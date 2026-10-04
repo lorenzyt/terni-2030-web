@@ -1,7 +1,6 @@
 import { Bar, BarChart, CartesianGrid, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import { Bot, Coins, TrendingUp } from "lucide-react";
 import { useCivic } from "@/lib/civic-store";
-import { FONDI_STIMATI } from "@/lib/terni-data";
 
 const pct = (a: number, b: number) => (a + b ? Math.round((a / (a + b)) * 100) : 0);
 const QUARTIERI_OSS = ["Centro", "Borgo Bovio", "Villaggio Matteotti", "Polymer / Viale Brin", "Marmore", "Cesure"];
@@ -36,7 +35,6 @@ export function Osservatorio() {
     { tipo: "Quota voti %", Istituzionali: pct(defVoti, comVoti), Cittadini: pct(comVoti, defVoti) },
   ];
 
-  const fondi = segn.reduce((a, s) => a + FONDI_STIMATI[s.categoria], 0);
   const top = [...perQuartiere].sort((a, b) => b.voti - a.voti)[0];
   const topSegn = [...segn].sort((a, b) => b.voti - a.voti)[0];
   const catCount = segn.reduce<Record<string, number>>((a, s) => ((a[s.categoria] = (a[s.categoria] ?? 0) + 1), a), {});
@@ -96,9 +94,9 @@ export function Osservatorio() {
               <Coins className="size-4" /> Fondi e incentivi teorici attivabili
             </p>
             <p className="mt-1 font-display text-3xl font-bold text-ember-gradient">
-              {fondi.toLocaleString("it-IT")} €
+              0 €
             </p>
-            <p className="text-xs text-muted-foreground">su {segn.length} proposte mappate · stima preliminare non vincolante</p>
+            <p className="text-xs text-muted-foreground">In attesa di abbinamento bando reale</p>
           </div>
           <div className="flex-1 rounded-lg border border-accent/40 bg-secondary/50 p-3 text-sm">
             <p className="mb-1 flex items-center gap-1 text-xs font-semibold uppercase tracking-wide text-accent">
