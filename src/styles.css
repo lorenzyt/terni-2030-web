@@ -1,0 +1,175 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * Terni 2030 — design system
+ * "Città dell'Amore e dell'Acciaio": antracite + acciaio, accenti rosso/ambra.
+ */
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-ring-offset-background: var(--background);
+  --color-steel: var(--steel);
+  --color-steel-foreground: var(--steel-foreground);
+  --color-ember: var(--ember);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --font-display: "Archivo", "Inter", sans-serif;
+  --font-sans: "Inter", sans-serif;
+}
+
+:root {
+  --radius: 0.5rem;
+  --background: oklch(0.19 0.008 60);
+  --foreground: oklch(0.95 0.008 80);
+  --surface: oklch(0.23 0.009 60);
+  --surface-2: oklch(0.27 0.01 60);
+  --card: oklch(0.23 0.009 60);
+  --card-foreground: oklch(0.95 0.008 80);
+  --popover: oklch(0.23 0.009 60);
+  --popover-foreground: oklch(0.95 0.008 80);
+  --primary: oklch(0.6 0.19 32);
+  --primary-foreground: oklch(0.99 0.01 80);
+  --secondary: oklch(0.29 0.011 60);
+  --secondary-foreground: oklch(0.93 0.008 80);
+  --muted: oklch(0.27 0.01 60);
+  --muted-foreground: oklch(0.72 0.012 70);
+  --accent: oklch(0.78 0.15 72);
+  --accent-foreground: oklch(0.2 0.02 60);
+  --ember: oklch(0.72 0.17 52);
+  --steel: oklch(0.68 0.012 240);
+  --steel-foreground: oklch(0.2 0.01 60);
+  --destructive: oklch(0.6 0.22 27);
+  --destructive-foreground: oklch(0.98 0.005 80);
+  --border: oklch(0.34 0.012 60);
+  --input: oklch(0.32 0.012 60);
+  --ring: oklch(0.6 0.19 32);
+  --chart-1: oklch(0.6 0.19 32);
+  --chart-2: oklch(0.78 0.15 72);
+  --chart-3: oklch(0.68 0.012 240);
+  --chart-4: oklch(0.72 0.17 52);
+  --chart-5: oklch(0.55 0.08 180);
+  --sidebar: oklch(0.21 0.008 60);
+  --sidebar-foreground: oklch(0.95 0.008 80);
+  --sidebar-primary: oklch(0.6 0.19 32);
+  --sidebar-primary-foreground: oklch(0.99 0.01 80);
+  --sidebar-accent: oklch(0.27 0.01 60);
+  --sidebar-accent-foreground: oklch(0.95 0.008 80);
+  --sidebar-border: oklch(0.34 0.012 60);
+  --sidebar-ring: oklch(0.6 0.19 32);
+
+  --gradient-ember: linear-gradient(135deg, var(--primary), var(--accent));
+  --gradient-steel: linear-gradient(
+    160deg,
+    oklch(0.27 0.01 60),
+    oklch(0.21 0.008 60)
+  );
+  --shadow-ember: 0 18px 40px -20px color-mix(in oklab, var(--primary) 60%, transparent);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
+  }
+}
+
+@utility surface-panel {
+  background: var(--gradient-steel);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+}
+
+@utility text-ember-gradient {
+  background: var(--gradient-ember);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@utility metal-edge {
+  box-shadow:
+    inset 0 1px 0 color-mix(in oklab, white 12%, transparent),
+    var(--shadow-ember);
+}
+
+/* Leaflet dark skin */
+.leaflet-container {
+  background: oklch(0.17 0.008 60);
+  font-family: var(--font-sans);
+}
+.leaflet-tile-pane {
+  filter: grayscale(0.7) invert(0.92) hue-rotate(180deg) brightness(0.95)
+    contrast(0.9);
+}
+.leaflet-popup-content-wrapper,
+.leaflet-popup-tip {
+  background: var(--surface-2);
+  color: var(--foreground);
+  border-radius: var(--radius-lg);
+}
+.leaflet-control-zoom a,
+.leaflet-bar a {
+  background: var(--surface-2) !important;
+  color: var(--foreground) !important;
+  border-color: var(--border) !important;
+}
+.leaflet-control-attribution {
+  background: color-mix(in oklab, var(--surface) 80%, transparent) !important;
+  color: var(--muted-foreground) !important;
+}
+.leaflet-control-attribution a {
+  color: var(--accent) !important;
+}
