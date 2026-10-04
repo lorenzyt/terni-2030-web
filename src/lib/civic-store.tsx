@@ -113,7 +113,13 @@ export function CivicProvider({ children }: { children: ReactNode }) {
     async function loadData() {
       if (supabase) {
         const { data } = await supabase.from("segnalazioni").select("*");
-        if (data) setState((s) => ({ ...s, segnalazioni: data as Segnalazione[] }));
+        if (data) {
+          const mapped = data.map((item: any) => ({
+            ...item,
+            data: item.created_at
+          }));
+          setState((s) => ({ ...s, segnalazioni: mapped as Segnalazione[] }));
+        }
       } else {
         try {
           const raw = localStorage.getItem(KEY);
@@ -153,6 +159,16 @@ export function useCivic() {
   const c = useContext(CivicContext);
   if (!c) throw new Error("useCivic fuori dal CivicProvider");
   return c;
+}
+
+export async function inviaSegnalazione(segnalazione: Omit<Segnalazione, 'id' | 'created_at' | 'data'>) {
+  if (!supabase) return;
+  const { error } = await supabase.from("segnalazioni").insert({
+    ...segnalazione,
+    id: nuovoId("s"),
+    created_at: new Date().toISOString().split('T')[0]
+  });
+  if (error) console.error("Errore invio:", error);
 }
 
 export function aggiungiCommento(update: Ctx["update"], chiave: string, autore: string, testo: string, esploratore: boolean) {
