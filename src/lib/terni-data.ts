@@ -1,5 +1,31 @@
 export const TERNI_CENTER: [number, number] = [42.5636, 12.6427];
 
+export const FONDI_STIMATI: Record<string, number> = {
+  "Spazi Verdi": 200000,
+  "Viabilità": 300000,
+  "Edifici Sfitti": 400000,
+  "Decoro": 150000,
+  "Proposta Progettuale": 100000,
+};
+
+export const OBIETTIVI: { id: string; nome: string }[] = [
+  { id: "o1", nome: "Riqualificazione Urbana" },
+  { id: "o2", nome: "Sostenibilità Energetica" },
+];
+
+export const PROFILI: { id: string; nome: string; desc: string }[] = [
+  { id: "cittadino", nome: "Cittadino", desc: "Privato residente" },
+  { id: "impresa", nome: "Impresa", desc: "Attività commerciale" },
+];
+
+export const CATEGORIA_TO_OBIETTIVO: Record<string, string> = {
+  "Spazi Verdi": "o1",
+  "Viabilità": "o1",
+  "Edifici Sfitti": "o2",
+  "Decoro": "o1",
+  "Proposta Progettuale": "o2",
+};
+
 export type CategoriaSegnalazione =
   | "Spazi Verdi"
   | "Viabilità"
@@ -55,7 +81,8 @@ export type Sondaggio = {
   id: string;
   domanda: string;
   contesto: string;
-  opzioni: { id: string; testo: string; voti: number }[];
+  opzioni: { id: string; testo: string; voti: number; community?: boolean }[];
+  community?: boolean;
 };
 
 export const SONDAGGI: Sondaggio[] = [
