@@ -62,7 +62,18 @@ export type AuditBando = {
   linkUfficiale?: string;
   nota?: string;
   operatore?: string;
-  data?: string;
+  aggiornato?: string;
+};
+
+export type DossierLog = {
+  id: string;
+  orario: string;
+  profilo: string;
+  quartiere: string;
+  obiettivo: string;
+  azione: string;
+  numero_bandi: number;
+  elenco_bandi: string[];
 };
 
 export type CivicState = {
@@ -81,6 +92,7 @@ export type CivicState = {
   noteArticoli: Record<string, string[]>;
   postSocial: PostSocial[];
   auditBandi: Record<string, AuditBando>;
+  dossierGenerati: DossierLog[];
 };
 
 const oggi = () => new Date().toISOString().slice(0, 10);
@@ -102,6 +114,7 @@ const INIZIALE: CivicState = {
   noteArticoli: {},
   postSocial: [],
   auditBandi: {},
+  dossierGenerati: [],
 };
 
 const KEY = "terni2030-state-v3-clean";
@@ -109,6 +122,7 @@ const KEY = "terni2030-state-v3-clean";
 type Ctx = {
   state: CivicState;
   update: (fn: (s: CivicState) => CivicState) => void;
+  ricaricaCloud: () => Promise<void>;
   puntiGuadagnati: number;
   puntiDisponibili: number;
 };
@@ -119,48 +133,68 @@ export function CivicProvider({ children }: { children: ReactNode }) {
   const [state, setState] = useState<CivicState>(INIZIALE);
   const hydrated = useRef(false);
 
-  useEffect(() => {
-    async function loadData() {
-      try {
-        localStorage.removeItem("terni2030-state-v1");
-        localStorage.removeItem("terni2030-state-v2");
-      } catch {}
-      if (supabase) {
-        const { data } = await supabase.from("segnalazioni").select("*");
-        if (data) {
-          const soloSegnalazioniMappa: Segnalazione[] = [];
-          const mappaAudit: Record<string, AuditBando> = {};
+  const ricaricaCloud = useCallback(async () => {
+    if (!supabase) return;
+    const { data } = await supabase.from("segnalazioni").select("*").order("created_at", { ascending: false });
+    if (data) {
+      const soloSegnalazioniMappa: Segnalazione[] = [];
+      const mappaAudit: Record<string, AuditBando> = {};
+      const listaDossier: DossierLog[] = [];
 
-          for (const item of data as any[]) {
-            const idStr = String(item.id || "");
-            if (idStr.startsWith("audit_")) {
-              const bandoKey = idStr.replace("audit_", "");
-              try {
-                const parsed = JSON.parse(item.descrizione || "{}");
-                mappaAudit[bandoKey] = {
-                  stato: item.stato || parsed.stato || "Certificato",
-                  linkUfficiale: parsed.linkUfficiale || "",
-                  nota: parsed.nota || "",
-                  operatore: parsed.operatore || "Controllore",
-                  data: item.created_at,
-                };
-              } catch {
-                mappaAudit[bandoKey] = { stato: item.stato || "Certificato", nota: item.descrizione || "" };
-              }
-            } else if (!idStr.startsWith("dossier_")) {
-              soloSegnalazioniMappa.push({
-                ...item,
-                data: item.created_at,
-              });
-            }
+      for (const item of data as any[]) {
+        const idStr = String(item.id || "");
+        if (idStr.startsWith("audit_")) {
+          const bandoKey = idStr.replace("audit_", "");
+          try {
+            const parsed = JSON.parse(item.descrizione || "{}");
+            mappaAudit[bandoKey] = {
+              stato: item.stato || parsed.stato || "Certificato",
+              linkUfficiale: parsed.linkUfficiale || "",
+              nota: parsed.nota || "",
+              operatore: parsed.operatore || "Controllore",
+              aggiornato: parsed.aggiornato || item.created_at,
+            };
+          } catch {
+            mappaAudit[bandoKey] = { stato: item.stato || "Certificato", nota: item.descrizione || "" };
           }
-          setState((s) => ({ ...s, segnalazioni: soloSegnalazioniMappa, auditBandi: mappaAudit }));
+        } else if (idStr.startsWith("dossier_")) {
+          try {
+            const parsed = JSON.parse(item.descrizione || "{}");
+            listaDossier.push({
+              id: idStr,
+              orario: parsed.orario || item.created_at || "-",
+              profilo: parsed.profilo || item.titolo || "-",
+              quartiere: parsed.quartiere || item.quartiere || "-",
+              obiettivo: parsed.obiettivo || "-",
+              azione: parsed.azione || item.stato || "Dossier",
+              numero_bandi: typeof parsed.numero_bandi === "number" ? parsed.numero_bandi : (item.voti || 0),
+              elenco_bandi: Array.isArray(parsed.elenco_bandi) ? parsed.elenco_bandi : [],
+            });
+          } catch {}
+        } else {
+          soloSegnalazioniMappa.push({
+            ...item,
+            data: item.created_at,
+          });
         }
       }
-      hydrated.current = true;
+      setState((s) => ({
+        ...s,
+        segnalazioni: soloSegnalazioniMappa,
+        auditBandi: mappaAudit,
+        dossierGenerati: listaDossier,
+      }));
     }
-    loadData();
   }, []);
+
+  useEffect(() => {
+    try {
+      localStorage.removeItem("terni2030-state-v1");
+      localStorage.removeItem("terni2030-state-v2");
+    } catch {}
+    void ricaricaCloud();
+    hydrated.current = true;
+  }, [ricaricaCloud]);
 
   const update = useCallback((fn: (s: CivicState) => CivicState) => {
     setState((prev) => {
@@ -179,7 +213,7 @@ export function CivicProvider({ children }: { children: ReactNode }) {
 
   return (
     <CivicContext.Provider
-      value={{ state, update, puntiGuadagnati, puntiDisponibili: puntiGuadagnati - state.puntiSpesi }}
+      value={{ state, update, ricaricaCloud, puntiGuadagnati, puntiDisponibili: puntiGuadagnati - state.puntiSpesi }}
     >
       {children}
     </CivicContext.Provider>
@@ -234,6 +268,28 @@ export async function registraDossierGenerato(payload: {
   } catch (e) {
     console.error("Errore log dossier:", e);
   }
+}
+
+export async function salvaAuditBandoCloud(
+  bandoKey: string,
+  titolo: string,
+  audit: AuditBando
+) {
+  if (!supabase) return;
+  const idRow = `audit_${bandoKey}`;
+  await supabase.from("segnalazioni").delete().eq("id", idRow);
+  await supabase.from("segnalazioni").insert({
+    id: idRow,
+    titolo: titolo.slice(0, 120),
+    quartiere: "Regia",
+    categoria: "Audit_Bando",
+    stato: audit.stato,
+    voti: 0,
+    lat: 42.5636,
+    lng: 12.6427,
+    descrizione: JSON.stringify(audit),
+    created_at: new Date().toISOString().split("T")[0],
+  });
 }
 
 export function aggiungiCommento(update: Ctx["update"], chiave: string, autore: string, testo: string, esploratore: boolean) {
