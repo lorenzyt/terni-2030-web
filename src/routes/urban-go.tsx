@@ -228,7 +228,7 @@ function UrbanGo() {
               onClick={() => spendi(COSTI_PREMI.badge, (s) => ({ ...s, badgeEsploratore: true }), "Badge Esploratore Certificato ottenuto!")} />
             <div className="rounded-lg border border-border p-3">
               <p className="font-semibold">Vantaggi presso Partner & Sponsor</p>
-              <p className="text-xs text-muted-foreground">{COSTI_PREMI.partner} punti ciascuno · ricevi un codice da mostrare in sede.</p>
+              <p className="text-xs text-muted-foreground">Iniziative e collaborazioni promozionali concordate in modo dedicato con i Partner Certificati.</p>
               <div className="mt-2 space-y-1">
                 {PARTNERS.filter((p) => p.certificato).map((p) => {
                   const preso = state.premiPartner.includes(p.id);

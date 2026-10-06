@@ -33,11 +33,11 @@ const PACCHETTI_KIT = [
     livello: "Gold · Partner Certificato",
     prezzo: "49,00 €",
     evidenza: true,
-    sottotitolo: "Circuito Premi & Bandi di Quartiere",
+    sottotitolo: "Partnership Dedicata & Bandi di Quartiere",
     idealePer: "Studi tecnici (ingegneri, architetti, geometri), commercialisti e attività commerciali",
     vantaggi: [
       "Tutti i vantaggi del livello Sostenitore + Badge «Partner Certificato»",
-      "Inserimento nel catalogo premi di Terni Urban GO (codici sconto T2030 per i cittadini)",
+      "Possibilità di collaborazione e partnership promozionale della tua attività concordata privatamente in modo dedicato",
       "Citazione nella sezione «Professionisti e partner accreditati su Terni» dei Dossier PDF Bandi IA",
     ],
   },
@@ -107,7 +107,7 @@ function PartnerPage() {
         <div className="max-w-xl">
           <h2 className="text-xl font-bold">Diventa Sponsor di Terni 2030</h2>
           <p className="mt-1 text-sm text-muted-foreground">
-            Visibilità sulla mappa civica, badge Partner Certificato, inserimento nei Dossier Bandi IA di quartiere e circuito premi cittadino.
+            Visibilità sulla mappa civica, badge Partner Certificato, inserimento nei Dossier Bandi IA di quartiere e partnership promozionali dedicate.
             Scrivi a <a href="mailto:Terni.2030@outlook.it" className="text-accent underline">Terni.2030@outlook.it</a>
           </p>
         </div>
