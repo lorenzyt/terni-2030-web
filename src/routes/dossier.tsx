@@ -1,5 +1,5 @@
 import bandiRealiJson from "@/lib/bandi_reali.json";
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { AlertCircle, ArrowLeft, ArrowRight, Check, ExternalLink, FileText, PhoneCall, Plus, Radar, Star, BadgeCheck, Award } from "lucide-react";
@@ -178,7 +178,7 @@ function DossierPage() {
   return (
     <div className="mx-auto max-w-5xl px-4 py-8 md:px-6">
       <div className="mb-8 text-center">
-        <Badge variant="secondary" className="mb-3">Analisi eseguita dall'IA · curata da Lorenzo Covicchio</Badge>
+        <div className="mb-3 flex items-center justify-center gap-2"><Badge variant="secondary">Analisi eseguita dall'IA · curata da Lorenzo Covicchio</Badge><Link to="/regia" className="rounded-full border border-border px-3 py-0.5 text-xs text-muted-foreground hover:border-accent hover:text-accent">🔒 Regia Operatori</Link></div>
         <h1 className="text-3xl font-bold md:text-4xl">Bandi & <span className="text-ember-gradient">Dossier IA</span></h1>
         <p className="mx-auto mt-2 max-w-2xl text-sm text-muted-foreground">
           Tre domande per ottenere la fotografia delle agevolazioni attive su Terni, con stima di fattibilità e prossimi passi.
