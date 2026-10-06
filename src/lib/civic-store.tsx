@@ -1,9 +1,12 @@
 import { createContext, useCallback, useContext, useEffect, useRef, useState, type ReactNode } from "react";
 import { createClient } from "@supabase/supabase-js";
 import {
+  BACHECA,
   POI_LIST,
   SEGNALAZIONI_INIZIALI,
   SONDAGGI,
+  type Associazione,
+  type POI,
   type Segnalazione,
 } from "@/lib/terni-data";
 
@@ -76,6 +79,17 @@ export type DossierLog = {
   elenco_bandi: string[];
 };
 
+export type PropostaModerazione = {
+  id: string;
+  tipo: "poi" | "bacheca" | "sondaggio" | "mappa";
+  titolo: string;
+  autore: string;
+  contatto: string;
+  data: string;
+  stato: "In attesa" | "Approvata" | "Rifiutata";
+  dati: any;
+};
+
 export type CivicState = {
   segnalazioni: Segnalazione[];
   votiSegnalazioni: string[];
@@ -91,8 +105,11 @@ export type CivicState = {
   recensioni: Recensione[];
   noteArticoli: Record<string, string[]>;
   postSocial: PostSocial[];
+  poiExtra: POI[];
+  bachecaExtra: Associazione[];
   auditBandi: Record<string, AuditBando>;
   dossierGenerati: DossierLog[];
+  proposteModerazione: PropostaModerazione[];
 };
 
 const oggi = () => new Date().toISOString().slice(0, 10);
@@ -113,11 +130,14 @@ const INIZIALE: CivicState = {
   recensioni: [],
   noteArticoli: {},
   postSocial: [],
+  poiExtra: [],
+  bachecaExtra: [],
   auditBandi: {},
   dossierGenerati: [],
+  proposteModerazione: [],
 };
 
-const KEY = "terni2030-state-v3-clean";
+const KEY = "terni2030-state-v4-pilastri";
 
 type Ctx = {
   state: CivicState;
@@ -134,12 +154,33 @@ export function CivicProvider({ children }: { children: ReactNode }) {
   const hydrated = useRef(false);
 
   const ricaricaCloud = useCallback(async () => {
+    try {
+      const raw = localStorage.getItem(KEY);
+      if (raw) {
+        const salvato = JSON.parse(raw) as Partial<CivicState>;
+        setState((prev) => ({
+          ...prev,
+          checkin: salvato.checkin ?? prev.checkin,
+          puntiSpesi: salvato.puntiSpesi ?? prev.puntiSpesi,
+          scontoDossier: salvato.scontoDossier ?? prev.scontoDossier,
+          badgeEsploratore: salvato.badgeEsploratore ?? prev.badgeEsploratore,
+          votiSegnalazioni: salvato.votiSegnalazioni ?? prev.votiSegnalazioni,
+          votiSondaggi: salvato.votiSondaggi ?? prev.votiSondaggi,
+        }));
+      }
+    } catch {}
+
     if (!supabase) return;
     const { data } = await supabase.from("segnalazioni").select("*").order("created_at", { ascending: false });
     if (data) {
       const soloSegnalazioniMappa: Segnalazione[] = [];
       const mappaAudit: Record<string, AuditBando> = {};
       const listaDossier: DossierLog[] = [];
+      const listaProposte: PropostaModerazione[] = [];
+      const poiApprovati: POI[] = [];
+      const bachecaApprovata: Associazione[] = [];
+      const postApprovati: PostSocial[] = [];
+      const sondaggiApprovati: SondaggioCivico[] = [];
 
       for (const item of data as any[]) {
         const idStr = String(item.id || "");
@@ -171,27 +212,110 @@ export function CivicProvider({ children }: { children: ReactNode }) {
               elenco_bandi: Array.isArray(parsed.elenco_bandi) ? parsed.elenco_bandi : [],
             });
           } catch {}
+        } else if (idStr.startsWith("prop_")) {
+          try {
+            const parsed = JSON.parse(item.descrizione || "{}");
+            const stProp = (item.stato || parsed.stato || "In attesa") as PropostaModerazione["stato"];
+            const propObj: PropostaModerazione = {
+              id: idStr,
+              tipo: parsed.tipo || "bacheca",
+              titolo: item.titolo || parsed.titolo || "Proposta Utente",
+              autore: parsed.autore || "Cittadino",
+              contatto: parsed.contatto || "-",
+              data: parsed.data || item.created_at || oggi(),
+              stato: stProp,
+              dati: parsed.dati || {},
+            };
+            listaProposte.push(propObj);
+
+            if (stProp === "Approvata") {
+              if (propObj.tipo === "poi" && propObj.dati) {
+                poiApprovati.push({
+                  id: idStr,
+                  nome: propObj.dati.nome || propObj.titolo,
+                  autore: propObj.dati.autore || propObj.autore,
+                  anno: propObj.dati.anno || "2026",
+                  categoria: propObj.dati.categoria || "Architettura d'autore",
+                  lat: Number(propObj.dati.lat) || 42.5636,
+                  lng: Number(propObj.dati.lng) || 12.6427,
+                  punti: Number(propObj.dati.punti) || 60,
+                  rarita: "Raro",
+                  descrizione: propObj.dati.descrizione || "",
+                  curiosita: propObj.dati.curiosita || "Scheda proposta dalla community e certificata dalla Regia.",
+                });
+              } else if (propObj.tipo === "bacheca" && propObj.dati) {
+                bachecaApprovata.push({
+                  id: idStr,
+                  nome: propObj.dati.nome || propObj.titolo,
+                  tipo: propObj.dati.tipo || "Associazione",
+                  descrizione: propObj.dati.descrizione || "",
+                  ambito: propObj.dati.ambito || "Territorio",
+                  contatto: propObj.contatto || propObj.dati.contatto || "",
+                });
+                postApprovati.push({
+                  id: idStr,
+                  pagina: propObj.dati.nome || propObj.titolo,
+                  tipo: "Iniziativa",
+                  testo: propObj.dati.descrizione || "",
+                  temi: [propObj.dati.ambito || "Terni2030"],
+                  data: propObj.data,
+                  reazioni: item.voti || 0,
+                  link: propObj.dati.link || "#",
+                  segnalatoDaUtente: true,
+                });
+              } else if (propObj.tipo === "sondaggio" && propObj.dati) {
+                sondaggiApprovati.push({
+                  id: idStr,
+                  domanda: propObj.dati.domanda || propObj.titolo,
+                  contesto: propObj.dati.contesto || `Proposto da ${propObj.autore}`,
+                  community: true,
+                  opzioni: Array.isArray(propObj.dati.opzioni)
+                    ? propObj.dati.opzioni
+                    : [
+                        { id: "a", testo: "Favorevole / Prioritario", voti: 0 },
+                        { id: "b", testo: "Da valutare con modifiche", voti: 0 },
+                      ],
+                });
+              }
+            }
+          } catch {}
         } else {
-          soloSegnalazioniMappa.push({
-            ...item,
-            data: item.created_at,
-          });
+          // Segnalazioni Mappa: se sono "In revisione" vanno anche nella coda di moderazione Admin
+          if (item.stato === "In revisione") {
+            listaProposte.push({
+              id: idStr,
+              tipo: "mappa",
+              titolo: item.titolo || "Segnalazione Mappa",
+              autore: "Cittadino su Mappa GIS",
+              contatto: item.quartiere || "Terni",
+              data: item.created_at || oggi(),
+              stato: "In attesa",
+              dati: item,
+            });
+          } else if (item.stato !== "Rifiutata") {
+            soloSegnalazioniMappa.push({
+              ...item,
+              data: item.created_at,
+            });
+          }
         }
       }
+
       setState((s) => ({
         ...s,
         segnalazioni: soloSegnalazioniMappa,
+        poiExtra: poiApprovati,
+        bachecaExtra: bachecaApprovata,
+        postSocial: postApprovati,
+        sondaggi: [...SONDAGGI, ...sondaggiApprovati],
         auditBandi: mappaAudit,
         dossierGenerati: listaDossier,
+        proposteModerazione: listaProposte,
       }));
     }
   }, []);
 
   useEffect(() => {
-    try {
-      localStorage.removeItem("terni2030-state-v1");
-      localStorage.removeItem("terni2030-state-v2");
-    } catch {}
     void ricaricaCloud();
     hydrated.current = true;
   }, [ricaricaCloud]);
@@ -199,17 +323,26 @@ export function CivicProvider({ children }: { children: ReactNode }) {
   const update = useCallback((fn: (s: CivicState) => CivicState) => {
     setState((prev) => {
       const next = fn(prev);
+      try {
+        localStorage.setItem(KEY, JSON.stringify({
+          checkin: next.checkin,
+          puntiSpesi: next.puntiSpesi,
+          scontoDossier: next.scontoDossier,
+          badgeEsploratore: next.badgeEsploratore,
+          votiSegnalazioni: next.votiSegnalazioni,
+          votiSondaggi: next.votiSondaggi,
+        }));
+      } catch {}
       if (supabase) {
         const diff = next.segnalazioni.find((n, i) => n.voti !== prev.segnalazioni[i]?.voti);
         if (diff) supabase.from("segnalazioni").update({ voti: diff.voti }).eq("id", diff.id).then();
-      } else {
-        localStorage.setItem(KEY, JSON.stringify(next));
       }
       return next;
     });
   }, []);
 
-  const puntiGuadagnati = POI_LIST.filter((p) => state.checkin.includes(p.id)).reduce((a, p) => a + p.punti, 0);
+  const tuttiPoi = [...POI_LIST, ...state.poiExtra];
+  const puntiGuadagnati = tuttiPoi.filter((p) => state.checkin.includes(p.id)).reduce((a, p) => a + p.punti, 0);
 
   return (
     <CivicContext.Provider
@@ -226,14 +359,76 @@ export function useCivic() {
   return c;
 }
 
+// Le segnalazioni mappa entrano con stato "In revisione" per passare dal permesso Admin
 export async function inviaSegnalazione(segnalazione: Omit<Segnalazione, 'id' | 'created_at' | 'data'>) {
   if (!supabase) return;
   const { error } = await supabase.from("segnalazioni").insert({
     ...segnalazione,
+    stato: "In revisione",
     id: nuovoId("s"),
     created_at: new Date().toISOString().split('T')[0]
   });
   if (error) console.error("Errore invio:", error);
+}
+
+// Invia una candidatura/proposta (Luogo POI, Bacheca, Sondaggio) alla coda di moderazione Admin
+export async function inviaPropostaModerazione(payload: {
+  tipo: "poi" | "bacheca" | "sondaggio";
+  titolo: string;
+  autore: string;
+  contatto: string;
+  dati: any;
+}) {
+  if (!supabase) return;
+  const idRow = `prop_${payload.tipo}_${Date.now().toString(36)}`;
+  await supabase.from("segnalazioni").insert({
+    id: idRow,
+    titolo: payload.titolo.slice(0, 120),
+    quartiere: payload.dati?.quartiere || "Terni",
+    categoria: "Proposta_Moderazione",
+    stato: "In attesa",
+    voti: 0,
+    lat: Number(payload.dati?.lat) || 42.5636,
+    lng: Number(payload.dati?.lng) || 12.6427,
+    descrizione: JSON.stringify({
+      ...payload,
+      stato: "In attesa",
+      data: oggi(),
+    }),
+    created_at: oggi(),
+  });
+}
+
+// Permette all'Admin in Regia di Approvare o Rifiutare qualsiasi proposta
+export async function gestisciPropostaAdmin(
+  proposta: PropostaModerazione,
+  esito: "Approvata" | "Rifiutata"
+) {
+  if (!supabase) return;
+  if (proposta.tipo === "mappa") {
+    if (esito === "Approvata") {
+      await supabase.from("segnalazioni").update({ stato: "Aperta" }).eq("id", proposta.id);
+    } else {
+      await supabase.from("segnalazioni").delete().eq("id", proposta.id);
+    }
+    return;
+  }
+  if (esito === "Rifiutata") {
+    await supabase.from("segnalazioni").delete().eq("id", proposta.id);
+  } else {
+    await supabase.from("segnalazioni").update({
+      stato: "Approvata",
+      descrizione: JSON.stringify({
+        tipo: proposta.tipo,
+        titolo: proposta.titolo,
+        autore: proposta.autore,
+        contatto: proposta.contatto,
+        data: proposta.data,
+        stato: "Approvata",
+        dati: proposta.dati,
+      }),
+    }).eq("id", proposta.id);
+  }
 }
 
 export async function registraDossierGenerato(payload: {
@@ -263,7 +458,7 @@ export async function registraDossierGenerato(payload: {
         numero_bandi: payload.bandi.length,
         elenco_bandi: payload.bandi.map((b) => `${b.nome} (${b.ente})`),
       }),
-      created_at: new Date().toISOString().split("T")[0],
+      created_at: oggi(),
     });
   } catch (e) {
     console.error("Errore log dossier:", e);
@@ -288,7 +483,7 @@ export async function salvaAuditBandoCloud(
     lat: 42.5636,
     lng: 12.6427,
     descrizione: JSON.stringify(audit),
-    created_at: new Date().toISOString().split("T")[0],
+    created_at: oggi(),
   });
 }
 

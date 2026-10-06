@@ -163,7 +163,7 @@ function DossierPage() {
       update((s) => ({ ...s, scontoDossier: true, puntiSpesi: s.puntiSpesi + COSTI_PREMI.sconto }));
     }
     contatta({
-      oggetto: `Sblocco Dossier PDF — ${prezzo}`,
+      oggetto: `Sblocco Dossier PDF — ${prezzo} (PayPal / Revolut / Bonifico)`,
       contesto: `Profilo: ${profiloNome} · Quartiere: ${quartiere} · Obiettivo: ${obiettivoNome}${search.caso ? ` · Caso: ${search.caso}` : ""} · Prezzo: ${prezzo}`,
     });
   };
