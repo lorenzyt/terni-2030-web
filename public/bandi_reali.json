@@ -250,7 +250,6 @@
     "ente": "Camera di Commercio",
     "scadenza": "Fri, 17 Jul 2026",
     "importo": "Consulta avviso ufficiale",
-    "obiettivo": "o7",
     "descrizione": "Avviso pubblico rilevato sul canale Camera di Commercio.",
     "link": "https://news.google.com/rss/articles/CBMijwFBVV95cUxNdFFpeDUtb1M3c2lUVC1peWpxM2RjajRGZnpieHkxZldCSjBJUWVjcF9USXFONlNvb1BoM0NndElVcnYzRkZybDVqZXJ0cktuOUJlTG9hWHIwS2tFU1VnT3JNUDlDLVVwTi1PUXBSbHRIM1pTYjdldnJCd3dGMzJrRzJISnJ4SmtxQUhCLUFQSQ?oc=5",
     "ambiti": [
@@ -259,16 +258,16 @@
     ],
     "obiettivo_id": "o7",
     "obiettivo_nome": "Digitalizzazione & Innovazione",
+    "obiettivo": "o7",
     "id": "b-9fcbbfb4"
   },
   {
-    "portale": "Camera di Commercio",
+    "portale": "Invitalia",
     "titolo": "Imprenditoria femminile e fondo perduto 2026: i bandi davvero aperti",
-    "ente": "Camera di Commercio",
+    "ente": "Invitalia",
     "scadenza": "Sat, 03 Oct 2026",
     "importo": "Consulta avviso ufficiale",
-    "obiettivo": "o7",
-    "descrizione": "Avviso pubblico rilevato sul canale Camera di Commercio.",
+    "descrizione": "Avviso pubblico rilevato sul canale Invitalia.",
     "link": "https://news.google.com/rss/articles/CBMidkFVX3lxTE9wMDFtNnJSTHhXQmppa2p5NlExVkRRaVFjSzhLQ0c1Yko3RmdSM0M3NjNHVTBTV1FOUXhpdmppbU44X1lYZEVjR1lmTF9aVTZzQVEtZDl1d05FZG14b2dNTGhUNjB2bnZUWWdLVjEwZ0xKeUxfM0E?oc=5",
     "ambiti": [
       "impresa",
@@ -276,6 +275,7 @@
     ],
     "obiettivo_id": "o7",
     "obiettivo_nome": "Digitalizzazione & Innovazione",
+    "obiettivo": "o7",
     "id": "b-7a005e13"
   },
   {
@@ -284,7 +284,6 @@
     "ente": "Camera di Commercio",
     "scadenza": "Fri, 24 Oct 2025",
     "importo": "Consulta avviso ufficiale",
-    "obiettivo": "o7",
     "descrizione": "Avviso pubblico rilevato sul canale Camera di Commercio.",
     "link": "https://news.google.com/rss/articles/CBMidEFVX3lxTE43dU5VUkc0UF8zV0ppbTV0N1p1ZHVlajc2UnBEYkNzcG1wY0dxMW9xMmxzbzBMT3RSZ2lXVVp2ZFpWb01ReW1XY1lFcHZQTHloYVVDVWZhZC0yWkRwX1c0V3JUOG0xUVljajg2QWNadVF2eVIx?oc=5",
     "ambiti": [
@@ -293,6 +292,7 @@
     ],
     "obiettivo_id": "o7",
     "obiettivo_nome": "Digitalizzazione & Innovazione",
+    "obiettivo": "o7",
     "id": "b-57a4e40f"
   },
   {
@@ -492,5 +492,1093 @@
     "obiettivo_nome": "Digitalizzazione & Innovazione",
     "obiettivo": "o7",
     "id": "b-b0d69537"
+  },
+  {
+    "portale": "Regione Umbria",
+    "titolo": "PR FESR Umbria 2021-2027 — Efficienza energetica e rinnovabili nelle imprese",
+    "ente": "Regione Umbria / Sviluppo Umbria",
+    "scadenza": "Bando pluriennale attivo",
+    "importo": "Contributo a fondo perduto fino al 40-60%",
+    "ambiti": [
+      "impresa",
+      "pubblico"
+    ],
+    "obiettivo_id": "o2",
+    "descrizione": "Finanziamenti per diagnosi energetiche, impianti fotovoltaici e isolamento termico degli immobili produttivi in Umbria.",
+    "link": "https://www.regione.umbria.it/la-regione/bandi",
+    "obiettivo_nome": "Sostenibilità Energetica",
+    "obiettivo": "o2",
+    "id": "b-c8e2ea94"
+  },
+  {
+    "portale": "Regione Umbria",
+    "titolo": "Programma Rigenerazione Urbana e recupero spazi pubblici nei Comuni umbri",
+    "ente": "Regione Umbria",
+    "scadenza": "Programmazione 2021-2027",
+    "importo": "Fondi FESR / Coesione territoriale",
+    "ambiti": [
+      "pubblico"
+    ],
+    "obiettivo_id": "o1",
+    "descrizione": "Risorse per riqualificazione piazze, aree verdi, illuminazione pubblica e recupero immobili comunali dismessi.",
+    "link": "https://www.regione.umbria.it/la-regione/bandi",
+    "obiettivo_nome": "Riqualificazione Urbana",
+    "obiettivo": "o1",
+    "id": "b-2b2fefe0"
+  },
+  {
+    "portale": "Regione Umbria",
+    "titolo": "Bando Sviluppo Umbria — Attrazione investimenti e nuovi insediamenti produttivi",
+    "ente": "Sviluppo Umbria",
+    "scadenza": "Sportello attivo",
+    "importo": "Fino al 50% tra fondo perduto e finanziamento agevolato",
+    "ambiti": [
+      "impresa",
+      "pubblico"
+    ],
+    "obiettivo_id": "o4",
+    "descrizione": "Sostegno all'apertura di nuovi impianti industriali, ampliamento stabilimenti e riconversione produttiva nella conca ternana.",
+    "link": "https://www.sviluppoumbria.it/bandi-e-avvisi",
+    "obiettivo_nome": "Nuovo Impianto & Sviluppo Industriale",
+    "obiettivo": "o4",
+    "id": "b-b8fe6a45"
+  },
+  {
+    "portale": "Regione Umbria",
+    "titolo": "Incentivi regionali per la mobilità ciclabile, ciclopedonale e intermodalità dolce",
+    "ente": "Regione Umbria",
+    "scadenza": "Attivo",
+    "importo": "Cofinanziamento regionale fino all'80%",
+    "ambiti": [
+      "impresa",
+      "pubblico"
+    ],
+    "obiettivo_id": "o3",
+    "descrizione": "Interventi per reti ciclabili urbane, ciclostazioni, velostazioni e servizi di bike/micromobility sharing.",
+    "link": "https://www.regione.umbria.it/la-regione/bandi",
+    "obiettivo_nome": "Mobilità Dolce & Sostenibile",
+    "obiettivo": "o3",
+    "id": "b-8426fcfa"
+  },
+  {
+    "portale": "Comune di Terni",
+    "titolo": "Fondazione Carit Terni — Bandi per Arte, Cultura, Sociale e Sviluppo del Territorio",
+    "ente": "Fondazione Cassa di Risparmio di Terni e Narni",
+    "scadenza": "Sessioni annuali aperte",
+    "importo": "Fondi a fondo perduto per progetti sul territorio ternano",
+    "ambiti": [
+      "cittadino",
+      "pubblico"
+    ],
+    "obiettivo_id": "o6",
+    "descrizione": "Contributi per associazioni, enti pubblici e comitati del territorio di Terni per progetti culturali, educativi, turistici e sociali.",
+    "link": "https://www.fondazionecarit.it/bandi",
+    "obiettivo_nome": "Cultura, Turismo & Terzo Settore",
+    "obiettivo": "o6",
+    "id": "b-1ce65c55"
+  },
+  {
+    "portale": "Comune di Terni",
+    "titolo": "Agevolazioni comunali per il rilancio del commercio di vicinato e riuso locali sfitti",
+    "ente": "Comune di Terni",
+    "scadenza": "Verifica avvisi SUAPE",
+    "importo": "Sgravi tributari locali e contributi apertura",
+    "ambiti": [
+      "cittadino",
+      "impresa",
+      "pubblico"
+    ],
+    "obiettivo_id": "o5",
+    "descrizione": "Misure per favorire la riapertura di botteghe artigiane, negozi su strada e recupero di vetrine sfitte nel centro e nei quartieri di Terni.",
+    "link": "https://www.comune.terni.it",
+    "obiettivo_nome": "Commercio & Riuso Locali Sfitti",
+    "obiettivo": "o5",
+    "id": "b-b512857b"
+  },
+  {
+    "portale": "Comune di Terni",
+    "titolo": "Patti di Collaborazione per la cura dei Beni Comuni e Spazi Verdi di quartiere",
+    "ente": "Comune di Terni",
+    "scadenza": "Sempre aperto",
+    "importo": "Supporto logistico, materiali ed esenzioni comunali",
+    "ambiti": [
+      "cittadino",
+      "pubblico"
+    ],
+    "obiettivo_id": "o1",
+    "descrizione": "Strumento per singoli cittadini, comitati di quartiere e associazioni ternane per co-gestire aree verdi, parchi e arredo urbano.",
+    "link": "https://www.comune.terni.it",
+    "obiettivo_nome": "Riqualificazione Urbana",
+    "obiettivo": "o1",
+    "id": "b-8c4903d2"
+  },
+  {
+    "portale": "GSE",
+    "titolo": "Conto Termico — Incentivi per efficientamento energetico e pompe di calore",
+    "ente": "GSE (Gestore dei Servizi Energetici)",
+    "scadenza": "Sportello permanente aperto",
+    "importo": "Fino al 65% a fondo perduto (fino al 100% per scuole/edifici pubblici)",
+    "ambiti": [
+      "cittadino",
+      "impresa",
+      "pubblico"
+    ],
+    "obiettivo_id": "o2",
+    "descrizione": "Contributo diretto sul conto corrente per sostituzione impianti di climatizzazione, solare termico, pompe di calore e isolamento.",
+    "link": "https://www.gse.it/servizi-per-te/efficienza-energetica/conto-termico",
+    "obiettivo_nome": "Sostenibilità Energetica",
+    "obiettivo": "o2",
+    "id": "b-4f95b554"
+  },
+  {
+    "portale": "GSE",
+    "titolo": "Incentivi CER (Comunità Energetiche Rinnovabili) e Autoconsumo Diffuso",
+    "ente": "GSE / MASE",
+    "scadenza": "Sportello aperto",
+    "importo": "Tariffa incentivante 20 anni + fino al 40% PNRR",
+    "ambiti": [
+      "cittadino",
+      "impresa",
+      "pubblico"
+    ],
+    "obiettivo_id": "o2",
+    "descrizione": "Agevolazioni per cittadini, condomìni, PMI ed enti locali che condividono energia prodotta da impianti fotovoltaici.",
+    "link": "https://www.gse.it/servizi-per-te/autoconsumo/gruppi-di-autoconsumatori-e-comunita-di-energia-rinnovabile",
+    "obiettivo_nome": "Sostenibilità Energetica",
+    "obiettivo": "o2",
+    "id": "b-cd9ad305"
+  },
+  {
+    "portale": "GSE",
+    "titolo": "Incentivi GSE per infrastrutture di ricarica elettrica e rinnovo flotte green",
+    "ente": "GSE",
+    "scadenza": "Attivo",
+    "importo": "Contributo in conto capitale fino al 40%",
+    "ambiti": [
+      "cittadino",
+      "impresa",
+      "pubblico"
+    ],
+    "obiettivo_id": "o3",
+    "descrizione": "Sostegno all'installazione di colonnine di ricarica e veicoli a zero emissioni per mobilità urbana sostenibile.",
+    "link": "https://www.gse.it/servizi-per-te/mobilita-sostenibile",
+    "obiettivo_nome": "Mobilità Dolce & Sostenibile",
+    "obiettivo": "o3",
+    "id": "b-c4f37133"
+  },
+  {
+    "portale": "PNRR",
+    "titolo": "PNRR Transizione 5.0 — Credito d'imposta per digitalizzazione e risparmio energetico",
+    "ente": "MIMIT / PNRR Italia Domani",
+    "scadenza": "Attivo",
+    "importo": "Credito d'imposta fino al 45% degli investimenti",
+    "ambiti": [
+      "impresa",
+      "pubblico"
+    ],
+    "obiettivo_id": "o7",
+    "descrizione": "Incentivo per imprese che investono in beni strumentali digitali 4.0 abbinati alla riduzione dei consumi energetici dello stabilimento.",
+    "link": "https://www.mimit.gov.it/it/incentivi/piano-transizione-5-0",
+    "obiettivo_nome": "Digitalizzazione & Innovazione",
+    "obiettivo": "o7",
+    "id": "b-a83f29dc"
+  },
+  {
+    "portale": "PNRR",
+    "titolo": "PNRR M2C2 — Rafforzamento Mobilità Ciclabile e Trasporto Rapido di Massa",
+    "ente": "MIT / PNRR",
+    "scadenza": "Attuazione in corso",
+    "importo": "Finanziamento 100% per enti territoriali e gestori",
+    "ambiti": [
+      "impresa",
+      "pubblico"
+    ],
+    "obiettivo_id": "o3",
+    "descrizione": "Fondi dedicati alla realizzazione di piste ciclabili urbane, ciclovie turistiche e servizi integrati di micromobilità condivisa.",
+    "link": "https://www.italiadomani.gov.it",
+    "obiettivo_nome": "Mobilità Dolce & Sostenibile",
+    "obiettivo": "o3",
+    "id": "b-47c1b20f"
+  },
+  {
+    "portale": "PNRR",
+    "titolo": "PNRR M5C2 — Piani Integrati di Rigenerazione Urbana e Housing Sociale",
+    "ente": "PNRR Italia Domani",
+    "scadenza": "Attivo",
+    "importo": "Fondi PNRR per Comuni e partenariati",
+    "ambiti": [
+      "cittadino",
+      "pubblico"
+    ],
+    "obiettivo_id": "o1",
+    "descrizione": "Interventi per il recupero di edilizia residenziale, rifunzionalizzazione di aree urbane degradate e creazione di spazi aggregativi.",
+    "link": "https://www.italiadomani.gov.it",
+    "obiettivo_nome": "Riqualificazione Urbana",
+    "obiettivo": "o1",
+    "id": "b-31f2e6ba"
+  },
+  {
+    "portale": "Invitalia",
+    "titolo": "Contratto di Sviluppo Invitalia — Grandi investimenti industriali e tutela ambientale",
+    "ente": "Invitalia / MIMIT",
+    "scadenza": "Sportello attivo",
+    "importo": "Fondo perduto + finanziamento agevolato fino al 75%",
+    "ambiti": [
+      "impresa",
+      "pubblico"
+    ],
+    "obiettivo_id": "o4",
+    "descrizione": "Principale strumento nazionale per la realizzazione di nuovi impianti industriali, riconversione siderurgica/chimica e poli produttivi.",
+    "link": "https://www.invitalia.it/cosa-facciamo/rafforziamo-le-imprese/contratti-di-sviluppo",
+    "obiettivo_nome": "Nuovo Impianto & Sviluppo Industriale",
+    "obiettivo": "o4",
+    "id": "b-dfa8f659"
+  },
+  {
+    "portale": "Invitalia",
+    "titolo": "ON (Oltre Nuove Imprese a Tasso Zero) & Autoimpiego Centro-Nord",
+    "ente": "Invitalia",
+    "scadenza": "Sportello aperto",
+    "importo": "Fino al 90% di copertura (mutuo tasso zero + fondo perduto)",
+    "ambiti": [
+      "cittadino",
+      "impresa",
+      "pubblico"
+    ],
+    "obiettivo_id": "o5",
+    "descrizione": "Incentivi per giovani e donne (e aspiranti imprenditori privati) che aprono una nuova attività commerciale, turistica o di servizi a Terni.",
+    "link": "https://www.invitalia.it/cosa-facciamo/creiamo-nuove-aziende/nuove-imprese-a-tasso-zero",
+    "obiettivo_nome": "Commercio & Riuso Locali Sfitti",
+    "obiettivo": "o5",
+    "id": "b-a9390539"
+  },
+  {
+    "portale": "Invitalia",
+    "titolo": "Smart&Start Italia — Finanziamenti per Startup Innovative e Tecnologiche",
+    "ente": "Invitalia",
+    "scadenza": "Sportello aperto",
+    "importo": "Finanziamento a tasso zero fino all'80% (da 100k a 1,5M €)",
+    "ambiti": [
+      "cittadino",
+      "impresa",
+      "pubblico"
+    ],
+    "obiettivo_id": "o7",
+    "descrizione": "Supporto alla nascita e crescita di startup ad alto contenuto tecnologico, digitale e di ricerca applicata.",
+    "link": "https://www.invitalia.it/cosa-facciamo/creiamo-nuove-aziende/smartstart-italia",
+    "obiettivo_nome": "Digitalizzazione & Innovazione",
+    "obiettivo": "o7",
+    "id": "b-b3ced13d"
+  },
+  {
+    "portale": "Camera di Commercio",
+    "titolo": "Bando Voucher Digitali I4.0 — PID Camera di Commercio dell'Umbria",
+    "ente": "Camera di Commercio dell'Umbria",
+    "scadenza": "Edizione annuale attiva",
+    "importo": "Voucher a fondo perduto fino al 50-70% (max 10.000 €)",
+    "ambiti": [
+      "impresa"
+    ],
+    "obiettivo_id": "o7",
+    "descrizione": "Contributi a fondo perduto per le MPMI ternane e umbre per software, e-commerce, intelligenza artificiale, cybersecurity e cloud.",
+    "link": "https://www.umbria.camcom.it/bandi-e-contributi",
+    "obiettivo_nome": "Digitalizzazione & Innovazione",
+    "obiettivo": "o7",
+    "id": "b-2d0cb94a"
+  },
+  {
+    "portale": "Camera di Commercio",
+    "titolo": "Bando Transizione Ecologica ed Efficienza Energetica Imprese Umbre",
+    "ente": "Camera di Commercio dell'Umbria",
+    "scadenza": "Attivo",
+    "importo": "Contributo a fondo perduto fino al 50%",
+    "ambiti": [
+      "impresa",
+      "pubblico"
+    ],
+    "obiettivo_id": "o2",
+    "descrizione": "Voucher camerali per audit energetici, certificazioni ambientali, economia circolare e costituzione di Comunità Energetiche.",
+    "link": "https://www.umbria.camcom.it/bandi-e-contributi",
+    "obiettivo_nome": "Sostenibilità Energetica",
+    "obiettivo": "o2",
+    "id": "b-9782e840"
+  },
+  {
+    "portale": "Camera di Commercio",
+    "titolo": "Contributi per Turismo, Commercio, Fiere e Rivitalizzazione Centri Urbani",
+    "ente": "Camera di Commercio dell'Umbria",
+    "scadenza": "Attivo",
+    "importo": "Voucher a fondo perduto fino al 50%",
+    "ambiti": [
+      "impresa",
+      "pubblico"
+    ],
+    "obiettivo_id": "o5",
+    "descrizione": "Sostegno alle attività commerciali, ricettive e artigianali della provincia di Terni per ammodernamento locali, insegne e promozione.",
+    "link": "https://www.umbria.camcom.it/bandi-e-contributi",
+    "obiettivo_nome": "Commercio & Riuso Locali Sfitti",
+    "obiettivo": "o5",
+    "id": "b-23232495"
+  },
+  {
+    "portale": "Regione Umbria",
+    "titolo": "\"La Rete dei borghi e delle comunità per rafforzare l'identità di Terni\"",
+    "ente": "Regione Umbria",
+    "scadenza": "Wed, 24 Jun 2026",
+    "importo": "Consulta avviso ufficiale",
+    "descrizione": "Avviso pubblico rilevato sul canale Regione Umbria.",
+    "link": "https://news.google.com/rss/articles/CBMisAFBVV95cUxPTzN6RFcyVWQ4SkhZZG1BZWZoVklPVTVCLVluZ2ozRi1Vc3ZRSjhSd1UyaldJUWFmcFJRS2QyWThsYW5QTl9jZEljOGxHay1ZZGpDVnFKS0NtZjA3Z29RaEhLSWZjMERrY1JJYjNEeUJiRVB3a0tmOFFtazZ3S2JwZWV0M0FidFhoR3YxLTY1Z1ZEZnlTaHBUa0dXRGhkaVdROXQtQnc2NVJ0SnhXOW81cA?oc=5",
+    "ambiti": [
+      "pubblico"
+    ],
+    "obiettivo_id": "o7",
+    "obiettivo_nome": "Digitalizzazione & Innovazione",
+    "obiettivo": "o7",
+    "id": "b-1827976e"
+  },
+  {
+    "portale": "Regione Umbria",
+    "titolo": "“Atto di programmazione in materia di sicurezza urbana 2025-2026”",
+    "ente": "Regione Umbria",
+    "scadenza": "Thu, 06 Nov 2025",
+    "importo": "Consulta avviso ufficiale",
+    "descrizione": "Avviso pubblico rilevato sul canale Regione Umbria.",
+    "link": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxPOFRQc3ZMOTZEUzlwUUdSRHRmUU5XcnlrWG1CY2Flc1ozUVZHMjJtYTVfLXhBUlB1Z3lJdi05WXJvRk1oRTdEOTU3aXNaalV4VHVqSzY0ZHRoNzFxYXF3UEZCM3JLU1gxNzdvUVhTMTBhSmpiUFkxUS1xZUNuVkU5ZlJzNVdBM280RnE2YWJxSEh5bWJNOW5IWXlRa1p0c0NfOWxWNUtZYUNuWjdDZUhtNGlvakVRdzItS3VtTUxDSld3bzQ3UkdKcw?oc=5",
+    "ambiti": [
+      "pubblico"
+    ],
+    "obiettivo_id": "o7",
+    "obiettivo_nome": "Digitalizzazione & Innovazione",
+    "obiettivo": "o7",
+    "id": "b-66a0d8e2"
+  },
+  {
+    "portale": "Regione Umbria",
+    "titolo": "Valorizzazione dei beni culturali in Umbria: dalla Regione 5 milioni per otto Comuni: ecco i progetti",
+    "ente": "Regione Umbria",
+    "scadenza": "Tue, 14 Jul 2026",
+    "importo": "Consulta avviso ufficiale",
+    "descrizione": "Avviso pubblico rilevato sul canale Regione Umbria.",
+    "link": "https://news.google.com/rss/articles/CBMizgFBVV95cUxPSGdKZ3U4alVaX2g3QUtZTE9FRDNIbWEzVVlCTnpBdm1HSENMZUhDa2hqeXZYOG1YZXBUSzZCNFJ5NlA2NERZazlGa0xIcTVIS1VFTUFjMDZhN2xTcUVUVGR2YVlGclJ3aWpnV2xKTVFFbUhfNzNXaTc1UFYxNHRPaGhrTEJEdDVUNUlld3czdTl2U19UT0NZcXRqZU54NXU3ZGJzaDc1UDl1dVBwSVhiYUNpeF83c2hPa0d2bUNrZGkwVE9QVWsxWEVLekx2dw?oc=5",
+    "ambiti": [
+      "pubblico"
+    ],
+    "obiettivo_id": "o7",
+    "obiettivo_nome": "Digitalizzazione & Innovazione",
+    "obiettivo": "o7",
+    "id": "b-2bde0db7"
+  },
+  {
+    "portale": "Regione Umbria",
+    "titolo": "Avviso pubblico ICC",
+    "ente": "Regione Umbria",
+    "scadenza": "Wed, 05 Aug 2026",
+    "importo": "Consulta avviso ufficiale",
+    "descrizione": "Avviso pubblico rilevato sul canale Regione Umbria.",
+    "link": "https://news.google.com/rss/articles/CBMi3wFBVV95cUxNN0xHbFF1UGNHM2U1VGpkbE5icjA1UFMzOG9yeXRJNkd0UG5MOWpZY2Z6TEpmbFlYSGpTQlhaZnc4bkpfbXRsZUwwekYtdXNDUW1SLUk2SmpzMUlIQWZWZTRiMmdiLXc2bVN4bDdFTHdSM0NXLWhBUmZWZlZPakRkS1I3cFdHTTdMZWZsYVNUcHdaSm9OZTB4SGtPZ0hINDFuc2RlUmtkVXNhQkpZYmpmYUM1b3gwRTBGcjZmYW1YMmxPSG9JOGtmdmxXRzhMNTdYNGJSSllVNWJqX0pRUlRV?oc=5",
+    "ambiti": [
+      "pubblico"
+    ],
+    "obiettivo_id": "o7",
+    "obiettivo_nome": "Digitalizzazione & Innovazione",
+    "obiettivo": "o7",
+    "id": "b-62eb6aeb"
+  },
+  {
+    "portale": "Regione Umbria",
+    "titolo": "Avviso STEP 2026 – LINEA A SOVVENZIONE",
+    "ente": "Regione Umbria",
+    "scadenza": "Wed, 05 Aug 2026",
+    "importo": "Consulta avviso ufficiale",
+    "descrizione": "Avviso pubblico rilevato sul canale Regione Umbria.",
+    "link": "https://news.google.com/rss/articles/CBMitwFBVV95cUxPTDhuZ0wweDlmbVl1bmxFb3EtOC1hY3hMam4yT3dqU0thY1ZTaFhtQmd3RWJxNzBSUUltb0hBSGtPQ0IzSEhuOUM4TmJBTV8yaVZVbXEwRGdjOU9fZU1GYVZyc3pBS1AxY0tqcXhUUTRsZ3ZvcENjNjVqaExDdlVzU0RwMkx2V3dtV1FzdkphR3EzRjc5T1FSY2FZQU4yNl84VFpGQ3lkeExfTURGcGZYM1VQMGxJeGc?oc=5",
+    "ambiti": [
+      "pubblico"
+    ],
+    "obiettivo_id": "o7",
+    "obiettivo_nome": "Digitalizzazione & Innovazione",
+    "obiettivo": "o7",
+    "id": "b-8cd8c541"
+  },
+  {
+    "portale": "Regione Umbria",
+    "titolo": "La Regione investe sulla cultura: pubblicato il bando da 3,8 milioni di euro per le imprese creative",
+    "ente": "Regione Umbria",
+    "scadenza": "Wed, 05 Aug 2026",
+    "importo": "Consulta avviso ufficiale",
+    "descrizione": "Avviso pubblico rilevato sul canale Regione Umbria.",
+    "link": "https://news.google.com/rss/articles/CBMi2gFBVV95cUxNT2ItV1pxMnd3S25samJiVEU3eE8xcmJydHNjcXFQbHdIZmJyZFp0Y01jQjhQdlpnaVZLemZSUUNlVWxTWjV6ZHNKU1c5M2FwS2FTTlM5MmRyc2txUXZBUEdiUUpOV0k4aURxdWxvM3BMVFBLTDhrN3hxMmlXcDZYYk5DdTBkRk45QWpnbFhlUm9XUHEweFVZcmRybFRSWnBoVjA4YzJwLWdjb3hPX1FSekdxUkNDQWNJMDFuVXl3RmJ6RUFCSGpVTVNZMFZmRldBTG5mdnpBVzRUdw?oc=5",
+    "ambiti": [
+      "impresa",
+      "pubblico"
+    ],
+    "obiettivo_id": "o7",
+    "obiettivo_nome": "Digitalizzazione & Innovazione",
+    "obiettivo": "o7",
+    "id": "b-d13e84eb"
+  },
+  {
+    "portale": "Regione Umbria",
+    "titolo": "Metropolitana pedonale: al via i lavori per l'impianto fotovoltaico alla Posterna",
+    "ente": "Regione Umbria",
+    "scadenza": "Wed, 27 May 2026",
+    "importo": "Consulta avviso ufficiale",
+    "descrizione": "Avviso pubblico rilevato sul canale Regione Umbria.",
+    "link": "https://news.google.com/rss/articles/CBMivgFBVV95cUxQb0NUWkpHa0d5NlNoNlpGNEVKX0xXeExpT3daSUgtZk1uc01hMV9vN2MtU0JWSDJIdFAzZ29xZ0dPbkNGdEVScUM4OXVzc294cjFRQ3d1WlpfNVFoajVBZURmVWxtNmVzZ1FweTc5NktfakxqbElhajIyV2hVY21DOV9MQXVVb0VOTTNEWngyUVZKWEZLdTZEMHV4MXdWVnZOUTBpTUNyQWZFeEV3dldLNzZjMHVMMmlRNmNPRmFB?oc=5",
+    "ambiti": [
+      "cittadino",
+      "pubblico"
+    ],
+    "obiettivo_id": "o2",
+    "obiettivo_nome": "Sostenibilità Energetica",
+    "obiettivo": "o2",
+    "id": "b-8c15625e"
+  },
+  {
+    "portale": "Regione Umbria",
+    "titolo": "“Celebrazione dell’VIII centenario della morte di San Francesco d’Assisi”",
+    "ente": "Regione Umbria",
+    "scadenza": "Thu, 19 Feb 2026",
+    "importo": "Consulta avviso ufficiale",
+    "descrizione": "Avviso pubblico rilevato sul canale Regione Umbria.",
+    "link": "https://news.google.com/rss/articles/CBMiygFBVV95cUxQcldmSEhWQU1ScDN4WHF1RlJHUXR4aDVyRnRqLXVzTFZnOG9pY09YNk02cXJwdlBJUnpFZmhWcUlzOVFFQlZjMktEaFVDTnB5amlCWHpnbXVLMDlfNUkyU19CVVNid19GN0NMSU9VVUVaaGFoTnI5OUxmMnZ6eGFOQ0E0VkRVaWJzeVVhaXZaZkRRSmplOF80cUxmeUdZUDA5OW9iWXVrczZlcGV3YTRubzJsUlZRVzFpOXp0QlZQWVkzZGlxa1cyWGdn?oc=5",
+    "ambiti": [
+      "pubblico"
+    ],
+    "obiettivo_id": "o7",
+    "obiettivo_nome": "Digitalizzazione & Innovazione",
+    "obiettivo": "o7",
+    "id": "b-f7431242"
+  },
+  {
+    "portale": "Regione Umbria",
+    "titolo": "Rivoluzione nel piano del trasporto pubblico: la nuova gara vale oltre 600 milioni e c'è il piano “salva-biglietti”",
+    "ente": "Regione Umbria",
+    "scadenza": "Thu, 28 May 2026",
+    "importo": "Consulta avviso ufficiale",
+    "descrizione": "Avviso pubblico rilevato sul canale Regione Umbria.",
+    "link": "https://news.google.com/rss/articles/CBMi1wFBVV95cUxORFNqc0NfRjc1VHc5S21TM0k3TS05bnNGMUh3eUNScHdYelB0aVpZWHp3LTM3b1BhNFJDcGQzenYwdVhNY1I5MENwX001anJSaFJnVW5sYWMzLXhrekxYNjBrYU1VcWY0NU5FUllFbl82ZWFiQnhjR25nQWNZRmpTUXd4WEwwQUVpczBKeXR2OEVfODBpZDBIbXctb0xNUlV4cUhYdm9MUTdFcHFnaDlHUHlxZ3NKM1U3djM3eWtCckx1SUpHWjBVUE4tRl9SN2FRVHdJNC1yWdIB3AFBVV95cUxPcVowUzNTT1B6eFAzbndqLTJrM3Y2LVJsUzRxcDFpa2h2TEtkQzg5REhZVkJEcXpsU0VSazJGS2N1b3ozVkd3MGF1UDVLeERBeGFVR1FBZHV0VlZuaU9iaUY3WTd5YTFGdFNzb1k5TG9jZTNqRVBlTkY3NEt2d0JCVHUzeUEyby1jQnZHenpaeFgwNk5RV2RoeTR5OVhPUnZVdklpWGdOLVhTZnExQ1VnQmtRYU1hbnc1SDh4ajBEMGRZQjRLWVRCMlNuVlBmTGhkMWRHX1V4LUtWWDdL?oc=5",
+    "ambiti": [
+      "pubblico"
+    ],
+    "obiettivo_id": "o3",
+    "obiettivo_nome": "Mobilità Dolce & Sostenibile",
+    "obiettivo": "o3",
+    "id": "b-5ddcaad9"
+  },
+  {
+    "portale": "Comune di Terni",
+    "titolo": "Famiglie numerose: l’avviso 2026 per l’accesso ai contributi",
+    "ente": "Comune di Terni",
+    "scadenza": "Fri, 28 Aug 2026",
+    "importo": "Consulta avviso ufficiale",
+    "descrizione": "Avviso pubblico rilevato sul canale Comune di Terni.",
+    "link": "https://news.google.com/rss/articles/CBMioAFBVV95cUxPQXZySHVDdHB0Z1U4N0ZCV0MzaEdObF9FV05mSVpQbUY4Zkhid09FMEJuZWw2SzJVTXRsMmNLMF8wTjhjcEsyd0dseno0eF9iUzR4VmdjM0tKejJ1R2FQSl9NY1p3ZU9jTXJoSlhHVElHc0NVdnQ3Ynd3OUVNV0VGaGJ6bHBpZVFxeTBMMzBaZXpvcHc2Ykx2Y1FhMThzYjVy?oc=5",
+    "ambiti": [
+      "cittadino",
+      "pubblico"
+    ],
+    "obiettivo_id": "o1",
+    "obiettivo_nome": "Riqualificazione Urbana",
+    "obiettivo": "o1",
+    "id": "b-57e4a5a3"
+  },
+  {
+    "portale": "Comune di Terni",
+    "titolo": "\"Per l'emergenza abitativa un nuovo avviso e non solo\"",
+    "ente": "Comune di Terni",
+    "scadenza": "Fri, 25 Sep 2026",
+    "importo": "Consulta avviso ufficiale",
+    "descrizione": "Avviso pubblico rilevato sul canale Comune di Terni.",
+    "link": "https://news.google.com/rss/articles/CBMimAFBVV95cUxOQ0RnNWdXaElJdHFZS2kwbzNZc3JoUkZKcm9CV2pmeXpLOHhWNnhULXhRNjFsZFd3TzhZVENmUnVpNVlISU1VbGNDNU9lMUJCcU5pTUctMk84NmRmR3NjanFCNVRTTTU0Y1BnN3JjbjhfeDVqa1BlOXhta0VwYnRsdmMwM2RpR0V6TGZfUVkwQ3R5MVJNUnJLUw?oc=5",
+    "ambiti": [
+      "pubblico"
+    ],
+    "obiettivo_id": "o1",
+    "obiettivo_nome": "Riqualificazione Urbana",
+    "obiettivo": "o1",
+    "id": "b-d4787904"
+  },
+  {
+    "portale": "Comune di Terni",
+    "titolo": "Fondazione Carit: nasce il bando ‘Un libro per amico’. Volumi gratuiti per progetti sul territorio",
+    "ente": "Comune di Terni",
+    "scadenza": "Tue, 07 Jul 2026",
+    "importo": "Consulta avviso ufficiale",
+    "descrizione": "Avviso pubblico rilevato sul canale Comune di Terni.",
+    "link": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxNRWEtSHdkbVE3emdxZnVBTWY5VEgzSkRqWmw3bUpMT0UwWXhKZWVJckEwd3ZhUlhVWE9fcDc4VlVsQ25FWUhZVmlxdTFlY0JxUGlGYmxoZGtrRDhERHVUaVFQaEd5SUtYREg4MHhUdklGMUdCX0RzNEtZY3JGa2ZrQ25iVzg3TDZhcURNdDREY1JRLUlZUWNQOVJIZnhaSjNmTmZfeXQ1QTVEMXJhd3l0R3kyd2FYdzNxNnBv?oc=5",
+    "ambiti": [
+      "pubblico"
+    ],
+    "obiettivo_id": "o6",
+    "obiettivo_nome": "Cultura, Turismo & Terzo Settore",
+    "obiettivo": "o6",
+    "id": "b-51a9bf4c"
+  },
+  {
+    "portale": "Comune di Terni",
+    "titolo": "Terni, la Fondazione Carit rinnova il Bando “Lettori Madre Lingua per le scuole”",
+    "ente": "Comune di Terni",
+    "scadenza": "Fri, 19 Jun 2026",
+    "importo": "Consulta avviso ufficiale",
+    "descrizione": "Avviso pubblico rilevato sul canale Comune di Terni.",
+    "link": "https://news.google.com/rss/articles/CBMiugFBVV95cUxPLXJ3ZUVrWndNeVMyT3VsS2U4bTRUYlVrcGl5NmtrUEZDbkIzcW92LTN6RU10ZnJ2d3NiTllxZzllMnBRb05iOTE5eUpES2JWRTZXbUVmcjBZVXpUaTk2cFFsV1BzV2hmUXM0M1RERUlqNnR4VW1fQTFrSGptSFR4QmVLdFNWaS0yS3g0TEFtcGNZMGxJRm8zY3c2RE85NDZ2Nlp6NVk5UmwzUHlnaVJXV0FMeE5sT3JkcEE?oc=5",
+    "ambiti": [
+      "pubblico"
+    ],
+    "obiettivo_id": "o6",
+    "obiettivo_nome": "Cultura, Turismo & Terzo Settore",
+    "obiettivo": "o6",
+    "id": "b-787bca33"
+  },
+  {
+    "portale": "Comune di Terni",
+    "titolo": "Terni, ‘Quarto anno rondine’: «Progetto sociale che trasforma il conflitto in competenza»",
+    "ente": "Comune di Terni",
+    "scadenza": "Thu, 30 Apr 2026",
+    "importo": "Consulta avviso ufficiale",
+    "descrizione": "Avviso pubblico rilevato sul canale Comune di Terni.",
+    "link": "https://news.google.com/rss/articles/CBMirAFBVV95cUxNbF9ucGh6V2ZDa0VIdlpuQXBtODZFbmx6N0U5NjdDV2EzMzFmaDNEQmtYeUJBaGd6aXdOWXRMVjFWYTdpQWx5Y01HWmFjVlYzTmVmZV9udVpSTGUwT3JKajZZSWotWVh4d2NocHlyUHVtUy1yUG5MakViNXRwdXJvNktHR01OTVd6RUtpdUhPLVhCTVJfbXdPSC1WSWlaRjhJQXJvZFl5V0duLUJ4?oc=5",
+    "ambiti": [
+      "pubblico"
+    ],
+    "obiettivo_id": "o6",
+    "obiettivo_nome": "Cultura, Turismo & Terzo Settore",
+    "obiettivo": "o6",
+    "id": "b-8669d2af"
+  },
+  {
+    "portale": "Comune di Terni",
+    "titolo": "Bando GAL Media Valle del Tevere 2026: contributi fino al 60% per PMI commercio e turismo",
+    "ente": "Comune di Terni",
+    "scadenza": "Mon, 20 Apr 2026",
+    "importo": "Consulta avviso ufficiale",
+    "descrizione": "Avviso pubblico rilevato sul canale Comune di Terni.",
+    "link": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxQMUF1b0IwWVhqYjJhWXh2Yks2VzAydGRMQ2FpanAzQzUzdllrd0gyQmtsR0ZoN1RmRC1peE5wSUtGVERPOWJWVzVvQXl2N2RXcnRjZjc2aWNkS1FkNU5qcERNU1RKMV9iUG0zc1pfNnlmcnp1SVU0YnhRYm8yZmtQSTJSMVBaa3J0TjNDLW4zT1pxc0RvREhOZFF1b05zcXVSQ04zVmhkdXgzY3p2d3N5NGVDU3hFTzJkRnRyMG9QUnIydw?oc=5",
+    "ambiti": [
+      "impresa",
+      "pubblico"
+    ],
+    "obiettivo_id": "o7",
+    "obiettivo_nome": "Digitalizzazione & Innovazione",
+    "obiettivo": "o7",
+    "id": "b-bfea0349"
+  },
+  {
+    "portale": "Comune di Terni",
+    "titolo": "\"Richiesta di alloggi in aumento\". Aiuta il nuovo bando comunale",
+    "ente": "Comune di Terni",
+    "scadenza": "Sat, 26 Sep 2026",
+    "importo": "Consulta avviso ufficiale",
+    "descrizione": "Avviso pubblico rilevato sul canale Comune di Terni.",
+    "link": "https://news.google.com/rss/articles/CBMihwFBVV95cUxOb2sxUnBXeG1sczJGXzRRUVNyT2o4SzZFamt2Sy1LNzI1aEdkdHRDZHhBcGRKUGxuSnVjbm12Y0hfaHMzT2RNTm14RzBYZWlmOWhNWm0yUjZ3YWNCT2hmdVRBZDRvajlzLTZmVTVRZWdXTkpSOGNjN1ZYWnVwOEV0Rm5ISDRkT0k?oc=5",
+    "ambiti": [
+      "pubblico"
+    ],
+    "obiettivo_id": "o1",
+    "obiettivo_nome": "Riqualificazione Urbana",
+    "obiettivo": "o1",
+    "id": "b-ff7dbf29"
+  },
+  {
+    "portale": "Comune di Terni",
+    "titolo": "\"Il bando regionale aiuta negozi di vicinato e pubblici esercizi. Bene la semplificazione burocratica\"",
+    "ente": "Comune di Terni",
+    "scadenza": "Tue, 26 May 2026",
+    "importo": "Consulta avviso ufficiale",
+    "descrizione": "Avviso pubblico rilevato sul canale Comune di Terni.",
+    "link": "https://news.google.com/rss/articles/CBMi6gFBVV95cUxPcHNEZXVseDZ2VWJsLTA1dmFQSHNGMVFZeFhCU2c2X0JNUHpZOXhROF9WX2VSYmJZa2IwRnROSXBlMU5GQnJ1NEtfOW5jdjhJck5qLWpqZ09pM1RZRzNPNHdfWElCd2FDWXpWcmdGcFNjNzhRckZMX0dUSW9ybnlXbXZvLUtTSXg2T2tzT1pKeWlfYzBYeWUtclJyUzZqQ2ZLVWU1Q3g0czJzLVVuNUNFYjVGRWRhTzZfbWlqTE9uMlNFWnZZU3FJWDl0RmxZUllYS3p2M3UxUm1NLV8tRjFKbS1PZk1jenV2anc?oc=5",
+    "ambiti": [
+      "impresa",
+      "pubblico"
+    ],
+    "obiettivo_id": "o5",
+    "obiettivo_nome": "Commercio & Riuso Locali Sfitti",
+    "obiettivo": "o5",
+    "id": "b-cb1fc49c"
+  },
+  {
+    "portale": "GSE",
+    "titolo": "Conto Termico 3.0: guida ai nuovi incentivi 2026",
+    "ente": "GSE",
+    "scadenza": "Fri, 22 May 2026",
+    "importo": "Consulta avviso ufficiale",
+    "descrizione": "Avviso pubblico rilevato sul canale GSE.",
+    "link": "https://news.google.com/rss/articles/CBMiYEFVX3lxTE95STl5TjRHNG1DRzAxakU4eklndERmcnBqOVpfbXN1TGh5T3hxYkpKSkxZNi1GcnFQbXN5Y3Z3anoxb1lkSzIzc0VBd05YcUlaaUxfME5vaEN4QnR2TzZVNw?oc=5",
+    "ambiti": [
+      "cittadino",
+      "pubblico"
+    ],
+    "obiettivo_id": "o2",
+    "obiettivo_nome": "Sostenibilità Energetica",
+    "obiettivo": "o2",
+    "id": "b-c5b81ac5"
+  },
+  {
+    "portale": "GSE",
+    "titolo": "Conto Termico 3.0 per le Aziende: Guida 2026 | GSE",
+    "ente": "GSE",
+    "scadenza": "Thu, 27 Aug 2026",
+    "importo": "Consulta avviso ufficiale",
+    "descrizione": "Avviso pubblico rilevato sul canale GSE.",
+    "link": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE9XQjc5OUVWZ3kwVW5WYS10eUJCV09IQl9OcE9WNjhkWExQOWhaRmk0NDNkVm9qWkdEYmlCamRxelA2TmFObXpmYkFqMVV4OFdmWmlQbGVocjNld0R1aW04?oc=5",
+    "ambiti": [
+      "cittadino",
+      "impresa",
+      "pubblico"
+    ],
+    "obiettivo_id": "o2",
+    "obiettivo_nome": "Sostenibilità Energetica",
+    "obiettivo": "o2",
+    "id": "b-93ea9882"
+  },
+  {
+    "portale": "GSE",
+    "titolo": "Conto termico 3.0: riapertura domande dal 13 aprile con precisazioni del GSE",
+    "ente": "GSE",
+    "scadenza": "Sat, 11 Apr 2026",
+    "importo": "Consulta avviso ufficiale",
+    "descrizione": "Avviso pubblico rilevato sul canale GSE.",
+    "link": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxOWjJubWh0emJhRW9KRHJsUkRHQ2pZMDhfQ3k4X3c2WUI2MktZbUEwUkgteV9USnpKaHFDdzVkSURRdXc3OGEwMWEyemkyaGI2cnBUdWZldWg4MnNTaEI0TXk1aksxUGQyYW9NU01LLTJmdXRycWtRenFNelg2dnN0c1IwZDhobkxmNVdUTlZXc092QnVpVF9Ec0dDblM5TjlqU3pRUWtVYzJkaDc3V1F2Y1BkRXpvZkY3cmktbWRTa19kUQ?oc=5",
+    "ambiti": [
+      "cittadino",
+      "pubblico"
+    ],
+    "obiettivo_id": "o2",
+    "obiettivo_nome": "Sostenibilità Energetica",
+    "obiettivo": "o2",
+    "id": "b-744f0e52"
+  },
+  {
+    "portale": "GSE",
+    "titolo": "Comunità Energetiche Rinnovabili (CER): la tariffa incentivante per fotovoltaico e altre rinnovabili, fino al 2027",
+    "ente": "GSE",
+    "scadenza": "Thu, 27 Aug 2026",
+    "importo": "Consulta avviso ufficiale",
+    "descrizione": "Avviso pubblico rilevato sul canale GSE.",
+    "link": "https://news.google.com/rss/articles/CBMif0FVX3lxTE9tbTEwQkFIMm5wWkJPcmJzRFcyeUdhYTU3Uzh5QzZoNXdDZE45eTF0VjU5dFQ3WGtubFctdktzbHVEUlYzQ1p2ZloyMVB5VWlWdXpCY09xbThILWItQl83R3JFSmF1dTE4d3ZXd2hyZk1ZdnU3dVRfN2VJdVVrSmM?oc=5",
+    "ambiti": [
+      "cittadino",
+      "pubblico"
+    ],
+    "obiettivo_id": "o2",
+    "obiettivo_nome": "Sostenibilità Energetica",
+    "obiettivo": "o2",
+    "id": "b-535eedca"
+  },
+  {
+    "portale": "GSE",
+    "titolo": "Il GSE lancia una nuova pagina sulle CER; con il Pnrr concessi contributi per oltre 700 milioni e 1,7 GW di potenza",
+    "ente": "GSE",
+    "scadenza": "Tue, 21 Jul 2026",
+    "importo": "Consulta avviso ufficiale",
+    "descrizione": "Avviso pubblico rilevato sul canale GSE.",
+    "link": "https://news.google.com/rss/articles/CBMihAFBVV95cUxQaUxsbUVKUlJRVzJQWUZNUWM0VG1PM2paUC0xeEdkRTlSSnZ3MXBXVEZZVGItZWxuVHNYZGN4MmFJcC1vQ05lTS16blJyaThnMktXYklDMXVTeHREbU1iSS1xUFJlTVdPRUNUUGd5ZG5sNFNkMUJkTFdnaUNhZFViaUprc3A?oc=5",
+    "ambiti": [
+      "pubblico"
+    ],
+    "obiettivo_id": "o2",
+    "obiettivo_nome": "Sostenibilità Energetica",
+    "obiettivo": "o2",
+    "id": "b-a05c3906"
+  },
+  {
+    "portale": "GSE",
+    "titolo": "Comunità energetiche, in Italia attive 3.630 configurazioni per 303 MW di potenza",
+    "ente": "GSE",
+    "scadenza": "Tue, 21 Jul 2026",
+    "importo": "Consulta avviso ufficiale",
+    "descrizione": "Avviso pubblico rilevato sul canale GSE.",
+    "link": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxQU3hxYzkxbHlHMjRUNHRnMGdlRUM5YlpJeXlZRXdMRU5aVXdZc3lHckpyYkcwWG02bUFzMEZIU3lSaVFlMmJwcmFRc2t3WDdZbG5HeGVqOTdlXzhBZXpreUFrMFBTMzRLR2RoTXpwNjhHdUIzTGNrVXZULV9VUURGZXZoeDFSbFBKSWJWX0NtQWZ2WW1QSFQ2d09ycHpobTAxaklPMVUyZVZ2bHg0Y3E3cEw2SXEweUlRMWFB?oc=5",
+    "ambiti": [
+      "pubblico"
+    ],
+    "obiettivo_id": "o2",
+    "obiettivo_nome": "Sostenibilità Energetica",
+    "obiettivo": "o2",
+    "id": "b-634e0643"
+  },
+  {
+    "portale": "GSE",
+    "titolo": "RICARICA VEICOLI ELETTRICI",
+    "ente": "GSE",
+    "scadenza": "Mon, 13 Apr 2026",
+    "importo": "Consulta avviso ufficiale",
+    "descrizione": "Avviso pubblico rilevato sul canale GSE.",
+    "link": "https://news.google.com/rss/articles/CBMi0AFBVV95cUxORUIwUy1HQkNTUngtZXk0QjNoLTZTVzN2X2liNjFub0NPWGp2MEczZmhNNDNSV3A0VVA5UktFd3RVUldfMkttRlJDeUszNERFUGYtV0tmU1R5M3hJRWxidkhrV210bTVzVjNsRXotRm9lc0xpY0dnODRsUXBhWFBUcjJhb0dDdDI3LURKOEdhMUF3SUZnUWs3Y09oZG0wVFRZbFZWZmwybmRpeEk2S1llVjdKRDdQLU1rLWV5Ykt3NUJzbUlZR1ZVVl9RbkZLX1Et?oc=5",
+    "ambiti": [
+      "pubblico"
+    ],
+    "obiettivo_id": "o3",
+    "obiettivo_nome": "Mobilità Dolce & Sostenibile",
+    "obiettivo": "o3",
+    "id": "b-15d396f2"
+  },
+  {
+    "portale": "GSE",
+    "titolo": "Bonus colonnine c’è ancora speranza. La Video – Guida all’incentivo",
+    "ente": "GSE",
+    "scadenza": "Fri, 02 Oct 2026",
+    "importo": "Consulta avviso ufficiale",
+    "descrizione": "Avviso pubblico rilevato sul canale GSE.",
+    "link": "https://news.google.com/rss/articles/CBMilgFBVV95cUxQMy14NGhDeFV0M2VkQ2JYcWN3R2FEd2FubnM1X0FGMDBBaEstcFJsSWhoa3dYd3ZfczVsWjZEUl9GQUZ5ZWVzNmltcDkyaF9tVGJqd0VRTEpiZEhTZGVMRVQzb1hYRVlWcXlOcmU0Y2t2clQ5WloyYWZqQTRPbUhnZzJaR0kzNm9ZZnNKZmJHbkZDMVRVSmc?oc=5",
+    "ambiti": [
+      "pubblico"
+    ],
+    "obiettivo_id": "o3",
+    "obiettivo_nome": "Mobilità Dolce & Sostenibile",
+    "obiettivo": "o3",
+    "id": "b-760141c8"
+  },
+  {
+    "portale": "GSE",
+    "titolo": "Colonnine di ricarica per auto elettriche, al via il bonus 80%",
+    "ente": "GSE",
+    "scadenza": "Tue, 22 Sep 2026",
+    "importo": "Consulta avviso ufficiale",
+    "descrizione": "Avviso pubblico rilevato sul canale GSE.",
+    "link": "https://news.google.com/rss/articles/CBMitAFBVV95cUxNTVdFOGF4VXFzX3lJU1l0LWd1YVZGd283a0FPTmVVaXlDY3c5VTVRakt5X0JpZFB3dUctdGRpTkJPdlI4RWwycExSbkNZajA4bXFQMExuWlR6SWpWSkRNSTBCZUlfLV9WTWJpdGtyME5ORThsSE1UR0szeFMxd0ZvdnhLU1ZxanhBRUFtdWhiby1FVk5VT1JYS1NyOUdHOFBUTlZUcTF0LVpfei1RYWpkcWk0SWjSAboBQVVfeXFMUHZjNTlyNUhFUWFhM3VuMDJ4ZDdiTXlVRGZScHJLSkdEU3VJRDNWTmYyX21tZU5CWGxFOUlZWEdTTmdxcWVrbUIwYWgyTXRxazZUWnZnMW0zWTlPamFrWm1kRGF0MDUybHEwbGNKZmJSZTVYWHItQV92ZlFNWFZKcW94M3JEMklDdGx6Vy1GNlhJYVo1ZTMxOUQzOXdzOGdIV0RKdTY1MExtZTl0RTJTQW5sb0ZiMXhwN2R3?oc=5",
+    "ambiti": [
+      "pubblico"
+    ],
+    "obiettivo_id": "o3",
+    "obiettivo_nome": "Mobilità Dolce & Sostenibile",
+    "obiettivo": "o3",
+    "id": "b-d5f22a94"
+  },
+  {
+    "portale": "PNRR",
+    "titolo": "Posti letto universitari, Comune di Terni cerca fondi per housing urbano diffuso",
+    "ente": "PNRR",
+    "scadenza": "Mon, 22 Jun 2026",
+    "importo": "Consulta avviso ufficiale",
+    "descrizione": "Avviso pubblico rilevato sul canale PNRR.",
+    "link": "https://news.google.com/rss/articles/CBMitAFBVV95cUxNcmtjQUtEOVM1ZkRmQ1JCZzNHanROczEwWHJTSTJYem05VUZOM2dBUUJfaHhSTEZLc05BUDUxLWpiRlZVTnc3SmtCN0FXWkVyMVIxbVViOEZDOENwc0Vlb3EtMzlpci1xdi12LXNfdDBqeVNmSEc1UWxXMjdXVDBXV1NoNVVXZjc2dURHX1BqQmFNd3B1eldtTmVQaXBSQTBPbnRvNzY5MVpPeFdjXzlBdDQzOEU?oc=5",
+    "ambiti": [
+      "pubblico"
+    ],
+    "obiettivo_id": "o2",
+    "obiettivo_nome": "Sostenibilità Energetica",
+    "obiettivo": "o2",
+    "id": "b-88ae3a2e"
+  },
+  {
+    "portale": "PNRR",
+    "titolo": "Cesi porta dell'Umbria, porta delle meraviglie",
+    "ente": "PNRR",
+    "scadenza": "Tue, 26 Nov 2024",
+    "importo": "Consulta avviso ufficiale",
+    "descrizione": "Avviso pubblico rilevato sul canale PNRR.",
+    "link": "https://news.google.com/rss/articles/CBMinwFBVV95cUxQX3VzSWhNYUkwS2NBeWZJaUlrRUNjXzVuN05jOUkyZHZRdDVleTczLTZieF85RVlhX3ljM0kwR1UxbXByNUVqZ1p4cVFUb2Nmemd5QjdkUFNUS3E5Qk9JT1l6aFA5Wi0xSzdNdW5zUTd2VG5MNWUzNlJGUjh5VWtncEEtMGVvd3VnRUo4QlRNci1fWnNLVVF0bHE0aTlfZTA?oc=5",
+    "ambiti": [
+      "pubblico"
+    ],
+    "obiettivo_id": "o1",
+    "obiettivo_nome": "Riqualificazione Urbana",
+    "obiettivo": "o1",
+    "id": "b-e58f9aa3"
+  },
+  {
+    "portale": "PNRR",
+    "titolo": "Cesi porta dell’Umbria, 20 milioni dal Pnrr per trasformare il borgo",
+    "ente": "PNRR",
+    "scadenza": "Wed, 09 Mar 2022",
+    "importo": "Consulta avviso ufficiale",
+    "descrizione": "Avviso pubblico rilevato sul canale PNRR.",
+    "link": "https://news.google.com/rss/articles/CBMinAFBVV95cUxNWmE3eVNQWkNkYklVWFdMSFpobDRoZFI1QmV0dmJXWHJUUFN3WGhvNWJmcGNYeUhBWWw2SG5ydDl2VzBWOVphcENCWFpIbmluQ1NkZXZxMHRQM196aW44allaRTlDUU92MjhkSmJUN0JGZnlFRjZWVmtEbW8yY1NsVUY3U1AwMGFaUk1yNVV6VDdFV2hQR0J3bkVDNXI?oc=5",
+    "ambiti": [
+      "pubblico"
+    ],
+    "obiettivo_id": "o1",
+    "obiettivo_nome": "Riqualificazione Urbana",
+    "obiettivo": "o1",
+    "id": "b-93d8d111"
+  },
+  {
+    "portale": "PNRR",
+    "titolo": "I grandi cantieri viabilistici del 2024-25 e i prossimi passi",
+    "ente": "PNRR",
+    "scadenza": "Tue, 16 Dec 2025",
+    "importo": "Consulta avviso ufficiale",
+    "descrizione": "Avviso pubblico rilevato sul canale PNRR.",
+    "link": "https://news.google.com/rss/articles/CBMioAFBVV95cUxNNGZqbVJJeDdpUEFGYzF1U052bkFNUXpFaHE0dXE3bl9yWFhCX1B0c1NxTWI1Y2VVNE9yY2hvX3ZqTmVEU0NEVTlfSFFPenlBTGJ0dlJKNFZNRWlwQUxBRDBWcFd6aC1ianFxMzB5OGRzMURaeGJGbi1zRWMzRUxuM3pUbDlOZXJwYlJlMjFmanViTjFGOGNYLXM3WExWY19w?oc=5",
+    "ambiti": [
+      "pubblico"
+    ],
+    "obiettivo_id": "o1",
+    "obiettivo_nome": "Riqualificazione Urbana",
+    "obiettivo": "o1",
+    "id": "b-1b4bf5b1"
+  },
+  {
+    "portale": "PNRR",
+    "titolo": "Nel comune arriva la \"bicipolitana\": il progetto per collegare la città e i comuni vicini",
+    "ente": "PNRR",
+    "scadenza": "Wed, 21 Jan 2026",
+    "importo": "Consulta avviso ufficiale",
+    "descrizione": "Avviso pubblico rilevato sul canale PNRR.",
+    "link": "https://news.google.com/rss/articles/CBMijwFBVV95cUxPVTVGcVJnNW80SEk3a3FCTjlHenJSd1piZTJtelBTc1JmS0hqUVFuVUFjX2hNYng0dHFYeklVc0tsd3RtZ3BWX1h3ZmRHUVROeWxsbTlfOXNsRFN3aF8yTFJsU1E3Nzl3QmtoRndxdU9IcEZaMHZDaldQMTFkeW1DRzRrOV90ZVAwRUdCN0ExRQ?oc=5",
+    "ambiti": [
+      "cittadino",
+      "pubblico"
+    ],
+    "obiettivo_id": "o3",
+    "obiettivo_nome": "Mobilità Dolce & Sostenibile",
+    "obiettivo": "o3",
+    "id": "b-d65cc96e"
+  },
+  {
+    "portale": "PNRR",
+    "titolo": "Bandi 2026 per Consulenti: Strumenti, Cumuli e Scadenze",
+    "ente": "PNRR",
+    "scadenza": "Thu, 24 Sep 2026",
+    "importo": "Consulta avviso ufficiale",
+    "descrizione": "Avviso pubblico rilevato sul canale PNRR.",
+    "link": "https://news.google.com/rss/articles/CBMifEFVX3lxTFBMYkVmeVNVWGlKbEhORE1zS01Ka3RRNmdUa0ZXNTlvRmhyMmo4MW1LcFFVN0luZGdUSDRsWTJsZFRDZ2gzTHFTUnBQTExEQjk3ZmlSN0dESHVqRkhWMjB6aGduTVhJREk3RE9JeWNlOFFPM0Qwc1p3Vkprb28?oc=5",
+    "ambiti": [
+      "pubblico"
+    ],
+    "obiettivo_id": "o1",
+    "obiettivo_nome": "Riqualificazione Urbana",
+    "obiettivo": "o1",
+    "id": "b-6547d333"
+  },
+  {
+    "portale": "PNRR",
+    "titolo": "Voucher Doppia Transizione, anche la CCIAA Gran Sasso d’Italia attiva il bando nazionale",
+    "ente": "PNRR",
+    "scadenza": "Fri, 24 Jul 2026",
+    "importo": "Consulta avviso ufficiale",
+    "descrizione": "Avviso pubblico rilevato sul canale PNRR.",
+    "link": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxNS1VGemRzVnNEdHFwV0dlWUltSTIzTndCakQ0SFY0Nm9ldUpQLWhLTmhDRm8wM01FV1BkMmRLZFk2dnZiVGxKS2wwMlNEY0FiOEpBTkJrMHRIekdwaWFEd01vTHZCZ3VsM1BzTUR6bWdBRzRYSU92bmpYcFlqUjdEdklhWlI5NFVIRm1vS0NyTUpCTkdWaTI0VmVTaExYZnM5bnJtWVdHbkdfTnc?oc=5",
+    "ambiti": [
+      "impresa",
+      "pubblico"
+    ],
+    "obiettivo_id": "o7",
+    "obiettivo_nome": "Digitalizzazione & Innovazione",
+    "obiettivo": "o7",
+    "id": "b-081ed157"
+  },
+  {
+    "portale": "PNRR",
+    "titolo": "PNRR: 700 milioni in più per la Transizione 5.0 delle imprese",
+    "ente": "PNRR",
+    "scadenza": "Thu, 04 Jun 2026",
+    "importo": "Consulta avviso ufficiale",
+    "descrizione": "Avviso pubblico rilevato sul canale PNRR.",
+    "link": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxPNThBTXRpQ3JXWWIza3IwWTdLdmNNZzZlS2EtSXQ5VDlJRzBWdVFUNml2U3Q2MEhpcGRtLVNQQl9YR1YwRFVjbGV5WFVmaGVqd212c1pvcU9vaXdhOW1xamRYdVd6YldTdmEwcmZzX1dFbHlZSHpVNXVsdEtYNkozUFFzaktOM2pDVTF6bHo0R1ZWRy1OY2V4Q1BnZkNtOWZPVEpCdW1uVjNRa0d2VElJVDhIWVhULXh2OWc4?oc=5",
+    "ambiti": [
+      "impresa",
+      "pubblico"
+    ],
+    "obiettivo_id": "o7",
+    "obiettivo_nome": "Digitalizzazione & Innovazione",
+    "obiettivo": "o7",
+    "id": "b-ed522c1d"
+  },
+  {
+    "portale": "Invitalia",
+    "titolo": "Contratto di Sviluppo Invitalia",
+    "ente": "Invitalia",
+    "scadenza": "Tue, 11 Aug 2026",
+    "importo": "Consulta avviso ufficiale",
+    "descrizione": "Avviso pubblico rilevato sul canale Invitalia.",
+    "link": "https://news.google.com/rss/articles/CBMickFVX3lxTE84aHBNVWlyS3dZSTdBdTQxbFRpYUxHVUNVSzNkbzlSS2tpOGFLYkdMcVR6OFV3ZUZpcjB2QTkxdDhNNF9kajdUQndsWGdYQ0ZlUzh2eEh4b25TRks4MjAxTTlyb0J3MVoySFJESFBGcEhGZw?oc=5",
+    "ambiti": [
+      "impresa",
+      "pubblico"
+    ],
+    "obiettivo_id": "o4",
+    "obiettivo_nome": "Nuovo Impianto & Sviluppo Industriale",
+    "obiettivo": "o4",
+    "id": "b-97fdf724"
+  },
+  {
+    "portale": "Invitalia",
+    "titolo": "Contributo 100% fondo contrasto alla Deindustrializzazione Lazio e Marche",
+    "ente": "Invitalia",
+    "scadenza": "Mon, 28 Sep 2026",
+    "importo": "Consulta avviso ufficiale",
+    "descrizione": "Avviso pubblico rilevato sul canale Invitalia.",
+    "link": "https://news.google.com/rss/articles/CBMixAFBVV95cUxQT09jbE54TXBqZWloTXpwSXVRdDMzVDRRZ3p5X3JYdUx1UGthaHRsbWhINHFaTmstNUZtS3UzamFyaVdHLUxVX0NIWGZLdFBUQjB2TVF3WDgzdmluUmxiMnUxM3ZEbmFfUHBkdmlhODQ2VGpkLV8zUlE5b0lYdFcxU05Ob0dDbVhScGduOU54cjhRN242SzFDSm93dTdQbWhMdzJjV1JQb2tZckRkSEtTRk40eXRYbXVOY00yekdxeEUwbF94?oc=5",
+    "ambiti": [
+      "impresa",
+      "pubblico"
+    ],
+    "obiettivo_id": "o4",
+    "obiettivo_nome": "Nuovo Impianto & Sviluppo Industriale",
+    "obiettivo": "o4",
+    "id": "b-94692933"
+  },
+  {
+    "portale": "Invitalia",
+    "titolo": "Bandi Invitalia 2026: Importi e Massimali per Impresa",
+    "ente": "Invitalia",
+    "scadenza": "Tue, 15 Sep 2026",
+    "importo": "Consulta avviso ufficiale",
+    "descrizione": "Avviso pubblico rilevato sul canale Invitalia.",
+    "link": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxOUUo4WkhKOFNaV25Fc3FvQ0FqWjQ4NjBXOE5YMDZmTF9GV1Q4Rk9IcFJDY1VUVEh2dldpR0FrTDM4ZklVQWpjWVAydWN5Z3RBY1pGNXhTM0xBamd1MzQteVN6WWJxOXE3SHR0WHFfemRWd0ZWWVNwQk9vSjVnRXh3TFFQR0xmWXN6?oc=5",
+    "ambiti": [
+      "impresa",
+      "pubblico"
+    ],
+    "obiettivo_id": "o7",
+    "obiettivo_nome": "Digitalizzazione & Innovazione",
+    "obiettivo": "o7",
+    "id": "b-f44fe7df"
+  },
+  {
+    "portale": "Invitalia",
+    "titolo": "Nuove imprese a tasso zero (NITO-ON)",
+    "ente": "Invitalia",
+    "scadenza": "Tue, 30 Jun 2026",
+    "importo": "Consulta avviso ufficiale",
+    "descrizione": "Avviso pubblico rilevato sul canale Invitalia.",
+    "link": "https://news.google.com/rss/articles/CBMioAFBVV95cUxPbjZ5eXVZeW9TeE1RcUo5dmtoZXFXZjNTUG5jTVFWVnNpZWlFVm8zYV9DSTI0YjZwSi1NbUx4WlBKWjAyekNLVVZmSGQzbldTNUJkN1dwN0VaVGR5cWxWUWhqWkhBU0RTUHV3d3lQWDBPRGJYTzN5MTZJU3c1TTlWWU53cjBXaHAxMzgyRWNCNEVWT2hvM0UydTRfY1E1ZTJF?oc=5",
+    "ambiti": [
+      "impresa",
+      "pubblico"
+    ],
+    "obiettivo_id": "o7",
+    "obiettivo_nome": "Digitalizzazione & Innovazione",
+    "obiettivo": "o7",
+    "id": "b-e65fc4a3"
+  },
+  {
+    "portale": "Invitalia",
+    "titolo": "Contributi a Fondo perduto per il Turismo: tutti i Bandi Aperti di Invitalia per il 2026",
+    "ente": "Invitalia",
+    "scadenza": "Fri, 25 Sep 2026",
+    "importo": "Consulta avviso ufficiale",
+    "descrizione": "Avviso pubblico rilevato sul canale Invitalia.",
+    "link": "https://news.google.com/rss/articles/CBMizAFBVV95cUxPRlV4YzV1bDQ5bFhtcDI5M21CbDVheHgyN25IMUlxMXVDNEVZSUM2azdsdmxieDF1YVozMElrYnV5M2drNElVTzVlT3dWRU4wY0dzTTdaLWJYYTBPVkFBLWtYSFEwbUtaV2t6ck9zbnVFbmt1YTdBMC1fZVUwVlQyZlpyQzVlTzR6T2dfN0NEVE5sMEwxa25rYUtfSk9sM19iSF9McnhubXNrTlg2VVRKSlFBY1dweFNqYTdEMmtMX1JnMVJtWlZvZlk3cGc?oc=5",
+    "ambiti": [
+      "impresa",
+      "pubblico"
+    ],
+    "obiettivo_id": "o7",
+    "obiettivo_nome": "Digitalizzazione & Innovazione",
+    "obiettivo": "o7",
+    "id": "b-08fcbee1"
+  },
+  {
+    "portale": "Invitalia",
+    "titolo": "Sostegno alle startup innovative (Smart & Start Italia)",
+    "ente": "Invitalia",
+    "scadenza": "Wed, 02 Sep 2026",
+    "importo": "Consulta avviso ufficiale",
+    "descrizione": "Avviso pubblico rilevato sul canale Invitalia.",
+    "link": "https://news.google.com/rss/articles/CBMikwFBVV95cUxPQXMycjlrZUpXTDBwNS04QndsU1dwbE1DTEU4U1ZubHFJTlZERnFsd1AyWGtxeG5mRVJsRDNMY2dqazBPV2QwU2pTeWRGM0RndDlBVlFLSFlYVEhRMGhvQWVVd1BDZ1pXcFpMQnVJVWZ0UGRJQ0I4bEZzNDZQbkIwbG5DX3NDRXlDVHNPQXR5QXhySVk?oc=5",
+    "ambiti": [
+      "impresa",
+      "pubblico"
+    ],
+    "obiettivo_id": "o7",
+    "obiettivo_nome": "Digitalizzazione & Innovazione",
+    "obiettivo": "o7",
+    "id": "b-8cad3ade"
+  },
+  {
+    "portale": "Invitalia",
+    "titolo": "Template Business Plan Smart&Start AI 2026: in 4 Ore",
+    "ente": "Invitalia",
+    "scadenza": "Sat, 19 Sep 2026",
+    "importo": "Consulta avviso ufficiale",
+    "descrizione": "Avviso pubblico rilevato sul canale Invitalia.",
+    "link": "https://news.google.com/rss/articles/CBMingFBVV95cUxPMG9PS3JXM0RjU2ZqZUlMdTdQWlFrNnExam1FckVNejZBNVRYRlViWm81a0wwYUc5bXZNaTFTaDlOUV9HZ3JUMkpFSHhzRjFlZXMwSUpkRFA5ajR4VjExV21tT0t4aUVCaDQzYlZiNGxpM19MWUpMYk4wM1V0SEVwb1gtOG83dVA4THJRam8xYVhnZWZobHBuaUtVYTFMdw?oc=5",
+    "ambiti": [
+      "impresa",
+      "pubblico"
+    ],
+    "obiettivo_id": "o7",
+    "obiettivo_nome": "Digitalizzazione & Innovazione",
+    "obiettivo": "o7",
+    "id": "b-ff860b0c"
+  },
+  {
+    "portale": "Camera di Commercio",
+    "titolo": "Efficienza energetica e fonti rinnovabili: incentivi per le imprese umbre",
+    "ente": "Camera di Commercio",
+    "scadenza": "Thu, 23 Jul 2026",
+    "importo": "Consulta avviso ufficiale",
+    "descrizione": "Avviso pubblico rilevato sul canale Camera di Commercio.",
+    "link": "https://news.google.com/rss/articles/CBMikwFBVV95cUxPRW84N2E1LVhJSlRvd3RObUFDLWxJS0RmT1lnX0EwSGI3dmNtbVJGWVYtSjJsdTNfbXo0ZTQyTFFOWVpsSVp0U2lpby1KVUFyUXdTUWdQakFxd3ZaV3FpVXI1SWVkWnFadXZUTXZhUVF3TkNmSzRZbXZRRkM2MXNXdDI2RklQR1BVV3AxcTZBTnNOTms?oc=5",
+    "ambiti": [
+      "impresa",
+      "pubblico"
+    ],
+    "obiettivo_id": "o2",
+    "obiettivo_nome": "Sostenibilità Energetica",
+    "obiettivo": "o2",
+    "id": "b-5545649c"
+  },
+  {
+    "portale": "Camera di Commercio",
+    "titolo": "Umbria Contributi e Finanziamenti agevolati per l'efficienza energetica delle imprese",
+    "ente": "Camera di Commercio",
+    "scadenza": "Fri, 04 Sep 2026",
+    "importo": "Consulta avviso ufficiale",
+    "descrizione": "Avviso pubblico rilevato sul canale Camera di Commercio.",
+    "link": "https://news.google.com/rss/articles/CBMiswFBVV95cUxPMjhLcHNnTUhfZWo1cnB6dW85eEt1TnZaOVlfaVRudHVwX0hQXzRvRzBSa0dpSm1zV1htTzd5VUlseExuTWZsdFo0ZGh6R2dhZWVXUEkyN1BIbk1Sci1rODRsN1RkREJSR2J1ZWdPQjdDSGxBWi1uVVZkcnZNRGpkcjR4cXpWSEtNMmtpY2RhTUg5Z05WaHJZNHpjSjg1eTBfQmRVVV9CQlJuczYxQ0MwaFpJQQ?oc=5",
+    "ambiti": [
+      "impresa",
+      "pubblico"
+    ],
+    "obiettivo_id": "o2",
+    "obiettivo_nome": "Sostenibilità Energetica",
+    "obiettivo": "o2",
+    "id": "b-5588377b"
+  },
+  {
+    "portale": "Camera di Commercio",
+    "titolo": "CCIAA dell’Emilia: bando efficienza energetica 2026",
+    "ente": "Camera di Commercio",
+    "scadenza": "Thu, 23 Jul 2026",
+    "importo": "Consulta avviso ufficiale",
+    "descrizione": "Avviso pubblico rilevato sul canale Camera di Commercio.",
+    "link": "https://news.google.com/rss/articles/CBMifEFVX3lxTFB2LWRNUk9yT2xzd2RwRkd2NlBUY2dtZ0I4MVl0VDZDVUdOOXkzZl9Dc2E4cU11bzFMRjJXbzE2a2I1ZTk0Vkl1N3J2TGZzMV9jaDhjR2lrMXlCU2lMUE9KQWtQQzl0Vk1NbnJha2lNbEtDOGowd1B1dVNHX1k?oc=5",
+    "ambiti": [
+      "impresa",
+      "pubblico"
+    ],
+    "obiettivo_id": "o2",
+    "obiettivo_nome": "Sostenibilità Energetica",
+    "obiettivo": "o2",
+    "id": "b-d5b173e1"
+  },
+  {
+    "portale": "Camera di Commercio",
+    "titolo": "Produttività, l'Umbria recupera sul 2019 ma resta gap nazionale | Perugia corre, Terni arretra",
+    "ente": "Camera di Commercio",
+    "scadenza": "Sat, 03 Oct 2026",
+    "importo": "Consulta avviso ufficiale",
+    "descrizione": "Avviso pubblico rilevato sul canale Camera di Commercio.",
+    "link": "https://news.google.com/rss/articles/CBMi1AFBVV95cUxOMTN1LUJ4NG9mdzExQXIwMlR1X1BYa0NZM1Ztc3c2WVpWWVg5NE1sYktfSG5TS0k0bHhFd2JQLVhmamVjcThIb0psYlNucFJTa2pXUXEzV3BTOF91cDRhalFyMTBkQVJadDJjcmswZjZGRWJWNHowdHZVR3llVThqc1lVaXlyY1psS2RrMXFFUFI2ckFBMDBlOFU0TjY1dHczUXdvRkZzN3JUM0VNd0dVUWV4TDhUY1JLdHlhMWE3dmx1S1pqOE5IbFRqSnNWVXgtUDUyOQ?oc=5",
+    "ambiti": [
+      "impresa",
+      "pubblico"
+    ],
+    "obiettivo_id": "o4",
+    "obiettivo_nome": "Nuovo Impianto & Sviluppo Industriale",
+    "obiettivo": "o4",
+    "id": "b-31247142"
+  },
+  {
+    "portale": "Camera di Commercio",
+    "titolo": "Concorso Camera di Commercio Umbria Istruttori 2026: 10 posti",
+    "ente": "Camera di Commercio",
+    "scadenza": "Wed, 20 May 2026",
+    "importo": "Consulta avviso ufficiale",
+    "descrizione": "Avviso pubblico rilevato sul canale Camera di Commercio.",
+    "link": "https://news.google.com/rss/articles/CBMijAFBVV95cUxNandmWTZDRG9wRkhYbTFPdWJvQzhKMkdvUDJ2bEU2VUpOenVtbXBHdGxCZUJHSVE1SllnanB3bkM2aGFuOXpNRFhUUlRSYXR0am1nNGppNjRIN09QYmg3MDE3QXBKWlowX0YtQ2JoZkRwRHNueHZxWTE5UlAzOHJxcWJWeXh2bmdnRkVJeg?oc=5",
+    "ambiti": [
+      "impresa",
+      "pubblico"
+    ],
+    "obiettivo_id": "o7",
+    "obiettivo_nome": "Digitalizzazione & Innovazione",
+    "obiettivo": "o7",
+    "id": "b-f647b940"
   }
 ]
