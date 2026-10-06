@@ -26,9 +26,6 @@ function LandingPage() {
           <Link to="/dossier" className="inline-flex items-center justify-center px-8 py-4 bg-secondary text-secondary-foreground rounded-lg font-semibold hover:bg-secondary/80 transition">
             Scopri i Bandi Attivi
           </Link>
-          <Link to="/regia" className="inline-flex items-center justify-center px-6 py-4 border border-border text-muted-foreground rounded-lg text-sm font-semibold hover:border-accent hover:text-accent transition">
-            🔒 Regia Operatori
-          </Link>
         </div>
       </section>
 
@@ -48,7 +45,7 @@ function LandingPage() {
               <p className="text-sm text-muted-foreground">Bandi monitorati</p>
             </div>
             <div>
-              <p className="text-sm font-mono text-muted-foreground">Ultima scansione: {new Date().toLocaleString()}</p>
+              <p className="text-sm font-mono text-muted-foreground">Ultima scansione: {new Date().toLocaleString("it-IT")}</p>
             </div>
           </div>
         </div>
