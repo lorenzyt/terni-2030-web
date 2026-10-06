@@ -13,7 +13,9 @@
     ],
     "obiettivo_id": "o7",
     "obiettivo_nome": "Digitalizzazione & Innovazione",
-    "id": "b-7d3ae09d"
+    "id": "b-7d3ae09d",
+    "semaforo": "giallo",
+    "stato_verifica": "Da Verificare (Feed Web)"
   },
   {
     "portale": "Regione Umbria",
@@ -29,7 +31,9 @@
     ],
     "obiettivo_id": "o7",
     "obiettivo_nome": "Digitalizzazione & Innovazione",
-    "id": "b-9abaadd9"
+    "id": "b-9abaadd9",
+    "semaforo": "giallo",
+    "stato_verifica": "Da Verificare (Feed Web)"
   },
   {
     "portale": "Regione Umbria",
@@ -45,7 +49,9 @@
     ],
     "obiettivo_id": "o7",
     "obiettivo_nome": "Digitalizzazione & Innovazione",
-    "id": "b-03e34b34"
+    "id": "b-03e34b34",
+    "semaforo": "giallo",
+    "stato_verifica": "Da Verificare (Feed Web)"
   },
   {
     "portale": "Comune di Terni",
@@ -61,7 +67,9 @@
     ],
     "obiettivo_id": "o1",
     "obiettivo_nome": "Riqualificazione Urbana",
-    "id": "b-9178ebe9"
+    "id": "b-9178ebe9",
+    "semaforo": "giallo",
+    "stato_verifica": "Da Verificare (Feed Web)"
   },
   {
     "portale": "Comune di Terni",
@@ -77,7 +85,9 @@
     ],
     "obiettivo_id": "o1",
     "obiettivo_nome": "Riqualificazione Urbana",
-    "id": "b-e6e3dbc2"
+    "id": "b-e6e3dbc2",
+    "semaforo": "giallo",
+    "stato_verifica": "Da Verificare (Feed Web)"
   },
   {
     "portale": "Comune di Terni",
@@ -93,7 +103,9 @@
     ],
     "obiettivo_id": "o1",
     "obiettivo_nome": "Riqualificazione Urbana",
-    "id": "b-c88c2f67"
+    "id": "b-c88c2f67",
+    "semaforo": "giallo",
+    "stato_verifica": "Da Verificare (Feed Web)"
   },
   {
     "portale": "GSE",
@@ -109,7 +121,9 @@
     ],
     "obiettivo_id": "o2",
     "obiettivo_nome": "Sostenibilità Energetica",
-    "id": "b-153ead0e"
+    "id": "b-153ead0e",
+    "semaforo": "giallo",
+    "stato_verifica": "Da Verificare (Feed Web)"
   },
   {
     "portale": "GSE",
@@ -125,7 +139,9 @@
     ],
     "obiettivo_id": "o2",
     "obiettivo_nome": "Sostenibilità Energetica",
-    "id": "b-e784ce69"
+    "id": "b-e784ce69",
+    "semaforo": "giallo",
+    "stato_verifica": "Da Verificare (Feed Web)"
   },
   {
     "portale": "GSE",
@@ -142,7 +158,9 @@
     ],
     "obiettivo_id": "o2",
     "obiettivo_nome": "Sostenibilità Energetica",
-    "id": "b-3417c141"
+    "id": "b-3417c141",
+    "semaforo": "giallo",
+    "stato_verifica": "Da Verificare (Feed Web)"
   },
   {
     "portale": "PNRR",
@@ -158,7 +176,9 @@
     ],
     "obiettivo_id": "o1",
     "obiettivo_nome": "Riqualificazione Urbana",
-    "id": "b-accb9155"
+    "id": "b-accb9155",
+    "semaforo": "giallo",
+    "stato_verifica": "Da Verificare (Feed Web)"
   },
   {
     "portale": "PNRR",
@@ -175,7 +195,9 @@
     ],
     "obiettivo_id": "o1",
     "obiettivo_nome": "Riqualificazione Urbana",
-    "id": "b-841840bf"
+    "id": "b-841840bf",
+    "semaforo": "giallo",
+    "stato_verifica": "Da Verificare (Feed Web)"
   },
   {
     "portale": "PNRR",
@@ -191,7 +213,9 @@
     ],
     "obiettivo_id": "o1",
     "obiettivo_nome": "Riqualificazione Urbana",
-    "id": "b-c5da29b5"
+    "id": "b-c5da29b5",
+    "semaforo": "giallo",
+    "stato_verifica": "Da Verificare (Feed Web)"
   },
   {
     "portale": "Invitalia",
@@ -208,7 +232,9 @@
     ],
     "obiettivo_id": "o4",
     "obiettivo_nome": "Nuovo Impianto & Sviluppo Industriale",
-    "id": "b-4f73e1c6"
+    "id": "b-4f73e1c6",
+    "semaforo": "giallo",
+    "stato_verifica": "Da Verificare (Feed Web)"
   },
   {
     "portale": "Invitalia",
@@ -225,7 +251,9 @@
     ],
     "obiettivo_id": "o4",
     "obiettivo_nome": "Nuovo Impianto & Sviluppo Industriale",
-    "id": "b-8918b546"
+    "id": "b-8918b546",
+    "semaforo": "giallo",
+    "stato_verifica": "Da Verificare (Feed Web)"
   },
   {
     "portale": "Invitalia",
@@ -242,7 +270,9 @@
     ],
     "obiettivo_id": "o4",
     "obiettivo_nome": "Nuovo Impianto & Sviluppo Industriale",
-    "id": "b-a8b83857"
+    "id": "b-a8b83857",
+    "semaforo": "giallo",
+    "stato_verifica": "Da Verificare (Feed Web)"
   },
   {
     "portale": "Camera di Commercio",
@@ -259,7 +289,9 @@
     "obiettivo_id": "o7",
     "obiettivo_nome": "Digitalizzazione & Innovazione",
     "obiettivo": "o7",
-    "id": "b-9fcbbfb4"
+    "id": "b-9fcbbfb4",
+    "semaforo": "giallo",
+    "stato_verifica": "Da Verificare (Feed Web)"
   },
   {
     "portale": "Invitalia",
@@ -276,7 +308,9 @@
     "obiettivo_id": "o7",
     "obiettivo_nome": "Digitalizzazione & Innovazione",
     "obiettivo": "o7",
-    "id": "b-7a005e13"
+    "id": "b-7a005e13",
+    "semaforo": "giallo",
+    "stato_verifica": "Da Verificare (Feed Web)"
   },
   {
     "portale": "Camera di Commercio",
@@ -293,7 +327,9 @@
     "obiettivo_id": "o7",
     "obiettivo_nome": "Digitalizzazione & Innovazione",
     "obiettivo": "o7",
-    "id": "b-57a4e40f"
+    "id": "b-57a4e40f",
+    "semaforo": "giallo",
+    "stato_verifica": "Da Verificare (Feed Web)"
   },
   {
     "portale": "Regione Umbria",
@@ -309,7 +345,9 @@
     "obiettivo_id": "o7",
     "obiettivo_nome": "Digitalizzazione & Innovazione",
     "obiettivo": "o7",
-    "id": "b-032e0b1d"
+    "id": "b-032e0b1d",
+    "semaforo": "giallo",
+    "stato_verifica": "Da Verificare (Feed Web)"
   },
   {
     "portale": "Comune di Terni",
@@ -326,7 +364,9 @@
     "obiettivo_id": "o1",
     "obiettivo_nome": "Riqualificazione Urbana",
     "obiettivo": "o1",
-    "id": "b-96c82430"
+    "id": "b-96c82430",
+    "semaforo": "giallo",
+    "stato_verifica": "Da Verificare (Feed Web)"
   },
   {
     "portale": "GSE",
@@ -342,7 +382,9 @@
     "obiettivo_id": "o2",
     "obiettivo_nome": "Sostenibilità Energetica",
     "obiettivo": "o2",
-    "id": "b-bea87ba9"
+    "id": "b-bea87ba9",
+    "semaforo": "giallo",
+    "stato_verifica": "Da Verificare (Feed Web)"
   },
   {
     "portale": "GSE",
@@ -359,7 +401,9 @@
     "obiettivo_id": "o2",
     "obiettivo_nome": "Sostenibilità Energetica",
     "obiettivo": "o2",
-    "id": "b-cfea02c7"
+    "id": "b-cfea02c7",
+    "semaforo": "giallo",
+    "stato_verifica": "Da Verificare (Feed Web)"
   },
   {
     "portale": "PNRR",
@@ -375,7 +419,9 @@
     "obiettivo_id": "o7",
     "obiettivo_nome": "Digitalizzazione & Innovazione",
     "obiettivo": "o7",
-    "id": "b-ef091a40"
+    "id": "b-ef091a40",
+    "semaforo": "giallo",
+    "stato_verifica": "Da Verificare (Feed Web)"
   },
   {
     "portale": "PNRR",
@@ -391,7 +437,9 @@
     "obiettivo_id": "o1",
     "obiettivo_nome": "Riqualificazione Urbana",
     "obiettivo": "o1",
-    "id": "b-c3740c4b"
+    "id": "b-c3740c4b",
+    "semaforo": "giallo",
+    "stato_verifica": "Da Verificare (Feed Web)"
   },
   {
     "portale": "PNRR",
@@ -407,7 +455,9 @@
     "obiettivo_id": "o7",
     "obiettivo_nome": "Digitalizzazione & Innovazione",
     "obiettivo": "o7",
-    "id": "b-6fcc4653"
+    "id": "b-6fcc4653",
+    "semaforo": "giallo",
+    "stato_verifica": "Da Verificare (Feed Web)"
   },
   {
     "portale": "PNRR",
@@ -423,7 +473,9 @@
     "obiettivo_id": "o1",
     "obiettivo_nome": "Riqualificazione Urbana",
     "obiettivo": "o1",
-    "id": "b-86e2a26d"
+    "id": "b-86e2a26d",
+    "semaforo": "giallo",
+    "stato_verifica": "Da Verificare (Feed Web)"
   },
   {
     "portale": "Invitalia",
@@ -440,7 +492,9 @@
     "obiettivo_id": "o4",
     "obiettivo_nome": "Nuovo Impianto & Sviluppo Industriale",
     "obiettivo": "o4",
-    "id": "b-76b1b3f8"
+    "id": "b-76b1b3f8",
+    "semaforo": "giallo",
+    "stato_verifica": "Da Verificare (Feed Web)"
   },
   {
     "portale": "Invitalia",
@@ -457,7 +511,9 @@
     "obiettivo_id": "o4",
     "obiettivo_nome": "Nuovo Impianto & Sviluppo Industriale",
     "obiettivo": "o4",
-    "id": "b-21ad6f9b"
+    "id": "b-21ad6f9b",
+    "semaforo": "giallo",
+    "stato_verifica": "Da Verificare (Feed Web)"
   },
   {
     "portale": "Camera di Commercio",
@@ -474,7 +530,9 @@
     "obiettivo_id": "o5",
     "obiettivo_nome": "Commercio & Riuso Locali Sfitti",
     "obiettivo": "o5",
-    "id": "b-2093f962"
+    "id": "b-2093f962",
+    "semaforo": "giallo",
+    "stato_verifica": "Da Verificare (Feed Web)"
   },
   {
     "portale": "Camera di Commercio",
@@ -491,7 +549,9 @@
     "obiettivo_id": "o7",
     "obiettivo_nome": "Digitalizzazione & Innovazione",
     "obiettivo": "o7",
-    "id": "b-b0d69537"
+    "id": "b-b0d69537",
+    "semaforo": "giallo",
+    "stato_verifica": "Da Verificare (Feed Web)"
   },
   {
     "portale": "Regione Umbria",
@@ -508,7 +568,9 @@
     "link": "https://www.regione.umbria.it/la-regione/bandi",
     "obiettivo_nome": "Sostenibilità Energetica",
     "obiettivo": "o2",
-    "id": "b-c8e2ea94"
+    "id": "b-c8e2ea94",
+    "semaforo": "verde",
+    "stato_verifica": "Fonte Istituzionale Diretta"
   },
   {
     "portale": "Regione Umbria",
@@ -524,7 +586,9 @@
     "link": "https://www.regione.umbria.it/la-regione/bandi",
     "obiettivo_nome": "Riqualificazione Urbana",
     "obiettivo": "o1",
-    "id": "b-2b2fefe0"
+    "id": "b-2b2fefe0",
+    "semaforo": "verde",
+    "stato_verifica": "Fonte Istituzionale Diretta"
   },
   {
     "portale": "Regione Umbria",
@@ -541,7 +605,9 @@
     "link": "https://www.sviluppoumbria.it/bandi-e-avvisi",
     "obiettivo_nome": "Nuovo Impianto & Sviluppo Industriale",
     "obiettivo": "o4",
-    "id": "b-b8fe6a45"
+    "id": "b-b8fe6a45",
+    "semaforo": "verde",
+    "stato_verifica": "Fonte Istituzionale Diretta"
   },
   {
     "portale": "Regione Umbria",
@@ -558,7 +624,9 @@
     "link": "https://www.regione.umbria.it/la-regione/bandi",
     "obiettivo_nome": "Mobilità Dolce & Sostenibile",
     "obiettivo": "o3",
-    "id": "b-8426fcfa"
+    "id": "b-8426fcfa",
+    "semaforo": "verde",
+    "stato_verifica": "Fonte Istituzionale Diretta"
   },
   {
     "portale": "Comune di Terni",
@@ -575,7 +643,9 @@
     "link": "https://www.fondazionecarit.it/bandi",
     "obiettivo_nome": "Cultura, Turismo & Terzo Settore",
     "obiettivo": "o6",
-    "id": "b-1ce65c55"
+    "id": "b-1ce65c55",
+    "semaforo": "verde",
+    "stato_verifica": "Fonte Istituzionale Diretta"
   },
   {
     "portale": "Comune di Terni",
@@ -593,7 +663,9 @@
     "link": "https://www.comune.terni.it",
     "obiettivo_nome": "Commercio & Riuso Locali Sfitti",
     "obiettivo": "o5",
-    "id": "b-b512857b"
+    "id": "b-b512857b",
+    "semaforo": "verde",
+    "stato_verifica": "Fonte Istituzionale Diretta"
   },
   {
     "portale": "Comune di Terni",
@@ -610,7 +682,9 @@
     "link": "https://www.comune.terni.it",
     "obiettivo_nome": "Riqualificazione Urbana",
     "obiettivo": "o1",
-    "id": "b-8c4903d2"
+    "id": "b-8c4903d2",
+    "semaforo": "verde",
+    "stato_verifica": "Fonte Istituzionale Diretta"
   },
   {
     "portale": "GSE",
@@ -628,7 +702,9 @@
     "link": "https://www.gse.it/servizi-per-te/efficienza-energetica/conto-termico",
     "obiettivo_nome": "Sostenibilità Energetica",
     "obiettivo": "o2",
-    "id": "b-4f95b554"
+    "id": "b-4f95b554",
+    "semaforo": "verde",
+    "stato_verifica": "Fonte Istituzionale Diretta"
   },
   {
     "portale": "GSE",
@@ -646,7 +722,9 @@
     "link": "https://www.gse.it/servizi-per-te/autoconsumo/gruppi-di-autoconsumatori-e-comunita-di-energia-rinnovabile",
     "obiettivo_nome": "Sostenibilità Energetica",
     "obiettivo": "o2",
-    "id": "b-cd9ad305"
+    "id": "b-cd9ad305",
+    "semaforo": "verde",
+    "stato_verifica": "Fonte Istituzionale Diretta"
   },
   {
     "portale": "GSE",
@@ -664,7 +742,9 @@
     "link": "https://www.gse.it/servizi-per-te/mobilita-sostenibile",
     "obiettivo_nome": "Mobilità Dolce & Sostenibile",
     "obiettivo": "o3",
-    "id": "b-c4f37133"
+    "id": "b-c4f37133",
+    "semaforo": "verde",
+    "stato_verifica": "Fonte Istituzionale Diretta"
   },
   {
     "portale": "PNRR",
@@ -681,7 +761,9 @@
     "link": "https://www.mimit.gov.it/it/incentivi/piano-transizione-5-0",
     "obiettivo_nome": "Digitalizzazione & Innovazione",
     "obiettivo": "o7",
-    "id": "b-a83f29dc"
+    "id": "b-a83f29dc",
+    "semaforo": "verde",
+    "stato_verifica": "Fonte Istituzionale Diretta"
   },
   {
     "portale": "PNRR",
@@ -698,7 +780,9 @@
     "link": "https://www.italiadomani.gov.it",
     "obiettivo_nome": "Mobilità Dolce & Sostenibile",
     "obiettivo": "o3",
-    "id": "b-47c1b20f"
+    "id": "b-47c1b20f",
+    "semaforo": "verde",
+    "stato_verifica": "Fonte Istituzionale Diretta"
   },
   {
     "portale": "PNRR",
@@ -715,7 +799,9 @@
     "link": "https://www.italiadomani.gov.it",
     "obiettivo_nome": "Riqualificazione Urbana",
     "obiettivo": "o1",
-    "id": "b-31f2e6ba"
+    "id": "b-31f2e6ba",
+    "semaforo": "verde",
+    "stato_verifica": "Fonte Istituzionale Diretta"
   },
   {
     "portale": "Invitalia",
@@ -732,7 +818,9 @@
     "link": "https://www.invitalia.it/cosa-facciamo/rafforziamo-le-imprese/contratti-di-sviluppo",
     "obiettivo_nome": "Nuovo Impianto & Sviluppo Industriale",
     "obiettivo": "o4",
-    "id": "b-dfa8f659"
+    "id": "b-dfa8f659",
+    "semaforo": "verde",
+    "stato_verifica": "Fonte Istituzionale Diretta"
   },
   {
     "portale": "Invitalia",
@@ -750,7 +838,9 @@
     "link": "https://www.invitalia.it/cosa-facciamo/creiamo-nuove-aziende/nuove-imprese-a-tasso-zero",
     "obiettivo_nome": "Commercio & Riuso Locali Sfitti",
     "obiettivo": "o5",
-    "id": "b-a9390539"
+    "id": "b-a9390539",
+    "semaforo": "verde",
+    "stato_verifica": "Fonte Istituzionale Diretta"
   },
   {
     "portale": "Invitalia",
@@ -768,7 +858,9 @@
     "link": "https://www.invitalia.it/cosa-facciamo/creiamo-nuove-aziende/smartstart-italia",
     "obiettivo_nome": "Digitalizzazione & Innovazione",
     "obiettivo": "o7",
-    "id": "b-b3ced13d"
+    "id": "b-b3ced13d",
+    "semaforo": "verde",
+    "stato_verifica": "Fonte Istituzionale Diretta"
   },
   {
     "portale": "Camera di Commercio",
@@ -784,7 +876,9 @@
     "link": "https://www.umbria.camcom.it/bandi-e-contributi",
     "obiettivo_nome": "Digitalizzazione & Innovazione",
     "obiettivo": "o7",
-    "id": "b-2d0cb94a"
+    "id": "b-2d0cb94a",
+    "semaforo": "verde",
+    "stato_verifica": "Fonte Istituzionale Diretta"
   },
   {
     "portale": "Camera di Commercio",
@@ -801,7 +895,9 @@
     "link": "https://www.umbria.camcom.it/bandi-e-contributi",
     "obiettivo_nome": "Sostenibilità Energetica",
     "obiettivo": "o2",
-    "id": "b-9782e840"
+    "id": "b-9782e840",
+    "semaforo": "verde",
+    "stato_verifica": "Fonte Istituzionale Diretta"
   },
   {
     "portale": "Camera di Commercio",
@@ -818,7 +914,9 @@
     "link": "https://www.umbria.camcom.it/bandi-e-contributi",
     "obiettivo_nome": "Commercio & Riuso Locali Sfitti",
     "obiettivo": "o5",
-    "id": "b-23232495"
+    "id": "b-23232495",
+    "semaforo": "verde",
+    "stato_verifica": "Fonte Istituzionale Diretta"
   },
   {
     "portale": "Regione Umbria",
@@ -834,7 +932,9 @@
     "obiettivo_id": "o7",
     "obiettivo_nome": "Digitalizzazione & Innovazione",
     "obiettivo": "o7",
-    "id": "b-1827976e"
+    "id": "b-1827976e",
+    "semaforo": "giallo",
+    "stato_verifica": "Da Verificare (Feed Web)"
   },
   {
     "portale": "Regione Umbria",
@@ -850,7 +950,9 @@
     "obiettivo_id": "o7",
     "obiettivo_nome": "Digitalizzazione & Innovazione",
     "obiettivo": "o7",
-    "id": "b-66a0d8e2"
+    "id": "b-66a0d8e2",
+    "semaforo": "giallo",
+    "stato_verifica": "Da Verificare (Feed Web)"
   },
   {
     "portale": "Regione Umbria",
@@ -866,7 +968,9 @@
     "obiettivo_id": "o7",
     "obiettivo_nome": "Digitalizzazione & Innovazione",
     "obiettivo": "o7",
-    "id": "b-2bde0db7"
+    "id": "b-2bde0db7",
+    "semaforo": "giallo",
+    "stato_verifica": "Da Verificare (Feed Web)"
   },
   {
     "portale": "Regione Umbria",
@@ -882,7 +986,9 @@
     "obiettivo_id": "o7",
     "obiettivo_nome": "Digitalizzazione & Innovazione",
     "obiettivo": "o7",
-    "id": "b-62eb6aeb"
+    "id": "b-62eb6aeb",
+    "semaforo": "giallo",
+    "stato_verifica": "Da Verificare (Feed Web)"
   },
   {
     "portale": "Regione Umbria",
@@ -898,7 +1004,9 @@
     "obiettivo_id": "o7",
     "obiettivo_nome": "Digitalizzazione & Innovazione",
     "obiettivo": "o7",
-    "id": "b-8cd8c541"
+    "id": "b-8cd8c541",
+    "semaforo": "giallo",
+    "stato_verifica": "Da Verificare (Feed Web)"
   },
   {
     "portale": "Regione Umbria",
@@ -915,7 +1023,9 @@
     "obiettivo_id": "o7",
     "obiettivo_nome": "Digitalizzazione & Innovazione",
     "obiettivo": "o7",
-    "id": "b-d13e84eb"
+    "id": "b-d13e84eb",
+    "semaforo": "giallo",
+    "stato_verifica": "Da Verificare (Feed Web)"
   },
   {
     "portale": "Regione Umbria",
@@ -932,7 +1042,9 @@
     "obiettivo_id": "o2",
     "obiettivo_nome": "Sostenibilità Energetica",
     "obiettivo": "o2",
-    "id": "b-8c15625e"
+    "id": "b-8c15625e",
+    "semaforo": "giallo",
+    "stato_verifica": "Da Verificare (Feed Web)"
   },
   {
     "portale": "Regione Umbria",
@@ -948,7 +1060,9 @@
     "obiettivo_id": "o7",
     "obiettivo_nome": "Digitalizzazione & Innovazione",
     "obiettivo": "o7",
-    "id": "b-f7431242"
+    "id": "b-f7431242",
+    "semaforo": "giallo",
+    "stato_verifica": "Da Verificare (Feed Web)"
   },
   {
     "portale": "Regione Umbria",
@@ -964,7 +1078,9 @@
     "obiettivo_id": "o3",
     "obiettivo_nome": "Mobilità Dolce & Sostenibile",
     "obiettivo": "o3",
-    "id": "b-5ddcaad9"
+    "id": "b-5ddcaad9",
+    "semaforo": "giallo",
+    "stato_verifica": "Da Verificare (Feed Web)"
   },
   {
     "portale": "Comune di Terni",
@@ -981,7 +1097,9 @@
     "obiettivo_id": "o1",
     "obiettivo_nome": "Riqualificazione Urbana",
     "obiettivo": "o1",
-    "id": "b-57e4a5a3"
+    "id": "b-57e4a5a3",
+    "semaforo": "giallo",
+    "stato_verifica": "Da Verificare (Feed Web)"
   },
   {
     "portale": "Comune di Terni",
@@ -997,7 +1115,9 @@
     "obiettivo_id": "o1",
     "obiettivo_nome": "Riqualificazione Urbana",
     "obiettivo": "o1",
-    "id": "b-d4787904"
+    "id": "b-d4787904",
+    "semaforo": "giallo",
+    "stato_verifica": "Da Verificare (Feed Web)"
   },
   {
     "portale": "Comune di Terni",
@@ -1013,7 +1133,9 @@
     "obiettivo_id": "o6",
     "obiettivo_nome": "Cultura, Turismo & Terzo Settore",
     "obiettivo": "o6",
-    "id": "b-51a9bf4c"
+    "id": "b-51a9bf4c",
+    "semaforo": "giallo",
+    "stato_verifica": "Da Verificare (Feed Web)"
   },
   {
     "portale": "Comune di Terni",
@@ -1029,7 +1151,9 @@
     "obiettivo_id": "o6",
     "obiettivo_nome": "Cultura, Turismo & Terzo Settore",
     "obiettivo": "o6",
-    "id": "b-787bca33"
+    "id": "b-787bca33",
+    "semaforo": "giallo",
+    "stato_verifica": "Da Verificare (Feed Web)"
   },
   {
     "portale": "Comune di Terni",
@@ -1045,7 +1169,9 @@
     "obiettivo_id": "o6",
     "obiettivo_nome": "Cultura, Turismo & Terzo Settore",
     "obiettivo": "o6",
-    "id": "b-8669d2af"
+    "id": "b-8669d2af",
+    "semaforo": "giallo",
+    "stato_verifica": "Da Verificare (Feed Web)"
   },
   {
     "portale": "Comune di Terni",
@@ -1062,7 +1188,9 @@
     "obiettivo_id": "o7",
     "obiettivo_nome": "Digitalizzazione & Innovazione",
     "obiettivo": "o7",
-    "id": "b-bfea0349"
+    "id": "b-bfea0349",
+    "semaforo": "giallo",
+    "stato_verifica": "Da Verificare (Feed Web)"
   },
   {
     "portale": "Comune di Terni",
@@ -1078,7 +1206,9 @@
     "obiettivo_id": "o1",
     "obiettivo_nome": "Riqualificazione Urbana",
     "obiettivo": "o1",
-    "id": "b-ff7dbf29"
+    "id": "b-ff7dbf29",
+    "semaforo": "giallo",
+    "stato_verifica": "Da Verificare (Feed Web)"
   },
   {
     "portale": "Comune di Terni",
@@ -1095,7 +1225,9 @@
     "obiettivo_id": "o5",
     "obiettivo_nome": "Commercio & Riuso Locali Sfitti",
     "obiettivo": "o5",
-    "id": "b-cb1fc49c"
+    "id": "b-cb1fc49c",
+    "semaforo": "giallo",
+    "stato_verifica": "Da Verificare (Feed Web)"
   },
   {
     "portale": "GSE",
@@ -1112,7 +1244,9 @@
     "obiettivo_id": "o2",
     "obiettivo_nome": "Sostenibilità Energetica",
     "obiettivo": "o2",
-    "id": "b-c5b81ac5"
+    "id": "b-c5b81ac5",
+    "semaforo": "giallo",
+    "stato_verifica": "Da Verificare (Feed Web)"
   },
   {
     "portale": "GSE",
@@ -1130,7 +1264,9 @@
     "obiettivo_id": "o2",
     "obiettivo_nome": "Sostenibilità Energetica",
     "obiettivo": "o2",
-    "id": "b-93ea9882"
+    "id": "b-93ea9882",
+    "semaforo": "giallo",
+    "stato_verifica": "Da Verificare (Feed Web)"
   },
   {
     "portale": "GSE",
@@ -1147,7 +1283,9 @@
     "obiettivo_id": "o2",
     "obiettivo_nome": "Sostenibilità Energetica",
     "obiettivo": "o2",
-    "id": "b-744f0e52"
+    "id": "b-744f0e52",
+    "semaforo": "giallo",
+    "stato_verifica": "Da Verificare (Feed Web)"
   },
   {
     "portale": "GSE",
@@ -1164,7 +1302,9 @@
     "obiettivo_id": "o2",
     "obiettivo_nome": "Sostenibilità Energetica",
     "obiettivo": "o2",
-    "id": "b-535eedca"
+    "id": "b-535eedca",
+    "semaforo": "giallo",
+    "stato_verifica": "Da Verificare (Feed Web)"
   },
   {
     "portale": "GSE",
@@ -1180,7 +1320,9 @@
     "obiettivo_id": "o2",
     "obiettivo_nome": "Sostenibilità Energetica",
     "obiettivo": "o2",
-    "id": "b-a05c3906"
+    "id": "b-a05c3906",
+    "semaforo": "giallo",
+    "stato_verifica": "Da Verificare (Feed Web)"
   },
   {
     "portale": "GSE",
@@ -1196,7 +1338,9 @@
     "obiettivo_id": "o2",
     "obiettivo_nome": "Sostenibilità Energetica",
     "obiettivo": "o2",
-    "id": "b-634e0643"
+    "id": "b-634e0643",
+    "semaforo": "giallo",
+    "stato_verifica": "Da Verificare (Feed Web)"
   },
   {
     "portale": "GSE",
@@ -1212,7 +1356,9 @@
     "obiettivo_id": "o3",
     "obiettivo_nome": "Mobilità Dolce & Sostenibile",
     "obiettivo": "o3",
-    "id": "b-15d396f2"
+    "id": "b-15d396f2",
+    "semaforo": "giallo",
+    "stato_verifica": "Da Verificare (Feed Web)"
   },
   {
     "portale": "GSE",
@@ -1228,7 +1374,9 @@
     "obiettivo_id": "o3",
     "obiettivo_nome": "Mobilità Dolce & Sostenibile",
     "obiettivo": "o3",
-    "id": "b-760141c8"
+    "id": "b-760141c8",
+    "semaforo": "giallo",
+    "stato_verifica": "Da Verificare (Feed Web)"
   },
   {
     "portale": "GSE",
@@ -1244,7 +1392,9 @@
     "obiettivo_id": "o3",
     "obiettivo_nome": "Mobilità Dolce & Sostenibile",
     "obiettivo": "o3",
-    "id": "b-d5f22a94"
+    "id": "b-d5f22a94",
+    "semaforo": "giallo",
+    "stato_verifica": "Da Verificare (Feed Web)"
   },
   {
     "portale": "PNRR",
@@ -1260,7 +1410,9 @@
     "obiettivo_id": "o2",
     "obiettivo_nome": "Sostenibilità Energetica",
     "obiettivo": "o2",
-    "id": "b-88ae3a2e"
+    "id": "b-88ae3a2e",
+    "semaforo": "giallo",
+    "stato_verifica": "Da Verificare (Feed Web)"
   },
   {
     "portale": "PNRR",
@@ -1276,7 +1428,9 @@
     "obiettivo_id": "o1",
     "obiettivo_nome": "Riqualificazione Urbana",
     "obiettivo": "o1",
-    "id": "b-e58f9aa3"
+    "id": "b-e58f9aa3",
+    "semaforo": "giallo",
+    "stato_verifica": "Da Verificare (Feed Web)"
   },
   {
     "portale": "PNRR",
@@ -1292,7 +1446,9 @@
     "obiettivo_id": "o1",
     "obiettivo_nome": "Riqualificazione Urbana",
     "obiettivo": "o1",
-    "id": "b-93d8d111"
+    "id": "b-93d8d111",
+    "semaforo": "giallo",
+    "stato_verifica": "Da Verificare (Feed Web)"
   },
   {
     "portale": "PNRR",
@@ -1308,7 +1464,9 @@
     "obiettivo_id": "o1",
     "obiettivo_nome": "Riqualificazione Urbana",
     "obiettivo": "o1",
-    "id": "b-1b4bf5b1"
+    "id": "b-1b4bf5b1",
+    "semaforo": "giallo",
+    "stato_verifica": "Da Verificare (Feed Web)"
   },
   {
     "portale": "PNRR",
@@ -1325,7 +1483,9 @@
     "obiettivo_id": "o3",
     "obiettivo_nome": "Mobilità Dolce & Sostenibile",
     "obiettivo": "o3",
-    "id": "b-d65cc96e"
+    "id": "b-d65cc96e",
+    "semaforo": "giallo",
+    "stato_verifica": "Da Verificare (Feed Web)"
   },
   {
     "portale": "PNRR",
@@ -1341,7 +1501,9 @@
     "obiettivo_id": "o1",
     "obiettivo_nome": "Riqualificazione Urbana",
     "obiettivo": "o1",
-    "id": "b-6547d333"
+    "id": "b-6547d333",
+    "semaforo": "giallo",
+    "stato_verifica": "Da Verificare (Feed Web)"
   },
   {
     "portale": "PNRR",
@@ -1358,7 +1520,9 @@
     "obiettivo_id": "o7",
     "obiettivo_nome": "Digitalizzazione & Innovazione",
     "obiettivo": "o7",
-    "id": "b-081ed157"
+    "id": "b-081ed157",
+    "semaforo": "giallo",
+    "stato_verifica": "Da Verificare (Feed Web)"
   },
   {
     "portale": "PNRR",
@@ -1375,7 +1539,9 @@
     "obiettivo_id": "o7",
     "obiettivo_nome": "Digitalizzazione & Innovazione",
     "obiettivo": "o7",
-    "id": "b-ed522c1d"
+    "id": "b-ed522c1d",
+    "semaforo": "giallo",
+    "stato_verifica": "Da Verificare (Feed Web)"
   },
   {
     "portale": "Invitalia",
@@ -1392,7 +1558,9 @@
     "obiettivo_id": "o4",
     "obiettivo_nome": "Nuovo Impianto & Sviluppo Industriale",
     "obiettivo": "o4",
-    "id": "b-97fdf724"
+    "id": "b-97fdf724",
+    "semaforo": "giallo",
+    "stato_verifica": "Da Verificare (Feed Web)"
   },
   {
     "portale": "Invitalia",
@@ -1409,7 +1577,9 @@
     "obiettivo_id": "o4",
     "obiettivo_nome": "Nuovo Impianto & Sviluppo Industriale",
     "obiettivo": "o4",
-    "id": "b-94692933"
+    "id": "b-94692933",
+    "semaforo": "giallo",
+    "stato_verifica": "Da Verificare (Feed Web)"
   },
   {
     "portale": "Invitalia",
@@ -1426,7 +1596,9 @@
     "obiettivo_id": "o7",
     "obiettivo_nome": "Digitalizzazione & Innovazione",
     "obiettivo": "o7",
-    "id": "b-f44fe7df"
+    "id": "b-f44fe7df",
+    "semaforo": "giallo",
+    "stato_verifica": "Da Verificare (Feed Web)"
   },
   {
     "portale": "Invitalia",
@@ -1443,7 +1615,9 @@
     "obiettivo_id": "o7",
     "obiettivo_nome": "Digitalizzazione & Innovazione",
     "obiettivo": "o7",
-    "id": "b-e65fc4a3"
+    "id": "b-e65fc4a3",
+    "semaforo": "giallo",
+    "stato_verifica": "Da Verificare (Feed Web)"
   },
   {
     "portale": "Invitalia",
@@ -1460,7 +1634,9 @@
     "obiettivo_id": "o7",
     "obiettivo_nome": "Digitalizzazione & Innovazione",
     "obiettivo": "o7",
-    "id": "b-08fcbee1"
+    "id": "b-08fcbee1",
+    "semaforo": "giallo",
+    "stato_verifica": "Da Verificare (Feed Web)"
   },
   {
     "portale": "Invitalia",
@@ -1477,7 +1653,9 @@
     "obiettivo_id": "o7",
     "obiettivo_nome": "Digitalizzazione & Innovazione",
     "obiettivo": "o7",
-    "id": "b-8cad3ade"
+    "id": "b-8cad3ade",
+    "semaforo": "giallo",
+    "stato_verifica": "Da Verificare (Feed Web)"
   },
   {
     "portale": "Invitalia",
@@ -1494,7 +1672,9 @@
     "obiettivo_id": "o7",
     "obiettivo_nome": "Digitalizzazione & Innovazione",
     "obiettivo": "o7",
-    "id": "b-ff860b0c"
+    "id": "b-ff860b0c",
+    "semaforo": "giallo",
+    "stato_verifica": "Da Verificare (Feed Web)"
   },
   {
     "portale": "Camera di Commercio",
@@ -1511,7 +1691,9 @@
     "obiettivo_id": "o2",
     "obiettivo_nome": "Sostenibilità Energetica",
     "obiettivo": "o2",
-    "id": "b-5545649c"
+    "id": "b-5545649c",
+    "semaforo": "giallo",
+    "stato_verifica": "Da Verificare (Feed Web)"
   },
   {
     "portale": "Camera di Commercio",
@@ -1528,7 +1710,9 @@
     "obiettivo_id": "o2",
     "obiettivo_nome": "Sostenibilità Energetica",
     "obiettivo": "o2",
-    "id": "b-5588377b"
+    "id": "b-5588377b",
+    "semaforo": "giallo",
+    "stato_verifica": "Da Verificare (Feed Web)"
   },
   {
     "portale": "Camera di Commercio",
@@ -1545,7 +1729,9 @@
     "obiettivo_id": "o2",
     "obiettivo_nome": "Sostenibilità Energetica",
     "obiettivo": "o2",
-    "id": "b-d5b173e1"
+    "id": "b-d5b173e1",
+    "semaforo": "giallo",
+    "stato_verifica": "Da Verificare (Feed Web)"
   },
   {
     "portale": "Camera di Commercio",
@@ -1562,7 +1748,9 @@
     "obiettivo_id": "o4",
     "obiettivo_nome": "Nuovo Impianto & Sviluppo Industriale",
     "obiettivo": "o4",
-    "id": "b-31247142"
+    "id": "b-31247142",
+    "semaforo": "giallo",
+    "stato_verifica": "Da Verificare (Feed Web)"
   },
   {
     "portale": "Camera di Commercio",
@@ -1579,6 +1767,8 @@
     "obiettivo_id": "o7",
     "obiettivo_nome": "Digitalizzazione & Innovazione",
     "obiettivo": "o7",
-    "id": "b-f647b940"
+    "id": "b-f647b940",
+    "semaforo": "giallo",
+    "stato_verifica": "Da Verificare (Feed Web)"
   }
 ]

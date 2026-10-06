@@ -12,7 +12,7 @@ import { Progress } from "@/components/ui/progress";
 import { Switch } from "@/components/ui/switch";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { filtraBandiPerDossier, OBIETTIVI, PROFILI, QUARTIERI, type Bando } from "@/lib/terni-data";
-import { COSTI_PREMI, nuovoId, oggi, useCivic } from "@/lib/civic-store";
+import { COSTI_PREMI, nuovoId, oggi, registraDossierGenerato, useCivic } from "@/lib/civic-store";
 import { useContact } from "@/components/ContactDialog";
 
 type Search = { quartiere?: string; obiettivo?: string; caso?: string };
@@ -104,11 +104,21 @@ function DossierPage() {
   const obCustom = state.obiettiviCommunity.find((o) => o.id === obiettivo);
 
   // Filtro rigoroso in virtù di Profilo + Obiettivo selezionati
-  const bandi: Bando[] = filtraBandiPerDossier(
+  const bandiGrezzi: Bando[] = filtraBandiPerDossier(
     profilo,
     obiettivo,
     obCustom ? `${obCustom.titolo} ${obCustom.descrizione}` : undefined
   );
+  const bandi: Bando[] = bandiGrezzi
+    .filter((b) => {
+      const key = b.nome.toLowerCase().replace(/[^a-z0-9]/g, "").slice(0, 40);
+      return state.auditBandi[key]?.stato !== "Scartato";
+    })
+    .map((b) => {
+      const key = b.nome.toLowerCase().replace(/[^a-z0-9]/g, "").slice(0, 40);
+      const overrideLink = state.auditBandi[key]?.linkUfficiale;
+      return overrideLink ? { ...b, link: overrideLink } : b;
+    });
 
   const profiloNome = PROFILI.find((p) => p.id === profilo)?.nome ?? "";
   const obiettivoNome = obCustom?.titolo ?? OBIETTIVI.find((o) => o.id === obiettivo)?.nome ?? "";
@@ -123,6 +133,15 @@ function DossierPage() {
     if (step === 0 && !profilo) return void toast.error("Seleziona l'ambito del tuo profilo.");
     if (step === 1 && !quartiere) return void toast.error("Seleziona uno dei 36 quartieri di Terni.");
     if (step === 2 && !obiettivo) return void toast.error("Seleziona il tuo obiettivo progettuale.");
+    if (step === 2) {
+      void registraDossierGenerato({
+        profilo: profiloNome || profilo,
+        quartiere,
+        obiettivo: obiettivoNome || obiettivo,
+        azione: bandi.length > 0 ? "Dossier Generato" : "Nessun Bando Rilevato",
+        bandi: bandi.map((b) => ({ nome: b.nome, ente: b.ente })),
+      });
+    }
     setStep((s) => Math.min(s + 1, 3));
   };
 
