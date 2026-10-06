@@ -171,8 +171,8 @@ function LandingPage() {
             <h2 className="text-2xl md:text-3xl font-bold">
               Dove sono i <span className="text-ember-gradient">Finanziamenti</span> vs Cosa chiedono i <span className="text-ember-gradient">Cittadini</span>
             </h2>
-            <p className="mt-1 max-w-3xl text-sm text-muted-foreground">
-              Confronto in tempo reale tra i bandi attivi per ciascun Obiettivo ONU (divisi per beneficiario) e le progettualità richieste dai quartieri di Terni.
+            <p className="mt-1 max-w-4xl text-sm text-muted-foreground">
+              Confronto in tempo reale tra i bandi attivi per ciascun Obiettivo ONU (divisi per beneficiario) e le progettualità richieste dai quartieri di Terni. Poiché molte misure agevolative sono trasversali — rispondendo contemporaneamente a più Obiettivi dell'Agenda 2030 e rivolgendosi a più destinatari (Enti, Imprese e Cittadini) — uno stesso bando può concorrere a più Goal e le percentuali indicano la copertura specifica di ciascun tema sul totale dei bandi monitorati.
             </p>
           </div>
 
