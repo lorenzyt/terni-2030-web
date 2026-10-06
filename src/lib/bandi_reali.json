@@ -5,9 +5,15 @@
     "ente": "Regione Umbria",
     "scadenza": "Mon, 05 Oct 2026",
     "importo": "Consulta avviso ufficiale",
-    "obiettivo": "o1",
+    "obiettivo": "o7",
     "descrizione": "Avviso pubblico rilevato sul canale Regione Umbria.",
-    "link": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxOc1l5WVBmQllWenpWaGxlaWZKT0VNUlN3ZGNRclVHcGRPZlRLRkRqOElQcWQ1UW93QWFRejh1Q1pVbVNLV1lmN3l6RUpFV0JJcG5sRDAtQndKWVpVRm9GcTE3ejZ3Q09mUVlkSkd1Z1MtbDd3MGtEalctV1pSZzcxTEtXRGZpel9IQXJFSkZMbUh4R2RQU3lqQVR5b1gxSk54dzNONHpucGpiZ2UxWUFoTnpZakRvdWc1?oc=5"
+    "link": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxOc1l5WVBmQllWenpWaGxlaWZKT0VNUlN3ZGNRclVHcGRPZlRLRkRqOElQcWQ1UW93QWFRejh1Q1pVbVNLV1lmN3l6RUpFV0JJcG5sRDAtQndKWVpVRm9GcTE3ejZ3Q09mUVlkSkd1Z1MtbDd3MGtEalctV1pSZzcxTEtXRGZpel9IQXJFSkZMbUh4R2RQU3lqQVR5b1gxSk54dzNONHpucGpiZ2UxWUFoTnpZakRvdWc1?oc=5",
+    "ambiti": [
+      "pubblico"
+    ],
+    "obiettivo_id": "o7",
+    "obiettivo_nome": "Digitalizzazione & Innovazione",
+    "id": "b-7d3ae09d"
   },
   {
     "portale": "Regione Umbria",
@@ -15,9 +21,15 @@
     "ente": "Regione Umbria",
     "scadenza": "Sun, 04 Oct 2026",
     "importo": "Consulta avviso ufficiale",
-    "obiettivo": "o1",
+    "obiettivo": "o7",
     "descrizione": "Avviso pubblico rilevato sul canale Regione Umbria.",
-    "link": "https://news.google.com/rss/articles/CBMi9gdBVV95cUxPQTJBdTlmYTBsRWZPRHMzamhhaU1wM1pEc3dlOWpRSU5tTFhtN1BlVkswMkQySXYwcnNjcFRua2VKS3YtTTJHVTEzV1l0ZHFMQ3hXZ1hSZnVtdU92SFYzMnJ6a3NUWWhmVFpTZVloNENxN2FLc0Fia2QwdEg0ejN5Wk8yTEVXaUpybTlWMGl4MFlzU3k3MnVhZlpWbHE0YjNMei1tLWRaQnlvR09CQ2pPV2RXUVhpMnZkekxTWE1VZHU2N29rZ3ZhQkZpY284Y2FFUlhERlJDNURzQ1NmTy0zQll1S19jRURxU1ZvOFQ4ZGl4cDBHdFhRdEk2Y196TzZXOHhkbEFuV1ptU0E4QnlKeF9WUHgtSUkzYjVqSUhzQ0tOUk1pWWhVUVBjaVBodnlmeHhrZURnZ1pzb3NzcXpGRzBucnBTdUZPVmtDWXpUZlltUF9mQkFXYzdnUWYyWkRXQWlidm1JRzk2M2dBaG8xTlZOMzNKQ3FoQjhWRUh5SVlUbnVNcEdnaHNHQl96VlBWUERWSkFyeGdBU2JMMWpIOXFwa3ByUkV2OEhuLXV3VldIQ0d5QWptb3MzVkFnWTdCbklsektpQWdNS24yLTRGeXd1c3Q4VEhyN1lzUG5BcUdoTFpLT3pwb1plSFhpM1lDUHNnSG9oQUU1WHlKTi1tQWEtTDNEOUtISTZRQjFuWC1MNGtJZUJ6V1hyYl9QSmZJLXhqZ19vaVA2ZkF3eGRBWU5rWVRrVlkybVZ1aWdKUjVjZnRoYUdUZ0Zlc1YtNnVua3k3ZmZtVllfQUxFWFpOX09HRmItNTVDX0U5Z1diT2lxWVh1RHFXTEVSU0s3ZFJlMHpRcmotTHpOeDRsWi1Hc2FIeFFTdkpuZHVaNlJZSGZjeXVTbVhaamZpb2MxdFl1MXJ3TG1ROExnY25mY1JraFNvQm5ZQWM5YVF6SXBKRWlnbTF6eTIxdUZSSmYwU0VBWGZDTzkwcjZWanY2bXV0amJNdHgtSnlMaE5aOWZqM3lzTVVZcldxX2FQNVVodXhheE0yV0l5a0xWSDYxMDFxQ2VJbWhmNlhPSnhMdm5LZ0liWjUtN2o1anVCZkhYM1VsMmN0Y2t2aTRTcTFBWWVwUEY4LWtzOXhXb1F3LTZDbF9NQzZWUmg0LVY0VjZSb3o3b3VfVDZfZ0w0V1NPc0wzNTRrTTQ4bkx4dktzTC1aWlQycEo3d2loNV90aHRmX0tZbXRXYkV3Y3hpaVlsWXY4U2VoWkJPQS1fMGxySzBPMTVvOGlaRDEzeFNXRllRb01OOElQc1dEdjdmQUk2eTlmYnJLbGhjX2JJZ290VjB5YUZ2aFBYeVE?oc=5"
+    "link": "https://news.google.com/rss/articles/CBMi9gdBVV95cUxPQTJBdTlmYTBsRWZPRHMzamhhaU1wM1pEc3dlOWpRSU5tTFhtN1BlVkswMkQySXYwcnNjcFRua2VKS3YtTTJHVTEzV1l0ZHFMQ3hXZ1hSZnVtdU92SFYzMnJ6a3NUWWhmVFpTZVloNENxN2FLc0Fia2QwdEg0ejN5Wk8yTEVXaUpybTlWMGl4MFlzU3k3MnVhZlpWbHE0YjNMei1tLWRaQnlvR09CQ2pPV2RXUVhpMnZkekxTWE1VZHU2N29rZ3ZhQkZpY284Y2FFUlhERlJDNURzQ1NmTy0zQll1S19jRURxU1ZvOFQ4ZGl4cDBHdFhRdEk2Y196TzZXOHhkbEFuV1ptU0E4QnlKeF9WUHgtSUkzYjVqSUhzQ0tOUk1pWWhVUVBjaVBodnlmeHhrZURnZ1pzb3NzcXpGRzBucnBTdUZPVmtDWXpUZlltUF9mQkFXYzdnUWYyWkRXQWlidm1JRzk2M2dBaG8xTlZOMzNKQ3FoQjhWRUh5SVlUbnVNcEdnaHNHQl96VlBWUERWSkFyeGdBU2JMMWpIOXFwa3ByUkV2OEhuLXV3VldIQ0d5QWptb3MzVkFnWTdCbklsektpQWdNS24yLTRGeXd1c3Q4VEhyN1lzUG5BcUdoTFpLT3pwb1plSFhpM1lDUHNnSG9oQUU1WHlKTi1tQWEtTDNEOUtISTZRQjFuWC1MNGtJZUJ6V1hyYl9QSmZJLXhqZ19vaVA2ZkF3eGRBWU5rWVRrVlkybVZ1aWdKUjVjZnRoYUdUZ0Zlc1YtNnVua3k3ZmZtVllfQUxFWFpOX09HRmItNTVDX0U5Z1diT2lxWVh1RHFXTEVSU0s3ZFJlMHpRcmotTHpOeDRsWi1Hc2FIeFFTdkpuZHVaNlJZSGZjeXVTbVhaamZpb2MxdFl1MXJ3TG1ROExnY25mY1JraFNvQm5ZQWM5YVF6SXBKRWlnbTF6eTIxdUZSSmYwU0VBWGZDTzkwcjZWanY2bXV0amJNdHgtSnlMaE5aOWZqM3lzTVVZcldxX2FQNVVodXhheE0yV0l5a0xWSDYxMDFxQ2VJbWhmNlhPSnhMdm5LZ0liWjUtN2o1anVCZkhYM1VsMmN0Y2t2aTRTcTFBWWVwUEY4LWtzOXhXb1F3LTZDbF9NQzZWUmg0LVY0VjZSb3o3b3VfVDZfZ0w0V1NPc0wzNTRrTTQ4bkx4dktzTC1aWlQycEo3d2loNV90aHRmX0tZbXRXYkV3Y3hpaVlsWXY4U2VoWkJPQS1fMGxySzBPMTVvOGlaRDEzeFNXRllRb01OOElQc1dEdjdmQUk2eTlmYnJLbGhjX2JJZ290VjB5YUZ2aFBYeVE?oc=5",
+    "ambiti": [
+      "pubblico"
+    ],
+    "obiettivo_id": "o7",
+    "obiettivo_nome": "Digitalizzazione & Innovazione",
+    "id": "b-9abaadd9"
   },
   {
     "portale": "Regione Umbria",
@@ -25,9 +37,15 @@
     "ente": "Regione Umbria",
     "scadenza": "Sun, 04 Oct 2026",
     "importo": "Consulta avviso ufficiale",
-    "obiettivo": "o1",
+    "obiettivo": "o7",
     "descrizione": "Avviso pubblico rilevato sul canale Regione Umbria.",
-    "link": "https://news.google.com/rss/articles/CBMi9gdBVV95cUxQZFlaMll3SlJrSUxEOXpRUXA2NjJweFFBOXpKUlBXZGtFa05ITGoyUDJLMGR1SUxPM1N2ZnJUVW5VenhIVGpLekY2TEIxSklEd2lPNDVnODFhTGRtdFg0bHRTNEVETlEyQWJySFdtNmVwZWJ6dFlMYUVOMTJrX2plZ2dBSmEtTXh1T0pPNEV3OGtLeG9UZGU1eDV4cFA3Q21ZUU5wS21mYU1QTC1TRG1xQnFyLTB5anVPaEFRYVVJbDFNYUJjQWpXdFQtWFM4WWhhd0JYNy1IWmU3Ym83X1ZEOUFmZnhuZjNXNzhzbWlFVms1MGNkd194OVpYeVZBMlpOdS1sS0xFS2MwRXpPLVdVUHJjUENNLUNDSTBYYzhNazd5RDZqNmlXczA3RGRoTXRmUmZONUFvNHlqSGZYSnhabEdnTVJVSkhMRWhnQ2ViV3RxNEtuNzZnZHFCeVlvTVlEUDgxZFVnc1dLS3VjN0luOXlIRkJveWVjWWNMNjEwQk9DdEZNbVp0amQzNnRkUVN2TndOMUNwXzd3UEp2VnFqUW1pREpsa1ZyY242MDVkQ2xhaVFnenRkM1FWeDNjd1pLby1PY3d5QkVMdW45MnZ2RlQwOEJwSWd0eGoyYm14Q0pyaXJhal90SkswRi1aYkFaWW14MUp2WVVtVUt2dldjMjhuRGd4eG1QMlVMUFlGd2VlZ0Z5M2VYRWVpNlM5QURETVdYQVBJbURMS3NvTUNzN1hSbnY3SVpLRWVITFZVOXRvWnpKejJlNjloMms0UDVTRnVuMmpoZEl3b29KRTh5dXN1cXNtRHZKZi1xSUNETjg5ZFlhbmxKeFZKaHZ6VWxsUlk4Vlh3d2M0WXBVSW44Yk9qT2Z5QmdXazdMWmVvVmtSa1B3aDdza1Rsb1NFLWY1a2NaZ19ZcG44SGhyTUhTWmhSckJuR0NCMnVpZXBWSE95d3NRWGZpYklIY29kUDM3eG9GWFF6M2FhRVZlQzNlM19mYU92dTBSS29JX2l0UDhYRjhvRjhyZ2FBU0p6ZDRrTVdsRTJnaXhsQWhmNF9qdjVKNkoxbERuSmNIQ0pxZjJ4N1pOU01KN3VCaDZNMlZWN1RjMXdMb0RCLVpUNVVQZ25sbHFEc3E3VzRHRWtWeDBEZ2xRWjVoVWgteUQ2eXM1c0FPT2FBNjNWVC1KVGNtaXBOdVFSckxLWkdjdHVobkxFeW1XR1N4MnZhdlJxTXBGQUloTWdxX2x1Y183Z2VKYkx3b1QwdmlJOV8xSDN5RUJwRFpJR0VaVlZDcGJhRDZPaUxMU29wR1JKZHN0V1AwZk5WeDZzanUtQ3JZNWRCRWVPSGlWMlE?oc=5"
+    "link": "https://news.google.com/rss/articles/CBMi9gdBVV95cUxQZFlaMll3SlJrSUxEOXpRUXA2NjJweFFBOXpKUlBXZGtFa05ITGoyUDJLMGR1SUxPM1N2ZnJUVW5VenhIVGpLekY2TEIxSklEd2lPNDVnODFhTGRtdFg0bHRTNEVETlEyQWJySFdtNmVwZWJ6dFlMYUVOMTJrX2plZ2dBSmEtTXh1T0pPNEV3OGtLeG9UZGU1eDV4cFA3Q21ZUU5wS21mYU1QTC1TRG1xQnFyLTB5anVPaEFRYVVJbDFNYUJjQWpXdFQtWFM4WWhhd0JYNy1IWmU3Ym83X1ZEOUFmZnhuZjNXNzhzbWlFVms1MGNkd194OVpYeVZBMlpOdS1sS0xFS2MwRXpPLVdVUHJjUENNLUNDSTBYYzhNazd5RDZqNmlXczA3RGRoTXRmUmZONUFvNHlqSGZYSnhabEdnTVJVSkhMRWhnQ2ViV3RxNEtuNzZnZHFCeVlvTVlEUDgxZFVnc1dLS3VjN0luOXlIRkJveWVjWWNMNjEwQk9DdEZNbVp0amQzNnRkUVN2TndOMUNwXzd3UEp2VnFqUW1pREpsa1ZyY242MDVkQ2xhaVFnenRkM1FWeDNjd1pLby1PY3d5QkVMdW45MnZ2RlQwOEJwSWd0eGoyYm14Q0pyaXJhal90SkswRi1aYkFaWW14MUp2WVVtVUt2dldjMjhuRGd4eG1QMlVMUFlGd2VlZ0Z5M2VYRWVpNlM5QURETVdYQVBJbURMS3NvTUNzN1hSbnY3SVpLRWVITFZVOXRvWnpKejJlNjloMms0UDVTRnVuMmpoZEl3b29KRTh5dXN1cXNtRHZKZi1xSUNETjg5ZFlhbmxKeFZKaHZ6VWxsUlk4Vlh3d2M0WXBVSW44Yk9qT2Z5QmdXazdMWmVvVmtSa1B3aDdza1Rsb1NFLWY1a2NaZ19ZcG44SGhyTUhTWmhSckJuR0NCMnVpZXBWSE95d3NRWGZpYklIY29kUDM3eG9GWFF6M2FhRVZlQzNlM19mYU92dTBSS29JX2l0UDhYRjhvRjhyZ2FBU0p6ZDRrTVdsRTJnaXhsQWhmNF9qdjVKNkoxbERuSmNIQ0pxZjJ4N1pOU01KN3VCaDZNMlZWN1RjMXdMb0RCLVpUNVVQZ25sbHFEc3E3VzRHRWtWeDBEZ2xRWjVoVWgteUQ2eXM1c0FPT2FBNjNWVC1KVGNtaXBOdVFSckxLWkdjdHVobkxFeW1XR1N4MnZhdlJxTXBGQUloTWdxX2x1Y183Z2VKYkx3b1QwdmlJOV8xSDN5RUJwRFpJR0VaVlZDcGJhRDZPaUxMU29wR1JKZHN0V1AwZk5WeDZzanUtQ3JZNWRCRWVPSGlWMlE?oc=5",
+    "ambiti": [
+      "pubblico"
+    ],
+    "obiettivo_id": "o7",
+    "obiettivo_nome": "Digitalizzazione & Innovazione",
+    "id": "b-03e34b34"
   },
   {
     "portale": "Comune di Terni",
@@ -37,7 +55,13 @@
     "importo": "Consulta avviso ufficiale",
     "obiettivo": "o1",
     "descrizione": "Avviso pubblico rilevato sul canale Comune di Terni.",
-    "link": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxOX0g0c2Uxd0JleGk4ajlJWlhuWnIyV1ZSY0JFR2JmVUg0WVFKSjVBNDlmQ3VtSWdxSkY3OE9vdXo0RzJRVUlLLUtVdXhvQ3RaZ1NyUkh2Q2FFU1ZpUHpIRmRKcXRJdDEtSjVJaG9MdGlGeWExcVZXWTAybjJVNlFEVWhUWk9adzVF?oc=5"
+    "link": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxOX0g0c2Uxd0JleGk4ajlJWlhuWnIyV1ZSY0JFR2JmVUg0WVFKSjVBNDlmQ3VtSWdxSkY3OE9vdXo0RzJRVUlLLUtVdXhvQ3RaZ1NyUkh2Q2FFU1ZpUHpIRmRKcXRJdDEtSjVJaG9MdGlGeWExcVZXWTAybjJVNlFEVWhUWk9adzVF?oc=5",
+    "ambiti": [
+      "pubblico"
+    ],
+    "obiettivo_id": "o1",
+    "obiettivo_nome": "Riqualificazione Urbana",
+    "id": "b-9178ebe9"
   },
   {
     "portale": "Comune di Terni",
@@ -47,7 +71,13 @@
     "importo": "Consulta avviso ufficiale",
     "obiettivo": "o1",
     "descrizione": "Avviso pubblico rilevato sul canale Comune di Terni.",
-    "link": "https://news.google.com/rss/articles/CBMiQkFVX3lxTE9VdGhOQzlGemt2VUN1LWFLeUd3MkIwWEFNdjdIU1JlWElmWXlSQUpmTFgyMG54NDlrVEExUFh5RENQQQ?oc=5"
+    "link": "https://news.google.com/rss/articles/CBMiQkFVX3lxTE9VdGhOQzlGemt2VUN1LWFLeUd3MkIwWEFNdjdIU1JlWElmWXlSQUpmTFgyMG54NDlrVEExUFh5RENQQQ?oc=5",
+    "ambiti": [
+      "pubblico"
+    ],
+    "obiettivo_id": "o1",
+    "obiettivo_nome": "Riqualificazione Urbana",
+    "id": "b-e6e3dbc2"
   },
   {
     "portale": "Comune di Terni",
@@ -57,7 +87,13 @@
     "importo": "Consulta avviso ufficiale",
     "obiettivo": "o1",
     "descrizione": "Avviso pubblico rilevato sul canale Comune di Terni.",
-    "link": "https://news.google.com/rss/articles/CBMi0AFBVV95cUxQcnlMRXZIWnN4M3lRVUFfd1FvSHVBLTJiQ0g3OGZEenF2NS1lQTRfeWxENTNNbl95M0N0dTRZeFhiTEV0aGNTVzBvc2RiTDl5SXB6QzI3WDlQZDEzT2JibkNjQkI3Smc0cGJ0OURpeU1MMXo3NlU3YlVLM051bzJNRFdhS0d3ZDU3bS1RWjg4V3BRZnVwX1VBU3RuVEd2VXA3b2tCR18xX3Q3ckZBb1htMEZmYVZ1b1loWDd3cUM4Si1GX0IwRlBOVXEzVkNNMG9N?oc=5"
+    "link": "https://news.google.com/rss/articles/CBMi0AFBVV95cUxQcnlMRXZIWnN4M3lRVUFfd1FvSHVBLTJiQ0g3OGZEenF2NS1lQTRfeWxENTNNbl95M0N0dTRZeFhiTEV0aGNTVzBvc2RiTDl5SXB6QzI3WDlQZDEzT2JibkNjQkI3Smc0cGJ0OURpeU1MMXo3NlU3YlVLM051bzJNRFdhS0d3ZDU3bS1RWjg4V3BRZnVwX1VBU3RuVEd2VXA3b2tCR18xX3Q3ckZBb1htMEZmYVZ1b1loWDd3cUM4Si1GX0IwRlBOVXEzVkNNMG9N?oc=5",
+    "ambiti": [
+      "pubblico"
+    ],
+    "obiettivo_id": "o1",
+    "obiettivo_nome": "Riqualificazione Urbana",
+    "id": "b-c88c2f67"
   },
   {
     "portale": "GSE",
@@ -67,7 +103,13 @@
     "importo": "Consulta avviso ufficiale",
     "obiettivo": "o2",
     "descrizione": "Avviso pubblico rilevato sul canale GSE.",
-    "link": "https://news.google.com/rss/articles/CBMijgFBVV95cUxQR191dmt0d2FLQ0dhdkpRcEVKRmEyQ1MxazdnZXFXMUFXVDZJc3dIZVRmbm9PWnpuTy1xNFdaU0FQX1RpUHVaRlNGVHBPNnU4VkRZdzVOM09VVGFQRFg0MGdTMDlVNWtYRlhHN2ppVTE1LVJDT21FU2dvTXBVdW5uN2NrWmF2QUpXcHFVTWdB?oc=5"
+    "link": "https://news.google.com/rss/articles/CBMijgFBVV95cUxQR191dmt0d2FLQ0dhdkpRcEVKRmEyQ1MxazdnZXFXMUFXVDZJc3dIZVRmbm9PWnpuTy1xNFdaU0FQX1RpUHVaRlNGVHBPNnU4VkRZdzVOM09VVGFQRFg0MGdTMDlVNWtYRlhHN2ppVTE1LVJDT21FU2dvTXBVdW5uN2NrWmF2QUpXcHFVTWdB?oc=5",
+    "ambiti": [
+      "pubblico"
+    ],
+    "obiettivo_id": "o2",
+    "obiettivo_nome": "Sostenibilità Energetica",
+    "id": "b-153ead0e"
   },
   {
     "portale": "GSE",
@@ -77,7 +119,13 @@
     "importo": "Consulta avviso ufficiale",
     "obiettivo": "o2",
     "descrizione": "Avviso pubblico rilevato sul canale GSE.",
-    "link": "https://news.google.com/rss/articles/CBMiSEFVX3lxTFBRLUkydDFlNWp1ajVWclVJcGNuNEtZZHBfU3pYR3hvU3lBWUFsOGdCeUx3VnFWd2ZDeXIyTHJ2TUtSRXJIRnRzSQ?oc=5"
+    "link": "https://news.google.com/rss/articles/CBMiSEFVX3lxTFBRLUkydDFlNWp1ajVWclVJcGNuNEtZZHBfU3pYR3hvU3lBWUFsOGdCeUx3VnFWd2ZDeXIyTHJ2TUtSRXJIRnRzSQ?oc=5",
+    "ambiti": [
+      "pubblico"
+    ],
+    "obiettivo_id": "o2",
+    "obiettivo_nome": "Sostenibilità Energetica",
+    "id": "b-e784ce69"
   },
   {
     "portale": "GSE",
@@ -87,7 +135,14 @@
     "importo": "Consulta avviso ufficiale",
     "obiettivo": "o2",
     "descrizione": "Avviso pubblico rilevato sul canale GSE.",
-    "link": "https://news.google.com/rss/articles/CBMitgFBVV95cUxOUklLZ0lFV2NRaG1Nb1FHU2FFNEk3LW5raWt6OUNQeE85a0VaUWFNQlRTMmc4Q05FejZqSjJ1UlZlQnFfcFZ2UEhDZTJmT0FSSVlEeFo1RmZzSHFKWGctemZLdVBucGswOVJ1Z09DVzFPOGVFbDFLUXIzUl9nUkhrT1NpZENRaWIzdy03OE8ybDBZbVNBMHI3Tl9Pc3ZlUnB1akhDeV8zdjU5UWozUVBvdWtEMUU5QQ?oc=5"
+    "link": "https://news.google.com/rss/articles/CBMitgFBVV95cUxOUklLZ0lFV2NRaG1Nb1FHU2FFNEk3LW5raWt6OUNQeE85a0VaUWFNQlRTMmc4Q05FejZqSjJ1UlZlQnFfcFZ2UEhDZTJmT0FSSVlEeFo1RmZzSHFKWGctemZLdVBucGswOVJ1Z09DVzFPOGVFbDFLUXIzUl9nUkhrT1NpZENRaWIzdy03OE8ybDBZbVNBMHI3Tl9Pc3ZlUnB1akhDeV8zdjU5UWozUVBvdWtEMUU5QQ?oc=5",
+    "ambiti": [
+      "cittadino",
+      "pubblico"
+    ],
+    "obiettivo_id": "o2",
+    "obiettivo_nome": "Sostenibilità Energetica",
+    "id": "b-3417c141"
   },
   {
     "portale": "PNRR",
@@ -95,9 +150,15 @@
     "ente": "PNRR",
     "scadenza": "Tue, 21 Jul 2026",
     "importo": "Consulta avviso ufficiale",
-    "obiettivo": "o2",
+    "obiettivo": "o1",
     "descrizione": "Avviso pubblico rilevato sul canale PNRR.",
-    "link": "https://news.google.com/rss/articles/CBMihgFBVV95cUxQbFk4enlPTDBkWW43ZndCRktLSjhIMHdMOUN4WHVweTBNT21NNHpjbUpfaGItSjJvTl9wTEtCMWtJcEh1NHZtVVdjTDVlUGRzX3lmV3lWcmFrbFdtbGJ2RXRJMW92dUZScnlTeXFFUUZVOHVUVGFTeWl4NHBBbFN2UC1McFlRQQ?oc=5"
+    "link": "https://news.google.com/rss/articles/CBMihgFBVV95cUxQbFk4enlPTDBkWW43ZndCRktLSjhIMHdMOUN4WHVweTBNT21NNHpjbUpfaGItSjJvTl9wTEtCMWtJcEh1NHZtVVdjTDVlUGRzX3lmV3lWcmFrbFdtbGJ2RXRJMW92dUZScnlTeXFFUUZVOHVUVGFTeWl4NHBBbFN2UC1McFlRQQ?oc=5",
+    "ambiti": [
+      "pubblico"
+    ],
+    "obiettivo_id": "o1",
+    "obiettivo_nome": "Riqualificazione Urbana",
+    "id": "b-accb9155"
   },
   {
     "portale": "PNRR",
@@ -105,9 +166,16 @@
     "ente": "PNRR",
     "scadenza": "Sat, 22 Aug 2026",
     "importo": "Consulta avviso ufficiale",
-    "obiettivo": "o2",
+    "obiettivo": "o1",
     "descrizione": "Avviso pubblico rilevato sul canale PNRR.",
-    "link": "https://news.google.com/rss/articles/CBMibkFVX3lxTE1mYnc1bXpHMEs4TXhyUDhLQjBJaDBCbkE5SGRmUVNtREV2N01Ibmk5X1F0OVI4SjRQWm5tQVJoVlBSbXU1VmJIR190aGROQkFIUDZOODEwTkpQOVNKdXJFcHFaUFotckFHa2F0dElB?oc=5"
+    "link": "https://news.google.com/rss/articles/CBMibkFVX3lxTE1mYnc1bXpHMEs4TXhyUDhLQjBJaDBCbkE5SGRmUVNtREV2N01Ibmk5X1F0OVI4SjRQWm5tQVJoVlBSbXU1VmJIR190aGROQkFIUDZOODEwTkpQOVNKdXJFcHFaUFotckFHa2F0dElB?oc=5",
+    "ambiti": [
+      "impresa",
+      "pubblico"
+    ],
+    "obiettivo_id": "o1",
+    "obiettivo_nome": "Riqualificazione Urbana",
+    "id": "b-841840bf"
   },
   {
     "portale": "PNRR",
@@ -115,9 +183,15 @@
     "ente": "PNRR",
     "scadenza": "Thu, 23 Apr 2026",
     "importo": "Consulta avviso ufficiale",
-    "obiettivo": "o2",
+    "obiettivo": "o1",
     "descrizione": "Avviso pubblico rilevato sul canale PNRR.",
-    "link": "https://news.google.com/rss/articles/CBMiakFVX3lxTE9BTENkUDlzMFl1MzF6eVowYkw4M1RQZlhicU92MWJIbS10LWJQQlhsQTJ0SThPRlRUUjg1UWZfZThRNTRMcDA4OURLUjVkVEd6clQxRFJfOF9Ed1BjT2d1SGk2RkpJT3JwZmc?oc=5"
+    "link": "https://news.google.com/rss/articles/CBMiakFVX3lxTE9BTENkUDlzMFl1MzF6eVowYkw4M1RQZlhicU92MWJIbS10LWJQQlhsQTJ0SThPRlRUUjg1UWZfZThRNTRMcDA4OURLUjVkVEd6clQxRFJfOF9Ed1BjT2d1SGk2RkpJT3JwZmc?oc=5",
+    "ambiti": [
+      "pubblico"
+    ],
+    "obiettivo_id": "o1",
+    "obiettivo_nome": "Riqualificazione Urbana",
+    "id": "b-c5da29b5"
   },
   {
     "portale": "Invitalia",
@@ -125,9 +199,16 @@
     "ente": "Invitalia",
     "scadenza": "Fri, 27 Apr 2018",
     "importo": "Consulta avviso ufficiale",
-    "obiettivo": "o2",
+    "obiettivo": "o4",
     "descrizione": "Avviso pubblico rilevato sul canale Invitalia.",
-    "link": "https://news.google.com/rss/articles/CBMiPEFVX3lxTE1sZTNBby1NOTg4YlF0UlRUa0YzQ0d4WHRlNUdDTTFyUDcyUGFuZVNhMmtmMWNpZEN0al82bA?oc=5"
+    "link": "https://news.google.com/rss/articles/CBMiPEFVX3lxTE1sZTNBby1NOTg4YlF0UlRUa0YzQ0d4WHRlNUdDTTFyUDcyUGFuZVNhMmtmMWNpZEN0al82bA?oc=5",
+    "ambiti": [
+      "impresa",
+      "pubblico"
+    ],
+    "obiettivo_id": "o4",
+    "obiettivo_nome": "Nuovo Impianto & Sviluppo Industriale",
+    "id": "b-4f73e1c6"
   },
   {
     "portale": "Invitalia",
@@ -135,9 +216,16 @@
     "ente": "Invitalia",
     "scadenza": "Tue, 06 May 2025",
     "importo": "Consulta avviso ufficiale",
-    "obiettivo": "o2",
+    "obiettivo": "o4",
     "descrizione": "Avviso pubblico rilevato sul canale Invitalia.",
-    "link": "https://news.google.com/rss/articles/CBMifEFVX3lxTE0tdzJzcmhDTTJkSm1uZnQ2WmMwWEtoREIyRjI1dENNc3AycDgtV2wyQ3dsLWdabG4xNTVIUnlXbVVrMHZGNi1hRkJVQWNIZElabU5qSG9UV2NWZ0hOY3FPNUlKZDR3azNlOGxXSWZab3BLX29jeUJ4RHlVQXE?oc=5"
+    "link": "https://news.google.com/rss/articles/CBMifEFVX3lxTE0tdzJzcmhDTTJkSm1uZnQ2WmMwWEtoREIyRjI1dENNc3AycDgtV2wyQ3dsLWdabG4xNTVIUnlXbVVrMHZGNi1hRkJVQWNIZElabU5qSG9UV2NWZ0hOY3FPNUlKZDR3azNlOGxXSWZab3BLX29jeUJ4RHlVQXE?oc=5",
+    "ambiti": [
+      "impresa",
+      "pubblico"
+    ],
+    "obiettivo_id": "o4",
+    "obiettivo_nome": "Nuovo Impianto & Sviluppo Industriale",
+    "id": "b-8918b546"
   },
   {
     "portale": "Invitalia",
@@ -145,9 +233,16 @@
     "ente": "Invitalia",
     "scadenza": "Thu, 20 Nov 2025",
     "importo": "Consulta avviso ufficiale",
-    "obiettivo": "o2",
+    "obiettivo": "o4",
     "descrizione": "Avviso pubblico rilevato sul canale Invitalia.",
-    "link": "https://news.google.com/rss/articles/CBMibEFVX3lxTE92QzFFX2NZTmkxd3NLTkpyRHJGSm1KMUpIZHNwQTNBd28wOWFmTDVOM2ZMU05LazJCeHVJd0dRc3c5Q0RVRGdaWWJ2TU9RRFVxMzFvaUg4bDRGZTNyUlBnT2ctMXI5MVB3dVdZcw?oc=5"
+    "link": "https://news.google.com/rss/articles/CBMibEFVX3lxTE92QzFFX2NZTmkxd3NLTkpyRHJGSm1KMUpIZHNwQTNBd28wOWFmTDVOM2ZMU05LazJCeHVJd0dRc3c5Q0RVRGdaWWJ2TU9RRFVxMzFvaUg4bDRGZTNyUlBnT2ctMXI5MVB3dVdZcw?oc=5",
+    "ambiti": [
+      "impresa",
+      "pubblico"
+    ],
+    "obiettivo_id": "o4",
+    "obiettivo_nome": "Nuovo Impianto & Sviluppo Industriale",
+    "id": "b-a8b83857"
   },
   {
     "portale": "Camera di Commercio",
@@ -155,9 +250,16 @@
     "ente": "Camera di Commercio",
     "scadenza": "Fri, 17 Jul 2026",
     "importo": "Consulta avviso ufficiale",
-    "obiettivo": "o1",
+    "obiettivo": "o7",
     "descrizione": "Avviso pubblico rilevato sul canale Camera di Commercio.",
-    "link": "https://news.google.com/rss/articles/CBMijwFBVV95cUxNdFFpeDUtb1M3c2lUVC1peWpxM2RjajRGZnpieHkxZldCSjBJUWVjcF9USXFONlNvb1BoM0NndElVcnYzRkZybDVqZXJ0cktuOUJlTG9hWHIwS2tFU1VnT3JNUDlDLVVwTi1PUXBSbHRIM1pTYjdldnJCd3dGMzJrRzJISnJ4SmtxQUhCLUFQSQ?oc=5"
+    "link": "https://news.google.com/rss/articles/CBMijwFBVV95cUxNdFFpeDUtb1M3c2lUVC1peWpxM2RjajRGZnpieHkxZldCSjBJUWVjcF9USXFONlNvb1BoM0NndElVcnYzRkZybDVqZXJ0cktuOUJlTG9hWHIwS2tFU1VnT3JNUDlDLVVwTi1PUXBSbHRIM1pTYjdldnJCd3dGMzJrRzJISnJ4SmtxQUhCLUFQSQ?oc=5",
+    "ambiti": [
+      "impresa",
+      "pubblico"
+    ],
+    "obiettivo_id": "o7",
+    "obiettivo_nome": "Digitalizzazione & Innovazione",
+    "id": "b-9fcbbfb4"
   },
   {
     "portale": "Camera di Commercio",
@@ -165,9 +267,16 @@
     "ente": "Camera di Commercio",
     "scadenza": "Sat, 03 Oct 2026",
     "importo": "Consulta avviso ufficiale",
-    "obiettivo": "o1",
+    "obiettivo": "o7",
     "descrizione": "Avviso pubblico rilevato sul canale Camera di Commercio.",
-    "link": "https://news.google.com/rss/articles/CBMidkFVX3lxTE9wMDFtNnJSTHhXQmppa2p5NlExVkRRaVFjSzhLQ0c1Yko3RmdSM0M3NjNHVTBTV1FOUXhpdmppbU44X1lYZEVjR1lmTF9aVTZzQVEtZDl1d05FZG14b2dNTGhUNjB2bnZUWWdLVjEwZ0xKeUxfM0E?oc=5"
+    "link": "https://news.google.com/rss/articles/CBMidkFVX3lxTE9wMDFtNnJSTHhXQmppa2p5NlExVkRRaVFjSzhLQ0c1Yko3RmdSM0M3NjNHVTBTV1FOUXhpdmppbU44X1lYZEVjR1lmTF9aVTZzQVEtZDl1d05FZG14b2dNTGhUNjB2bnZUWWdLVjEwZ0xKeUxfM0E?oc=5",
+    "ambiti": [
+      "impresa",
+      "pubblico"
+    ],
+    "obiettivo_id": "o7",
+    "obiettivo_nome": "Digitalizzazione & Innovazione",
+    "id": "b-7a005e13"
   },
   {
     "portale": "Camera di Commercio",
@@ -175,8 +284,213 @@
     "ente": "Camera di Commercio",
     "scadenza": "Fri, 24 Oct 2025",
     "importo": "Consulta avviso ufficiale",
-    "obiettivo": "o1",
+    "obiettivo": "o7",
     "descrizione": "Avviso pubblico rilevato sul canale Camera di Commercio.",
-    "link": "https://news.google.com/rss/articles/CBMidEFVX3lxTE43dU5VUkc0UF8zV0ppbTV0N1p1ZHVlajc2UnBEYkNzcG1wY0dxMW9xMmxzbzBMT3RSZ2lXVVp2ZFpWb01ReW1XY1lFcHZQTHloYVVDVWZhZC0yWkRwX1c0V3JUOG0xUVljajg2QWNadVF2eVIx?oc=5"
+    "link": "https://news.google.com/rss/articles/CBMidEFVX3lxTE43dU5VUkc0UF8zV0ppbTV0N1p1ZHVlajc2UnBEYkNzcG1wY0dxMW9xMmxzbzBMT3RSZ2lXVVp2ZFpWb01ReW1XY1lFcHZQTHloYVVDVWZhZC0yWkRwX1c0V3JUOG0xUVljajg2QWNadVF2eVIx?oc=5",
+    "ambiti": [
+      "impresa",
+      "pubblico"
+    ],
+    "obiettivo_id": "o7",
+    "obiettivo_nome": "Digitalizzazione & Innovazione",
+    "id": "b-57a4e40f"
+  },
+  {
+    "portale": "Regione Umbria",
+    "titolo": "Avviso meteo 027/2024",
+    "ente": "Regione Umbria",
+    "scadenza": "Sun, 04 Oct 2026",
+    "importo": "Consulta avviso ufficiale",
+    "descrizione": "Avviso pubblico rilevato sul canale Regione Umbria.",
+    "link": "https://news.google.com/rss/articles/CBMi9gdBVV95cUxPdjQ4bnRmSDF5dkRhU3huUk5xNW9nMmh3dVlUek50czVLZ1ZnZkdDdWVpVlNjVS1UVWpaSHUyOTQyZFBVekFBb2tLVy1HYWVwNjU3cXRBSF9CR2VVMzNzNUVlbVJYSUVqclpTaWYzX1Utb001eU12Y3pGN3JRSEtkSmxZME1PdFg4NGJRZkdISWtreUFmYXFsdm0wWHg2RHRvdFc2NW1OVllqdVpqNWFXU0VKV0hZX1Y5eDZCRFB0TGJvSXdHSVQzaUpHcGlVMm1aVEhzZXRzLWtuRG1UNE9NamVLMG10OGp3aTJQU0dDTlBXM1hkaUJfandBTWFoeURYZEJvZ2NkVk1wRWVzYmtvdjYtYjZwVm1ieFlRckEyc1lYZlZCTUFya1czeFE3ZmlUaUtzcGF6Z0dNTkJlT2l2Y1pKX00yM3RtdWQtOGpENVUxeDI4R2w4d005NGJ3V25zTlhodFBkcVJVWE9oNFhRVHVfZXFwaE5NREdHaFU0V0hiazdpdXVQXy1YRTI3STZUY2EyVWVVZFZMYkNpcTRMcHpWMFBIUGxfWGNhaFZ1dWQ1MnBiT0RwRzNDRnkxemlDN08xMDgyRlYzNnZZbVlpd1dmNHpncWtwMlpoWnVKdXY2RFVvUHdEUFlfdkFvTEJyOEZ3QVZiOVRTemg0SkZ5NmhjNUt3V2w1TENuUm1xLS1YeTlQTE5EQ2xUZ0lxWEJseHVyTnVBT0hKenMxOTE1emh5T2R0WWZKdW11TW5YQVNtQTRGTEgtbW5NcV9xNzEwVjR0VkZOX2gtOElFTnNEYTJYQnY0SlhRWG85Q3QwM0JkR3hOd0M5dUwxV21RZzFFNm5WeE9oTnJ4MlhNdFdpZTNBYmcyQ3VTNHBEOEZPVlNpaTB2NERqQXlteUY5V1RueHpwZ09STVM4MFh2ZnFKUU54Zjgtei1Yb0pjTkxvc0lGTVVrSHl0Rlc4U0ZHNV9DcklQc1RXVU5MTjVId3lXbDRMMG52am9uUGpkUkc0dmNkTXBKZnBFODBnX2p5NGtSRmg5dEh1TWlLb1hxcHFfVlVzVG0xRzF2RllVSVhQaFNGa0hDUDZzMVhUaFVuQ2w5NG92UmMxam9mTzVSV1dXVkxHZ1ZwVHpMSE10dDM3RDdTSFE4TnZTMnhSMHYwbUxnblMxSS0tMmM5bUMtLXMydHppQ3pDY2JLekUwZ1FmaE5wb2x4VkFwMnowajF2cUZ1YWxKUGYxY0tWeTJUc1gxRXo2blFTTG9pUXEzMkRYODNic2V4Uk5kQ3daSVlIVUxaalhDX3FMRTNaTUY2MUhHTFV1dHpPMnd2VzNyNkVpck92OExpbkE?oc=5",
+    "ambiti": [
+      "pubblico"
+    ],
+    "obiettivo_id": "o7",
+    "obiettivo_nome": "Digitalizzazione & Innovazione",
+    "obiettivo": "o7",
+    "id": "b-032e0b1d"
+  },
+  {
+    "portale": "Comune di Terni",
+    "titolo": "Presidente per Asm",
+    "ente": "Comune di Terni",
+    "scadenza": "Mon, 07 Sep 2026",
+    "importo": "Consulta avviso ufficiale",
+    "descrizione": "Avviso pubblico rilevato sul canale Comune di Terni.",
+    "link": "https://news.google.com/rss/articles/CBMiXEFVX3lxTE9pUnBMTnVNOHBqM1NYWFRXTEVFTVBKWnFuRFFzaG5UTzQ3ck1UYU9MNHVnakFDNDAtaHRiLTU3d0JKSGI0WE01ejJHV043Z05nQjgxVWVubDRqU0Qx?oc=5",
+    "ambiti": [
+      "cittadino",
+      "pubblico"
+    ],
+    "obiettivo_id": "o1",
+    "obiettivo_nome": "Riqualificazione Urbana",
+    "obiettivo": "o1",
+    "id": "b-96c82430"
+  },
+  {
+    "portale": "GSE",
+    "titolo": "Elenco dispositivi",
+    "ente": "GSE",
+    "scadenza": "Fri, 30 Apr 2021",
+    "importo": "Consulta avviso ufficiale",
+    "descrizione": "Avviso pubblico rilevato sul canale GSE.",
+    "link": "https://news.google.com/rss/articles/CBMiywFBVV95cUxQMnFIeDlrS3h6MmRWTGgyd280Zm5KXzRVc3o3Z3RYVm1xN2lVeUYzajJnRzVlUm1SSEhic2pGU0RxNURIRy1UUHBWVDJSLUVjbktrdUw0TU42bXJlRkttNGQwRjVwV1J6X3ZrbV9IbXVmOWhMRnRERHdYbFQ0Ri1Gc0lQRWlwdjBsa3BfcjBDelZIRW9DUjVYaUdrQ3RIbEpLRWJwT1FuQ1Y2R3VlWWtXNmpNNmo3V0NtWjFPRWVua19UbllZYU9fbG4zcw?oc=5",
+    "ambiti": [
+      "pubblico"
+    ],
+    "obiettivo_id": "o2",
+    "obiettivo_nome": "Sostenibilità Energetica",
+    "obiettivo": "o2",
+    "id": "b-bea87ba9"
+  },
+  {
+    "portale": "GSE",
+    "titolo": "Chi può accedere al Conto Termico 3.0",
+    "ente": "GSE",
+    "scadenza": "Sat, 20 Dec 2025",
+    "importo": "Consulta avviso ufficiale",
+    "descrizione": "Avviso pubblico rilevato sul canale GSE.",
+    "link": "https://news.google.com/rss/articles/CBMilAFBVV95cUxQeV81bjFEMWVuVXM3c1BGRnVScUNTWDd4OExnYkttWjQwSm1lalVFajdHTjRQdC0xTlIwV0Z3dFI2ZENnQnA2TVBaeEJyMV9jSU9lYURYM0I0QXhQN2JmRjNvZnMxVHVhRURNZzlrUkp2UllBbTlmcVNjMFprd1BKVnpyNzR4UXFKZk1DbHVQUEFBcUpu?oc=5",
+    "ambiti": [
+      "cittadino",
+      "pubblico"
+    ],
+    "obiettivo_id": "o2",
+    "obiettivo_nome": "Sostenibilità Energetica",
+    "obiettivo": "o2",
+    "id": "b-cfea02c7"
+  },
+  {
+    "portale": "PNRR",
+    "titolo": "Concorso docenti infanzia e primaria PNRR3: ecco le graduatorie [AGGIORNATO]",
+    "ente": "PNRR",
+    "scadenza": "Thu, 16 Jul 2026",
+    "importo": "Consulta avviso ufficiale",
+    "descrizione": "Avviso pubblico rilevato sul canale PNRR.",
+    "link": "https://news.google.com/rss/articles/CBMiugFBVV95cUxNamFUM3dtbk9SbWlGajlibFltVDAwM1pNN0xkbzROUGtUSGRKYjJ1WFVlcE5ISGgxTGRMXzhXWFJvOWV5S1VqVzl1RkRERXQwT1FjM29YUnlES2FwcXJaM0xUS0pCWGJDc2lNQnZuSkdtdkF0ckJGLW83U3g1WWJKTjVEcTUtODJSVkZOdDJRWktEY0JQZ1lGN1hkQ2dKR3ZIS3VRNi1iaWVMbWNBZm4xNVAyVVNoc1ZtZUE?oc=5",
+    "ambiti": [
+      "pubblico"
+    ],
+    "obiettivo_id": "o7",
+    "obiettivo_nome": "Digitalizzazione & Innovazione",
+    "obiettivo": "o7",
+    "id": "b-ef091a40"
+  },
+  {
+    "portale": "PNRR",
+    "titolo": "Graduatorie concorso PNRR3: gli elenchi pubblicati",
+    "ente": "PNRR",
+    "scadenza": "Sat, 23 May 2026",
+    "importo": "Consulta avviso ufficiale",
+    "descrizione": "Avviso pubblico rilevato sul canale PNRR.",
+    "link": "https://news.google.com/rss/articles/CBMihAFBVV95cUxPVlpDX1p0OTA3UzVqTGlyLXlSaEVndml2a1VYQTZZN25Oc1J5aTJpREd0QkdQMGtOUEc3TEtUNUR2X0UzOFpEd0E5aVA1cThQTDQzWlpJRHFMTm5WWWhPSHdlYzdwZ2ItNk5wNldsYnpMRy0tRnpuWGdxaVVpWXNETWhTTTk?oc=5",
+    "ambiti": [
+      "pubblico"
+    ],
+    "obiettivo_id": "o1",
+    "obiettivo_nome": "Riqualificazione Urbana",
+    "obiettivo": "o1",
+    "id": "b-c3740c4b"
+  },
+  {
+    "portale": "PNRR",
+    "titolo": "Graduatorie concorso PNRR3, pubblicazioni aggiornate degli elenchi relativi alla scuola secondaria",
+    "ente": "PNRR",
+    "scadenza": "Sun, 28 Jun 2026",
+    "importo": "Consulta avviso ufficiale",
+    "descrizione": "Avviso pubblico rilevato sul canale PNRR.",
+    "link": "https://news.google.com/rss/articles/CBMivgFBVV95cUxOQmk2aWQ4RkRQMENreVl3VHdpeVFOdUpCOFlHQXhoemIwelVFQ0pwUC1zNzNxMUxfbFAtSlF6RkJqdHdXODUxcXNKLW1raWtIS09QVWtBdTdiR2xYQ3RKSTloa2kwWFVhVVdtSUcwSHVjbUVqTko0TjZXYWw3X0wwTThfMjk4RHp5LVZvWmJlZDJEeUJibDJ5ZHh3ZmtrbVA4VnNsTEZvRnVvaFNRek9PR0hXWG5EdjRBQmdQeVJR?oc=5",
+    "ambiti": [
+      "pubblico"
+    ],
+    "obiettivo_id": "o7",
+    "obiettivo_nome": "Digitalizzazione & Innovazione",
+    "obiettivo": "o7",
+    "id": "b-6fcc4653"
+  },
+  {
+    "portale": "PNRR",
+    "titolo": "Concorso docenti PNRR3 scuola secondaria: ecco le graduatorie per le assunzioni [AGGIORNATO]",
+    "ente": "PNRR",
+    "scadenza": "Thu, 16 Jul 2026",
+    "importo": "Consulta avviso ufficiale",
+    "descrizione": "Avviso pubblico rilevato sul canale PNRR.",
+    "link": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxPT2hhQklMNlpyZXZlMV9iU0gwU2JGY0szdFBFNVlQNHBjUHJpVVpsMmFsRWdSbWVzdFJQZW9ETHVJbUx1czBxbGROZTRQZ1I2THNSNTV4UFowYmhickNFVzN6V284WWdSMlVPZEJMTkNRdWZ1YkNpQVRoVzdXS3pSeFdZWkprOE4xLUU2SWNXWlNWMzdvWkk0Uy1weGoyQ1RtV0ExODBGRC1FVzFpSVNVdEZjdWIwSXU2N1NKVzFLLU9Yc2M?oc=5",
+    "ambiti": [
+      "pubblico"
+    ],
+    "obiettivo_id": "o1",
+    "obiettivo_nome": "Riqualificazione Urbana",
+    "obiettivo": "o1",
+    "id": "b-86e2a26d"
+  },
+  {
+    "portale": "Invitalia",
+    "titolo": "SPESE AMMISSIBILI",
+    "ente": "Invitalia",
+    "scadenza": "Fri, 03 Oct 2025",
+    "importo": "Consulta avviso ufficiale",
+    "descrizione": "Avviso pubblico rilevato sul canale Invitalia.",
+    "link": "https://news.google.com/rss/articles/CBMid0FVX3lxTE9aWW5PbXpmeTdWUGlEOVBsVzZ1c0UwclB4RHJSOGVrRW5KTHgxVGx5a0xOLUhPSW9CMnpncTFjWXhXV1ZjOTFxWHlreUZCd0t6ZWtjakJ4U1dPS3AtcUlDdjNVVkFYcVpIVHNSSVI0ZV9tUFpHVldj?oc=5",
+    "ambiti": [
+      "impresa",
+      "pubblico"
+    ],
+    "obiettivo_id": "o4",
+    "obiettivo_nome": "Nuovo Impianto & Sviluppo Industriale",
+    "obiettivo": "o4",
+    "id": "b-76b1b3f8"
+  },
+  {
+    "portale": "Invitalia",
+    "titolo": "Incentivi, strumenti e progetti",
+    "ente": "Invitalia",
+    "scadenza": "Mon, 05 May 2025",
+    "importo": "Consulta avviso ufficiale",
+    "descrizione": "Avviso pubblico rilevato sul canale Invitalia.",
+    "link": "https://news.google.com/rss/articles/CBMibEFVX3lxTE1ZWjNBLXo1RDBfWXdIZ3VmeUk2b0NuWUdyV0Q1T3pZQUpQb1FJSks1MnZBVE5wZ0ZaUE82NkdpZk9rbVNmM3ZxQWhLaE5ZUzhpdzVTbXFVbVBJRFdDZEN6azNVUXNET3Vkd2hrcA?oc=5",
+    "ambiti": [
+      "impresa",
+      "pubblico"
+    ],
+    "obiettivo_id": "o4",
+    "obiettivo_nome": "Nuovo Impianto & Sviluppo Industriale",
+    "obiettivo": "o4",
+    "id": "b-21ad6f9b"
+  },
+  {
+    "portale": "Camera di Commercio",
+    "titolo": "Contributi a Fondo Perduto 2026: Come Funzionano Davvero",
+    "ente": "Camera di Commercio",
+    "scadenza": "Thu, 24 Sep 2026",
+    "importo": "Consulta avviso ufficiale",
+    "descrizione": "Avviso pubblico rilevato sul canale Camera di Commercio.",
+    "link": "https://news.google.com/rss/articles/CBMiakFVX3lxTFA0UkhFZU8tU2p5Z05KSEFpb1ZuRk9UcEw1UzZjbGQ0dTM0N3NIUTAycXZpTElTTy1EbzdTOWM5ajhBUWVkMURZZjhramtfU09lQl9rWHZYVkphVFVWNnUybXNsR29BbUFVSkE?oc=5",
+    "ambiti": [
+      "impresa",
+      "pubblico"
+    ],
+    "obiettivo_id": "o5",
+    "obiettivo_nome": "Commercio & Riuso Locali Sfitti",
+    "obiettivo": "o5",
+    "id": "b-2093f962"
+  },
+  {
+    "portale": "Camera di Commercio",
+    "titolo": "Il 10 luglio al via le domande per il bando \"doppia transizione digitale ed ecologica 2026\"",
+    "ente": "Camera di Commercio",
+    "scadenza": "Mon, 06 Jul 2026",
+    "importo": "Consulta avviso ufficiale",
+    "descrizione": "Avviso pubblico rilevato sul canale Camera di Commercio.",
+    "link": "https://news.google.com/rss/articles/CBMixAFBVV95cUxOczU1bTRpSmM5ZVgyUkpzbmRzVndPOGtCenQxQmdod2M4RGtXYUFsN1kzam15TFQ1SF9vVWFmWWFqaUdsdlpZUWhXbThLTlc5SlpMMEVSTldEMFhheU9nX0prVEFaZEdNNFIyVnNJSURIZm8tQ3RZZFBFLTd3UlZGOGtlUkswazR4SmsxOU5UOXluOXd2TTRSSnYwVVI5X0xoV0VveUgxYmUzYjB6dWNxQ3MtWVd3WWRISXlQRXVya0EyaHY0?oc=5",
+    "ambiti": [
+      "impresa",
+      "pubblico"
+    ],
+    "obiettivo_id": "o7",
+    "obiettivo_nome": "Digitalizzazione & Innovazione",
+    "obiettivo": "o7",
+    "id": "b-b0d69537"
   }
 ]
