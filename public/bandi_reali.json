@@ -200,22 +200,22 @@
     "stato_verifica": "Da Verificare (Feed Web)"
   },
   {
-    "portale": "PNRR",
+    "portale": "Camera di Commercio",
     "titolo": "Bandi a Fondo Perduto Aperti Adesso: Scadenze e Click Day",
-    "ente": "PNRR",
+    "ente": "Camera di Commercio",
     "scadenza": "Thu, 23 Apr 2026",
     "importo": "Consulta avviso ufficiale",
-    "obiettivo": "o1",
-    "descrizione": "Avviso pubblico rilevato sul canale PNRR.",
+    "descrizione": "Avviso pubblico rilevato sul canale Camera di Commercio.",
     "link": "https://news.google.com/rss/articles/CBMiakFVX3lxTE9BTENkUDlzMFl1MzF6eVowYkw4M1RQZlhicU92MWJIbS10LWJQQlhsQTJ0SThPRlRUUjg1UWZfZThRNTRMcDA4OURLUjVkVEd6clQxRFJfOF9Ed1BjT2d1SGk2RkpJT3JwZmc?oc=5",
+    "semaforo": "giallo",
     "ambiti": [
+      "impresa",
       "pubblico"
     ],
-    "obiettivo_id": "o1",
-    "obiettivo_nome": "Riqualificazione Urbana",
-    "id": "b-c5da29b5",
-    "semaforo": "giallo",
-    "stato_verifica": "Da Verificare (Feed Web)"
+    "obiettivo_id": "o5",
+    "obiettivo_nome": "Commercio & Riuso Locali Sfitti",
+    "obiettivo": "o5",
+    "id": "b-c5da29b5"
   },
   {
     "portale": "Invitalia",
@@ -468,6 +468,7 @@
     "descrizione": "Avviso pubblico rilevato sul canale PNRR.",
     "link": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxPT2hhQklMNlpyZXZlMV9iU0gwU2JGY0szdFBFNVlQNHBjUHJpVVpsMmFsRWdSbWVzdFJQZW9ETHVJbUx1czBxbGROZTRQZ1I2THNSNTV4UFowYmhickNFVzN6V284WWdSMlVPZEJMTkNRdWZ1YkNpQVRoVzdXS3pSeFdZWkprOE4xLUU2SWNXWlNWMzdvWkk0Uy1weGoyQ1RtV0ExODBGRC1FVzFpSVNVdEZjdWIwSXU2N1NKVzFLLU9Yc2M?oc=5",
     "ambiti": [
+      "impresa",
       "pubblico"
     ],
     "obiettivo_id": "o1",
@@ -554,7 +555,7 @@
     "stato_verifica": "Da Verificare (Feed Web)"
   },
   {
-    "portale": "Regione Umbria",
+    "portale": "PR FESR 2021/2027",
     "titolo": "PR FESR Umbria 2021-2027 — Efficienza energetica e rinnovabili nelle imprese",
     "ente": "Regione Umbria / Sviluppo Umbria",
     "scadenza": "Bando pluriennale attivo",
@@ -641,11 +642,10 @@
     "obiettivo_id": "o6",
     "descrizione": "Contributi per associazioni, enti pubblici e comitati del territorio di Terni per progetti culturali, educativi, turistici e sociali.",
     "link": "https://www.fondazionecarit.it/bandi",
+    "semaforo": "verde",
     "obiettivo_nome": "Cultura, Turismo & Terzo Settore",
     "obiettivo": "o6",
-    "id": "b-1ce65c55",
-    "semaforo": "verde",
-    "stato_verifica": "Fonte Istituzionale Diretta"
+    "id": "b-1ce65c55"
   },
   {
     "portale": "Comune di Terni",
@@ -661,11 +661,10 @@
     "obiettivo_id": "o5",
     "descrizione": "Misure per favorire la riapertura di botteghe artigiane, negozi su strada e recupero di vetrine sfitte nel centro e nei quartieri di Terni.",
     "link": "https://www.comune.terni.it",
+    "semaforo": "verde",
     "obiettivo_nome": "Commercio & Riuso Locali Sfitti",
     "obiettivo": "o5",
-    "id": "b-b512857b",
-    "semaforo": "verde",
-    "stato_verifica": "Fonte Istituzionale Diretta"
+    "id": "b-b512857b"
   },
   {
     "portale": "Comune di Terni",
@@ -700,11 +699,10 @@
     "obiettivo_id": "o2",
     "descrizione": "Contributo diretto sul conto corrente per sostituzione impianti di climatizzazione, solare termico, pompe di calore e isolamento.",
     "link": "https://www.gse.it/servizi-per-te/efficienza-energetica/conto-termico",
+    "semaforo": "verde",
     "obiettivo_nome": "Sostenibilità Energetica",
     "obiettivo": "o2",
-    "id": "b-4f95b554",
-    "semaforo": "verde",
-    "stato_verifica": "Fonte Istituzionale Diretta"
+    "id": "b-4f95b554"
   },
   {
     "portale": "GSE",
@@ -720,11 +718,10 @@
     "obiettivo_id": "o2",
     "descrizione": "Agevolazioni per cittadini, condomìni, PMI ed enti locali che condividono energia prodotta da impianti fotovoltaici.",
     "link": "https://www.gse.it/servizi-per-te/autoconsumo/gruppi-di-autoconsumatori-e-comunita-di-energia-rinnovabile",
+    "semaforo": "verde",
     "obiettivo_nome": "Sostenibilità Energetica",
     "obiettivo": "o2",
-    "id": "b-cd9ad305",
-    "semaforo": "verde",
-    "stato_verifica": "Fonte Istituzionale Diretta"
+    "id": "b-cd9ad305"
   },
   {
     "portale": "GSE",
@@ -759,11 +756,10 @@
     "obiettivo_id": "o7",
     "descrizione": "Incentivo per imprese che investono in beni strumentali digitali 4.0 abbinati alla riduzione dei consumi energetici dello stabilimento.",
     "link": "https://www.mimit.gov.it/it/incentivi/piano-transizione-5-0",
+    "semaforo": "verde",
     "obiettivo_nome": "Digitalizzazione & Innovazione",
     "obiettivo": "o7",
-    "id": "b-a83f29dc",
-    "semaforo": "verde",
-    "stato_verifica": "Fonte Istituzionale Diretta"
+    "id": "b-a83f29dc"
   },
   {
     "portale": "PNRR",
@@ -797,11 +793,10 @@
     "obiettivo_id": "o1",
     "descrizione": "Interventi per il recupero di edilizia residenziale, rifunzionalizzazione di aree urbane degradate e creazione di spazi aggregativi.",
     "link": "https://www.italiadomani.gov.it",
+    "semaforo": "verde",
     "obiettivo_nome": "Riqualificazione Urbana",
     "obiettivo": "o1",
-    "id": "b-31f2e6ba",
-    "semaforo": "verde",
-    "stato_verifica": "Fonte Istituzionale Diretta"
+    "id": "b-31f2e6ba"
   },
   {
     "portale": "Invitalia",
@@ -816,11 +811,10 @@
     "obiettivo_id": "o4",
     "descrizione": "Principale strumento nazionale per la realizzazione di nuovi impianti industriali, riconversione siderurgica/chimica e poli produttivi.",
     "link": "https://www.invitalia.it/cosa-facciamo/rafforziamo-le-imprese/contratti-di-sviluppo",
+    "semaforo": "verde",
     "obiettivo_nome": "Nuovo Impianto & Sviluppo Industriale",
     "obiettivo": "o4",
-    "id": "b-dfa8f659",
-    "semaforo": "verde",
-    "stato_verifica": "Fonte Istituzionale Diretta"
+    "id": "b-dfa8f659"
   },
   {
     "portale": "Invitalia",
@@ -874,11 +868,10 @@
     "obiettivo_id": "o7",
     "descrizione": "Contributi a fondo perduto per le MPMI ternane e umbre per software, e-commerce, intelligenza artificiale, cybersecurity e cloud.",
     "link": "https://www.umbria.camcom.it/bandi-e-contributi",
+    "semaforo": "verde",
     "obiettivo_nome": "Digitalizzazione & Innovazione",
     "obiettivo": "o7",
-    "id": "b-2d0cb94a",
-    "semaforo": "verde",
-    "stato_verifica": "Fonte Istituzionale Diretta"
+    "id": "b-2d0cb94a"
   },
   {
     "portale": "Camera di Commercio",
@@ -926,15 +919,14 @@
     "importo": "Consulta avviso ufficiale",
     "descrizione": "Avviso pubblico rilevato sul canale Regione Umbria.",
     "link": "https://news.google.com/rss/articles/CBMisAFBVV95cUxPTzN6RFcyVWQ4SkhZZG1BZWZoVklPVTVCLVluZ2ozRi1Vc3ZRSjhSd1UyaldJUWFmcFJRS2QyWThsYW5QTl9jZEljOGxHay1ZZGpDVnFKS0NtZjA3Z29RaEhLSWZjMERrY1JJYjNEeUJiRVB3a0tmOFFtazZ3S2JwZWV0M0FidFhoR3YxLTY1Z1ZEZnlTaHBUa0dXRGhkaVdROXQtQnc2NVJ0SnhXOW81cA?oc=5",
+    "semaforo": "giallo",
     "ambiti": [
       "pubblico"
     ],
     "obiettivo_id": "o7",
     "obiettivo_nome": "Digitalizzazione & Innovazione",
     "obiettivo": "o7",
-    "id": "b-1827976e",
-    "semaforo": "giallo",
-    "stato_verifica": "Da Verificare (Feed Web)"
+    "id": "b-1827976e"
   },
   {
     "portale": "Regione Umbria",
@@ -962,70 +954,68 @@
     "importo": "Consulta avviso ufficiale",
     "descrizione": "Avviso pubblico rilevato sul canale Regione Umbria.",
     "link": "https://news.google.com/rss/articles/CBMizgFBVV95cUxPSGdKZ3U4alVaX2g3QUtZTE9FRDNIbWEzVVlCTnpBdm1HSENMZUhDa2hqeXZYOG1YZXBUSzZCNFJ5NlA2NERZazlGa0xIcTVIS1VFTUFjMDZhN2xTcUVUVGR2YVlGclJ3aWpnV2xKTVFFbUhfNzNXaTc1UFYxNHRPaGhrTEJEdDVUNUlld3czdTl2U19UT0NZcXRqZU54NXU3ZGJzaDc1UDl1dVBwSVhiYUNpeF83c2hPa0d2bUNrZGkwVE9QVWsxWEVLekx2dw?oc=5",
+    "semaforo": "giallo",
     "ambiti": [
       "pubblico"
     ],
     "obiettivo_id": "o7",
     "obiettivo_nome": "Digitalizzazione & Innovazione",
     "obiettivo": "o7",
-    "id": "b-2bde0db7",
-    "semaforo": "giallo",
-    "stato_verifica": "Da Verificare (Feed Web)"
+    "id": "b-2bde0db7"
   },
   {
-    "portale": "Regione Umbria",
+    "portale": "PR FESR 2021/2027",
     "titolo": "Avviso pubblico ICC",
-    "ente": "Regione Umbria",
+    "ente": "PR FESR 2021/2027",
     "scadenza": "Wed, 05 Aug 2026",
     "importo": "Consulta avviso ufficiale",
-    "descrizione": "Avviso pubblico rilevato sul canale Regione Umbria.",
+    "descrizione": "Avviso pubblico rilevato sul canale PR FESR 2021/2027.",
     "link": "https://news.google.com/rss/articles/CBMi3wFBVV95cUxNN0xHbFF1UGNHM2U1VGpkbE5icjA1UFMzOG9yeXRJNkd0UG5MOWpZY2Z6TEpmbFlYSGpTQlhaZnc4bkpfbXRsZUwwekYtdXNDUW1SLUk2SmpzMUlIQWZWZTRiMmdiLXc2bVN4bDdFTHdSM0NXLWhBUmZWZlZPakRkS1I3cFdHTTdMZWZsYVNUcHdaSm9OZTB4SGtPZ0hINDFuc2RlUmtkVXNhQkpZYmpmYUM1b3gwRTBGcjZmYW1YMmxPSG9JOGtmdmxXRzhMNTdYNGJSSllVNWJqX0pRUlRV?oc=5",
-    "ambiti": [
-      "pubblico"
-    ],
-    "obiettivo_id": "o7",
-    "obiettivo_nome": "Digitalizzazione & Innovazione",
-    "obiettivo": "o7",
-    "id": "b-62eb6aeb",
     "semaforo": "giallo",
-    "stato_verifica": "Da Verificare (Feed Web)"
-  },
-  {
-    "portale": "Regione Umbria",
-    "titolo": "Avviso STEP 2026 – LINEA A SOVVENZIONE",
-    "ente": "Regione Umbria",
-    "scadenza": "Wed, 05 Aug 2026",
-    "importo": "Consulta avviso ufficiale",
-    "descrizione": "Avviso pubblico rilevato sul canale Regione Umbria.",
-    "link": "https://news.google.com/rss/articles/CBMitwFBVV95cUxPTDhuZ0wweDlmbVl1bmxFb3EtOC1hY3hMam4yT3dqU0thY1ZTaFhtQmd3RWJxNzBSUUltb0hBSGtPQ0IzSEhuOUM4TmJBTV8yaVZVbXEwRGdjOU9fZU1GYVZyc3pBS1AxY0tqcXhUUTRsZ3ZvcENjNjVqaExDdlVzU0RwMkx2V3dtV1FzdkphR3EzRjc5T1FSY2FZQU4yNl84VFpGQ3lkeExfTURGcGZYM1VQMGxJeGc?oc=5",
-    "ambiti": [
-      "pubblico"
-    ],
-    "obiettivo_id": "o7",
-    "obiettivo_nome": "Digitalizzazione & Innovazione",
-    "obiettivo": "o7",
-    "id": "b-8cd8c541",
-    "semaforo": "giallo",
-    "stato_verifica": "Da Verificare (Feed Web)"
-  },
-  {
-    "portale": "Regione Umbria",
-    "titolo": "La Regione investe sulla cultura: pubblicato il bando da 3,8 milioni di euro per le imprese creative",
-    "ente": "Regione Umbria",
-    "scadenza": "Wed, 05 Aug 2026",
-    "importo": "Consulta avviso ufficiale",
-    "descrizione": "Avviso pubblico rilevato sul canale Regione Umbria.",
-    "link": "https://news.google.com/rss/articles/CBMi2gFBVV95cUxNT2ItV1pxMnd3S25samJiVEU3eE8xcmJydHNjcXFQbHdIZmJyZFp0Y01jQjhQdlpnaVZLemZSUUNlVWxTWjV6ZHNKU1c5M2FwS2FTTlM5MmRyc2txUXZBUEdiUUpOV0k4aURxdWxvM3BMVFBLTDhrN3hxMmlXcDZYYk5DdTBkRk45QWpnbFhlUm9XUHEweFVZcmRybFRSWnBoVjA4YzJwLWdjb3hPX1FSekdxUkNDQWNJMDFuVXl3RmJ6RUFCSGpVTVNZMFZmRldBTG5mdnpBVzRUdw?oc=5",
     "ambiti": [
       "impresa",
       "pubblico"
     ],
-    "obiettivo_id": "o7",
-    "obiettivo_nome": "Digitalizzazione & Innovazione",
-    "obiettivo": "o7",
-    "id": "b-d13e84eb",
+    "obiettivo_id": "o1",
+    "obiettivo_nome": "Riqualificazione Urbana",
+    "obiettivo": "o1",
+    "id": "b-62eb6aeb"
+  },
+  {
+    "portale": "PR FESR 2021/2027",
+    "titolo": "Avviso STEP 2026 – LINEA A SOVVENZIONE",
+    "ente": "PR FESR 2021/2027",
+    "scadenza": "Wed, 05 Aug 2026",
+    "importo": "Consulta avviso ufficiale",
+    "descrizione": "Avviso pubblico rilevato sul canale PR FESR 2021/2027.",
+    "link": "https://news.google.com/rss/articles/CBMitwFBVV95cUxPTDhuZ0wweDlmbVl1bmxFb3EtOC1hY3hMam4yT3dqU0thY1ZTaFhtQmd3RWJxNzBSUUltb0hBSGtPQ0IzSEhuOUM4TmJBTV8yaVZVbXEwRGdjOU9fZU1GYVZyc3pBS1AxY0tqcXhUUTRsZ3ZvcENjNjVqaExDdlVzU0RwMkx2V3dtV1FzdkphR3EzRjc5T1FSY2FZQU4yNl84VFpGQ3lkeExfTURGcGZYM1VQMGxJeGc?oc=5",
     "semaforo": "giallo",
-    "stato_verifica": "Da Verificare (Feed Web)"
+    "ambiti": [
+      "impresa",
+      "pubblico"
+    ],
+    "obiettivo_id": "o1",
+    "obiettivo_nome": "Riqualificazione Urbana",
+    "obiettivo": "o1",
+    "id": "b-8cd8c541"
+  },
+  {
+    "portale": "PR FESR 2021/2027",
+    "titolo": "La Regione investe sulla cultura: pubblicato il bando da 3,8 milioni di euro per le imprese creative",
+    "ente": "PR FESR 2021/2027",
+    "scadenza": "Wed, 05 Aug 2026",
+    "importo": "Consulta avviso ufficiale",
+    "descrizione": "Avviso pubblico rilevato sul canale PR FESR 2021/2027.",
+    "link": "https://news.google.com/rss/articles/CBMi2gFBVV95cUxNT2ItV1pxMnd3S25samJiVEU3eE8xcmJydHNjcXFQbHdIZmJyZFp0Y01jQjhQdlpnaVZLemZSUUNlVWxTWjV6ZHNKU1c5M2FwS2FTTlM5MmRyc2txUXZBUEdiUUpOV0k4aURxdWxvM3BMVFBLTDhrN3hxMmlXcDZYYk5DdTBkRk45QWpnbFhlUm9XUHEweFVZcmRybFRSWnBoVjA4YzJwLWdjb3hPX1FSekdxUkNDQWNJMDFuVXl3RmJ6RUFCSGpVTVNZMFZmRldBTG5mdnpBVzRUdw?oc=5",
+    "semaforo": "giallo",
+    "ambiti": [
+      "impresa",
+      "pubblico"
+    ],
+    "obiettivo_id": "o6",
+    "obiettivo_nome": "Cultura, Turismo & Terzo Settore",
+    "obiettivo": "o6",
+    "id": "b-d13e84eb"
   },
   {
     "portale": "Regione Umbria",
@@ -1295,6 +1285,7 @@
     "importo": "Consulta avviso ufficiale",
     "descrizione": "Avviso pubblico rilevato sul canale GSE.",
     "link": "https://news.google.com/rss/articles/CBMif0FVX3lxTE9tbTEwQkFIMm5wWkJPcmJzRFcyeUdhYTU3Uzh5QzZoNXdDZE45eTF0VjU5dFQ3WGtubFctdktzbHVEUlYzQ1p2ZloyMVB5VWlWdXpCY09xbThILWItQl83R3JFSmF1dTE4d3ZXd2hyZk1ZdnU3dVRfN2VJdVVrSmM?oc=5",
+    "semaforo": "giallo",
     "ambiti": [
       "cittadino",
       "pubblico"
@@ -1302,12 +1293,10 @@
     "obiettivo_id": "o2",
     "obiettivo_nome": "Sostenibilità Energetica",
     "obiettivo": "o2",
-    "id": "b-535eedca",
-    "semaforo": "giallo",
-    "stato_verifica": "Da Verificare (Feed Web)"
+    "id": "b-535eedca"
   },
   {
-    "portale": "GSE",
+    "portale": "PNRR",
     "titolo": "Il GSE lancia una nuova pagina sulle CER; con il Pnrr concessi contributi per oltre 700 milioni e 1,7 GW di potenza",
     "ente": "GSE",
     "scadenza": "Tue, 21 Jul 2026",
@@ -1404,15 +1393,14 @@
     "importo": "Consulta avviso ufficiale",
     "descrizione": "Avviso pubblico rilevato sul canale PNRR.",
     "link": "https://news.google.com/rss/articles/CBMitAFBVV95cUxNcmtjQUtEOVM1ZkRmQ1JCZzNHanROczEwWHJTSTJYem05VUZOM2dBUUJfaHhSTEZLc05BUDUxLWpiRlZVTnc3SmtCN0FXWkVyMVIxbVViOEZDOENwc0Vlb3EtMzlpci1xdi12LXNfdDBqeVNmSEc1UWxXMjdXVDBXV1NoNVVXZjc2dURHX1BqQmFNd3B1eldtTmVQaXBSQTBPbnRvNzY5MVpPeFdjXzlBdDQzOEU?oc=5",
+    "semaforo": "giallo",
     "ambiti": [
       "pubblico"
     ],
     "obiettivo_id": "o2",
     "obiettivo_nome": "Sostenibilità Energetica",
     "obiettivo": "o2",
-    "id": "b-88ae3a2e",
-    "semaforo": "giallo",
-    "stato_verifica": "Da Verificare (Feed Web)"
+    "id": "b-88ae3a2e"
   },
   {
     "portale": "PNRR",
@@ -1422,15 +1410,14 @@
     "importo": "Consulta avviso ufficiale",
     "descrizione": "Avviso pubblico rilevato sul canale PNRR.",
     "link": "https://news.google.com/rss/articles/CBMinwFBVV95cUxQX3VzSWhNYUkwS2NBeWZJaUlrRUNjXzVuN05jOUkyZHZRdDVleTczLTZieF85RVlhX3ljM0kwR1UxbXByNUVqZ1p4cVFUb2Nmemd5QjdkUFNUS3E5Qk9JT1l6aFA5Wi0xSzdNdW5zUTd2VG5MNWUzNlJGUjh5VWtncEEtMGVvd3VnRUo4QlRNci1fWnNLVVF0bHE0aTlfZTA?oc=5",
+    "semaforo": "giallo",
     "ambiti": [
       "pubblico"
     ],
     "obiettivo_id": "o1",
     "obiettivo_nome": "Riqualificazione Urbana",
     "obiettivo": "o1",
-    "id": "b-e58f9aa3",
-    "semaforo": "giallo",
-    "stato_verifica": "Da Verificare (Feed Web)"
+    "id": "b-e58f9aa3"
   },
   {
     "portale": "PNRR",
@@ -1608,6 +1595,7 @@
     "importo": "Consulta avviso ufficiale",
     "descrizione": "Avviso pubblico rilevato sul canale Invitalia.",
     "link": "https://news.google.com/rss/articles/CBMioAFBVV95cUxPbjZ5eXVZeW9TeE1RcUo5dmtoZXFXZjNTUG5jTVFWVnNpZWlFVm8zYV9DSTI0YjZwSi1NbUx4WlBKWjAyekNLVVZmSGQzbldTNUJkN1dwN0VaVGR5cWxWUWhqWkhBU0RTUHV3d3lQWDBPRGJYTzN5MTZJU3c1TTlWWU53cjBXaHAxMzgyRWNCNEVWT2hvM0UydTRfY1E1ZTJF?oc=5",
+    "semaforo": "giallo",
     "ambiti": [
       "impresa",
       "pubblico"
@@ -1615,9 +1603,7 @@
     "obiettivo_id": "o7",
     "obiettivo_nome": "Digitalizzazione & Innovazione",
     "obiettivo": "o7",
-    "id": "b-e65fc4a3",
-    "semaforo": "giallo",
-    "stato_verifica": "Da Verificare (Feed Web)"
+    "id": "b-e65fc4a3"
   },
   {
     "portale": "Invitalia",
@@ -1770,5 +1756,736 @@
     "id": "b-f647b940",
     "semaforo": "giallo",
     "stato_verifica": "Da Verificare (Feed Web)"
+  },
+  {
+    "portale": "PR FESR 2021/2027",
+    "titolo": "PR FESR Umbria 2021-2027 — Azione 2.1.1 Efficienza energetica e rinnovabili nelle imprese",
+    "ente": "Regione Umbria / Sviluppo Umbria (PR FESR 2021-2027)",
+    "scadenza": "Programmazione 2021-2027 attiva",
+    "importo": "Contributo a fondo perduto fino al 40-60%",
+    "ambiti": [
+      "impresa",
+      "pubblico"
+    ],
+    "obiettivo_id": "o2",
+    "descrizione": "Finanziamenti FESR per diagnosi energetiche, impianti fotovoltaici, solare termico e isolamento degli immobili produttivi in Umbria.",
+    "link": "https://www.regione.umbria.it/programmazione-fesr",
+    "semaforo": "verde",
+    "obiettivo_nome": "Sostenibilità Energetica",
+    "obiettivo": "o2",
+    "id": "b-95f7191a"
+  },
+  {
+    "portale": "PR FESR 2021/2027",
+    "titolo": "PR FESR Umbria 2021-2027 — Azione 1.1.1 Sostegno a progetti di Ricerca e Sviluppo e Innovazione",
+    "ente": "Regione Umbria / Sviluppo Umbria (PR FESR 2021-2027)",
+    "scadenza": "Bandi periodici attivi",
+    "importo": "Fondo perduto fino al 60% per PMI e partenariati",
+    "ambiti": [
+      "impresa",
+      "pubblico"
+    ],
+    "obiettivo_id": "o7",
+    "descrizione": "Supporto a progetti di ricerca industriale, sviluppo sperimentale, prototipazione e trasferimento tecnologico nelle filiere umbre.",
+    "link": "https://www.sviluppoumbria.it/bandi-e-avvisi",
+    "semaforo": "verde",
+    "obiettivo_nome": "Digitalizzazione & Innovazione",
+    "obiettivo": "o7",
+    "id": "b-a34f317e"
+  },
+  {
+    "portale": "PR FESR 2021/2027",
+    "titolo": "PR FESR Umbria 2021-2027 — Agenda Urbana Sostenibile Comune di Terni",
+    "ente": "Regione Umbria / Comune di Terni (PR FESR)",
+    "scadenza": "Attuazione 2021-2027",
+    "importo": "Dotazione dedicata Agenda Urbana Terni",
+    "ambiti": [
+      "cittadino",
+      "impresa",
+      "pubblico"
+    ],
+    "obiettivo_id": "o1",
+    "descrizione": "Risorse FESR destinate alla rigenerazione di spazi urbani, digitalizzazione servizi comunali, mobilità ciclabile e inclusione a Terni.",
+    "link": "https://www.regione.umbria.it/programmazione-fesr",
+    "semaforo": "verde",
+    "obiettivo_nome": "Riqualificazione Urbana",
+    "obiettivo": "o1",
+    "id": "b-ff9eac54"
+  },
+  {
+    "portale": "PR FESR 2021/2027",
+    "titolo": "PR FESR Umbria 2021-2027 — Azione 1.3.1 Investimenti produttivi, macchinari e competitività PMI",
+    "ente": "Sviluppo Umbria (PR FESR 2021-2027)",
+    "scadenza": "Sportello attivo",
+    "importo": "Fondo perduto + anticipazione agevolata",
+    "ambiti": [
+      "impresa",
+      "pubblico"
+    ],
+    "obiettivo_id": "o4",
+    "descrizione": "Agevolazioni per ampliamento di stabilimenti produttivi, acquisto impianti industriali 4.0 e riconversione ecologica nel territorio ternano.",
+    "link": "https://www.sviluppoumbria.it/bandi-e-avvisi",
+    "semaforo": "verde",
+    "obiettivo_nome": "Nuovo Impianto & Sviluppo Industriale",
+    "obiettivo": "o4",
+    "id": "b-aeb04054"
+  },
+  {
+    "portale": "FSE",
+    "titolo": "PR FSE+ Umbria 2021-2027 — Incentivi per nuove assunzioni e stabilizzazioni lavorative",
+    "ente": "Regione Umbria / ARPAL Umbria (PR FSE+)",
+    "scadenza": "Avvisi annuali attivi",
+    "importo": "Contributo a fondo perduto per assunzione (fino a 10.000-12.000 €)",
+    "ambiti": [
+      "cittadino",
+      "impresa",
+      "pubblico"
+    ],
+    "obiettivo_id": "o4",
+    "descrizione": "Sovvenzioni FSE+ per le imprese umbre e ternane che assumono giovani, donne, disoccupati o lavoratori in transizione occupazionale.",
+    "link": "https://www.arpalumbria.it/avvisi-e-bandi",
+    "semaforo": "verde",
+    "obiettivo_nome": "Nuovo Impianto & Sviluppo Industriale",
+    "obiettivo": "o4",
+    "id": "b-bd055e9b"
+  },
+  {
+    "portale": "FSE",
+    "titolo": "PR FSE+ Umbria 2021-2027 — Creazione d'impresa, lavoro autonomo e microimprenditorialità",
+    "ente": "Regione Umbria / ARPAL Umbria (PR FSE+)",
+    "scadenza": "Attivo",
+    "importo": "Contributo a fondo perduto per avvio nuova attività",
+    "ambiti": [
+      "cittadino",
+      "impresa",
+      "pubblico"
+    ],
+    "obiettivo_id": "o5",
+    "descrizione": "Finanziamenti del Fondo Sociale Europeo Plus per cittadini, giovani e professionisti che avviano nuove imprese o studi in Umbria.",
+    "link": "https://www.regione.umbria.it/fse",
+    "semaforo": "verde",
+    "obiettivo_nome": "Commercio & Riuso Locali Sfitti",
+    "obiettivo": "o5",
+    "id": "b-b97a514a"
+  },
+  {
+    "portale": "FSE",
+    "titolo": "PR FSE+ Umbria 2021-2027 — Progetti di inclusione sociale, welfare di comunità e Terzo Settore",
+    "ente": "Regione Umbria (PR FSE+ 2021-2027)",
+    "scadenza": "Programmazione 2021-2027",
+    "importo": "Fondi FSE+ per ETS, cooperative, enti pubblici e famiglie",
+    "ambiti": [
+      "cittadino",
+      "pubblico"
+    ],
+    "obiettivo_id": "o6",
+    "descrizione": "Sostegno a iniziative socio-educative, vita indipendente, conciliazione vita-lavoro, borse di studio e formazione per i cittadini.",
+    "link": "https://www.regione.umbria.it/fse",
+    "semaforo": "verde",
+    "obiettivo_nome": "Cultura, Turismo & Terzo Settore",
+    "obiettivo": "o6",
+    "id": "b-07123fdd"
+  },
+  {
+    "portale": "FSC",
+    "titolo": "Accordo per la Coesione FSC 2021-2027 Regione Umbria — Infrastrutture e Rigenerazione Urbana",
+    "ente": "Presidenza del Consiglio / Regione Umbria (FSC 2021-2027)",
+    "scadenza": "Programmazione pluriennale attiva",
+    "importo": "Cofinanziamento statale/regionale FSC fino al 100%",
+    "ambiti": [
+      "cittadino",
+      "pubblico"
+    ],
+    "obiettivo_id": "o1",
+    "descrizione": "Risorse del Fondo per lo Sviluppo e la Coesione per opere pubbliche, recupero immobili degradati, dissesto idrogeologico e riqualificazione a Terni.",
+    "link": "https://politichecoesione.governo.it/it/politica-di-coesione/fondo-per-lo-sviluppo-e-la-coesione-fsc/",
+    "semaforo": "verde",
+    "obiettivo_nome": "Riqualificazione Urbana",
+    "obiettivo": "o1",
+    "id": "b-44d24047"
+  },
+  {
+    "portale": "FSC",
+    "titolo": "FSC 2021-2027 — Interventi per la Mobilità Sostenibile, Intermodalità e Reti Ciclabili",
+    "ente": "DIPCOE / Regione Umbria (FSC)",
+    "scadenza": "Attivo",
+    "importo": "Finanziamenti per Comuni ed enti attuatori",
+    "ambiti": [
+      "impresa",
+      "pubblico"
+    ],
+    "obiettivo_id": "o3",
+    "descrizione": "Fondi FSC dedicati al potenziamento delle infrastrutture di trasporto locale, nodi di scambio modale e percorsi ciclopedonali.",
+    "link": "https://opencoesione.gov.it/it/",
+    "semaforo": "verde",
+    "obiettivo_nome": "Mobilità Dolce & Sostenibile",
+    "obiettivo": "o3",
+    "id": "b-ff4d8b06"
+  },
+  {
+    "portale": "FSC",
+    "titolo": "FSC 2021-2027 — Sostegno alle Aree Industriali, Reindustrializzazione e Impianti Produttivi",
+    "ente": "MIMIT / Politiche di Coesione (FSC)",
+    "scadenza": "Attivo",
+    "importo": "Contributi in conto impianti e infrastrutturazione aree",
+    "ambiti": [
+      "impresa",
+      "pubblico"
+    ],
+    "obiettivo_id": "o4",
+    "descrizione": "Linee FSC per il rilancio delle aree industriali, attrazione di investimenti manifatturieri e ammodernamento ecologico degli stabilimenti.",
+    "link": "https://politichecoesione.governo.it/it/",
+    "semaforo": "verde",
+    "obiettivo_nome": "Nuovo Impianto & Sviluppo Industriale",
+    "obiettivo": "o4",
+    "id": "b-000d49ec"
+  },
+  {
+    "portale": "PNRR",
+    "titolo": "PNRR M2C2 — Rafforzamento Mobilità Ciclabile e Trasporto Rapido Sostenibile",
+    "ente": "MIT / PNRR Italia Domani",
+    "scadenza": "Attuazione in corso",
+    "importo": "Finanziamento 100% per enti territoriali e gestori",
+    "ambiti": [
+      "impresa",
+      "pubblico"
+    ],
+    "obiettivo_id": "o3",
+    "descrizione": "Fondi dedicati alla realizzazione di piste ciclabili urbane, ciclovie turistiche e servizi integrati di micromobilità condivisa.",
+    "link": "https://www.italiadomani.gov.it",
+    "semaforo": "verde",
+    "obiettivo_nome": "Mobilità Dolce & Sostenibile",
+    "obiettivo": "o3",
+    "id": "b-ce13b5fc"
+  },
+  {
+    "portale": "Regione Umbria",
+    "titolo": "Programma Regionale Rigenerazione Urbana e recupero spazi pubblici nei Comuni umbri",
+    "ente": "Regione Umbria",
+    "scadenza": "Programmazione 2021-2027",
+    "importo": "Cofinanziamento regionale",
+    "ambiti": [
+      "pubblico"
+    ],
+    "obiettivo_id": "o1",
+    "descrizione": "Risorse per riqualificazione piazze, aree verdi, illuminazione pubblica e recupero immobili comunali dismessi.",
+    "link": "https://www.regione.umbria.it/la-regione/bandi",
+    "semaforo": "verde",
+    "obiettivo_nome": "Riqualificazione Urbana",
+    "obiettivo": "o1",
+    "id": "b-0483844c"
+  },
+  {
+    "portale": "PR FESR 2021/2027",
+    "titolo": "Agenda Urbana 2021-2027",
+    "ente": "PR FESR 2021/2027",
+    "scadenza": "Mon, 29 Jun 2020",
+    "importo": "Consulta avviso ufficiale",
+    "descrizione": "Avviso pubblico rilevato sul canale PR FESR 2021/2027.",
+    "link": "https://news.google.com/rss/articles/CBMicEFVX3lxTFBvSWw3MlBORWhzcmJJVEtWeWphOGZXWGRkYzFlM25DMEhHTXlBNDl4ZmpDQ1hKRXRKejhJczRBNE5HUi1GTEktZHo5VXl0UDgxX2I1NFBpbXRmZjhvQXNEb1dKelVzbWtzdnl2SFBGc18?oc=5",
+    "semaforo": "giallo",
+    "ambiti": [
+      "impresa",
+      "pubblico"
+    ],
+    "obiettivo_id": "o1",
+    "obiettivo_nome": "Riqualificazione Urbana",
+    "obiettivo": "o1",
+    "id": "b-0b611bfa"
+  },
+  {
+    "portale": "PR FESR 2021/2027",
+    "titolo": "La giunta vara l'avvio della riqualificazione del Parco Rosselli",
+    "ente": "PR FESR 2021/2027",
+    "scadenza": "Fri, 20 Jun 2025",
+    "importo": "Consulta avviso ufficiale",
+    "descrizione": "Avviso pubblico rilevato sul canale PR FESR 2021/2027.",
+    "link": "https://news.google.com/rss/articles/CBMirgFBVV95cUxPZ3g2V1pvYlZvak1IUjlUbkdwM0M5WDZCekdjYzhNeHZOTXpUY01IUi0wTlNIdTEzeWZBUkt2MzBha1ptQWlfZ1VpYkRqamtfX3BKUDlKWFZqYWIyeE9yQkhhbGhlWFdRRW5LM3Z1VV9QVVNrRHhHTHdkcHVTRzZkUTkwc0Z4NGJELUdNWjhQVFlmMUk3ZHRXTHVHYzJaWFBtM01TT2pYRmJCdURBaHc?oc=5",
+    "semaforo": "giallo",
+    "ambiti": [
+      "impresa",
+      "pubblico"
+    ],
+    "obiettivo_id": "o1",
+    "obiettivo_nome": "Riqualificazione Urbana",
+    "obiettivo": "o1",
+    "id": "b-e0c891b8"
+  },
+  {
+    "portale": "PR FESR 2021/2027",
+    "titolo": "Agenda Urbana Terni",
+    "ente": "PR FESR 2021/2027",
+    "scadenza": "Sun, 05 Apr 2026",
+    "importo": "Consulta avviso ufficiale",
+    "descrizione": "Avviso pubblico rilevato sul canale PR FESR 2021/2027.",
+    "link": "https://news.google.com/rss/articles/CBMi6AJBVV95cUxNUlBYR0VXb0U4aFpsdGk4Sk1YQngzcnFvYXBrWXE5VUpjZ0xRQWlrZkFRdkROVHBuV0JvU2YxWjhDbnBwOW80azlTUHBOTTVGNkdlSEJEcDhvSnd4dm5vbDgtbVMyNE1nVUtEdE8xUUhhNVE4T0lCY1g4R2otNzF3S2FUM0N1bWJveElDYWZTNDgwaWJ3WWZvbUVxSGZpVGhEclg4X2p4MWxDWHFnTDFSWnlrUVZRTGw1N0FvN2hKRnd6akk0NERjU01tUXZtczNrYVJZM2pETllRcnlIcVJHcWJDTFlNNWwwR2NMeUh4MDNOVTd1NWFoeWdkQlJUWVBDanQ2NmdRQjdoSGQ2LTM4UlMyeXItOFhWZDdkOVh6Y1hPT20tWlllWHk5eWJnVnQzZ1lUczliUWhJbEJ6MF93eHNTLVpNZEtGdEpKOGswSm1tQU1tdHE5SVl5N0J2Z3Zob0wxaU9xQ1o?oc=5",
+    "semaforo": "giallo",
+    "ambiti": [
+      "impresa",
+      "pubblico"
+    ],
+    "obiettivo_id": "o1",
+    "obiettivo_nome": "Riqualificazione Urbana",
+    "obiettivo": "o1",
+    "id": "b-475e14e8"
+  },
+  {
+    "portale": "PR FESR 2021/2027",
+    "titolo": "Sostegno alle imprese cinematografiche e audiovisive",
+    "ente": "PR FESR 2021/2027",
+    "scadenza": "Fri, 18 Sep 2026",
+    "importo": "Consulta avviso ufficiale",
+    "descrizione": "Avviso pubblico rilevato sul canale PR FESR 2021/2027.",
+    "link": "https://news.google.com/rss/articles/CBMi3gJBVV95cUxOcndDZGVkcTBfa29tN2twUVhXV0ozYW5Rb1dpX2JCbDNWUHNoLUNxOHdYUjNQWDBBalI0RlZ6ZFdsWjVsR095enc1NUtJUGtpVnE4aVhJMzI5NkV1MVpXMkVBOFk4RzZueHFKcmFVaUg4YmVhQ2tEcmNBREQzcGpiN25KMVdad2dncXdmbV8ySmkta2EyMV9WMXFhamhxLUdweW02RFNTNENZWGVMUEZGYVFUUmFDaHpKN1pJa1gyMHlSNWFFNzZGaE53Tm5Rdm4xM1NycjdmOThDTjhpTXlnZzIybGJBSmxqSEdfbmE2X1NPY2FiSVlzcUdFMjdHMFRwU2ppaFBxRXd6WkRzODZjQ2gzTTlTRndMeGpYaFg4bEM1OWR0Xzl4V1NidWZqd3EtSGFmTUhJSFA2MW43emRzbExMdnh6V3Z5MGQydVJybU10d2JCZGhadzZRUkdoUQ?oc=5",
+    "semaforo": "giallo",
+    "ambiti": [
+      "impresa",
+      "pubblico"
+    ],
+    "obiettivo_id": "o1",
+    "obiettivo_nome": "Riqualificazione Urbana",
+    "obiettivo": "o1",
+    "id": "b-6f9e22b8"
+  },
+  {
+    "portale": "PR FESR 2021/2027",
+    "titolo": "PR FESR 2021-2027 Azione 1.3.4 “Bando per il sostegno agli investimenti delle imprese che esercitano",
+    "ente": "PR FESR 2021/2027",
+    "scadenza": "Sat, 09 Aug 2025",
+    "importo": "Consulta avviso ufficiale",
+    "descrizione": "Avviso pubblico rilevato sul canale PR FESR 2021/2027.",
+    "link": "https://news.google.com/rss/articles/CBMi9wNBVV95cUxNaXQtYlVSUTdHVENGdm1tY0dVaEVzRTVua0x4bGlSLXFxMDhIVEVrMnJEOWFGVVBPVlh2NldUSTVIOUlVMHVOVVJ0RjVsenJLVGh1WjZwU0FZNV9RVk1ndE9MQzVGU1p3cXVXLUdUQXQwMDJTVDNnYm9MbkJGc09TaUQ2X3pLTWU2enpmSWxYNVdlOEFrU205aHZxRGI4UmU5ZmMzdlhDNGJpVXBIX1RBeDlSYldibEVJSVRCQ1hJZUFTMHZZclE0dWNiRGNNREZTcFJ1RUxzbHF2Q0VyZTh5Y0czbG5oSGNvN2xFblJGUzFVamFReXkzb3MwSEtTU2NoT2VjVzFqeXlnZjExZFlYUngxMXh4SlRDOWJvdjlWUGJTc3REUVFWeS1HTWdyTUhVdmJMY0JxcEpnVjl1eEdZMFB3Y0t1SlVzUVk4SUt5cTdQTWs1UlFyNUNmQUdZb1h1UkEybENGOENwNHpWYkxCTUFJNUVfdEFPNnNOLU9URTVxelNsd2pWLUR5Z1hZOXpxcGwyd1FxMEp2S3hja3cxcHZxUm9PTmZOdzBlb0lnOEhtc3VPWlMwNEM0cldjQ2xZZk5GSjVDaUI5UGZuRE8tbkRjUElQZ3o5azRPRnZfTVhXem9UQTE1YUs3RjRkT0Jvd1JMbXdNQQ?oc=5",
+    "semaforo": "giallo",
+    "ambiti": [
+      "impresa",
+      "pubblico"
+    ],
+    "obiettivo_id": "o1",
+    "obiettivo_nome": "Riqualificazione Urbana",
+    "obiettivo": "o1",
+    "id": "b-66684b54"
+  },
+  {
+    "portale": "FSE",
+    "titolo": "Avviso Pubblico P FSE+ 2021-2027",
+    "ente": "FSE",
+    "scadenza": "Fri, 02 Oct 2026",
+    "importo": "Consulta avviso ufficiale",
+    "descrizione": "Avviso pubblico rilevato sul canale FSE.",
+    "link": "https://news.google.com/rss/articles/CBMi3wFBVV95cUxPbUJ3eHlFNFRObXNGc2hOXzh0aWl1dWpjR21NMTZ4RTJyZ2NuQ2QyXzJMeExFZERYZGNpME1KZFN1VGhVQzkydGRMODNva01mWURsU3lJeFFJVDRhRTNIc2lmMEtWaUxUVzlUS0h3cHdEVVp4ZjZONG84bTByUVhXTXhiNnJURTQ4R0VyMjFlMi1rck9CZV9pV3AySGZONWp3QkZVdzZMRjFFVUx5U3ZBNXg1aFM0R1p4d1RIbjFoc29TSnBtdVBBUURVVHV2SURoNWVLNzlHU3ptM1U0bXFB?oc=5",
+    "semaforo": "giallo",
+    "ambiti": [
+      "cittadino",
+      "pubblico"
+    ],
+    "obiettivo_id": "o1",
+    "obiettivo_nome": "Riqualificazione Urbana",
+    "obiettivo": "o1",
+    "id": "b-a7e8d1c7"
+  },
+  {
+    "portale": "FSE",
+    "titolo": "Centri estivi 2026",
+    "ente": "FSE",
+    "scadenza": "Mon, 27 Jul 2026",
+    "importo": "Consulta avviso ufficiale",
+    "descrizione": "Avviso pubblico rilevato sul canale FSE.",
+    "link": "https://news.google.com/rss/articles/CBMi6AFBVV95cUxPd0E5OERzR245dVdrVUNYc19ZRmtDRF94TzdQN3JGTVY4YTRDMlEzSUdOS2dlTmt5UVJ0RTZQSGxsMFVZNzFNaHJvdXY5dG8tZC10cUo3UWtEUUdxWHluQWFqdWNHNDY3MnFRdnZoLVU2S0NfRGVwemcxelQ3UXBzbUZSdWtjUFRqLXZyUnVHLV9OMzBaYnJuMm4yYmQyTHpFRFNSR2E1eDdhYjJZdkhrYzg3WlpwTUI4YURTOXp3ZVRBNWpTbDRHYlZJQkVvaHhPOHJIcVdSb3N6TWdVbVM3d0lDUHk5a2dG?oc=5",
+    "semaforo": "giallo",
+    "ambiti": [
+      "cittadino",
+      "pubblico"
+    ],
+    "obiettivo_id": "o1",
+    "obiettivo_nome": "Riqualificazione Urbana",
+    "obiettivo": "o1",
+    "id": "b-dafc2066"
+  },
+  {
+    "portale": "FSE",
+    "titolo": "\"Interventi regionali per la sicurezza del territorio, l'inclusione sociale e la cultura\"",
+    "ente": "FSE",
+    "scadenza": "Wed, 09 Sep 2026",
+    "importo": "Consulta avviso ufficiale",
+    "descrizione": "Avviso pubblico rilevato sul canale FSE.",
+    "link": "https://news.google.com/rss/articles/CBMi3gFBVV95cUxOdkVPbjVtODNJcjdVZHRSTU5DUEZMY3lyU21BZVhGMFpWWG93TlhvdXAzcHBhQkhDdXdRS2p6czNMam1xck9tenZwLVZVQlhQVHlJdDh3TlpfQklvcXFLdkNRX2xkdEhmZW8xckxwdlA1cUM0Y2NRLWJLNHUxZWg0TTdWcmlOWjhJOFVJejR5LVlsbUNHZVZjY2pQV0NxMVZfSE4xRVBmS0UzRmNuS2hVb3NtNE5TSFNPdnRYeGZMSjQxNV9iV3FEcU9ZcHdxT3RXN2ZEYllKWHRHVzhoWXc?oc=5",
+    "semaforo": "giallo",
+    "ambiti": [
+      "cittadino",
+      "pubblico"
+    ],
+    "obiettivo_id": "o6",
+    "obiettivo_nome": "Cultura, Turismo & Terzo Settore",
+    "obiettivo": "o6",
+    "id": "b-85f2cfe0"
+  },
+  {
+    "portale": "FSE",
+    "titolo": "Bando Incentivi all'Occupazione 2025: al via il servizio di supporto per la rendicontazione sulla piattaforma Coe.Si 21-27",
+    "ente": "FSE",
+    "scadenza": "Wed, 22 Jul 2026",
+    "importo": "Consulta avviso ufficiale",
+    "descrizione": "Avviso pubblico rilevato sul canale FSE.",
+    "link": "https://news.google.com/rss/articles/CBMi5wFBVV95cUxOMW8yVk5LVXVkZ1JicVFFQzFhQktyZVdMUk9adEJqdHFTMko5aGo0eXQybGpMZmxLUFhoUnNpdmFQOXdVeTA0a2YzeElNejRFa0w5aG1VRGZSLUFnX1dkdnEySW9Rc0x4MUhFNlVDYUVtbVBVeXVnc2dsbGd6WnYxaTlHSTVqNjZObml2MWV1a1hLY0tqbWd1WEJ3Rms2T05fcGN5V3hzN2d0ekZFRUFLVFU0SmJxM0dyajAwVHdBNjRnc3R4WWJsaE9hTGdiSWFlNjhwc2N4NlY1ZTNIeGplemZiWmVQTDQ?oc=5",
+    "semaforo": "giallo",
+    "ambiti": [
+      "cittadino",
+      "pubblico"
+    ],
+    "obiettivo_id": "o4",
+    "obiettivo_nome": "Nuovo Impianto & Sviluppo Industriale",
+    "obiettivo": "o4",
+    "id": "b-8e2277fa"
+  },
+  {
+    "portale": "FSE",
+    "titolo": "Avviso pubblico: “Incentivi per l’occupazione stabile 2025”",
+    "ente": "FSE",
+    "scadenza": "Wed, 20 Aug 2025",
+    "importo": "Consulta avviso ufficiale",
+    "descrizione": "Avviso pubblico rilevato sul canale FSE.",
+    "link": "https://news.google.com/rss/articles/CBMimwJBVV95cUxOa203VTN4enIzZk1BdEFYbWEyenhGbHIzaWtEY3Rwb1RCZldobVQ0cTZaTDdKVTY2S29LWkh5ZE9tN1k0U3BwTDBVRGt6dmdoV3ZBaWtmWkVhZlZjOF9pN1BuM0xPNDZzbnJJOGVObktUN2ZBOVZsS2F3UG5VdGt4b0Mzd1NraGVpbmFRQnhCZEZZb3hyek5Nd1E0NmE5NUg0Y0FrMHFEYndoM251S2RudHpGcVJhUnpnd1c2bF9NOW90Y0xGUHlYUUhIRUp1Ukc5SU9jX0xZMjIyaGlnRVc1MV9sZ0dfckRlTDlLc080NnMta2VNUFJ0dzNSN2QyZVdjTVZvN2ZrellTN0hxVzVlb3E2elpVMGtyN1lv?oc=5",
+    "semaforo": "giallo",
+    "ambiti": [
+      "cittadino",
+      "pubblico"
+    ],
+    "obiettivo_id": "o4",
+    "obiettivo_nome": "Nuovo Impianto & Sviluppo Industriale",
+    "obiettivo": "o4",
+    "id": "b-ff9e4590"
+  },
+  {
+    "portale": "FSE",
+    "titolo": "Bando Re Work Regione Umbria Contributi a fondo perduto per l'inserimento lavorativo",
+    "ente": "FSE",
+    "scadenza": "Sat, 14 Aug 2021",
+    "importo": "Consulta avviso ufficiale",
+    "descrizione": "Avviso pubblico rilevato sul canale FSE.",
+    "link": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxPUnFxTThaQlFsQV9sM2s5RDd6eEFPNUtHRC1jTjYwYTh0dy1fQTVNU0Y1a3FWTkwxMHFrQm5yQVJPaWNFU2R5aDgxSXB2NE5iaVBvaURCUms1ajBveWFfaDRCZTctUTdXYWE3dmdUdWJBS2FTOWd3MkZWWGpUcUZMVHFJTFM2VWNhQlNXU1lyREYzbVpCLXlsVmNnRmY1bi1iNGpVck1IYzZEVTRVSmJ1ZXdZOTBaSEFuTUJBaWlkZTBrMVU?oc=5",
+    "semaforo": "giallo",
+    "ambiti": [
+      "cittadino",
+      "pubblico"
+    ],
+    "obiettivo_id": "o7",
+    "obiettivo_nome": "Digitalizzazione & Innovazione",
+    "obiettivo": "o7",
+    "id": "b-b15558d9"
+  },
+  {
+    "portale": "FSE",
+    "titolo": "La Regione investe nella ricerca: 3,6 milioni di euro per 38 nuove borse di dottorato",
+    "ente": "FSE",
+    "scadenza": "Thu, 09 Jul 2026",
+    "importo": "Consulta avviso ufficiale",
+    "descrizione": "Avviso pubblico rilevato sul canale FSE.",
+    "link": "https://news.google.com/rss/articles/CBMilAFBVV95cUxNRFcxRmd6TjRCejhYaTRSNjlBRHFzQWZRYkMxMU9KcFN0MGVUU2NpMG5CSHg3NkFiaEJkYUpFYlJBV2ltc3hPX19meVlPUUU2R3o2YkotdmtpTXJhRXpzREoyNE9yNjNpaWREVmx0VkdtOEUxbWVuakczaHFXdHJtUXNac29MUnlVM0ptQlU2c0JoQUVm?oc=5",
+    "semaforo": "giallo",
+    "ambiti": [
+      "cittadino",
+      "pubblico"
+    ],
+    "obiettivo_id": "o2",
+    "obiettivo_nome": "Sostenibilità Energetica",
+    "obiettivo": "o2",
+    "id": "b-41881304"
+  },
+  {
+    "portale": "FSE",
+    "titolo": "Umbria, abbonamento bus a 70 euro per gli studenti: i requisiti",
+    "ente": "FSE",
+    "scadenza": "Wed, 12 Aug 2026",
+    "importo": "Consulta avviso ufficiale",
+    "descrizione": "Avviso pubblico rilevato sul canale FSE.",
+    "link": "https://news.google.com/rss/articles/CBMihwFBVV95cUxOc1kyNXkzMTZFSjZ2NlFSWHdialMzbklBUFJmYzZpRmV3dWJqRDRzeElmNFB5OTdLSFF4bmR4aF9keWFKWlV5c1dKMDd3QWNuZVpQZjhYRHdTUmNVQ3k3S0poMlhGTlM1SUtRQmY3M3JJSVZFamNCYk1oWjNHd0NjX1Ywa3AzSkXSAYwBQVVfeXFMUFRhcEx5Rk10Zl9vUmxDQkpyQ1lmTU54UXRYeXZSQmw4RDZtbDBpZ1V6MHlFWW1qblQ0dl9OM1R2c19FMVltb2NJTWY0RmxNTUVnMGpjS0lnWFlqcGtVOGtzY0FhbnU0aDBvY0tIMG11aXd3Ykg1SDBpV0dtTERxclNVMFp0b2UtdnIzcGE?oc=5",
+    "semaforo": "giallo",
+    "ambiti": [
+      "cittadino",
+      "pubblico"
+    ],
+    "obiettivo_id": "o1",
+    "obiettivo_nome": "Riqualificazione Urbana",
+    "obiettivo": "o1",
+    "id": "b-de065296"
+  },
+  {
+    "portale": "FSC",
+    "titolo": "Accordo per la Coesione dell’Umbria 2021-2027",
+    "ente": "FSC",
+    "scadenza": "Thu, 22 May 2025",
+    "importo": "Consulta avviso ufficiale",
+    "descrizione": "Avviso pubblico rilevato sul canale FSC.",
+    "link": "https://news.google.com/rss/articles/CBMigAFBVV95cUxOTXJlX2RLR0JkR3hiSTlrN0ZwTWxpVGJtYVRvOGNuMkgtMm9hT1BhWC1EZUI3b2dNbjVUeE1BekVWeFU1ZVdoZ042NjhPZ1F5ZkhQRzJrTkh3U2VOZGdIS0djLXd4Ujdqdk5RVnhaYTUySGFNTXVvNTNfaDd2aTNLdQ?oc=5",
+    "semaforo": "giallo",
+    "ambiti": [
+      "pubblico"
+    ],
+    "obiettivo_id": "o7",
+    "obiettivo_nome": "Digitalizzazione & Innovazione",
+    "obiettivo": "o7",
+    "id": "b-176f623f"
+  },
+  {
+    "portale": "FSC",
+    "titolo": "Avviso per il sostegno degli investimenti produttivi e per la tutela ambientale per l’area di Crisi Complessa Terni",
+    "ente": "FSC",
+    "scadenza": "Wed, 10 Sep 2025",
+    "importo": "Consulta avviso ufficiale",
+    "descrizione": "Avviso pubblico rilevato sul canale FSC.",
+    "link": "https://news.google.com/rss/articles/CBMiowJBVV95cUxOSE51c3dleURuaHVoZmVTTW9UZlFQQ2EtVF9DT2FrSF8zdXQxZmRHUUZ4dG56bjVlVmhMTExHM2pRMm1Va2R2STVrWnIyeFpqRzN3S1Vrc2hFa1FUZGNpNjB4SzZIakdLck1mVVpkVGI1OG01WjgwU3pIYmJ0UXJmQWF1ZU5RZ0lESTB1aFM3dUY4aFhJVHZpZWNJX1o4LWN1SERHQ3NCakJrNzVnWEhPa0ZKWG5ieTJFdUs1R2pFZTBiZ1BEREE2U3Q0aGJ2RFN2VzJxSjF2cXpLcVlJOWtVeGwteGhyNnF5SGpESWZFNTRRVEsxZERONkF1QTVBQWhFMUFadlBLVDh6bHdibkxVUlluT1VfV2xwSmFQa2FBSWJweWs?oc=5",
+    "semaforo": "giallo",
+    "ambiti": [
+      "impresa",
+      "pubblico"
+    ],
+    "obiettivo_id": "o4",
+    "obiettivo_nome": "Nuovo Impianto & Sviluppo Industriale",
+    "obiettivo": "o4",
+    "id": "b-bcca7d56"
+  },
+  {
+    "portale": "FSC",
+    "titolo": "Infrastrutture, sì della Giunta alla realizzazione della bretella Terni-Staino-Pentima e della variante amerina",
+    "ente": "FSC",
+    "scadenza": "Tue, 08 Jul 2025",
+    "importo": "Consulta avviso ufficiale",
+    "descrizione": "Avviso pubblico rilevato sul canale FSC.",
+    "link": "https://news.google.com/rss/articles/CBMi7AFBVV95cUxQMkQ2SHFuOEFpdmk5cGw4WDFpZWtoWWlUcWpuODNRbUNTb0hhYS05QWRKS1ByVmh1R194NDlPQ09SeEhJeTBwTzBhRW5ET0Nxd1BRUFBRWW5pS3hxNFpTLVFjd2x4U2xTMndhSEZYZE1SZ25OWmdRLWV0OU1lTlRLd0E3bU1sRUlHYldtWS1LOW1mSjZlMGdEbmRfbnZnaWItZTRUSlJKenBTa2g3TGtNS05qQ1Ixb0tnemY0YkVRNEhNN1hyalNtbnNWWERBRDlrU3RGVUJ5YXNwZXNnaXVBMGxESl9KQ2tfMFREdtIB9AFBVV95cUxQUy1sVXNxcjlmV2MweDFtOXhhSEdLV1dyT3JlV21VSGNUU0pSZlRrTmVMNmU2cmhZX1RoblZ3MDRfd0tpUzRYSlNjelRVXzNJV0hmbk5LeDRESmdHT25Ka0xOdnIwVEJyRnFWODBFcmRwQlZsUUFDTDdkbUZoV053MUhjbjdlMlZNVjZyMWhqTnFYeDZPYU1fWXJoVktELUdIUmZQU0xQdTNBbEpEMXgxRXN5VEZjSVJoTGxLRGZoaDBQUFEyUlhNQnZULVlLTW50a2tIb05qVE13OVFlMHdtTkxBaS1HbXR0a21fdVQ3ZzNOTlg4?oc=5",
+    "semaforo": "giallo",
+    "ambiti": [
+      "pubblico"
+    ],
+    "obiettivo_id": "o1",
+    "obiettivo_nome": "Riqualificazione Urbana",
+    "obiettivo": "o1",
+    "id": "b-5aa6738c"
+  },
+  {
+    "portale": "FSC",
+    "titolo": "Piano sviluppo e coesione",
+    "ente": "FSC",
+    "scadenza": "Wed, 25 May 2022",
+    "importo": "Consulta avviso ufficiale",
+    "descrizione": "Avviso pubblico rilevato sul canale FSC.",
+    "link": "https://news.google.com/rss/articles/CBMib0FVX3lxTFBrelFnOG4xYkQycHp4YVVMU094Tk9OWDVHMk5aT2x3Ylh2OUZ1MWtJcTl0aVlQaGlIbnM1WFVtVjlObHpDdnEyUVVoWHNQNUhyVTJZaUdKVklWcENnTHdERGlyOC1CTXJkcG5QRmtKWQ?oc=5",
+    "semaforo": "giallo",
+    "ambiti": [
+      "pubblico"
+    ],
+    "obiettivo_id": "o1",
+    "obiettivo_nome": "Riqualificazione Urbana",
+    "obiettivo": "o1",
+    "id": "b-63f0cf6f"
+  },
+  {
+    "portale": "FSC",
+    "titolo": "Pubblicati i testi aggiornati degli Accordi di Coesione. Cosa finanziano le risorse FSC 2021-2027",
+    "ente": "FSC",
+    "scadenza": "Thu, 07 Dec 2023",
+    "importo": "Consulta avviso ufficiale",
+    "descrizione": "Avviso pubblico rilevato sul canale FSC.",
+    "link": "https://news.google.com/rss/articles/CBMidEFVX3lxTE1Ha0pvTXYxMWJpdmZPTWFBREhESnVRR3NwdktNS1N3dEVrTno4cFo1NjJ2VGFTMTc0UGx5XzZvcWgzaW1Kb0hKb3gtYkRoYTJKTVFONEFxekkyQWlPNXNlMWRCQXZaWHV2bUp2UFRkTVhmMVIx?oc=5",
+    "semaforo": "giallo",
+    "ambiti": [
+      "pubblico"
+    ],
+    "obiettivo_id": "o1",
+    "obiettivo_nome": "Riqualificazione Urbana",
+    "obiettivo": "o1",
+    "id": "b-693a6778"
+  },
+  {
+    "portale": "PNRR",
+    "titolo": "Pnrr Terni, nuovo bando per Cesi: 600 mila euro per recupero patrimonio edilizio privato",
+    "ente": "PNRR",
+    "scadenza": "Thu, 25 Dec 2025",
+    "importo": "Consulta avviso ufficiale",
+    "descrizione": "Avviso pubblico rilevato sul canale PNRR.",
+    "link": "https://news.google.com/rss/articles/CBMisAFBVV95cUxNbTM2Wm8zalU5X05MMUF0SXlvLXotT2kxaV92VVQ2LVN6ZWM3ZVppdVNNNWxGeHQ2S0tBNTlhVXRqbkZKTjlnek5qZkhmS1dKcm9HaFZqdGNSSUExRDYzblVQSlJZZzNIalppcFRkYzliMjh4U1BwZlgwVTRhVG0xNlAxeGdrZjVkVS1Zb0p6TUJvTk9BQWtzTEpma2RjRF9KOFNDSkpVZXZ5aHpfYzlvaw?oc=5",
+    "semaforo": "giallo",
+    "ambiti": [
+      "pubblico"
+    ],
+    "obiettivo_id": "o1",
+    "obiettivo_nome": "Riqualificazione Urbana",
+    "obiettivo": "o1",
+    "id": "b-702657dd"
+  },
+  {
+    "portale": "PNRR",
+    "titolo": "19 Comuni in 9 Regioni accedono ai contributi per scuolabus sostenibili",
+    "ente": "PNRR",
+    "scadenza": "Fri, 19 May 2023",
+    "importo": "Consulta avviso ufficiale",
+    "descrizione": "Avviso pubblico rilevato sul canale PNRR.",
+    "link": "https://news.google.com/rss/articles/CBMinAFBVV95cUxQblV4bnJMZGxtM2pkdHMzZW9kOS1abGI2czg3R1JCS3ViQ0NNTEw1a0poOE5IWmhyVUZxNzlCc0hkT19UUkUzaEkxSUhWYXFnR1VmOUMyN2dVcjRpanVXNkgtRlE4cF9MdGctdzJoZEZPalJxYjVYeVUyNF9RQ3l4a1JHQTlDN05pd0dHV1FHRXZGXzJQd29TZE5KWTM?oc=5",
+    "semaforo": "giallo",
+    "ambiti": [
+      "pubblico"
+    ],
+    "obiettivo_id": "o1",
+    "obiettivo_nome": "Riqualificazione Urbana",
+    "obiettivo": "o1",
+    "id": "b-e797322a"
+  },
+  {
+    "portale": "PNRR",
+    "titolo": "Marsciano inaugura il cohousing per persone con disabilità: operativo il progetto Pnrr",
+    "ente": "PNRR",
+    "scadenza": "Thu, 23 Jul 2026",
+    "importo": "Consulta avviso ufficiale",
+    "descrizione": "Avviso pubblico rilevato sul canale PNRR.",
+    "link": "https://news.google.com/rss/articles/CBMivwFBVV95cUxQQmlvbGlrNnNDSnJhYnlWNHlDZU13WTNFTmFkaVEtTTVxN2NlR2J4OWhqM0hNRFdKSllpc2t4UWdWQ3I5NjJhd2w1OVd1Ykk0WWNGZ2NVVVh1bkV4b3A2M3IwRGhIMUZlUVB4RXR4UjRLc3ZJYU1YT0xiSnZPak83RmdPQXl6Tk1VMGhSa1NVN1ZUaklLdEVyLU1yb21uWUhQbWRlS2d6N1R6OUdiUzB1N0szdHkzeFdZaXF3X2dHRQ?oc=5",
+    "semaforo": "giallo",
+    "ambiti": [
+      "pubblico"
+    ],
+    "obiettivo_id": "o1",
+    "obiettivo_nome": "Riqualificazione Urbana",
+    "obiettivo": "o1",
+    "id": "b-b20276c3"
+  },
+  {
+    "portale": "PNRR",
+    "titolo": "Colpo grosso della Usl Umbria 2, si aggiudica due progetti Pnrr per 5 milioni di euro: più assistenza domiciliare per anziani e centri disabili",
+    "ente": "PNRR",
+    "scadenza": "Fri, 13 Mar 2026",
+    "importo": "Consulta avviso ufficiale",
+    "descrizione": "Avviso pubblico rilevato sul canale PNRR.",
+    "link": "https://news.google.com/rss/articles/CBMikwJBVV95cUxNM0NERXdDTUhMOTBlcUJydUpRQ0cwNnNSLUt6RnRsRWNhRlgySXBnb0Etd2xuOF9WQmU5bElSZ1dDaWFnMHJJT1FwRVRXWmlONVU0STFpdnl1WXV6d19JS2hkWWxTNldGM28zTTc0c3h5dG41VmlZcGJRakFDSGZpd0R0NXdldHBBdHpuUEtoQlVBMDhCVExoOTJGT1JVNkpickFSbm1tZmlzeEttLXd2QVlaNGdpV1FWOWllaUtOUlUydVFrNE9KeGdFSVFYMFJjbU1zR0FmbGJhZlVDU290R2lRM2xCQ2U2UndSXzVBaVVRVWdsdFZyVzY2REdnUWp6NTlUQ3lQUWZWVjM4WlJNVkNyTQ?oc=5",
+    "semaforo": "giallo",
+    "ambiti": [
+      "pubblico"
+    ],
+    "obiettivo_id": "o7",
+    "obiettivo_nome": "Digitalizzazione & Innovazione",
+    "obiettivo": "o7",
+    "id": "b-76c7a271"
+  },
+  {
+    "portale": "Regione Umbria",
+    "titolo": "L’Assemblea legislativa approva le “Norme in materia di cultura e imprese culturali e creative”",
+    "ente": "Regione Umbria",
+    "scadenza": "Thu, 07 May 2026",
+    "importo": "Consulta avviso ufficiale",
+    "descrizione": "Avviso pubblico rilevato sul canale Regione Umbria.",
+    "link": "https://news.google.com/rss/articles/CBMixgFBVV95cUxOdnBPSDd3UGNVRzU5Ump6R0wxMGVXRGh4UTFLTmZ1UmVMeU9xXzVaNTE2OHBFOG9hTUhVWnNfWnlzRDdVaHZ4aWdTTzhtN3hnS3o5T2JrdFNmcHNTNGlMaXJoR041R0paR1Q4SkdxV3JCdS1KN2c2U1pMQ09JUndMOTlEbDFOYlNSQ1d1alo1QkJpUjZMdUh1dVZNRnlSYTNMV1hqNV85akdHOWZOT2N1UlJKY2dYbGg2RFdaRnkxeTlDN3N1aUE?oc=5",
+    "semaforo": "giallo",
+    "ambiti": [
+      "impresa",
+      "pubblico"
+    ],
+    "obiettivo_id": "o7",
+    "obiettivo_nome": "Digitalizzazione & Innovazione",
+    "obiettivo": "o7",
+    "id": "b-fc5e2540"
+  },
+  {
+    "portale": "GSE",
+    "titolo": "Facility CACER, regole più flessibili per i contributi alle CER",
+    "ente": "GSE",
+    "scadenza": "Tue, 31 Mar 2026",
+    "importo": "Consulta avviso ufficiale",
+    "descrizione": "Avviso pubblico rilevato sul canale GSE.",
+    "link": "https://news.google.com/rss/articles/CBMiT0FVX3lxTFBpdThhOFhuZUpYSjJadHJNaURYTFFrSGhXYjBNSkluV2F6bDZEaG9hdjhJalhsUVM2RjJEVWlhQkJrUDBCWXA5dFMyQ1NMTVk?oc=5",
+    "semaforo": "giallo",
+    "ambiti": [
+      "pubblico"
+    ],
+    "obiettivo_id": "o2",
+    "obiettivo_nome": "Sostenibilità Energetica",
+    "obiettivo": "o2",
+    "id": "b-efee76fa"
+  },
+  {
+    "portale": "GSE",
+    "titolo": "Bandi Efficientamento Energetico Aziende 2026: 60% Copertura",
+    "ente": "GSE",
+    "scadenza": "Mon, 14 Sep 2026",
+    "importo": "Consulta avviso ufficiale",
+    "descrizione": "Avviso pubblico rilevato sul canale GSE.",
+    "link": "https://news.google.com/rss/articles/CBMigwFBVV95cUxNTUZZQ1QwRzY0UGZMZHRGNlRpOURFRjE0NkRHWFVBRXpZZG9QRTVYN1pSaWFIaWRJX2pwVXJ6b3pWaVhSN29ob2JoSW9xdVBUR1d6VVEyaWJ2VmZNU2NpbTRaNy1jWGMxUUlMa3MxRmh2WU1OUnREeHVBVmtKRDU1b2FxMA?oc=5",
+    "semaforo": "giallo",
+    "ambiti": [
+      "impresa",
+      "pubblico"
+    ],
+    "obiettivo_id": "o2",
+    "obiettivo_nome": "Sostenibilità Energetica",
+    "obiettivo": "o2",
+    "id": "b-e6e12eb8"
+  },
+  {
+    "portale": "Invitalia",
+    "titolo": "Smart&Start Italia 2026: tasso zero e 30% fondo perduto",
+    "ente": "Invitalia",
+    "scadenza": "Sun, 04 Oct 2026",
+    "importo": "Consulta avviso ufficiale",
+    "descrizione": "Avviso pubblico rilevato sul canale Invitalia.",
+    "link": "https://news.google.com/rss/articles/CBMie0FVX3lxTFBrbFlXQTJvVldoRjM4YV9kVG04Z0ZCV1c3R3AxTmtROWU1VGM3QXljeWFYN05aZWtkLTBBb2p2aFRMR09VTzBMNDZaOFRLX3FDR1RidFF0bWZLSnBjdnFheDNnNGVzWUcyeE5rS1E0Y3JlQU90SEpOUXdHZw?oc=5",
+    "semaforo": "giallo",
+    "ambiti": [
+      "impresa",
+      "pubblico"
+    ],
+    "obiettivo_id": "o7",
+    "obiettivo_nome": "Digitalizzazione & Innovazione",
+    "obiettivo": "o7",
+    "id": "b-fadc954d"
+  },
+  {
+    "portale": "Invitalia",
+    "titolo": "Incentivi Startup 2026: Quali Misure Sono Aperte",
+    "ente": "Invitalia",
+    "scadenza": "Sun, 04 Oct 2026",
+    "importo": "Consulta avviso ufficiale",
+    "descrizione": "Avviso pubblico rilevato sul canale Invitalia.",
+    "link": "https://news.google.com/rss/articles/CBMiZEFVX3lxTE14WGlKbFNjOEF5TmpXYWYxMmtzY1JJWmlLbWRhTkhSc1gwQWRZM1VCOG9QdGg4dElydW9CWFJNVkE5QlBqSVJyV2JCRzhVOHoyRWhBWHhfa0ZsVElQa0NWbXMyRk0?oc=5",
+    "semaforo": "giallo",
+    "ambiti": [
+      "impresa",
+      "pubblico"
+    ],
+    "obiettivo_id": "o7",
+    "obiettivo_nome": "Digitalizzazione & Innovazione",
+    "obiettivo": "o7",
+    "id": "b-d4e80b20"
+  },
+  {
+    "portale": "Camera di Commercio",
+    "titolo": "Venezia e Rovigo: Bando Voucher Doppia Transizione 2026",
+    "ente": "Camera di Commercio",
+    "scadenza": "Sat, 11 Jul 2026",
+    "importo": "Consulta avviso ufficiale",
+    "descrizione": "Avviso pubblico rilevato sul canale Camera di Commercio.",
+    "link": "https://news.google.com/rss/articles/CBMikAFBVV95cUxNM0NlOFBYNDBmU3hHSFI3N01JcVB5VWRvT3pmRzhadWpJRV9KMnIzeFctakk4dS1McUVLM2h6a0h0TU5zSjZlLXRwRlQweDdWTk5jWTdFSzYyM2ZCd0tLU3RSXzFSalVKRFZNNHc2T3Y1MEVjZzY1Ynk4enVqak8wOU01NXZ3S1ZxX2cyRGRYN28?oc=5",
+    "semaforo": "giallo",
+    "ambiti": [
+      "impresa",
+      "pubblico"
+    ],
+    "obiettivo_id": "o7",
+    "obiettivo_nome": "Digitalizzazione & Innovazione",
+    "obiettivo": "o7",
+    "id": "b-81e920e8"
+  },
+  {
+    "portale": "Camera di Commercio",
+    "titolo": "Camera di Commercio di Rieti Viterbo: Al via il bando \"doppia transizione digitale ed ecologica 2026\"",
+    "ente": "Camera di Commercio",
+    "scadenza": "Wed, 01 Jul 2026",
+    "importo": "Consulta avviso ufficiale",
+    "descrizione": "Avviso pubblico rilevato sul canale Camera di Commercio.",
+    "link": "https://news.google.com/rss/articles/CBMi0AFBVV95cUxQaE4zMUNFU2wyTzVPOVVMVm83bmdBWXh1Y2c4dTMyTi15V2tsV2hrU1JBdHBiQWVWM1NRY3BnOHBVN3dPY1JFaHdOVDE4TXNVRXRkMVYxU0lyRWhReG10eUtqRDJsUHltbXJOVUlWOGVSaDE1eFlRbWlDdDR4aERCN0laTHFvRTR1N3locS12OC10S0tRNWxsZXZkdktZa2lHdGZKM3drVnFzWVJGTWF1WWNKc3FaNU91bmNlRHhiV1pIZmF3UmpMSGlGWU9veUpk?oc=5",
+    "semaforo": "giallo",
+    "ambiti": [
+      "impresa",
+      "pubblico"
+    ],
+    "obiettivo_id": "o2",
+    "obiettivo_nome": "Sostenibilità Energetica",
+    "obiettivo": "o2",
+    "id": "b-1672d983"
   }
 ]
