@@ -22,7 +22,7 @@ import {
   type CategoriaSegnalazione,
   type Segnalazione,
 } from "@/lib/terni-data";
-import { nuovoId, oggi, useCivic } from "@/lib/civic-store";
+import { inviaPropostaModerazione, inviaSegnalazione, nuovoId, oggi, useCivic } from "@/lib/civic-store";
 
 export const Route = createFileRoute("/mappa")({
   component: MappaCivica,
@@ -46,13 +46,13 @@ function MappaCivica() {
   const [discussione, setDiscussione] = useState<Segnalazione | null>(null);
   const [aperti, setAperti] = useState<string[]>([]);
   const [nuovoSondOpen, setNuovoSondOpen] = useState(false);
-  const [sondForm, setSondForm] = useState({ domanda: "", contesto: "Centro", opzioni: "" });
+  const [sondForm, setSondForm] = useState({ domanda: "", contesto: "Centro Storico", opzioni: "" });
   const [opzioneNuova, setOpzioneNuova] = useState<Record<string, string>>({});
   const [form, setForm] = useState({
     titolo: "",
     descrizione: "",
     categoria: "Spazi Verdi" as CategoriaSegnalazione,
-    quartiere: "Centro",
+    quartiere: "Centro Storico",
   });
 
   const { segnalazioni, votiSegnalazioni, commenti, sondaggi, votiSondaggi } = state;
@@ -127,10 +127,19 @@ function MappaCivica() {
       stato: "Aperta",
       data: oggi(),
     };
-    update((s) => ({ ...s, segnalazioni: [nuova, ...s.segnalazioni], votiSegnalazioni: [...s.votiSegnalazioni, nuova.id] }));
-    setForm({ titolo: "", descrizione: "", categoria: "Spazi Verdi", quartiere: "Centro" });
+    void inviaSegnalazione({
+      titolo: nuova.titolo,
+      descrizione: nuova.descrizione,
+      categoria: nuova.categoria,
+      quartiere: nuova.quartiere,
+      lat: nuova.lat,
+      lng: nuova.lng,
+      voti: 1,
+      stato: "In revisione",
+    });
+    setForm({ titolo: "", descrizione: "", categoria: "Spazi Verdi", quartiere: "Centro Storico" });
     setDialogOpen(false);
-    toast.success("Segnalazione pubblicata sulla mappa civica.");
+    toast.success("Segnalazione inviata alla Regia Admin per l'approvazione sulla mappa!");
   };
 
   const votaSondaggio = (sid: string, oid: string) => {
@@ -158,16 +167,20 @@ function MappaCivica() {
   const creaSondaggio = () => {
     const opz = sondForm.opzioni.split("\n").map((o) => o.trim()).filter(Boolean);
     if (!sondForm.domanda.trim() || opz.length < 2) return void toast.error("Inserisci una domanda e almeno 2 opzioni (una per riga).");
-    update((s) => ({
-      ...s,
-      sondaggi: [
-        { id: nuovoId("p"), domanda: sondForm.domanda.trim(), contesto: `Sondaggio civico della community · ${sondForm.contesto}`, community: true, opzioni: opz.map((t) => ({ id: nuovoId("o"), testo: t, voti: 0, community: true })) },
-        ...s.sondaggi,
-      ],
-    }));
-    setSondForm({ domanda: "", contesto: "Centro", opzioni: "" });
+    void inviaPropostaModerazione({
+      tipo: "sondaggio",
+      titolo: sondForm.domanda.trim(),
+      autore: "Cittadino da Mappa Civica",
+      contatto: sondForm.contesto,
+      dati: {
+        domanda: sondForm.domanda.trim(),
+        contesto: `Sondaggio civico · ${sondForm.contesto}`,
+        opzioni: opz.map((t, idx) => ({ id: `op${idx + 1}`, testo: t, voti: 0, community: true })),
+      },
+    });
+    setSondForm({ domanda: "", contesto: "Centro Storico", opzioni: "" });
     setNuovoSondOpen(false);
-    toast.success("Nuovo sondaggio civico pubblicato.");
+    toast.success("Proposta di sondaggio inviata alla Regia Admin per l'approvazione!");
   };
 
   return (

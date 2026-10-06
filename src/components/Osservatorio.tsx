@@ -3,7 +3,7 @@ import { Bot, Coins, TrendingUp } from "lucide-react";
 import { useCivic } from "@/lib/civic-store";
 
 const pct = (a: number, b: number) => (a + b ? Math.round((a / (a + b)) * 100) : 0);
-const QUARTIERI_OSS = ["Centro", "Borgo Bovio", "Villaggio Matteotti", "Polymer / Viale Brin", "Marmore", "Cesure"];
+const QUARTIERI_OSS = ["Centro Storico", "Borgo Bovio", "Villaggio Matteotti", "Polymer / Viale Brin", "Marmore", "Cesure"];
 
 const tooltipStyle = {
   background: "var(--surface-2)",

@@ -2,7 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { Map, Compass, FileSearch, Handshake, Flame } from "lucide-react";
 
 const LINKS = [
-  { to: "/", label: "Mappa & Segnalazioni", icon: Map },
+  { to: "/mappa", label: "Mappa & Segnalazioni", icon: Map },
   { to: "/urban-go", label: "Terni Urban GO", icon: Compass },
   { to: "/dossier", label: "Bandi & Dossier IA", icon: FileSearch },
   { to: "/partner", label: "Partner & Sponsor", icon: Handshake },
