@@ -94,7 +94,7 @@ const INIZIALE: CivicState = {
   postSocial: [],
 };
 
-const KEY = "terni2030-state-v2";
+const KEY = "terni2030-state-v3-clean";
 
 type Ctx = {
   state: CivicState;
@@ -111,6 +111,7 @@ export function CivicProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     async function loadData() {
+      try { localStorage.removeItem("terni2030-state-v1"); localStorage.removeItem("terni2030-state-v2"); } catch {}
       if (supabase) {
         const { data } = await supabase.from("segnalazioni").select("*");
         if (data) {

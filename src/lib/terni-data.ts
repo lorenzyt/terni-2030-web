@@ -3,11 +3,11 @@ import bandiReali from './bandi_reali.json';
 export const TERNI_CENTER: [number, number] = [42.5636, 12.6427];
 
 export const FONDI_STIMATI: Record<string, number> = {
-  "Spazi Verdi": 200000,
-  "Viabilità": 300000,
-  "Edifici Sfitti": 400000,
-  "Decoro": 150000,
-  "Proposta Progettuale": 100000,
+  "Spazi Verdi": 0,
+  "Viabilità": 0,
+  "Edifici Sfitti": 0,
+  "Decoro": 0,
+  "Proposta Progettuale": 0,
 };
 
 export const OBIETTIVI: { id: string; nome: string }[] = [
@@ -64,20 +64,7 @@ export type Segnalazione = {
   data: string;
 };
 
-export const SEGNALAZIONI_INIZIALI: Segnalazione[] = [
-  {
-    id: "s1",
-    titolo: "Riqualificazione Parco Le Grazie",
-    descrizione: "Proposta di riqualificazione illuminazione e arredi.",
-    categoria: "Spazi Verdi",
-    quartiere: "Le Grazie",
-    lat: 42.5684,
-    lng: 12.6512,
-    voti: 0,
-    stato: "Aperta",
-    data: new Date().toISOString().split('T')[0],
-  }
-];
+export const SEGNALAZIONI_INIZIALI: Segnalazione[] = [];
 
 export type Sondaggio = {
   id: string;
@@ -87,18 +74,7 @@ export type Sondaggio = {
   community?: boolean;
 };
 
-export const SONDAGGI: Sondaggio[] = [
-  {
-    id: "p1",
-    domanda: "Quale priorità per il centro storico di Terni nel 2027?",
-    contesto: "Sondaggio territoriale",
-    opzioni: [
-      { id: "a", testo: "Pedonalizzazione di Corso Tacito", voti: 0 },
-      { id: "b", testo: "Riuso dei locali sfitti", voti: 0 },
-      { id: "c", testo: "Più verde in Piazza Tacito", voti: 0 },
-    ],
-  }
-];
+export const SONDAGGI: Sondaggio[] = [];
 
 export type POI = {
   id: string;
@@ -127,7 +103,7 @@ export type Associazione = {
 export const BACHECA: Associazione[] = [];
 
 export const QUARTIERI = [
-  "Centro", "Borgo Bovio", "Le Grazie", "Villaggio Matteotti", "Rivo", 
+  "Centro", "Borgo Bovio", "Le Grazie", "Villaggio Matteotti", "Rivo",
   "Polymer / Viale Brin", "Cospea", "Gabelletta", "Papigno", "Marmore", "Cesure",
 ];
 
@@ -140,40 +116,23 @@ export type Bando = {
   nota: string;
 };
 
-// Mappatura bandi reali verso il tipo Bando richiesto
+const tuttiBandiMappati: Bando[] = (bandiReali as any[]).map((b) => ({
+  nome: b.titolo || "Bando Territoriale",
+  ente: b.ente || "Ente Pubblico",
+  contributo: b.importo || "Consulta avviso",
+  scadenza: b.scadenza || "Attivo",
+  match: 85,
+  nota: b.descrizione || "",
+}));
+
 export const BANDI: Record<string, Bando[]> = {
-  ristrutturazione: bandiReali
-    .filter(b => b.categoria === "Energia & Ambiente")
-    .map(b => ({
-      nome: b.titolo,
-      ente: b.ente,
-      contributo: b.importo,
-      scadenza: b.scadenza,
-      match: 80,
-      nota: b.descrizione
-    })),
-  apertura: [],
-  sfitto: [],
-  energia: bandiReali
-    .filter(b => b.categoria === "Energia & Ambiente")
-    .map(b => ({
-      nome: b.titolo,
-      ente: b.ente,
-      contributo: b.importo,
-      scadenza: b.scadenza,
-      match: 90,
-      nota: b.descrizione
-    })),
-  cultura: bandiReali
-    .filter(b => b.categoria === "Cultura & Giovani")
-    .map(b => ({
-      nome: b.titolo,
-      ente: b.ente,
-      contributo: b.importo,
-      scadenza: b.scadenza,
-      match: 70,
-      nota: b.descrizione
-    })),
+  o1: tuttiBandiMappati,
+  o2: tuttiBandiMappati,
+  ristrutturazione: tuttiBandiMappati,
+  apertura: tuttiBandiMappati,
+  sfitto: tuttiBandiMappati,
+  energia: tuttiBandiMappati,
+  cultura: tuttiBandiMappati,
 };
 
 export type Partner = {

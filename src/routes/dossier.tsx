@@ -36,12 +36,12 @@ export const Route = createFileRoute("/dossier")({
 const STEPS = ["Profilo", "Quartiere", "Obiettivo", "Dossier"];
 
 const PORTALI = [
-  { nome: "Regione Umbria", n: 14, ambito: "FESR, FSE+, rigenerazione, borghi" },
-  { nome: "Comune di Terni", n: 6, ambito: "Facciate, sfitti, commercio di vicinato" },
-  { nome: "GSE", n: 4, ambito: "Conto Termico, CER, fotovoltaico" },
-  { nome: "PNRR", n: 9, ambito: "Transizione energetica, inclusione, cultura" },
-  { nome: "Invitalia", n: 5, ambito: "Nuove imprese, autoimpiego, startup" },
-  { nome: "Camera di Commercio", n: 3, ambito: "Digitalizzazione, voucher, internazionalizzazione" },
+  { nome: "Regione Umbria", n: 0, ambito: "FESR, FSE+, rigenerazione, borghi" },
+  { nome: "Comune di Terni", n: 0, ambito: "Facciate, sfitti, commercio di vicinato" },
+  { nome: "GSE", n: 0, ambito: "Conto Termico, CER, fotovoltaico" },
+  { nome: "PNRR", n: 0, ambito: "Transizione energetica, inclusione, cultura" },
+  { nome: "Invitalia", n: 0, ambito: "Nuove imprese, autoimpiego, startup" },
+  { nome: "Camera di Commercio", n: 0, ambito: "Digitalizzazione, voucher, internazionalizzazione" },
 ];
 
 const INDICE = [

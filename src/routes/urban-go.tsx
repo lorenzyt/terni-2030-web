@@ -35,7 +35,7 @@ const COLORI_POI: Record<POI["categoria"], string> = {
 function UrbanGo() {
   const { state, update, puntiGuadagnati, puntiDisponibili } = useCivic();
   const esplorati = state.checkin;
-  const [attivo, setAttivo] = useState<POI>(POI_LIST[0] as POI);
+  const [attivo, setAttivo] = useState<POI | undefined>(POI_LIST[0]);
   const [premiOpen, setPremiOpen] = useState(false);
   const [segnalaOpen, setSegnalaOpen] = useState(false);
   const [post, setPost] = useState({ pagina: "", testo: "", link: "" });
@@ -104,7 +104,7 @@ function UrbanGo() {
           <div>
             <p className="text-sm font-semibold">{puntiDisponibili} punti disponibili</p>
             <p className="text-[11px] text-muted-foreground">{puntiGuadagnati}/{puntiTotali} guadagnati · Premi & Livelli →</p>
-            <Progress value={(puntiGuadagnati / puntiTotali) * 100} className="mt-1 h-1.5 w-40" />
+            <Progress value={puntiTotali > 0 ? (puntiGuadagnati / puntiTotali) * 100 : 0} className="mt-1 h-1.5 w-40" />
           </div>
         </button>
       </div>
@@ -118,7 +118,7 @@ function UrbanGo() {
             {POI_LIST.map((p) => {
               const fatto = esplorati.includes(p.id);
               return (
-                <article key={p.id} onClick={() => setAttivo(p)} className={`surface-panel cursor-pointer p-4 ${attivo.id === p.id ? "border-primary/70" : ""}`}>
+                <article key={p.id} onClick={() => setAttivo(p)} className={`surface-panel cursor-pointer p-4 ${attivo?.id === p.id ? "border-primary/70" : ""}`}>
                   <div className="flex items-start justify-between gap-2">
                     <div>
                       <Badge className="border-0" style={{ backgroundColor: `${COLORI_POI[p.categoria]}22`, color: COLORI_POI[p.categoria] }}>{p.categoria}</Badge>
@@ -175,15 +175,18 @@ function UrbanGo() {
         <aside className="space-y-5">
           <div className="surface-panel p-4">
             <h2 className="flex items-center gap-2 text-sm font-semibold uppercase tracking-wider text-muted-foreground"><Sparkles className="size-4" /> Scheda di approfondimento</h2>
-            <h3 className="mt-3 text-lg font-semibold">{attivo.nome}</h3>
-            <p className="text-xs text-muted-foreground">{attivo.autore} · {attivo.anno}</p>
-            <p className="mt-3 text-sm">{attivo.descrizione}</p>
-            <p className="mt-3 rounded-md border border-border bg-surface-2 p-3 text-sm text-muted-foreground">
-              <span className="font-semibold text-accent">Lo sapevi? </span>{attivo.curiosita}
-            </p>
-            <Button className="mt-3 w-full" asChild>
-              <Link to="/articoli/$id" params={{ id: attivo.id }}>Scopri di più — Leggi l'articolo d'autore →</Link>
-            </Button>
+            {attivo ? (
+              <>
+                <h3 className="mt-3 text-lg font-semibold">{attivo.nome}</h3>
+                <p className="text-xs text-muted-foreground">{attivo.autore} · {attivo.anno}</p>
+                <p className="mt-3 text-sm">{attivo.descrizione}</p>
+                <p className="mt-3 rounded-md border border-border bg-surface-2 p-3 text-sm text-muted-foreground">
+                  <span className="font-semibold text-accent">Lo sapevi? </span>{attivo.curiosita}
+                </p>
+              </>
+            ) : (
+              <p className="mt-3 text-sm text-muted-foreground">Nessuna scheda luogo inserita al momento.</p>
+            )}
           </div>
 
           <div className="surface-panel p-4">
