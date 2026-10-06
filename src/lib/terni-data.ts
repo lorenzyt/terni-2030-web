@@ -78,7 +78,7 @@ export const AGENDA_2030_GOALS: GoalAgenda2030[] = [
     numero: 8,
     titolo: "Lavoro Dignitoso e Crescita Economica",
     colore: "#a21942",
-    descrizione: "Ocupazione giovanile (FSE+), rilancio del commercio di vicinato, turismo e nuove aperture.",
+    descrizione: "Occupazione giovanile (FSE+), rilancio del commercio di vicinato, turismo e nuove aperture.",
     obiettiviCollegati: ["o5", "o6"],
     categorieMappa: ["Edifici Sfitti"],
   },
