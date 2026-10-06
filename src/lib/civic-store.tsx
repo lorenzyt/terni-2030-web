@@ -3,10 +3,12 @@ import { createClient } from "@supabase/supabase-js";
 import {
   BACHECA,
   POI_LIST,
+  RARITA_STANDARD,
   SEGNALAZIONI_INIZIALI,
   SONDAGGI,
   type Associazione,
   type POI,
+  type RaritaPOI,
   type Segnalazione,
 } from "@/lib/terni-data";
 
@@ -137,7 +139,7 @@ const INIZIALE: CivicState = {
   proposteModerazione: [],
 };
 
-const KEY = "terni2030-state-v4-pilastri";
+const KEY = "terni2030-state-v5-clean-poi";
 
 type Ctx = {
   state: CivicState;
@@ -230,18 +232,22 @@ export function CivicProvider({ children }: { children: ReactNode }) {
 
             if (stProp === "Approvata") {
               if (propObj.tipo === "poi" && propObj.dati) {
+                const raritaScelta: RaritaPOI =
+                  propObj.dati.rarita && RARITA_STANDARD[propObj.dati.rarita as RaritaPOI]
+                    ? (propObj.dati.rarita as RaritaPOI)
+                    : "Comune";
                 poiApprovati.push({
                   id: idStr,
                   nome: propObj.dati.nome || propObj.titolo,
                   autore: propObj.dati.autore || propObj.autore,
-                  anno: propObj.dati.anno || "2026",
+                  anno: propObj.dati.anno || "Storico / Contemporaneo",
                   categoria: propObj.dati.categoria || "Architettura d'autore",
                   lat: Number(propObj.dati.lat) || 42.5636,
                   lng: Number(propObj.dati.lng) || 12.6427,
-                  punti: Number(propObj.dati.punti) || 60,
-                  rarita: "Raro",
+                  punti: RARITA_STANDARD[raritaScelta].punti,
+                  rarita: raritaScelta,
                   descrizione: propObj.dati.descrizione || "",
-                  curiosita: propObj.dati.curiosita || "Scheda proposta dalla community e certificata dalla Regia.",
+                  curiosita: propObj.dati.curiosita || "Luogo certificato dalla Regia Terni 2030.",
                 });
               } else if (propObj.tipo === "bacheca" && propObj.dati) {
                 bachecaApprovata.push({
@@ -402,7 +408,8 @@ export async function inviaPropostaModerazione(payload: {
 // Permette all'Admin in Regia di Approvare o Rifiutare qualsiasi proposta
 export async function gestisciPropostaAdmin(
   proposta: PropostaModerazione,
-  esito: "Approvata" | "Rifiutata"
+  esito: "Approvata" | "Rifiutata",
+  raritaOverride?: RaritaPOI
 ) {
   if (!supabase) return;
   if (proposta.tipo === "mappa") {
@@ -416,6 +423,11 @@ export async function gestisciPropostaAdmin(
   if (esito === "Rifiutata") {
     await supabase.from("segnalazioni").delete().eq("id", proposta.id);
   } else {
+    const datiAggiornati = { ...(proposta.dati || {}) };
+    if (proposta.tipo === "poi" && raritaOverride) {
+      datiAggiornati.rarita = raritaOverride;
+      datiAggiornati.punti = RARITA_STANDARD[raritaOverride].punti;
+    }
     await supabase.from("segnalazioni").update({
       stato: "Approvata",
       descrizione: JSON.stringify({
@@ -425,7 +437,7 @@ export async function gestisciPropostaAdmin(
         contatto: proposta.contatto,
         data: proposta.data,
         stato: "Approvata",
-        dati: proposta.dati,
+        dati: datiAggiornati,
       }),
     }).eq("id", proposta.id);
   }

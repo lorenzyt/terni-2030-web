@@ -176,6 +176,46 @@ export type Sondaggio = {
 
 export const SONDAGGI: Sondaggio[] = [];
 
+export type RaritaPOI = "Comune" | "Raro" | "Epico" | "Leggendario" | "Unico";
+
+export const RARITA_STANDARD: Record<
+  RaritaPOI,
+  { punti: number; colore: string; label: string; desc: string }
+> = {
+  Comune: {
+    punti: 25,
+    colore: "#94a3b8",
+    label: "Comune · 25 pt",
+    desc: "Tappa urbana diffusa o punto d'interesse di quartiere",
+  },
+  Raro: {
+    punti: 50,
+    colore: "#3b82f6",
+    label: "Raro · 50 pt",
+    desc: "Luogo storico, artistico o identitario di rilievo cittadino",
+  },
+  Epico: {
+    punti: 100,
+    colore: "#a855f7",
+    label: "Epico · 100 pt",
+    desc: "Monumento, archeologia industriale o architettura d'eccellenza",
+  },
+  Leggendario: {
+    punti: 200,
+    colore: "#f59e0b",
+    label: "Leggendario · 200 pt",
+    desc: "Capolavoro simbolo della storia e dell'identità di Terni",
+  },
+  Unico: {
+    punti: 500,
+    colore: "#ef4444",
+    label: "Unico · 500 pt",
+    desc: "Patrimonio irripetibile di valore assoluto",
+  },
+};
+
+export const ORDINE_RARITA: RaritaPOI[] = ["Comune", "Raro", "Epico", "Leggendario", "Unico"];
+
 export type POI = {
   id: string;
   nome: string;
@@ -185,92 +225,13 @@ export type POI = {
   lat: number;
   lng: number;
   punti: number;
-  rarita?: "Comune" | "Raro" | "Epico" | "Leggendario";
+  rarita: RaritaPOI;
   descrizione: string;
   curiosita: string;
 };
 
-// Monumenti storici reali di Terni per il TerniDex (sbloccabili sul posto via GPS)
-export const POI_LIST: POI[] = [
-  {
-    id: "poi-lancia",
-    nome: "Lancia di Luce (Obelisco di Pomodoro)",
-    autore: "Arnaldo Pomodoro",
-    anno: "1985–1995",
-    categoria: "Arte pubblica",
-    lat: 42.5663,
-    lng: 12.6451,
-    punti: 100,
-    rarita: "Leggendario",
-    descrizione: "Scultura monumentale in acciaio speciale alta 32 metri e pesante 105 tonnellate, simbolo della storia siderurgica di Terni.",
-    curiosita: "Fu fusa e lavorata direttamente nelle fonderie delle Acciaierie di Terni in quattro grandi sezioni sovrapposte.",
-  },
-  {
-    id: "poi-spada",
-    nome: "Palazzo Spada",
-    autore: "Antonio da Sangallo il Giovane",
-    anno: "1546",
-    categoria: "Architettura d'autore",
-    lat: 42.5606,
-    lng: 12.6466,
-    punti: 75,
-    rarita: "Epico",
-    descrizione: "Capolavoro rinascimentale cinquecentesco voluto dal conte Michelangelo Spada, oggi sede del Municipio di Terni.",
-    curiosita: "L'architetto Antonio da Sangallo il Giovane morì a Terni proprio nel 1546 mentre seguiva i lavori nella conca.",
-  },
-  {
-    id: "poi-matteotti",
-    nome: "Villaggio Matteotti",
-    autore: "Giancarlo De Carlo",
-    anno: "1969–1975",
-    categoria: "Architettura d'autore",
-    lat: 42.5488,
-    lng: 12.6602,
-    punti: 90,
-    rarita: "Leggendario",
-    descrizione: "Celebre esempio internazionale di architettura partecipata, progettato con il coinvolgimento diretto degli operai delle acciaierie.",
-    curiosita: "Presenta percorsi pedonali sopraelevati, giardini pensili e 45 tipologie diverse di alloggi scelte assieme alle famiglie.",
-  },
-  {
-    id: "poi-pressa",
-    nome: "Grande Pressa da 12.000 Tonnellate",
-    autore: "Società degli Alti Forni, Fonderie e Acciaierie",
-    anno: "1935",
-    categoria: "Archeologia industriale",
-    lat: 42.5707,
-    lng: 12.6502,
-    punti: 80,
-    rarita: "Epico",
-    descrizione: "Colosso della siderurgia ternana collocato di fronte alla Stazione Ferroviaria in Piazza Dante.",
-    curiosita: "Alta oltre 15 metri, veniva impiegata per forgiare le grandi corazze navali e gli alberi motore.",
-  },
-  {
-    id: "poi-anfiteatro",
-    nome: "Anfiteatro Romano di Interamna Nahars",
-    autore: "Fausto Tizio Liberale (Epoca Imperiale)",
-    anno: "32 d.C.",
-    categoria: "Storia e fede",
-    lat: 42.5592,
-    lng: 12.6494,
-    punti: 70,
-    rarita: "Raro",
-    descrizione: "Antico anfiteatro romano in opus reticulatum capace di ospitare fino a 10.000 spettatori, incastonato nel parco cittadino.",
-    curiosita: "Sopra le sue arcate vennero edificati nel corso dei secoli il Palazzo Vescovile e antiche chiese.",
-  },
-  {
-    id: "poi-ridolfi",
-    nome: "Piazza Tacito e Fontana dello Zodiaco",
-    autore: "Mario Ridolfi, Wolfgang Frankl, Corrado Cagli",
-    anno: "1936 / 1961",
-    categoria: "Architettura d'autore",
-    lat: 42.5649,
-    lng: 12.6461,
-    punti: 65,
-    rarita: "Raro",
-    descrizione: "Fulcro urbanistico della Terni moderna con la monumentale fontana decorata dai mosaici zodiacali su disegno di Corrado Cagli.",
-    curiosita: "L'antenna centrale in acciaio inossidabile richiama la forza dell'acqua del Velino e del Nera.",
-  },
-];
+// Lista iniziale vuota: tutti i luoghi vengono inseriti da Lorenzo o dagli utenti previa approvazione Admin
+export const POI_LIST: POI[] = [];
 
 export type Associazione = {
   id: string;

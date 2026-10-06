@@ -6,6 +6,7 @@ import { CheckCircle2, ExternalLink, FileText, Inbox, Lock, RefreshCw, Search, S
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
+import { ORDINE_RARITA, RARITA_STANDARD, type RaritaPOI } from "@/lib/terni-data";
 import { gestisciPropostaAdmin, salvaAuditBandoCloud, useCivic, type AuditBando, type PropostaModerazione } from "@/lib/civic-store";
 
 export const Route = createFileRoute("/regia")({
@@ -38,6 +39,7 @@ function RegiaPage() {
   const [filtroStato, setFiltroStato] = useState<string>("tutti");
   const [filtroPortale, setFiltroPortale] = useState<string>("tutti");
   const [bozze, setBozze] = useState<Record<string, { link: string; nota: string }>>({});
+  const [raritaSceltaAdmin, setRaritaSceltaAdmin] = useState<Record<string, RaritaPOI>>({});
   const [loading, setLoading] = useState(false);
 
   const eseguiAccesso = () => {
@@ -132,7 +134,8 @@ function RegiaPage() {
   };
 
   const decidiProposta = async (prop: PropostaModerazione, esito: "Approvata" | "Rifiutata") => {
-    await gestisciPropostaAdmin(prop, esito);
+    const rar = raritaSceltaAdmin[prop.id] || (prop.dati?.rarita as RaritaPOI) || "Comune";
+    await gestisciPropostaAdmin(prop, esito, rar);
     await ricaricaCloud();
     toast.success(esito === "Approvata" ? `Proposta «${prop.titolo}» approvata e pubblicata sul sito!` : `Proposta «${prop.titolo}» rifiutata e rimossa.`);
   };
@@ -344,10 +347,21 @@ function RegiaPage() {
                     )}
                   </div>
 
-                  <div className="flex gap-2">
+                  <div className="flex flex-wrap items-center gap-2">
+                    {prop.tipo === "poi" && (
+                      <select
+                        value={raritaSceltaAdmin[prop.id] || prop.dati?.rarita || "Comune"}
+                        onChange={(e) => setRaritaSceltaAdmin({ ...raritaSceltaAdmin, [prop.id]: e.target.value as RaritaPOI })}
+                        className="h-9 rounded-md border border-border bg-background px-3 text-xs font-semibold"
+                      >
+                        {ORDINE_RARITA.map((r) => (
+                          <option key={r} value={r}>{RARITA_STANDARD[r].label}</option>
+                        ))}
+                      </select>
+                    )}
                     {prop.stato !== "Approvata" && (
                       <Button size="sm" onClick={() => decidiProposta(prop, "Approvata")}>
-                        <CheckCircle2 className="mr-1 size-4" /> Approva e Pubblica
+                        <CheckCircle2 className="mr-1 size-4" /> Approva / Aggiorna
                       </Button>
                     )}
                     <Button size="sm" variant="destructive" onClick={() => decidiProposta(prop, "Rifiutata")}>
