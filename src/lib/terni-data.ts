@@ -1,3 +1,5 @@
+import bandiReali from './bandi_reali.json';
+
 export const TERNI_CENTER: [number, number] = [42.5636, 12.6427];
 
 export const FONDI_STIMATI: Record<string, number> = {
@@ -138,12 +140,40 @@ export type Bando = {
   nota: string;
 };
 
+// Mappatura bandi reali verso il tipo Bando richiesto
 export const BANDI: Record<string, Bando[]> = {
-  ristrutturazione: [],
+  ristrutturazione: bandiReali
+    .filter(b => b.categoria === "Energia & Ambiente")
+    .map(b => ({
+      nome: b.titolo,
+      ente: b.ente,
+      contributo: b.importo,
+      scadenza: b.scadenza,
+      match: 80,
+      nota: b.descrizione
+    })),
   apertura: [],
   sfitto: [],
-  energia: [],
-  cultura: [],
+  energia: bandiReali
+    .filter(b => b.categoria === "Energia & Ambiente")
+    .map(b => ({
+      nome: b.titolo,
+      ente: b.ente,
+      contributo: b.importo,
+      scadenza: b.scadenza,
+      match: 90,
+      nota: b.descrizione
+    })),
+  cultura: bandiReali
+    .filter(b => b.categoria === "Cultura & Giovani")
+    .map(b => ({
+      nome: b.titolo,
+      ente: b.ente,
+      contributo: b.importo,
+      scadenza: b.scadenza,
+      match: 70,
+      nota: b.descrizione
+    })),
 };
 
 export type Partner = {
