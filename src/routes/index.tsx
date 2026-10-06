@@ -2,7 +2,7 @@ import bandiRealiJson from "@/lib/bandi_reali.json";
 import { AGENDA_2030_GOALS, POI_LIST } from "@/lib/terni-data";
 import { useCivic } from "@/lib/civic-store";
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Map, FileText, LayoutDashboard, ArrowRight, Globe, Compass, Sparkles } from "lucide-react";
+import { Map, FileText, LayoutDashboard, ArrowRight, Globe, Compass } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 
 export const Route = createFileRoute("/")({
@@ -13,19 +13,18 @@ export const Route = createFileRoute("/")({
 function IconaUfficialeSDG({ numero, colore }: { numero: number; colore: string }) {
   return (
     <div
-      className="flex size-16 shrink-0 flex-col justify-between rounded-lg p-2 text-white shadow-md select-none"
+      className="flex size-14 shrink-0 flex-col justify-between rounded-lg p-1.5 text-white shadow-md select-none"
       style={{ backgroundColor: colore }}
       title={`Obiettivo Agenda 2030 ONU n. ${numero}`}
     >
       <div className="flex items-center justify-between leading-none">
-        <span className="font-display text-sm font-black tracking-tighter">{numero}</span>
-        <span className="text-[8px] font-bold uppercase opacity-90">ONU</span>
+        <span className="font-display text-xs font-black tracking-tighter">{numero}</span>
+        <span className="text-[7px] font-bold uppercase opacity-90">ONU</span>
       </div>
 
       <div className="flex items-center justify-center">
         {numero === 7 && (
-          /* Goal 7: Sole con simbolo Power al centro */
-          <svg viewBox="0 0 64 64" className="size-9 fill-none stroke-white" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round">
+          <svg viewBox="0 0 64 64" className="size-8 fill-none stroke-white" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round">
             <circle cx="32" cy="32" r="12" />
             <path d="M32 23v9" />
             <path d="M27 26.5a7.5 7.5 0 1 0 10 0" />
@@ -34,8 +33,7 @@ function IconaUfficialeSDG({ numero, colore }: { numero: number; colore: string 
         )}
 
         {numero === 8 && (
-          /* Goal 8: Grafico a barre in crescita con freccia */
-          <svg viewBox="0 0 64 64" className="size-9 fill-none stroke-white" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round">
+          <svg viewBox="0 0 64 64" className="size-8 fill-none stroke-white" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round">
             <path d="M12 46l13-12 10 7 16-17" />
             <path d="M41 24h10v10" />
             <rect x="13" y="48" width="7" height="8" fill="white" stroke="none" />
@@ -46,17 +44,13 @@ function IconaUfficialeSDG({ numero, colore }: { numero: number; colore: string 
         )}
 
         {numero === 9 && (
-          /* Goal 9: Tre cubi isometrici dell'industria e infrastruttura */
-          <svg viewBox="0 0 64 64" className="size-9 fill-none stroke-white" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-            {/* Cubo superiore */}
+          <svg viewBox="0 0 64 64" className="size-8 fill-none stroke-white" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
             <polygon points="32,10 44,17 32,24 20,17" />
             <polyline points="20,17 20,29 32,36 44,29 44,17" />
             <line x1="32" y1="24" x2="32" y2="36" />
-            {/* Cubo sinistro */}
             <polygon points="20,29 32,36 20,43 8,36" />
             <polyline points="8,36 8,48 20,55 32,48 32,36" />
             <line x1="20" y1="43" x2="20" y2="55" />
-            {/* Cubo destro */}
             <polygon points="44,29 56,36 44,43 32,36" />
             <polyline points="32,36 32,48 44,55 56,48 56,36" />
             <line x1="44" y1="43" x2="44" y2="55" />
@@ -64,8 +58,7 @@ function IconaUfficialeSDG({ numero, colore }: { numero: number; colore: string 
         )}
 
         {numero === 11 && (
-          /* Goal 11: Edifici urbani, casa e verde cittadino */
-          <svg viewBox="0 0 64 64" className="size-9 fill-none stroke-white" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+          <svg viewBox="0 0 64 64" className="size-8 fill-none stroke-white" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
             <rect x="10" y="16" width="16" height="38" fill="white" fillOpacity="0.2" />
             <line x1="15" y1="22" x2="15" y2="22.1" strokeWidth="4" />
             <line x1="21" y1="22" x2="21" y2="22.1" strokeWidth="4" />
@@ -81,8 +74,7 @@ function IconaUfficialeSDG({ numero, colore }: { numero: number; colore: string 
         )}
 
         {numero === 13 && (
-          /* Goal 13: Occhio climatico con globo terrestre al centro */
-          <svg viewBox="0 0 64 64" className="size-9 fill-none stroke-white" strokeWidth="3.2" strokeLinecap="round" strokeLinejoin="round">
+          <svg viewBox="0 0 64 64" className="size-8 fill-none stroke-white" strokeWidth="3.2" strokeLinecap="round" strokeLinejoin="round">
             <path d="M6 32C14 18 23 14 32 14s18 4 26 18c-8 14-17 18-26 18S14 46 6 32z" />
             <circle cx="32" cy="32" r="11" />
             <path d="M21 32h22M32 21c3.5 3.5 3.5 18.5 0 22M32 21c-3.5 3.5-3.5 18.5 0 22" />
@@ -90,8 +82,7 @@ function IconaUfficialeSDG({ numero, colore }: { numero: number; colore: string 
         )}
 
         {numero === 15 && (
-          /* Goal 15: Albero, uccelli in volo e suolo terrestre */
-          <svg viewBox="0 0 64 64" className="size-9 fill-none stroke-white" strokeWidth="3.2" strokeLinecap="round" strokeLinejoin="round">
+          <svg viewBox="0 0 64 64" className="size-8 fill-none stroke-white" strokeWidth="3.2" strokeLinecap="round" strokeLinejoin="round">
             <circle cx="24" cy="24" r="10" fill="white" fillOpacity="0.25" />
             <line x1="24" y1="34" x2="24" y2="50" strokeWidth="4" />
             <path d="M40 18c2.5-2.5 5.5-2.5 7 0 1.5-2.5 4.5-2.5 7 0" />
@@ -170,21 +161,19 @@ function LandingPage() {
         </div>
       </section>
 
-      {/* PILASTRO 1: Osservatorio Agenda 2030 ONU con Icone Ufficiali dello Schema */}
+      {/* PILASTRO 1 OTTIMIZZATO: Zero ripetizioni + Icona Ufficiale ONU */}
       <section className="container mx-auto px-6 py-12">
         <div className="surface-panel p-6 md:p-8">
-          <div className="mb-6 flex flex-wrap items-end justify-between gap-4">
-            <div>
-              <Badge className="mb-2 border-0 bg-accent/20 text-accent">
-                <Globe className="mr-1 size-3.5" /> Bussola Fondi & Bisogni Reali · Agenda 2030 ONU
-              </Badge>
-              <h2 className="text-2xl md:text-3xl font-bold">
-                Dove sono i <span className="text-ember-gradient">Finanziamenti</span> vs Cosa chiedono i <span className="text-ember-gradient">Cittadini</span>
-              </h2>
-              <p className="mt-1 max-w-3xl text-sm text-muted-foreground">
-                Ogni scheda riporta l'icona ufficiale del Goal ONU e confronta l'<b>Offerta di Bandi</b> (quanti dei {tuttiBandi.length} bandi attivi finanziano quel tema e per chi) con la <b>Domanda Cittadina</b>.
-              </p>
-            </div>
+          <div className="mb-6">
+            <Badge className="mb-2 border-0 bg-accent/20 text-accent">
+              <Globe className="mr-1 size-3.5" /> Bussola Fondi & Bisogni Reali · Agenda 2030 ONU
+            </Badge>
+            <h2 className="text-2xl md:text-3xl font-bold">
+              Dove sono i <span className="text-ember-gradient">Finanziamenti</span> vs Cosa chiedono i <span className="text-ember-gradient">Cittadini</span>
+            </h2>
+            <p className="mt-1 max-w-3xl text-sm text-muted-foreground">
+              Confronto in tempo reale tra i bandi attivi per ciascun Obiettivo ONU (divisi per beneficiario) e le progettualità richieste dai quartieri di Terni.
+            </p>
           </div>
 
           <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
@@ -219,24 +208,20 @@ function LandingPage() {
                   className="rounded-xl border border-border bg-surface-2 p-5 flex flex-col justify-between transition hover:border-accent/60"
                 >
                   <div>
-                    {/* Intestazione con Mattonella Icona Ufficiale Agenda 2030 + Titolo */}
-                    <div className="flex items-start gap-3.5">
+                    {/* Intestazione pulita: Icona Ufficiale ONU + Titolo (senza badge percentuale duplicato) */}
+                    <div className="flex items-center gap-3.5">
                       <IconaUfficialeSDG numero={goal.numero} colore={goal.colore} />
-                      <div className="flex-1 min-w-0">
-                        <div className="flex items-center justify-between gap-1">
-                          <span className="text-[11px] font-bold uppercase tracking-wider" style={{ color: goal.colore }}>
-                            Goal {goal.numero} · Agenda 2030
-                          </span>
-                          <Badge variant="secondary" className="font-mono text-[10px]">
-                            {nBandi} bandi ({percOffertaBandi}%)
-                          </Badge>
-                        </div>
-                        <h3 className="mt-1 text-base font-bold leading-snug">{goal.titolo}</h3>
+                      <div className="min-w-0">
+                        <span className="text-[11px] font-bold uppercase tracking-wider" style={{ color: goal.colore }}>
+                          Obiettivo ONU {goal.numero}
+                        </span>
+                        <h3 className="text-base font-bold leading-snug">{goal.titolo}</h3>
                       </div>
                     </div>
 
                     <p className="mt-3 text-xs text-muted-foreground">{goal.descrizione}</p>
 
+                    {/* Destinatari */}
                     <div className="mt-3 flex flex-wrap gap-1.5 text-[11px]">
                       <span className="rounded bg-secondary px-2 py-0.5 text-muted-foreground">
                         🏛️ Enti: <b className="text-foreground">{nPubblico}</b>
@@ -250,11 +235,12 @@ function LandingPage() {
                     </div>
                   </div>
 
-                  <div className="mt-5 space-y-3 border-t border-border pt-3">
+                  {/* Barre comparative (unica sede dove compaiono numeri e percentuali) */}
+                  <div className="mt-5 space-y-3 border-t border-border pt-3.5">
                     <div>
                       <div className="flex justify-between text-xs mb-1">
                         <span className="text-muted-foreground">💰 Offerta Bandi Attivi</span>
-                        <b style={{ color: goal.colore }}>{nBandi} bandi ({percOffertaBandi}%)</b>
+                        <b style={{ color: goal.colore }}>{nBandi} su {tuttiBandi.length} ({percOffertaBandi}%)</b>
                       </div>
                       <div className="h-2 w-full rounded-full bg-secondary overflow-hidden">
                         <div
@@ -268,9 +254,7 @@ function LandingPage() {
                       <div className="flex justify-between text-xs mb-1">
                         <span className="text-muted-foreground">🙋‍♂️ Domanda da Terni (Mappa & Dossier)</span>
                         <b className="text-foreground">
-                          {totDomandaTema === 0
-                            ? "0 richieste (In attesa)"
-                            : `${totDomandaTema} progetti (${percDomandaCittadina}%)`}
+                          {totDomandaTema === 0 ? "0 proposte" : `${totDomandaTema} proposte (${percDomandaCittadina}%)`}
                         </b>
                       </div>
                       <div className="h-2 w-full rounded-full bg-secondary overflow-hidden">
@@ -281,27 +265,12 @@ function LandingPage() {
                       </div>
                     </div>
 
-                    <div className="rounded-md bg-secondary/50 p-2.5 text-[11px] text-muted-foreground flex items-start gap-1.5">
-                      <Sparkles className="size-3.5 text-accent shrink-0 mt-0.5" />
-                      <span>
-                        {totDomandaTema === 0 ? (
-                          <>
-                            <b>Fondi pronti da intercettare:</b> ci sono <b>{nBandi} bandi attivi</b> su questo tema, ma nessuna proposta ancora inviata dai quartieri.
-                          </>
-                        ) : (
-                          <>
-                            <b>Tema attivo:</b> {totDomandaTema} iniziative cittadine incrociate con <b>{nBandi} bandi disponibili</b>.
-                          </>
-                        )}
-                      </span>
-                    </div>
-
                     <Link
                       to="/dossier"
                       search={{ obiettivo: obiettivoPrimario }}
-                      className="mt-1 inline-flex w-full items-center justify-center rounded-md border border-border bg-background py-2 text-xs font-semibold text-accent hover:border-accent transition"
+                      className="mt-2 inline-flex w-full items-center justify-center rounded-md border border-border bg-background py-2 text-xs font-semibold text-accent hover:border-accent transition"
                     >
-                      Scopri i {nBandi} bandi del Goal {goal.numero} <ArrowRight className="ml-1 size-3.5" />
+                      Filtra i bandi nel Dossier IA <ArrowRight className="ml-1 size-3.5" />
                     </Link>
                   </div>
                 </div>
