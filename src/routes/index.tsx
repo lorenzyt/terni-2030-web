@@ -1,3 +1,5 @@
+import bandiRealiJson from "@/lib/bandi_reali.json";
+import { useCivic } from "@/lib/civic-store";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Map, FileText, LayoutDashboard, ArrowRight } from "lucide-react";
 
@@ -6,6 +8,7 @@ export const Route = createFileRoute("/")({
 });
 
 function LandingPage() {
+  const { state } = useCivic();
   return (
     <div className="min-h-screen bg-background text-foreground">
       {/* Hero Section */}
@@ -34,11 +37,11 @@ function LandingPage() {
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div>
-              <p className="text-4xl font-bold text-accent">0</p>
+              <p className="text-4xl font-bold text-accent">{state.segnalazioni.length}</p>
               <p className="text-sm text-muted-foreground">Proposte raccolte</p>
             </div>
             <div>
-              <p className="text-4xl font-bold text-accent">0</p>
+              <p className="text-4xl font-bold text-accent">{(bandiRealiJson as any[]).length}</p>
               <p className="text-sm text-muted-foreground">Bandi monitorati</p>
             </div>
             <div>
