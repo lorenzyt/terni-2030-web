@@ -40,12 +40,15 @@ const contaPerPortale = (nome: string) =>
   (bandiRealiJson as any[]).filter((b) => (b.portale || b.ente || "").toLowerCase().includes(nome.toLowerCase())).length;
 
 const PORTALI = [
-  { nome: "Regione Umbria", n: contaPerPortale("Regione Umbria"), ambito: "FESR, FSE+, rigenerazione, borghi" },
-  { nome: "Comune di Terni", n: contaPerPortale("Comune di Terni"), ambito: "Facciate, sfitti, commercio di vicinato" },
-  { nome: "GSE", n: contaPerPortale("GSE"), ambito: "Conto Termico, CER, fotovoltaico" },
-  { nome: "PNRR", n: contaPerPortale("PNRR"), ambito: "Transizione energetica, inclusione, cultura" },
-  { nome: "Invitalia", n: contaPerPortale("Invitalia"), ambito: "Nuove imprese, impianti, autoimpiego, startup" },
-  { nome: "Camera di Commercio", n: contaPerPortale("Camera di Commercio"), ambito: "Digitalizzazione, voucher, internazionalizzazione" },
+  { nome: "PR FESR 2021/2027", n: contaPerPortale("FESR"), ambito: "Imprese, energia, ricerca, Agenda Urbana Terni" },
+  { nome: "FSE", n: contaPerPortale("FSE"), ambito: "PR FSE+ 2021/2027, occupazione, formazione, inclusione" },
+  { nome: "FSC", n: contaPerPortale("FSC"), ambito: "Fondo Sviluppo e Coesione, infrastrutture, aree urbane" },
+  { nome: "PNRR", n: contaPerPortale("PNRR"), ambito: "Italia Domani, Transizione 5.0, mobilità, rigenerazione" },
+  { nome: "Regione Umbria", n: contaPerPortale("Regione Umbria"), ambito: "Bandi regionali, Sviluppo Umbria, territorio" },
+  { nome: "Comune di Terni", n: contaPerPortale("Comune di Terni"), ambito: "Avvisi comunali, Fondazione Carit, sfitti e beni comuni" },
+  { nome: "GSE", n: contaPerPortale("GSE"), ambito: "Conto Termico, CER, fotovoltaico, mobilità elettrica" },
+  { nome: "Invitalia", n: contaPerPortale("Invitalia"), ambito: "Nuovi impianti industriali, autoimpiego, startup" },
+  { nome: "Camera di Commercio", n: contaPerPortale("Camera di Commercio"), ambito: "Voucher digitali I4.0, commercio, transizione" },
 ];
 
 const INDICE = [

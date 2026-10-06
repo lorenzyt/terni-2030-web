@@ -239,11 +239,14 @@ function RegiaPage() {
               onChange={(e) => setFiltroPortale(e.target.value)}
               className="h-9 rounded-md border border-border bg-background px-3 text-xs"
             >
-              <option value="tutti">Tutti i 6 Portali</option>
+              <option value="tutti">Tutti i 9 Canali & Fondi</option>
+              <option value="FESR">PR FESR 2021/2027</option>
+              <option value="FSE">FSE / PR FSE+ 2021/2027</option>
+              <option value="FSC">FSC (Fondo Sviluppo e Coesione)</option>
+              <option value="PNRR">PNRR</option>
               <option value="Regione Umbria">Regione Umbria</option>
               <option value="Comune di Terni">Comune di Terni</option>
               <option value="GSE">GSE</option>
-              <option value="PNRR">PNRR</option>
               <option value="Invitalia">Invitalia</option>
               <option value="Camera di Commercio">Camera di Commercio</option>
             </select>
