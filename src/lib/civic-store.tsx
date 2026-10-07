@@ -591,4 +591,4 @@ export function aggiungiCommento(update: Ctx["update"], chiave: string, autore: 
 }
 
 export { oggi };
-export const COSTI_PREMI = { sconto: 300, badge: 200, partner: 150 } as const;
+export const COSTI_PREMI = { sconto: 500, badge: 1000, partner: 150 } as const;
