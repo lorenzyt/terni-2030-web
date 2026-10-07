@@ -255,7 +255,7 @@ function MappaCivica() {
               <BarChart3 className="size-4" /> Mini-Sondaggi Territoriali
             </h2>
             <Button size="sm" variant="outline" className="mb-4 w-full" onClick={() => setNuovoSondOpen(true)}>
-              <Plus className="size-4" /> Crea Nuovo Sondaggio Civico
+              <Plus className="size-4" /> Proponi Nuovo Sondaggio
             </Button>
             <div className="space-y-6">
               {sondaggi.map((s) => {
@@ -381,8 +381,8 @@ function MappaCivica() {
       <Dialog open={nuovoSondOpen} onOpenChange={setNuovoSondOpen}>
         <DialogContent className="z-[2000]">
           <DialogHeader>
-            <DialogTitle>Crea Nuovo Sondaggio Civico</DialogTitle>
-            <DialogDescription>Sarà contrassegnato come "Proposto dai Cittadini (Community)".</DialogDescription>
+            <DialogTitle>Proponi Nuovo Sondaggio</DialogTitle>
+            <DialogDescription>Invia la tua idea. Appena approvata dalla Regia, sarà pubblicata e contrassegnata come "Proposto dai Cittadini (Community)".</DialogDescription>
           </DialogHeader>
           <div className="space-y-3">
             <div>
@@ -402,7 +402,7 @@ function MappaCivica() {
               <Label>Opzioni (una per riga)</Label>
               <Textarea value={sondForm.opzioni} onChange={(e) => setSondForm({ ...sondForm, opzioni: e.target.value })} placeholder={"Mercato a km zero\nSpazio eventi\nCoworking"} />
             </div>
-            <Button className="w-full" onClick={creaSondaggio}>Pubblica sondaggio</Button>
+            <Button className="w-full" onClick={creaSondaggio}>Invia Proposta alla Regia</Button>
           </div>
         </DialogContent>
       </Dialog>
