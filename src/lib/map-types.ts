@@ -8,6 +8,8 @@ export type MapPin = {
   label: string;
   glow?: boolean;
   popup: ReactNode;
+  imageUrl?: string;
+  isPremium?: boolean;
 };
 
 export type MapCanvasProps = {

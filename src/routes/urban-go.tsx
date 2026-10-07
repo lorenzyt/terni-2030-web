@@ -208,7 +208,9 @@ function UrbanGo() {
           lat: parseFloat(formProp.lat) || 42.5636,
           lng: parseFloat(formProp.lng) || 12.6427,
           descrizione: formProp.descrizione.trim(),
-          curiosita: formProp.curiosita.trim() || "Luogo proposto dalla community e validato dalla Regia Terni 2030.",
+          curiosita: formProp.curiosita.trim(),
+          immagine: formProp.immagine.trim(),
+          articolo: formProp.articolo.trim() || "Luogo proposto dalla community e validato dalla Regia Terni 2030.",
         },
       });
     } else if (tipoCandidatura === "bacheca") {
@@ -250,7 +252,7 @@ function UrbanGo() {
     setFormProp({
       autore: "", contatto: "", titolo: "", sottotitolo: "", anno: "",
       categoriaPoi: "Architettura d'autore", raritaPoi: "Comune",
-      lat: "42.5636", lng: "12.6427", descrizione: "", curiosita: "",
+      lat: "42.5636", lng: "12.6427", descrizione: "", curiosita: "", immagine: "", articolo: "",
       opzione1: "", opzione2: "", opzione3: "",
     });
     setCandidaturaOpen(false);
@@ -268,6 +270,8 @@ function UrbanGo() {
       color: sbloccato ? "#22c55e" : infoRar.colore,
       label: `${p.nome} (${p.rarita})`,
       glow: !sbloccato,
+      imageUrl: p.immagine,
+      isPremium: ["Epico", "Leggendario", "Unico"].includes(p.rarita),
       popup: (
         <div className="space-y-2">
           <p className="font-semibold">{p.nome}</p>
@@ -384,7 +388,7 @@ function UrbanGo() {
                   >
                     <div className="flex items-start justify-between gap-2">
                       <div className="flex flex-wrap items-center gap-1.5">
-                        <Badge className="border-0" style={{ backgroundColor: `${COLORI_POI[p.categoria]}22`, color: COLORI_POI[p.categoria] }}>
+                        <Badge className="border-0" style={{ backgroundColor: `${(COLORI_POI[p.categoria] || "#10b981")}22`, color: (COLORI_POI[p.categoria] || "#10b981") }}>
                           {p.categoria}
                         </Badge>
                         <Badge
@@ -415,7 +419,7 @@ function UrbanGo() {
                     )}
 
                     <p className="mt-2 text-sm text-muted-foreground">
-                      {fatto ? p.descrizione : `${p.descrizione.slice(0, 75)}... [Avvicinati col GPS per sbloccare la scheda completa]`}
+                      {fatto ? (p.articolo ? `${p.descrizione} — Dossier Sbloccato` : p.descrizione) : `${p.descrizione.slice(0, 75)}... [Sblocca per leggere l'articolo]`}
                     </p>
 
                     <div className="mt-3 flex flex-wrap gap-2">
@@ -521,8 +525,9 @@ function UrbanGo() {
                   </Badge>
                   <h3 className="mt-2 text-lg font-semibold">{attivo.nome}</h3>
                   <p className="text-xs text-muted-foreground">{attivo.autore} · {attivo.anno}</p>
-                  <p className="mt-3 whitespace-pre-line text-sm">{attivo.descrizione}</p>
-                  <p className="mt-3 rounded-md border border-border bg-surface-2 p-3 text-sm text-muted-foreground">
+                  {attivo.immagine && <img src={attivo.immagine} alt={attivo.nome} className="mt-4 h-48 w-full rounded-md object-cover border border-border" />}
+                  <p className="mt-4 whitespace-pre-line text-sm leading-relaxed">{attivo.articolo || attivo.descrizione}</p>
+                  <p className="mt-4 rounded-md border border-border bg-surface-2 p-3 text-sm text-muted-foreground">
                     <span className="font-semibold text-accent">Curiosità segreta sbloccata: </span>
                     {attivo.curiosita}
                   </p>
@@ -704,15 +709,16 @@ function UrbanGo() {
                 <div className="grid gap-2 sm:grid-cols-2">
                   <div>
                     <Label>Categoria del Luogo</Label>
-                    <select
+                    <Input 
+                      list="cat-poi-list"
                       value={formProp.categoriaPoi}
                       onChange={(e) => setFormProp({ ...formProp, categoriaPoi: e.target.value as POI["categoria"] })}
-                      className="mt-1 h-9 w-full rounded-md border border-border bg-background px-3 text-xs"
-                    >
-                      {CATEGORIE_POI.map((cat) => (
-                        <option key={cat} value={cat}>{cat}</option>
-                      ))}
-                    </select>
+                      placeholder="Seleziona o scrivi..."
+                      className="mt-1 h-9 w-full text-xs"
+                    />
+                    <datalist id="cat-poi-list">
+                      {CATEGORIE_POI.map((cat) => <option key={cat} value={cat} />)}
+                    </datalist>
                   </div>
                   <div>
                     <Label>Livello di Rarità Standard</Label>
@@ -756,6 +762,10 @@ function UrbanGo() {
                   <Label>Curiosità segreta (sbloccabile col GPS sul posto)</Label>
                   <Input value={formProp.curiosita} onChange={(e) => setFormProp({ ...formProp, curiosita: e.target.value })} />
                 </div>
+                <div>
+                  <Label>Immagine Principale (URL)</Label>
+                  <Input value={formProp.immagine} onChange={(e) => setFormProp({ ...formProp, immagine: e.target.value })} placeholder="https://..." />
+                </div>
               </>
             )}
 
@@ -782,9 +792,15 @@ function UrbanGo() {
             )}
 
             <div>
-              <Label>{tipoCandidatura === "poi" ? "Articolo / Scheda storica del luogo" : "Descrizione dettagliata"}</Label>
-              <Textarea value={formProp.descrizione} onChange={(e) => setFormProp({ ...formProp, descrizione: e.target.value })} rows={4} />
+              <Label>{tipoCandidatura === "poi" ? "Breve Anteprima (Sempre visibile)" : "Descrizione dettagliata"}</Label>
+              <Textarea value={formProp.descrizione} onChange={(e) => setFormProp({ ...formProp, descrizione: e.target.value })} rows={2} />
             </div>
+            {tipoCandidatura === "poi" && (
+              <div>
+                <Label>Articolo Completo (Sbloccabile col GPS)</Label>
+                <Textarea value={formProp.articolo} onChange={(e) => setFormProp({ ...formProp, articolo: e.target.value })} rows={5} placeholder="La scheda storica dettagliata..." />
+              </div>
+            )}
 
             <Button className="w-full" onClick={inviaCandidatura}>
               Invia alla Regia per Approvazione

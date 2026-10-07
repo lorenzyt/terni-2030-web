@@ -3,7 +3,16 @@ import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import type { MapCanvasProps } from "@/lib/map-types";
 
-function pinIcon(color: string, glow?: boolean) {
+function pinIcon(color: string, glow?: boolean, imageUrl?: string, isPremium?: boolean) {
+  if (imageUrl && isPremium) {
+    return L.divIcon({
+      className: "",
+      html: `<div style="width:36px;height:36px;border-radius:50%;border:3px solid ${color};box-shadow:0 0 0 4px ${color}33${glow ? `,0 0 18px 4px ${color}aa` : ""};background-image:url('${imageUrl}');background-size:cover;background-position:center;"></div>`,
+      iconSize: [36, 36],
+      iconAnchor: [18, 18],
+      popupAnchor: [0, -18],
+    });
+  }
   return L.divIcon({
     className: "",
     html: `<span style="display:block;width:20px;height:20px;border-radius:50%;background:${color};border:2px solid rgba(255,255,255,.85);box-shadow:0 0 0 4px ${color}33${
@@ -51,7 +60,7 @@ export default function MapCanvas({
         <Marker
           key={p.id}
           position={[p.lat, p.lng]}
-          icon={pinIcon(p.color, p.glow)}
+          icon={pinIcon(p.color, p.glow, p.imageUrl, p.isPremium)}
           title={p.label}
         >
           <Popup minWidth={240}>{p.popup}</Popup>

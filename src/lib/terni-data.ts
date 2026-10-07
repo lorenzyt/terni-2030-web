@@ -228,6 +228,8 @@ export type POI = {
   rarita: RaritaPOI;
   descrizione: string;
   curiosita: string;
+  immagine?: string;
+  articolo?: string;
 };
 
 // Lista iniziale vuota: tutti i luoghi vengono inseriti da Lorenzo o dagli utenti previa approvazione Admin

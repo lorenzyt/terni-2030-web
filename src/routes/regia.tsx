@@ -3,6 +3,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { toast } from "sonner";
 import { CheckCircle2, ExternalLink, FileText, Inbox, Lock, RefreshCw, Search, ShieldCheck, AlertTriangle, XCircle, Zap } from "lucide-react";
+import { TerniMap } from "@/components/TerniMap";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
@@ -48,7 +49,7 @@ function RegiaPage() {
     const [inserimentoOpen, setInserimentoOpen] = useState(false);
   const [formDir, setFormDir] = useState({
     titolo: "", autore: "Regia Terni 2030", anno: "", categoria: "Architettura d'autore" as POI["categoria"],
-    rarita: "Comune" as RaritaPOI, lat: "42.5636", lng: "12.6427", curiosita: "", descrizione: ""
+    rarita: "Comune" as RaritaPOI, lat: "42.5636", lng: "12.6427", curiosita: "", descrizione: "", immagine: "", articolo: ""
   });
 
   const salvaPoiDiretto = async () => {
@@ -65,10 +66,12 @@ function RegiaPage() {
       lng: parseFloat(formDir.lng) || 12.6427,
       curiosita: formDir.curiosita.trim(),
       descrizione: formDir.descrizione.trim(),
+      immagine: formDir.immagine.trim(),
+      articolo: formDir.articolo.trim(),
     });
     await ricaricaCloud();
     setInserimentoOpen(false);
-    setFormDir({ ...formDir, titolo: "", descrizione: "", curiosita: "" });
+    setFormDir({ ...formDir, titolo: "", descrizione: "", curiosita: "", immagine: "", articolo: "" });
     toast.success("Luogo inserito e pubblicato istantaneamente sul sito!");
   };
 
@@ -447,13 +450,16 @@ function RegiaPage() {
             <div className="grid gap-2 sm:grid-cols-2">
               <div>
                 <Label>Categoria</Label>
-                <select
-                  value={formDir.categoria}
-                  onChange={(e) => setFormDir({ ...formDir, categoria: e.target.value as POI["categoria"] })}
-                  className="mt-1 h-9 w-full rounded-md border border-border bg-background px-3 text-xs"
-                >
-                  {CATEGORIE_POI.map((c) => <option key={c} value={c}>{c}</option>)}
-                </select>
+                <Input 
+                  list="categorie-list" 
+                  value={formDir.categoria} 
+                  onChange={(e) => setFormDir({ ...formDir, categoria: e.target.value as POI["categoria"] })} 
+                  placeholder="Seleziona o scrivi nuova..." 
+                  className="mt-1 h-9 text-xs" 
+                />
+                <datalist id="categorie-list">
+                  {CATEGORIE_POI.map((c) => <option key={c} value={c} />)}
+                </datalist>
               </div>
               <div>
                 <Label>Livello di Rarità</Label>
@@ -467,13 +473,21 @@ function RegiaPage() {
               </div>
             </div>
             <div>
-              <div className="flex items-center justify-between">
-                <Label>Coordinate GPS (Lat, Lng)</Label>
+              <div className="flex items-center justify-between mb-1">
+                <Label>Coordinate (Clicca sulla Mappa per impostare)</Label>
                 <button type="button" onClick={usaMiaPosizioneNelForm} className="text-[11px] font-semibold text-accent hover:underline">
-                  📍 Usa la mia posizione GPS
+                  📍 Usa il mio GPS attuale
                 </button>
               </div>
-              <div className="mt-1 grid grid-cols-2 gap-2">
+              <div className="h-[200px] w-full rounded-md border border-border overflow-hidden mb-2">
+                <TerniMap 
+                  center={[parseFloat(formDir.lat) || 42.5636, parseFloat(formDir.lng) || 12.6427]} 
+                  zoom={15} 
+                  pins={[{id:'preview', lat:parseFloat(formDir.lat)||42.5636, lng:parseFloat(formDir.lng)||12.6427, color:'#10b981', label:'Anteprima', popup:<span>Anteprima Posizione</span>}]} 
+                  onMapClick={(lat, lng) => setFormDir({...formDir, lat: lat.toString(), lng: lng.toString()})} 
+                />
+              </div>
+              <div className="grid grid-cols-2 gap-2">
                 <Input value={formDir.lat} onChange={(e) => setFormDir({ ...formDir, lat: e.target.value })} placeholder="Latitudine" />
                 <Input value={formDir.lng} onChange={(e) => setFormDir({ ...formDir, lng: e.target.value })} placeholder="Longitudine" />
               </div>
@@ -489,8 +503,16 @@ function RegiaPage() {
               </div>
             </div>
             <div>
-              <Label>Testo Scheda / Articolo</Label>
-              <Textarea value={formDir.descrizione} onChange={(e) => setFormDir({ ...formDir, descrizione: e.target.value })} rows={5} />
+              <Label>Immagine Principale (URL Web)</Label>
+              <Input value={formDir.immagine} onChange={(e) => setFormDir({ ...formDir, immagine: e.target.value })} placeholder="https://..." />
+            </div>
+            <div>
+              <Label>Breve Anteprima (Sempre visibile a tutti)</Label>
+              <Textarea value={formDir.descrizione} onChange={(e) => setFormDir({ ...formDir, descrizione: e.target.value })} rows={2} />
+            </div>
+            <div>
+              <Label>Articolo Completo (Sbloccabile col GPS sul posto)</Label>
+              <Textarea value={formDir.articolo} onChange={(e) => setFormDir({ ...formDir, articolo: e.target.value })} rows={5} />
             </div>
             <Button className="w-full bg-emerald-600 hover:bg-emerald-700 text-white" onClick={salvaPoiDiretto}>
               <Zap className="mr-1.5 size-4" /> Pubblica Subito sul Sito

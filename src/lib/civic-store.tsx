@@ -248,6 +248,8 @@ export function CivicProvider({ children }: { children: ReactNode }) {
                   rarita: raritaScelta,
                   descrizione: propObj.dati.descrizione || "",
                   curiosita: propObj.dati.curiosita || "Luogo certificato dalla Regia Terni 2030.",
+                  immagine: propObj.dati.immagine,
+                  articolo: propObj.dati.articolo,
                 });
               } else if (propObj.tipo === "bacheca" && propObj.dati) {
                 bachecaApprovata.push({
@@ -436,6 +438,8 @@ export async function inserisciPoiDirettoAdmin(payload: any) {
         lng: payload.lng,
         descrizione: payload.descrizione,
         curiosita: payload.curiosita,
+        immagine: payload.immagine,
+        articolo: payload.articolo,
       },
     }),
     created_at: oggi(),
