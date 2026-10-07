@@ -2,7 +2,7 @@ import bandiRealiJson from "@/lib/bandi_reali.json";
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { toast } from "sonner";
-import { CheckCircle2, ExternalLink, FileText, Inbox, Lock, RefreshCw, Search, ShieldCheck, AlertTriangle, XCircle, Zap } from "lucide-react";
+import { CheckCircle2, ExternalLink, FileText, Inbox, Lock, RefreshCw, Search, ShieldCheck, AlertTriangle, XCircle, Zap, MapPin } from "lucide-react";
 import { TerniMap } from "@/components/TerniMap";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -11,7 +11,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { ORDINE_RARITA, RARITA_STANDARD, type RaritaPOI, type POI } from "@/lib/terni-data";
-import { gestisciPropostaAdmin, inserisciPoiDirettoAdmin, salvaAuditBandoCloud, useCivic, type AuditBando, type PropostaModerazione } from "@/lib/civic-store";
+import { gestisciPropostaAdmin, inserisciPoiDirettoAdmin, eliminaPoiAdmin, modificaPoiAdmin, salvaAuditBandoCloud, useCivic, type AuditBando, type PropostaModerazione } from "@/lib/civic-store";
 
 export const Route = createFileRoute("/regia")({
   head: () => ({
@@ -40,13 +40,14 @@ function RegiaPage() {
     try { return sessionStorage.getItem("terni2030_regia_op") || ""; } catch { return ""; }
   });
   const [codiceInput, setCodiceInput] = useState("");
-  const [tab, setTab] = useState<"bandi" | "dossier" | "proposte">("bandi");
+  const [tab, setTab] = useState<"bandi" | "dossier" | "proposte" | "luoghi">("bandi");
   const [ricerca, setRicerca] = useState("");
   const [filtroStato, setFiltroStato] = useState<string>("tutti");
   const [filtroPortale, setFiltroPortale] = useState<string>("tutti");
   const [bozze, setBozze] = useState<Record<string, { link: string; nota: string }>>({});
   const [raritaSceltaAdmin, setRaritaSceltaAdmin] = useState<Record<string, RaritaPOI>>({});
     const [inserimentoOpen, setInserimentoOpen] = useState(false);
+  const [editModeId, setEditModeId] = useState<string | null>(null);
   const [formDir, setFormDir] = useState({
     titolo: "", autoreStorico: "", autoreScheda: "Lorenzo Covicchio", anno: "", categoria: "Architettura d'autore" as POI["categoria"],
     rarita: "Comune" as RaritaPOI, lat: "42.5636", lng: "12.6427", descrizione: "", immagine: "", articolo: ""
@@ -57,12 +58,11 @@ function RegiaPage() {
     const descrizione = formDir.descrizione.trim() || "Recati sul posto con il GPS per sbloccare la scheda e leggere il Dossier storico completo.";
     const infoRar = RARITA_STANDARD[formDir.rarita] || RARITA_STANDARD["Comune"];
     
-    // Chiude subito la modale così l'utente vede il toast di salvataggio
     setInserimentoOpen(false);
 
     try {
-      toast.info("Invio al database in corso...");
-      await inserisciPoiDirettoAdmin({
+      toast.info(editModeId ? "Aggiornamento in corso..." : "Invio al database in corso...");
+      const payload = {
         titolo: titolo,
         autoreStorico: formDir.autoreStorico.trim() || "Non specificato",
         autoreScheda: formDir.autoreScheda.trim() || "Lorenzo Covicchio",
@@ -75,12 +75,32 @@ function RegiaPage() {
         descrizione: descrizione,
         immagine: formDir.immagine.trim(),
         articolo: formDir.articolo.trim(),
-      });
+      };
+      
+      if (editModeId) {
+        await modificaPoiAdmin(editModeId, payload);
+      } else {
+        await inserisciPoiDirettoAdmin(payload);
+      }
+      
       await ricaricaCloud();
       setFormDir({ ...formDir, titolo: "", descrizione: "", immagine: "", articolo: "" });
-      toast.success("✅ Luogo pubblicato! Controlla la mappa di Terni Urban GO.");
+      toast.success(editModeId ? "✅ Luogo aggiornato con successo!" : "✅ Luogo pubblicato! Controlla la mappa di Terni Urban GO.");
+      setEditModeId(null);
     } catch (err: any) {
       toast.error(`❌ Errore di salvataggio DB: ${err.message}`);
+    }
+  };
+
+  const eliminaPoi = async (id: string) => {
+    if (!confirm("Sei sicuro di voler rimuovere definitivamente questo luogo dal sito?")) return;
+    try {
+      toast.info("Eliminazione in corso...");
+      await eliminaPoiAdmin(id);
+      await ricaricaCloud();
+      toast.success("🗑️ Luogo rimosso dal sito.");
+    } catch (err: any) {
+      toast.error(`❌ Errore: ${err.message}`);
     }
   };
 
@@ -218,7 +238,11 @@ function RegiaPage() {
         </div>
 
                 <div className="flex flex-wrap items-center gap-2">
-          <Button size="sm" className="bg-emerald-600 hover:bg-emerald-700 text-white" onClick={() => setInserimentoOpen(true)}>
+          <Button size="sm" className="bg-emerald-600 hover:bg-emerald-700 text-white" onClick={() => {
+            setEditModeId(null);
+            setFormDir({ titolo: "", autoreStorico: "", autoreScheda: "Lorenzo Covicchio", anno: "", categoria: "Architettura d'autore", rarita: "Comune", lat: "42.5636", lng: "12.6427", descrizione: "", immagine: "", articolo: "" });
+            setInserimentoOpen(true);
+          }}>
             <Zap className="mr-1 size-3.5" /> Inserimento Rapido POI
           </Button>
           <Button size="sm" variant={tab === "bandi" ? "default" : "secondary"} onClick={() => setTab("bandi")}>
@@ -229,6 +253,9 @@ function RegiaPage() {
           </Button>
           <Button size="sm" variant={tab === "proposte" ? "default" : "secondary"} onClick={() => setTab("proposte")}>
             📥 3. Proposte da Approvare ({proposteInAttesa.length})
+          </Button>
+          <Button size="sm" variant={tab === "luoghi" ? "default" : "secondary"} onClick={() => setTab("luoghi")}>
+            📍 4. Luoghi Pubblicati ({state.poiExtra.length})
           </Button>
           <Button size="sm" variant="outline" onClick={aggiornaDati} disabled={loading}>
             <RefreshCw className={`mr-1 size-3.5 ${loading ? "animate-spin" : ""}`} /> Sincronizza
@@ -439,7 +466,7 @@ function RegiaPage() {
         <DialogContent className="z-[2000] max-h-[90vh] max-w-lg overflow-y-auto">
           <DialogHeader>
             <DialogTitle className="flex items-center gap-2">
-              <Zap className="size-5 text-emerald-500" /> Inserimento Diretto Luogo/POI
+              <Zap className="size-5 text-emerald-500" /> {editModeId ? "Modifica Luogo/POI" : "Inserimento Diretto Luogo/POI"}
             </DialogTitle>
             <DialogDescription>
               Pubblica istantaneamente una nuova scheda nel TerniDex senza passare dalla coda di moderazione.
@@ -528,7 +555,7 @@ function RegiaPage() {
               <Textarea value={formDir.articolo} onChange={(e) => setFormDir({ ...formDir, articolo: e.target.value })} rows={5} />
             </div>
             <Button className="w-full bg-emerald-600 hover:bg-emerald-700 text-white" onClick={salvaPoiDiretto}>
-              <Zap className="mr-1.5 size-4" /> Pubblica Subito sul Sito
+              <Zap className="mr-1.5 size-4" /> {editModeId ? "Salva Modifiche" : "Pubblica Subito sul Sito"}
             </Button>
           </div>
         </DialogContent>
