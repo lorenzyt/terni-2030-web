@@ -12,8 +12,8 @@ import {
   type Segnalazione,
 } from "@/lib/terni-data";
 
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
-const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || "https://qmkhbwlqbpswcrvszjxd.supabase.co";
+const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY || "sb_publishable_yqbhDlGA6_Q7oQz1flEa9w_4Jw1DkF3";
 export const supabase = supabaseUrl && supabaseAnonKey ? createClient(supabaseUrl, supabaseAnonKey) : null;
 
 export type Commento = {
