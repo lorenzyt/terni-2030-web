@@ -155,13 +155,21 @@ function MappaCivica() {
 
   const aggiungiOpzione = (sid: string) => {
     const t = (opzioneNuova[sid] ?? "").trim();
-    if (!t) return void toast.error("Scrivi il testo dell'obiettivo.");
-    update((s) => ({
-      ...s,
-      sondaggi: s.sondaggi.map((x) => (x.id === sid ? { ...x, opzioni: [...x.opzioni, { id: nuovoId("o"), testo: t, voti: 0, community: true }] } : x)),
-    }));
+    if (!t) return void toast.error("Scrivi il testo dell'opzione proposta.");
+    const sondTarget = sondaggi.find((s) => s.id === sid);
+    void inviaPropostaModerazione({
+      tipo: "sondaggio",
+      titolo: `Nuova opzione per sondaggio: ${sondTarget?.domanda?.slice(0, 30)}...`,
+      autore: "Cittadino (Mappa Civica)",
+      contatto: "Opzione aggiuntiva",
+      dati: {
+        domanda: `L'utente suggerisce di aggiungere questa opzione al sondaggio:`,
+        contesto: t,
+        opzioni: [],
+      }
+    });
     setOpzioneNuova((p) => ({ ...p, [sid]: "" }));
-    toast.success("Obiettivo della community aggiunto.");
+    toast.success("Opzione inviata alla Regia Admin per approvazione.");
   };
 
   const creaSondaggio = () => {
