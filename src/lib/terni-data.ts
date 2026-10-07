@@ -220,6 +220,7 @@ export type POI = {
   id: string;
   nome: string;
   autore: string;
+  autoreScheda?: string;
   anno: string;
   categoria: "Architettura d'autore" | "Arte pubblica" | "Archeologia industriale" | "Storia e fede";
   lat: number;
@@ -227,7 +228,7 @@ export type POI = {
   punti: number;
   rarita: RaritaPOI;
   descrizione: string;
-  curiosita: string;
+  
   immagine?: string;
   articolo?: string;
 };

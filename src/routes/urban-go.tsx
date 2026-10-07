@@ -200,7 +200,8 @@ function UrbanGo() {
         contatto: formProp.contatto.trim(),
         dati: {
           nome: formProp.titolo.trim(),
-          autore: formProp.sottotitolo.trim() || formProp.autore.trim(),
+          autore: formProp.sottotitolo.trim() || "Non specificato",
+          autoreScheda: formProp.autore.trim(),
           anno: formProp.anno.trim() || "Storico / Contemporaneo",
           categoria: formProp.categoriaPoi,
           rarita: formProp.raritaPoi,
@@ -527,9 +528,8 @@ function UrbanGo() {
                   <p className="text-xs text-muted-foreground">{attivo.autore} · {attivo.anno}</p>
                   {attivo.immagine && <img src={attivo.immagine} alt={attivo.nome} className="mt-4 h-48 w-full rounded-md object-cover border border-border" />}
                   <p className="mt-4 whitespace-pre-line text-sm leading-relaxed">{attivo.articolo || attivo.descrizione}</p>
-                  <p className="mt-4 rounded-md border border-border bg-surface-2 p-3 text-sm text-muted-foreground">
-                    <span className="font-semibold text-accent">Curiosità segreta sbloccata: </span>
-                    {attivo.curiosita}
+                  <p className="mt-4 flex items-center justify-end gap-1 border-t border-border pt-3 text-xs text-muted-foreground">
+                    <span className="opacity-70">Scheda di approfondimento a cura di:</span> <b className="text-foreground">{attivo.autoreScheda || "Lorenzo Covicchio"}</b>
                   </p>
                 </>
               ) : (
@@ -758,10 +758,7 @@ function UrbanGo() {
                   </div>
                 </div>
 
-                <div>
-                  <Label>Curiosità segreta (sbloccabile col GPS sul posto)</Label>
-                  <Input value={formProp.curiosita} onChange={(e) => setFormProp({ ...formProp, curiosita: e.target.value })} />
-                </div>
+                
                 <div>
                   <Label>Immagine Principale (URL)</Label>
                   <Input value={formProp.immagine} onChange={(e) => setFormProp({ ...formProp, immagine: e.target.value })} placeholder="https://..." />

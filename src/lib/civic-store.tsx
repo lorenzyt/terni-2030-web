@@ -247,7 +247,7 @@ export function CivicProvider({ children }: { children: ReactNode }) {
                   punti: RARITA_STANDARD[raritaScelta].punti,
                   rarita: raritaScelta,
                   descrizione: propObj.dati.descrizione || "",
-                  curiosita: propObj.dati.curiosita || "Luogo certificato dalla Regia Terni 2030.",
+                  autoreScheda: propObj.dati.autoreScheda || propObj.autore,
                   immagine: propObj.dati.immagine,
                   articolo: propObj.dati.articolo,
                 });
@@ -437,7 +437,7 @@ export async function inserisciPoiDirettoAdmin(payload: any) {
         lat: payload.lat,
         lng: payload.lng,
         descrizione: payload.descrizione,
-        curiosita: payload.curiosita,
+        autoreScheda: payload.autoreScheda,
         immagine: payload.immagine,
         articolo: payload.articolo,
       },

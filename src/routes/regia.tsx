@@ -48,8 +48,8 @@ function RegiaPage() {
   const [raritaSceltaAdmin, setRaritaSceltaAdmin] = useState<Record<string, RaritaPOI>>({});
     const [inserimentoOpen, setInserimentoOpen] = useState(false);
   const [formDir, setFormDir] = useState({
-    titolo: "", autore: "Regia Terni 2030", anno: "", categoria: "Architettura d'autore" as POI["categoria"],
-    rarita: "Comune" as RaritaPOI, lat: "42.5636", lng: "12.6427", curiosita: "", descrizione: "", immagine: "", articolo: ""
+    titolo: "", autoreStorico: "", autoreScheda: "Lorenzo Covicchio", anno: "", categoria: "Architettura d'autore" as POI["categoria"],
+    rarita: "Comune" as RaritaPOI, lat: "42.5636", lng: "12.6427", descrizione: "", immagine: "", articolo: ""
   });
 
   const salvaPoiDiretto = async () => {
@@ -57,15 +57,15 @@ function RegiaPage() {
     const infoRar = RARITA_STANDARD[formDir.rarita];
     await inserisciPoiDirettoAdmin({
       titolo: formDir.titolo.trim(),
-      autore: formDir.autore.trim(),
+      autore: formDir.autoreStorico.trim() || "Non specificato",
+      autoreScheda: formDir.autoreScheda.trim() || "Lorenzo Covicchio",
       anno: formDir.anno.trim() || "Storico / Contemporaneo",
       categoria: formDir.categoria,
       rarita: formDir.rarita,
       punti: infoRar.punti,
       lat: parseFloat(formDir.lat) || 42.5636,
       lng: parseFloat(formDir.lng) || 12.6427,
-      curiosita: formDir.curiosita.trim(),
-      descrizione: formDir.descrizione.trim(),
+            descrizione: formDir.descrizione.trim(),
       immagine: formDir.immagine.trim(),
       articolo: formDir.articolo.trim(),
     });
@@ -443,8 +443,8 @@ function RegiaPage() {
                 <Input value={formDir.titolo} onChange={(e) => setFormDir({ ...formDir, titolo: e.target.value })} />
               </div>
               <div>
-                <Label>Autore storico / Autore scheda</Label>
-                <Input value={formDir.autore} onChange={(e) => setFormDir({ ...formDir, autore: e.target.value })} />
+                <Label>Autore storico / Architetto</Label>
+                <Input value={formDir.autoreStorico} onChange={(e) => setFormDir({ ...formDir, autoreStorico: e.target.value })} placeholder="Es. Mario Ridolfi" />
               </div>
             </div>
             <div className="grid gap-2 sm:grid-cols-2">
@@ -498,8 +498,12 @@ function RegiaPage() {
                 <Input value={formDir.anno} onChange={(e) => setFormDir({ ...formDir, anno: e.target.value })} placeholder="Es. 1936" />
               </div>
               <div>
-                <Label>Curiosità (Sbloccabile GPS)</Label>
-                <Input value={formDir.curiosita} onChange={(e) => setFormDir({ ...formDir, curiosita: e.target.value })} />
+                <Label>Autore Scheda (Admin)</Label>
+                <Input list="autori-admin-list" value={formDir.autoreScheda} onChange={(e) => setFormDir({ ...formDir, autoreScheda: e.target.value })} className="mt-1 h-9 text-xs" />
+                <datalist id="autori-admin-list">
+                  <option value="Lorenzo Covicchio" />
+                  <option value="Thyrus IA" />
+                </datalist>
               </div>
             </div>
             <div>
