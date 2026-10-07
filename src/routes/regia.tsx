@@ -53,26 +53,30 @@ function RegiaPage() {
   });
 
   const salvaPoiDiretto = async () => {
-    if (!formDir.titolo.trim() || !formDir.descrizione.trim()) return void toast.error("Compila titolo e descrizione.");
+    if (!formDir.titolo.trim() || !formDir.descrizione.trim()) return void toast.error("Compila almeno titolo e breve anteprima.");
     const infoRar = RARITA_STANDARD[formDir.rarita];
-    await inserisciPoiDirettoAdmin({
-      titolo: formDir.titolo.trim(),
-      autore: formDir.autoreStorico.trim() || "Non specificato",
-      autoreScheda: formDir.autoreScheda.trim() || "Lorenzo Covicchio",
-      anno: formDir.anno.trim() || "Storico / Contemporaneo",
-      categoria: formDir.categoria,
-      rarita: formDir.rarita,
-      punti: infoRar.punti,
-      lat: parseFloat(formDir.lat) || 42.5636,
-      lng: parseFloat(formDir.lng) || 12.6427,
-            descrizione: formDir.descrizione.trim(),
-      immagine: formDir.immagine.trim(),
-      articolo: formDir.articolo.trim(),
-    });
-    await ricaricaCloud();
-    setInserimentoOpen(false);
-    setFormDir({ ...formDir, titolo: "", descrizione: "", curiosita: "", immagine: "", articolo: "" });
-    toast.success("Luogo inserito e pubblicato istantaneamente sul sito!");
+    try {
+      await inserisciPoiDirettoAdmin({
+        titolo: formDir.titolo.trim(),
+        autore: formDir.autoreStorico.trim() || "Non specificato",
+        autoreScheda: formDir.autoreScheda.trim() || "Lorenzo Covicchio",
+        anno: formDir.anno.trim() || "Storico / Contemporaneo",
+        categoria: formDir.categoria,
+        rarita: formDir.rarita,
+        punti: infoRar.punti,
+        lat: parseFloat(formDir.lat) || 42.5636,
+        lng: parseFloat(formDir.lng) || 12.6427,
+        descrizione: formDir.descrizione.trim(),
+        immagine: formDir.immagine.trim(),
+        articolo: formDir.articolo.trim(),
+      });
+      await ricaricaCloud();
+      setInserimentoOpen(false);
+      setFormDir({ ...formDir, titolo: "", descrizione: "", immagine: "", articolo: "" });
+      toast.success("✅ Luogo pubblicato! Lo trovi nella mappa di Terni Urban GO.");
+    } catch (err: any) {
+      toast.error(`❌ Errore di salvataggio DB: ${err.message}`);
+    }
   };
 
   const usaMiaPosizioneNelForm = () => {

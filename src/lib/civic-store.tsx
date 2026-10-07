@@ -409,9 +409,9 @@ export async function inviaPropostaModerazione(payload: {
 
 // Permette all'Admin in Regia di Approvare o Rifiutare qualsiasi proposta
 export async function inserisciPoiDirettoAdmin(payload: any) {
-  if (!supabase) return;
+  if (!supabase) throw new Error("Database offline o non connesso");
   const idRow = `prop_poi_${Date.now().toString(36)}`;
-  await supabase.from("segnalazioni").insert({
+  const { error } = await supabase.from("segnalazioni").insert({
     id: idRow,
     titolo: payload.titolo.slice(0, 120),
     quartiere: "Regia",
@@ -424,12 +424,14 @@ export async function inserisciPoiDirettoAdmin(payload: any) {
       tipo: "poi",
       titolo: payload.titolo,
       autore: payload.autore,
+      autoreScheda: payload.autoreScheda,
       contatto: "Admin Diretto",
       data: oggi(),
       stato: "Approvata",
       dati: {
         nome: payload.titolo,
         autore: payload.autore,
+        autoreScheda: payload.autoreScheda,
         anno: payload.anno,
         categoria: payload.categoria,
         rarita: payload.rarita,
@@ -437,13 +439,13 @@ export async function inserisciPoiDirettoAdmin(payload: any) {
         lat: payload.lat,
         lng: payload.lng,
         descrizione: payload.descrizione,
-        autoreScheda: payload.autoreScheda,
         immagine: payload.immagine,
         articolo: payload.articolo,
       },
     }),
     created_at: oggi(),
   });
+  if (error) throw new Error(error.message);
 }
 
 export async function gestisciPropostaAdmin(
