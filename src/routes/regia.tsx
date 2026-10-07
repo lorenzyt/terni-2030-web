@@ -462,6 +462,60 @@ function RegiaPage() {
         </div>
       )}
 
+      {tab === "luoghi" && (
+        <div className="space-y-4">
+          {state.poiExtra.length === 0 ? (
+            <div className="surface-panel p-8 text-center text-sm text-muted-foreground">
+              <MapPin className="mx-auto mb-2 size-8 text-accent" />
+              Nessun luogo attualmente pubblicato sul TerniDex.
+            </div>
+          ) : (
+            state.poiExtra.map((poi) => (
+              <div key={poi.id} className="surface-panel p-5">
+                <div className="flex flex-wrap items-start justify-between gap-4">
+                  <div className="space-y-1 max-w-3xl">
+                    <div className="flex flex-wrap items-center gap-2">
+                      <Badge className="border-0 bg-emerald-500/20 text-emerald-400">🟢 Pubblicato</Badge>
+                      <Badge variant="secondary">{poi.categoria}</Badge>
+                      <Badge variant="outline" className="text-[10px] uppercase text-accent border-accent">{poi.rarita}</Badge>
+                    </div>
+                    <h3 className="text-base font-bold pt-1">{poi.nome}</h3>
+                    <p className="text-sm text-muted-foreground">{poi.descrizione}</p>
+                    <p className="text-xs text-muted-foreground mt-2">
+                      <MapPin className="inline size-3 mr-1" /> {poi.lat}, {poi.lng}
+                    </p>
+                  </div>
+                  <div className="flex flex-wrap items-center gap-2">
+                    <Button size="sm" variant="secondary" onClick={() => {
+                      setEditModeId(poi.id);
+                      setFormDir({
+                        titolo: poi.nome,
+                        autoreStorico: poi.autore,
+                        autoreScheda: (poi as any).autoreScheda || "Lorenzo Covicchio",
+                        anno: poi.anno,
+                        categoria: poi.categoria,
+                        rarita: poi.rarita,
+                        lat: poi.lat.toString(),
+                        lng: poi.lng.toString(),
+                        descrizione: poi.descrizione,
+                        immagine: poi.immagine || "",
+                        articolo: poi.articolo || "",
+                      });
+                      setInserimentoOpen(true);
+                    }}>
+                      ✏️ Modifica
+                    </Button>
+                    <Button size="sm" variant="destructive" onClick={() => eliminaPoi(poi.id)}>
+                      🗑️ Rimuovi
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            ))
+          )}
+        </div>
+      )}
+
       <Dialog open={inserimentoOpen} onOpenChange={setInserimentoOpen}>
         <DialogContent className="z-[2000] max-h-[90vh] max-w-lg overflow-y-auto">
           <DialogHeader>
