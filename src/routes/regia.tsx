@@ -404,13 +404,13 @@ function RegiaPage() {
 
       {tab === "proposte" && (
         <div className="space-y-4">
-          {state.proposteModerazione.length === 0 ? (
+          {proposteInAttesa.length === 0 ? (
             <div className="surface-panel p-8 text-center text-sm text-muted-foreground">
               <Inbox className="mx-auto mb-2 size-8 text-accent" />
               Nessuna candidatura o proposta in coda di moderazione. Quando un cittadino propone una scheda luogo, un'associazione per la bacheca, un sondaggio o un pin mappa, comparirà qui per la tua approvazione.
             </div>
           ) : (
-            state.proposteModerazione.map((prop) => (
+            proposteInAttesa.map((prop) => (
               <div key={prop.id} className="surface-panel p-5">
                 <div className="flex flex-wrap items-start justify-between gap-4">
                   <div className="space-y-1 max-w-3xl">
