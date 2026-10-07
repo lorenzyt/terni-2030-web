@@ -148,8 +148,8 @@ function LandingPage() {
               <p className="text-sm text-muted-foreground">Bandi ufficiali attivi</p>
             </div>
             <div>
-              <p className="text-4xl font-bold text-accent">{state.checkin.length}/{totPoi}</p>
-              <p className="text-sm text-muted-foreground">Luoghi TerniDex scoperti</p>
+              <p className="text-4xl font-bold text-accent">{totPoi}</p>
+              <p className="text-sm text-muted-foreground">Luoghi TerniDex da scoprire</p>
             </div>
             <div>
               <p className="text-sm font-mono text-muted-foreground">
