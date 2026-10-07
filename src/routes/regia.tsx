@@ -94,14 +94,10 @@ function RegiaPage() {
 
   const eliminaPoi = async (id: string) => {
     if (!confirm("Sei sicuro di voler rimuovere definitivamente questo luogo dal sito?")) return;
-    try {
-      toast.info("Eliminazione in corso...");
-      await eliminaPoiAdmin(id);
-      await ricaricaCloud();
-      toast.success("🗑️ Luogo rimosso dal sito.");
-    } catch (err: any) {
-      toast.error(`❌ Errore: ${err.message}`);
-    }
+    toast.info("Eliminazione in corso...");
+    await eliminaPoiAdmin(id);
+    await ricaricaCloud();
+    toast.success("🗑️ Luogo rimosso dal sito.");
   };
 
   const usaMiaPosizioneNelForm = () => {
