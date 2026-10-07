@@ -2,12 +2,15 @@ import bandiRealiJson from "@/lib/bandi_reali.json";
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { toast } from "sonner";
-import { CheckCircle2, ExternalLink, FileText, Inbox, Lock, RefreshCw, Search, ShieldCheck, AlertTriangle, XCircle } from "lucide-react";
+import { CheckCircle2, ExternalLink, FileText, Inbox, Lock, RefreshCw, Search, ShieldCheck, AlertTriangle, XCircle, Zap } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
-import { ORDINE_RARITA, RARITA_STANDARD, type RaritaPOI } from "@/lib/terni-data";
-import { gestisciPropostaAdmin, salvaAuditBandoCloud, useCivic, type AuditBando, type PropostaModerazione } from "@/lib/civic-store";
+import { Textarea } from "@/components/ui/textarea";
+import { Label } from "@/components/ui/label";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { ORDINE_RARITA, RARITA_STANDARD, type RaritaPOI, type POI } from "@/lib/terni-data";
+import { gestisciPropostaAdmin, inserisciPoiDirettoAdmin, salvaAuditBandoCloud, useCivic, type AuditBando, type PropostaModerazione } from "@/lib/civic-store";
 
 export const Route = createFileRoute("/regia")({
   head: () => ({
@@ -18,6 +21,8 @@ export const Route = createFileRoute("/regia")({
   }),
   component: RegiaPage,
 });
+
+const CATEGORIE_POI: POI["categoria"][] = ["Architettura d'autore", "Arte pubblica", "Archeologia industriale", "Storia e fede"];
 
 const CODICI_ABILITATI: Record<string, string> = {
   "Tr2030!Admin#Lollo95": "Lorenzo (Admin)",
@@ -40,6 +45,46 @@ function RegiaPage() {
   const [filtroPortale, setFiltroPortale] = useState<string>("tutti");
   const [bozze, setBozze] = useState<Record<string, { link: string; nota: string }>>({});
   const [raritaSceltaAdmin, setRaritaSceltaAdmin] = useState<Record<string, RaritaPOI>>({});
+    const [inserimentoOpen, setInserimentoOpen] = useState(false);
+  const [formDir, setFormDir] = useState({
+    titolo: "", autore: "Regia Terni 2030", anno: "", categoria: "Architettura d'autore" as POI["categoria"],
+    rarita: "Comune" as RaritaPOI, lat: "42.5636", lng: "12.6427", curiosita: "", descrizione: ""
+  });
+
+  const salvaPoiDiretto = async () => {
+    if (!formDir.titolo.trim() || !formDir.descrizione.trim()) return void toast.error("Compila titolo e descrizione.");
+    const infoRar = RARITA_STANDARD[formDir.rarita];
+    await inserisciPoiDirettoAdmin({
+      titolo: formDir.titolo.trim(),
+      autore: formDir.autore.trim(),
+      anno: formDir.anno.trim() || "Storico / Contemporaneo",
+      categoria: formDir.categoria,
+      rarita: formDir.rarita,
+      punti: infoRar.punti,
+      lat: parseFloat(formDir.lat) || 42.5636,
+      lng: parseFloat(formDir.lng) || 12.6427,
+      curiosita: formDir.curiosita.trim(),
+      descrizione: formDir.descrizione.trim(),
+    });
+    await ricaricaCloud();
+    setInserimentoOpen(false);
+    setFormDir({ ...formDir, titolo: "", descrizione: "", curiosita: "" });
+    toast.success("Luogo inserito e pubblicato istantaneamente sul sito!");
+  };
+
+  const usaMiaPosizioneNelForm = () => {
+    if ("geolocation" in navigator) {
+      navigator.geolocation.getCurrentPosition((pos) => {
+        setFormDir((f) => ({
+          ...f,
+          lat: pos.coords.latitude.toFixed(5),
+          lng: pos.coords.longitude.toFixed(5),
+        }));
+        toast.success("Coordinate GPS rilevate e inserite!");
+      });
+    }
+  };
+
   const [loading, setLoading] = useState(false);
 
   const eseguiAccesso = () => {
@@ -160,7 +205,10 @@ function RegiaPage() {
           </p>
         </div>
 
-        <div className="flex flex-wrap items-center gap-2">
+                <div className="flex flex-wrap items-center gap-2">
+          <Button size="sm" className="bg-emerald-600 hover:bg-emerald-700 text-white" onClick={() => setInserimentoOpen(true)}>
+            <Zap className="mr-1 size-3.5" /> Inserimento Rapido POI
+          </Button>
           <Button size="sm" variant={tab === "bandi" ? "default" : "secondary"} onClick={() => setTab("bandi")}>
             🔎 1. Verifica Bandi ({tuttiBandi.length})
           </Button>
@@ -374,6 +422,83 @@ function RegiaPage() {
           )}
         </div>
       )}
+
+      <Dialog open={inserimentoOpen} onOpenChange={setInserimentoOpen}>
+        <DialogContent className="z-[2000] max-h-[90vh] max-w-lg overflow-y-auto">
+          <DialogHeader>
+            <DialogTitle className="flex items-center gap-2">
+              <Zap className="size-5 text-emerald-500" /> Inserimento Diretto Luogo/POI
+            </DialogTitle>
+            <DialogDescription>
+              Pubblica istantaneamente una nuova scheda nel TerniDex senza passare dalla coda di moderazione.
+            </DialogDescription>
+          </DialogHeader>
+          <div className="space-y-3">
+            <div className="grid gap-2 sm:grid-cols-2">
+              <div>
+                <Label>Nome del Luogo / Architettura</Label>
+                <Input value={formDir.titolo} onChange={(e) => setFormDir({ ...formDir, titolo: e.target.value })} />
+              </div>
+              <div>
+                <Label>Autore storico / Autore scheda</Label>
+                <Input value={formDir.autore} onChange={(e) => setFormDir({ ...formDir, autore: e.target.value })} />
+              </div>
+            </div>
+            <div className="grid gap-2 sm:grid-cols-2">
+              <div>
+                <Label>Categoria</Label>
+                <select
+                  value={formDir.categoria}
+                  onChange={(e) => setFormDir({ ...formDir, categoria: e.target.value as POI["categoria"] })}
+                  className="mt-1 h-9 w-full rounded-md border border-border bg-background px-3 text-xs"
+                >
+                  {CATEGORIE_POI.map((c) => <option key={c} value={c}>{c}</option>)}
+                </select>
+              </div>
+              <div>
+                <Label>Livello di Rarità</Label>
+                <select
+                  value={formDir.rarita}
+                  onChange={(e) => setFormDir({ ...formDir, rarita: e.target.value as RaritaPOI })}
+                  className="mt-1 h-9 w-full rounded-md border border-border bg-background px-3 text-xs font-semibold"
+                >
+                  {ORDINE_RARITA.map((r) => <option key={r} value={r}>{RARITA_STANDARD[r].label}</option>)}
+                </select>
+              </div>
+            </div>
+            <div>
+              <div className="flex items-center justify-between">
+                <Label>Coordinate GPS (Lat, Lng)</Label>
+                <button type="button" onClick={usaMiaPosizioneNelForm} className="text-[11px] font-semibold text-accent hover:underline">
+                  📍 Usa la mia posizione GPS
+                </button>
+              </div>
+              <div className="mt-1 grid grid-cols-2 gap-2">
+                <Input value={formDir.lat} onChange={(e) => setFormDir({ ...formDir, lat: e.target.value })} placeholder="Latitudine" />
+                <Input value={formDir.lng} onChange={(e) => setFormDir({ ...formDir, lng: e.target.value })} placeholder="Longitudine" />
+              </div>
+            </div>
+            <div className="grid gap-2 sm:grid-cols-2">
+              <div>
+                <Label>Anno / Epoca</Label>
+                <Input value={formDir.anno} onChange={(e) => setFormDir({ ...formDir, anno: e.target.value })} placeholder="Es. 1936" />
+              </div>
+              <div>
+                <Label>Curiosità (Sbloccabile GPS)</Label>
+                <Input value={formDir.curiosita} onChange={(e) => setFormDir({ ...formDir, curiosita: e.target.value })} />
+              </div>
+            </div>
+            <div>
+              <Label>Testo Scheda / Articolo</Label>
+              <Textarea value={formDir.descrizione} onChange={(e) => setFormDir({ ...formDir, descrizione: e.target.value })} rows={5} />
+            </div>
+            <Button className="w-full bg-emerald-600 hover:bg-emerald-700 text-white" onClick={salvaPoiDiretto}>
+              <Zap className="mr-1.5 size-4" /> Pubblica Subito sul Sito
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
+

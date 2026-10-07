@@ -406,6 +406,42 @@ export async function inviaPropostaModerazione(payload: {
 }
 
 // Permette all'Admin in Regia di Approvare o Rifiutare qualsiasi proposta
+export async function inserisciPoiDirettoAdmin(payload: any) {
+  if (!supabase) return;
+  const idRow = `prop_poi_${Date.now().toString(36)}`;
+  await supabase.from("segnalazioni").insert({
+    id: idRow,
+    titolo: payload.titolo.slice(0, 120),
+    quartiere: "Regia",
+    categoria: "Proposta_Moderazione",
+    stato: "Approvata",
+    voti: 0,
+    lat: payload.lat || 42.5636,
+    lng: payload.lng || 12.6427,
+    descrizione: JSON.stringify({
+      tipo: "poi",
+      titolo: payload.titolo,
+      autore: payload.autore,
+      contatto: "Admin Diretto",
+      data: oggi(),
+      stato: "Approvata",
+      dati: {
+        nome: payload.titolo,
+        autore: payload.autore,
+        anno: payload.anno,
+        categoria: payload.categoria,
+        rarita: payload.rarita,
+        punti: payload.punti,
+        lat: payload.lat,
+        lng: payload.lng,
+        descrizione: payload.descrizione,
+        curiosita: payload.curiosita,
+      },
+    }),
+    created_at: oggi(),
+  });
+}
+
 export async function gestisciPropostaAdmin(
   proposta: PropostaModerazione,
   esito: "Approvata" | "Rifiutata",
