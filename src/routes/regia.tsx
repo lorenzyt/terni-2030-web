@@ -53,27 +53,32 @@ function RegiaPage() {
   });
 
   const salvaPoiDiretto = async () => {
-    if (!formDir.titolo.trim() || !formDir.descrizione.trim()) return void toast.error("Compila almeno titolo e breve anteprima.");
-    const infoRar = RARITA_STANDARD[formDir.rarita];
+    const titolo = formDir.titolo.trim() || "Luogo Senza Nome";
+    const descrizione = formDir.descrizione.trim() || "Recati sul posto con il GPS per sbloccare la scheda e leggere il Dossier storico completo.";
+    const infoRar = RARITA_STANDARD[formDir.rarita] || RARITA_STANDARD["Comune"];
+    
+    // Chiude subito la modale così l'utente vede il toast di salvataggio
+    setInserimentoOpen(false);
+
     try {
+      toast.info("Invio al database in corso...");
       await inserisciPoiDirettoAdmin({
-        titolo: formDir.titolo.trim(),
-        autore: formDir.autoreStorico.trim() || "Non specificato",
+        titolo: titolo,
+        autoreStorico: formDir.autoreStorico.trim() || "Non specificato",
         autoreScheda: formDir.autoreScheda.trim() || "Lorenzo Covicchio",
         anno: formDir.anno.trim() || "Storico / Contemporaneo",
-        categoria: formDir.categoria,
+        categoria: formDir.categoria || "Arte pubblica",
         rarita: formDir.rarita,
         punti: infoRar.punti,
         lat: parseFloat(formDir.lat) || 42.5636,
         lng: parseFloat(formDir.lng) || 12.6427,
-        descrizione: formDir.descrizione.trim(),
+        descrizione: descrizione,
         immagine: formDir.immagine.trim(),
         articolo: formDir.articolo.trim(),
       });
       await ricaricaCloud();
-      setInserimentoOpen(false);
       setFormDir({ ...formDir, titolo: "", descrizione: "", immagine: "", articolo: "" });
-      toast.success("✅ Luogo pubblicato! Lo trovi nella mappa di Terni Urban GO.");
+      toast.success("✅ Luogo pubblicato! Controlla la mappa di Terni Urban GO.");
     } catch (err: any) {
       toast.error(`❌ Errore di salvataggio DB: ${err.message}`);
     }
