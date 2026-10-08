@@ -11,7 +11,7 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { useCivic, registraDossierGenerato, oggi, COSTI_PREMI, nuovoId } from "@/lib/civic-store";
-import { filtraBandiPerDossier, OBIETTIVI, PROFILI, QUARTIERI } from "@/lib/terni-data";
+import { OBIETTIVI, PROFILI, QUARTIERI } from "@/lib/terni-data";
 import { toast } from "sonner";
 import { useContact } from "@/components/ContactDialog";
 import bandiRealiJson from "@/lib/bandi_reali.json";
@@ -19,10 +19,13 @@ import bandiRealiJson from "@/lib/bandi_reali.json";
 export const Route = createFileRoute("/dossier")({ component: DossierPage });
 
 const FASI = ["Profilo", "Quartiere", "Obiettivo", "Dossier"];
-const MODELLI_DOSSIER = ["Inquadramento progetto", "Bandi europei e nazionali", "Fondi regionali (Umbria)", "Bandi comunali (Terni)", "Finanza agevolata", "Rischi e punti attenzione"];
 
 function normKey(titolo: string): string { return String(titolo || "").toLowerCase().replace(/[^a-z0-9]/g, "").slice(0, 40); }
-const contaPerPortale = (nome: string) => (bandiRealiJson as any[]).filter((b) => (b.portale || b.ente || "").toLowerCase().includes(nome.toLowerCase())).length;
+
+// Salvagente nel caso il JSON dovesse mai caricarsi male
+const bandiArray = Array.isArray(bandiRealiJson) ? bandiRealiJson : [];
+
+const contaPerPortale = (nome: string) => bandiArray.filter((b: any) => (b.portale || b.ente || "").toLowerCase().includes(nome.toLowerCase())).length;
 
 const PORTALI = [
   { nome: "Regione Umbria", n: contaPerPortale("Regione Umbria"), ambito: "FESR, FSE+, rigenerazione" },
@@ -32,10 +35,6 @@ const PORTALI = [
   { nome: "Invitalia", n: contaPerPortale("Invitalia"), ambito: "Nuove imprese, impianti, startup" },
   { nome: "Camera di Commercio", n: contaPerPortale("Camera di Commercio"), ambito: "Digitale, voucher, export" }
 ];
-
-function Stelle({ n, onSet }: { n: number; onSet?: (v: number) => void }) {
-  return <span className="inline-flex">{[1, 2, 3, 4, 5].map((i) => <button key={i} type="button" disabled={!onSet} onClick={() => onSet?.(i)}><Star className={`size-4 ${i <= n ? "fill-accent text-accent" : "text-muted-foreground"}`} /></button>)}</span>;
-}
 
 function DossierPage() {
   const search = Route.useSearch() as any;
@@ -49,15 +48,15 @@ function DossierPage() {
   const [cercaQuartiere, setCercaQuartiere] = useState("");
   const [custom, setCustom] = useState({ titolo: "", descrizione: "", area: "" });
   const [usaPunti, setUsaPunti] = useState(false);
-  const [rec, setRec] = useState({ autore: "", ruolo: "", stelle: 5, testo: "" });
   const [emailDossier, setEmailDossier] = useState("");
 
   const obiettiviLocali = OBIETTIVI || [];
   const profiliLocali = PROFILI || [];
   const quartieriLocali = QUARTIERI || [];
 
-  const communityOb = (state.obiettiviCommunity || []).filter((o: any) => !quartiere || o.area === quartiere);
-  const obCustom = (state.obiettiviCommunity || []).find((o: any) => o.id === obiettivo);
+  // Protezioni ?. contro "undefined" al primo render
+  const communityOb = (state?.obiettiviCommunity || []).filter((o: any) => !quartiere || o.area === quartiere);
+  const obCustom = (state?.obiettiviCommunity || []).find((o: any) => o.id === obiettivo);
 
   const costoPunti = COSTI_PREMI?.sconto || 500;
   const saldo = puntiDisponibili ? puntiDisponibili() : 0;
@@ -65,29 +64,36 @@ function DossierPage() {
   const prezzoPieno = 14.90;
   const prezzoScontato = 9.90;
 
-  const dossierVenduti = (state.dossierGenerati || []).filter((d: any) => d.stato === "Venduto").length;
+  const dossierVenduti = (state?.dossierGenerati || []).filter((d: any) => d.stato === "Venduto").length;
 
-  const bandiGrezzi = (filtraBandiPerDossier && typeof filtraBandiPerDossier === "function") 
-    ? filtraBandiPerDossier(profilo, obiettivo, obCustom ? `${obCustom.titolo} ${obCustom.descrizione}` : undefined) 
-    : [];
-  const bandi = bandiGrezzi.filter((b: any) => state.auditBandi?.[normKey(b.nome || b.titolo)]?.stato !== "Scartato");
+  // Filtraggio diretto autonomo (senza dipendere da export esterni in terni-data.ts)
+  const bandiGrezzi = bandiArray.filter((b: any) => {
+      if (!obiettivo) return false;
+      const obId = b.obiettivo_id || b.obiettivo;
+      return obId === obiettivo || (b.ambiti && Array.isArray(b.ambiti) && b.ambiti.includes(profilo));
+  });
+  
+  const bandi = bandiGrezzi
+      .filter((b: any) => state?.auditBandi?.[normKey(b.nome || b.titolo)]?.stato !== "Scartato")
+      .slice(0, 5);
 
   const profiloNome = profiliLocali.find((p: any) => p.id === profilo)?.nome ?? profilo;
   const obiettivoNome = obCustom?.titolo ?? obiettiviLocali.find((o: any) => o.id === obiettivo)?.nome ?? obiettivo;
   const quartieriFiltrati = quartieriLocali.filter((q: string) => q.toLowerCase().includes(cercaQuartiere.trim().toLowerCase()));
 
   useEffect(() => {
-    if (search.quartiere || search.obiettivo) {
+    if (search?.quartiere || search?.obiettivo) {
       if (search.quartiere) setQuartiere(search.quartiere);
       if (search.obiettivo) setObiettivo(search.obiettivo);
       setProfilo((p: any) => p || "cittadino");
-      setStep(search.quartiere && search.obiettivo ? 3 : 2);
+      setStep((search.quartiere && search.obiettivo) ? 3 : 2);
     }
   }, [search]);
 
   const aggiungiCustom = () => {
     if (!custom.titolo.trim()) return toast.error("Dai un titolo al tuo obiettivo.");
-    const nuovo = { id: nuovoId("oc"), titolo: custom.titolo.trim(), descrizione: custom.descrizione.trim(), area: custom.area || quartiere || "Centro Storico" };
+    const idGenerato = typeof nuovoId === "function" ? nuovoId("oc") : `oc_${Date.now()}`;
+    const nuovo = { id: idGenerato, titolo: custom.titolo.trim(), descrizione: custom.descrizione.trim(), area: custom.area || quartiere || "Centro Storico" };
     if (update) update((s: any) => ({ ...s, obiettiviCommunity: [...(s.obiettiviCommunity || []), nuovo] }));
     setObiettivo(nuovo.id);
     setCustom({ titolo: "", descrizione: "", area: "" });
@@ -98,7 +104,7 @@ function DossierPage() {
     if (!emailDossier || !emailDossier.includes("@")) return toast.error("Inserisci un'email valida.");
     toast.info("Generazione dossier in corso...");
     try {
-      if (registraDossierGenerato) {
+      if (typeof registraDossierGenerato === "function") {
         await registraDossierGenerato({
           profilo: profiloNome, quartiere, obiettivo: obiettivoNome, email: emailDossier,
           azione: bandi.length > 0 ? "Richiesta PDF" : "Nessun Bando - Contatto",
@@ -112,17 +118,6 @@ function DossierPage() {
       });
       toast.success("Dossier richiesto! Ti contatteremo a breve.");
     } catch (err: any) { toast.error(`Errore: ${err.message}`); }
-  };
-
-  const inviaRecensione = () => {
-    if (!rec.autore || !rec.testo) return toast.error("Dati mancanti.");
-    if (update) {
-      update((s: any) => ({
-        ...s, recensioni: [{ id: `rec_${Date.now()}`, ...rec, data: oggi ? oggi() : new Date().toLocaleDateString(), verificata: false }, ...(s.recensioni || [])]
-      }));
-    }
-    setRec({ autore: "", ruolo: "", stelle: 5, testo: "" });
-    toast.success("Recensione inviata!");
   };
 
   const card = (sel: boolean) => `rounded-lg border p-4 text-left transition-colors ${sel ? "border-primary bg-secondary" : "border-border hover:bg-secondary/60"}`;
