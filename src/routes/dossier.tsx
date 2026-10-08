@@ -72,12 +72,13 @@ function Stelle({ n, onSet }: { n: number; onSet?: (v: number) => void }) {
   return (
     <span className="inline-flex">
       {[1, 2, 3, 4, 5].map((i) => (
-        <>
-            
-            <button key={i} type="button" disabled={!onSet} onClick={() => onSet?.(i)}>
+        <button key={i} type="button" disabled={!onSet} onClick={() => onSet?.(i)}>
           <Star className={`size-4 ${i <= n ? "fill-accent text-accent" : "text-muted-foreground"}`} />
         </button>
       ))}
+    </span>
+  );
+}
     </span>
   );
 }
