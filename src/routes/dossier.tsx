@@ -6,23 +6,20 @@ import { useCivic, registraDossierGenerato, COSTI_PREMI, nuovoId } from "@/lib/c
 import { OBIETTIVI, PROFILI, QUARTIERI } from "@/lib/terni-data";
 import bandiRealiJson from "@/lib/bandi_reali.json";
 
-// 1. IL FIX: Definiamo i tipi dei parametri URL
+// Il validateSearch è obbligatorio per usare Route.useSearch() senza crashare TanStack Router
 type DossierSearch = {
   quartiere?: string;
   obiettivo?: string;
 };
 
 export const Route = createFileRoute("/dossier")({
-  // 2. IL FIX: Aggiungiamo validateSearch. Senza questo, Route.useSearch() fa crashare il router a schermo nero.
-  validateSearch: (search: Record<string, unknown>): DossierSearch => {
-    return {
-      quartiere: search.quartiere as string | undefined,
-      obiettivo: search.obiettivo as string | undefined,
-    };
-  },
+  validateSearch: (search: Record<string, unknown>): DossierSearch => ({
+    quartiere: search.quartiere as string | undefined,
+    obiettivo: search.obiettivo as string | undefined,
+  }),
   component: DossierPage,
   errorComponent: ({ error }) => (
-    <div className="p-10 text-red-500 font-bold bg-background h-screen flex flex-col justify-center items-center">
+    <div className="p-10 text-red-500 font-bold bg-background h-screen flex flex-col justify-center items-center text-center">
       <AlertCircle className="size-12 mb-4" />
       <h2 className="text-2xl mb-2">Errore di Rendering</h2>
       <p className="font-mono text-sm">{error.message}</p>
@@ -46,7 +43,7 @@ const PORTALI = [
 ];
 
 function DossierPage() {
-  const search = Route.useSearch(); // Ora è sicuro chiamarlo grazie al validateSearch sopra
+  const search = Route.useSearch();
   
   const civic = useCivic() || {};
   const state = civic.state || {};
