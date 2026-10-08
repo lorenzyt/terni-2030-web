@@ -1,52 +1,47 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { ArrowLeft, FileText, CheckCircle2, Star, BadgeCheck } from "lucide-react";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { ArrowLeft, FileText, CheckCircle2, Star, BadgeCheck, Lock, Radar, AlertCircle, Plus } from "lucide-react";
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { useCivic, registraDossierGenerato, oggi, COSTI_PREMI } from "@/lib/civic-store";
+import { Badge } from "@/components/ui/badge";
+import { Progress } from "@/components/ui/progress";
+import { useCivic, registraDossierGenerato, oggi, COSTI_PREMI, nuovoId } from "@/lib/civic-store";
+import { filtraBandiPerDossier, OBIETTIVI, PROFILI, QUARTIERI } from "@/lib/terni-data";
 import { toast } from "sonner";
 import { useContact } from "@/components/ContactDialog";
+import bandiRealiJson from "@/lib/bandi_reali.json";
 
-export const Route = createFileRoute("/dossier")({
-  component: DossierPage,
-});
+export const Route = createFileRoute("/dossier")({ component: DossierPage });
 
-const FASI = ["Profilazione", "Quartiere & Obiettivi", "Analisi & Matching", "Emissione"];
+const FASI = ["Profilo", "Quartiere", "Obiettivo", "Dossier"];
+const MODELLI_DOSSIER = ["Inquadramento progetto", "Bandi europei e nazionali", "Fondi regionali (Umbria)", "Bandi comunali (Terni)", "Finanza agevolata", "Rischi e punti attenzione"];
 
-const MODELLI_DOSSIER = [
-  "Inquadramento del progetto",
-  "Bandi europei diretti",
-  "Fondi regionali attivi (Umbria)",
-  "Bandi comunali aperti su Terni",
-  "Finanza agevolata e credito d'imposta",
-  "Bonus per privati e condomini",
-  "Rischi e punti di attenzione",
-  "Professionisti e partner accreditati su Terni",
-  "Prossimi passi e contatti",
+function normKey(titolo: string): string { return String(titolo || "").toLowerCase().replace(/[^a-z0-9]/g, "").slice(0, 40); }
+const contaPerPortale = (nome: string) => (bandiRealiJson as any[]).filter((b) => (b.portale || b.ente || "").toLowerCase().includes(nome.toLowerCase())).length;
+
+const PORTALI = [
+  { nome: "Regione Umbria", n: contaPerPortale("Regione Umbria"), ambito: "FESR, FSE+, rigenerazione" },
+  { nome: "Comune di Terni", n: contaPerPortale("Comune di Terni"), ambito: "Sfitti, commercio, sociale" },
+  { nome: "GSE", n: contaPerPortale("GSE"), ambito: "Conto Termico, CER, fotovoltaico" },
+  { nome: "PNRR", n: contaPerPortale("PNRR"), ambito: "Transizione, inclusione, cultura" },
+  { nome: "Invitalia", n: contaPerPortale("Invitalia"), ambito: "Nuove imprese, impianti, startup" },
+  { nome: "Camera di Commercio", n: contaPerPortale("Camera di Commercio"), ambito: "Digitale, voucher, export" }
 ];
 
 function Stelle({ n, onSet }: { n: number; onSet?: (v: number) => void }) {
-  return (
-    <span className="inline-flex">
-      {[1, 2, 3, 4, 5].map((i) => (
-        <button key={i} type="button" disabled={!onSet} onClick={() => onSet?.(i)}>
-          <Star className={`size-4 ${i <= n ? "fill-accent text-accent" : "text-muted-foreground"}`} />
-        </button>
-      ))}
-    </span>
-  );
+  return <span className="inline-flex">{[1, 2, 3, 4, 5].map((i) => <button key={i} type="button" disabled={!onSet} onClick={() => onSet?.(i)}><Star className={`size-4 ${i <= n ? "fill-accent text-accent" : "text-muted-foreground"}`} /></button>)}</span>;
 }
 
 function DossierPage() {
-  const search = Route.useSearch();
+  const search = Route.useSearch() as any;
   const { state, update, puntiDisponibili } = useCivic();
   const contatta = useContact();
+
   const [step, setStep] = useState(0);
   const [profilo, setProfilo] = useState("");
   const [quartiere, setQuartiere] = useState("");
@@ -55,274 +50,182 @@ function DossierPage() {
   const [custom, setCustom] = useState({ titolo: "", descrizione: "", area: "" });
   const [usaPunti, setUsaPunti] = useState(false);
   const [rec, setRec] = useState({ autore: "", ruolo: "", stelle: 5, testo: "" });
+  const [emailDossier, setEmailDossier] = useState("");
+
+  const obiettiviLocali = OBIETTIVI || [];
+  const profiliLocali = PROFILI || [];
+  const quartieriLocali = QUARTIERI || [];
+
+  const communityOb = (state.obiettiviCommunity || []).filter((o: any) => !quartiere || o.area === quartiere);
+  const obCustom = (state.obiettiviCommunity || []).find((o: any) => o.id === obiettivo);
+
+  const costoPunti = COSTI_PREMI?.sconto || 500;
+  const saldo = puntiDisponibili ? puntiDisponibili() : 0;
+  const puoScontare = saldo >= costoPunti;
+  const prezzoPieno = 14.90;
+  const prezzoScontato = 9.90;
+
+  const dossierVenduti = (state.dossierGenerati || []).filter((d: any) => d.stato === "Venduto").length;
+
+  const bandiGrezzi = (filtraBandiPerDossier && typeof filtraBandiPerDossier === "function") 
+    ? filtraBandiPerDossier(profilo, obiettivo, obCustom ? `${obCustom.titolo} ${obCustom.descrizione}` : undefined) 
+    : [];
+  const bandi = bandiGrezzi.filter((b: any) => state.auditBandi?.[normKey(b.nome || b.titolo)]?.stato !== "Scartato");
+
+  const profiloNome = profiliLocali.find((p: any) => p.id === profilo)?.nome ?? profilo;
+  const obiettivoNome = obCustom?.titolo ?? obiettiviLocali.find((o: any) => o.id === obiettivo)?.nome ?? obiettivo;
+  const quartieriFiltrati = quartieriLocali.filter((q: string) => q.toLowerCase().includes(cercaQuartiere.trim().toLowerCase()));
 
   useEffect(() => {
     if (search.quartiere || search.obiettivo) {
       if (search.quartiere) setQuartiere(search.quartiere);
       if (search.obiettivo) setObiettivo(search.obiettivo);
-      setProfilo((p) => p || "cittadino");
+      setProfilo((p: any) => p || "cittadino");
       setStep(search.quartiere && search.obiettivo ? 3 : 2);
-      toast.info("Matching preliminare avviato con i dati della segnalazione.");
     }
-  }, [search.quartiere, search.obiettivo]);
+  }, [search]);
 
-  const communityOb = state.obiettiviCommunity.filter((o) => !quartiere || o.area === quartiere);
-  const obCustom = state.obiettiviCommunity.find((o) => o.id === obiettivo);
-
-  const costoPunti = COSTI_PREMI.sconto;
-  const saldo = puntiDisponibili();
-  const puoScontare = saldo >= costoPunti;
-  const prezzoPieno = 14.90;
-  const prezzoScontato = 9.90;
+  const aggiungiCustom = () => {
+    if (!custom.titolo.trim()) return toast.error("Dai un titolo al tuo obiettivo.");
+    const nuovo = { id: nuovoId("oc"), titolo: custom.titolo.trim(), descrizione: custom.descrizione.trim(), area: custom.area || quartiere || "Centro Storico" };
+    if (update) update((s: any) => ({ ...s, obiettiviCommunity: [...(s.obiettiviCommunity || []), nuovo] }));
+    setObiettivo(nuovo.id);
+    setCustom({ titolo: "", descrizione: "", area: "" });
+    toast.success("Obiettivo personalizzato aggiunto.");
+  };
 
   const generaDossier = async () => {
-    const emailInput = document.getElementById("dossierEmail") as HTMLInputElement;
-    if (!emailInput || !emailInput.value || !emailInput.value.includes("@")) {
-      toast.error("Inserisci un indirizzo email valido.");
-      return;
-    }
-
+    if (!emailDossier || !emailDossier.includes("@")) return toast.error("Inserisci un'email valida.");
     toast.info("Generazione dossier in corso...");
     try {
-      await registraDossierGenerato({
-        profilo, quartiere, obiettivo, custom, usaPunti,
-        email: emailInput.value
+      if (registraDossierGenerato) {
+        await registraDossierGenerato({
+          profilo: profiloNome, quartiere, obiettivo: obiettivoNome, email: emailDossier,
+          azione: bandi.length > 0 ? "Richiesta PDF" : "Nessun Bando - Contatto",
+          bandi: bandi.map((b: any) => ({ nome: b.nome || b.titolo, ente: b.ente || b.portale }))
+        });
+      }
+      if (usaPunti && update) update((s: any) => ({ ...s, puntiSpesi: (s.puntiSpesi || 0) + costoPunti }));
+      if (contatta) contatta({
+        oggetto: "Richiesta Dossier IA",
+        contesto: `Da: ${emailDossier}\nProfilo: ${profiloNome}\nQuartiere: ${quartiere}\nObiettivo: ${obiettivoNome}`
       });
-      if (usaPunti) update({ puntiSpesi: state.puntiSpesi + costoPunti });
-      contatta("Generazione Dossier IA Completata", `Dossier richiesto da: ${emailInput.value}\nProfilo: ${profilo}\nObiettivo: ${obiettivo}\nQuartiere: ${quartiere}`);
-      toast.success("Dossier generato con successo! Controlla la tua email.");
-    } catch (err: any) {
-      toast.error(`Errore durante la generazione: ${err.message}`);
-    }
+      toast.success("Dossier richiesto! Ti contatteremo a breve.");
+    } catch (err: any) { toast.error(`Errore: ${err.message}`); }
   };
 
   const inviaRecensione = () => {
-    if (!rec.autore || !rec.testo) return toast.error("Nome e testo obbligatori");
-    update({
-      recensioni: [
-        { id: `rec_${Date.now()}`, ...rec, data: oggi(), verificata: false },
-        ...state.recensioni,
-      ],
-    });
+    if (!rec.autore || !rec.testo) return toast.error("Dati mancanti.");
+    if (update) {
+      update((s: any) => ({
+        ...s, recensioni: [{ id: `rec_${Date.now()}`, ...rec, data: oggi ? oggi() : new Date().toLocaleDateString(), verificata: false }, ...(s.recensioni || [])]
+      }));
+    }
     setRec({ autore: "", ruolo: "", stelle: 5, testo: "" });
-    toast.success("Recensione inviata in approvazione!");
+    toast.success("Recensione inviata!");
   };
 
+  const card = (sel: boolean) => `rounded-lg border p-4 text-left transition-colors ${sel ? "border-primary bg-secondary" : "border-border hover:bg-secondary/60"}`;
+
   return (
-    <div className="container max-w-4xl py-12">
-      <div className="mb-8">
-        <Button variant="ghost" className="mb-4 text-muted-foreground hover:text-white" onClick={() => window.history.back()}>
-          <ArrowLeft className="mr-2 size-4" /> Torna indietro
-        </Button>
-        <h1 className="text-3xl font-bold tracking-tight text-accent lg:text-4xl">
-          <FileText className="mr-3 inline-block size-8 align-text-bottom" />
-          Bandi & Dossier IA
-        </h1>
-        <p className="mt-4 text-lg text-muted-foreground">
-          Genera un fascicolo strategico personalizzato che incrocia i tuoi progetti con tutti i bandi (europei, regionali e comunali) e le agevolazioni attive a Terni.
-        </p>
+    <div className="mx-auto max-w-5xl px-4 py-8 md:px-6">
+      <div className="mb-8 text-center">
+        <div className="mb-3 flex justify-center gap-2">
+          <Badge variant="secondary">Analisi IA · curata da Lorenzo</Badge>
+          <Link to="/regia" className="inline-flex items-center gap-1 rounded-full border border-border px-3 py-0.5 text-xs text-muted-foreground hover:border-accent hover:text-accent transition">
+            <Lock className="size-3" /> Regia Operatori
+          </Link>
+        </div>
+        <h1 className="text-3xl font-bold md:text-4xl">Bandi & <span className="text-ember-gradient">Dossier IA</span></h1>
+        {dossierVenduti > 0 && <p className="mt-2 text-xs font-semibold text-accent">🔥 {dossierVenduti} Dossier consegnati!</p>}
       </div>
 
-      <div className="mb-8 flex items-center justify-between gap-2 overflow-x-auto pb-4">
-        {FASI.map((f, i) => (
-          <div key={i} className={`flex min-w-max items-center gap-2 ${i === step ? "text-accent" : i < step ? "text-white" : "text-muted-foreground"}`}>
-            <div className={`flex size-6 items-center justify-center rounded-full text-xs font-bold ${i === step ? "bg-accent text-background" : i < step ? "bg-white text-background" : "bg-panel"}`}>
-              {i < step ? <CheckCircle2 className="size-4" /> : i + 1}
+      <section className="surface-panel mb-6 p-5">
+        <h2 className="flex items-center gap-2 text-lg font-bold"><Radar className="size-5 text-accent" /> Radar Portali Attivi</h2>
+        <div className="mt-4 grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
+          {PORTALI.map((p) => (
+            <div key={p.nome} className="rounded-md border border-border p-3">
+              <p className="flex justify-between text-sm font-semibold">{p.nome}<span className="text-accent">{p.n} bandi</span></p>
+              <p className="text-xs text-muted-foreground">{p.ambito}</p>
             </div>
-            <span className="text-sm font-semibold">{f}</span>
-            {i < FASI.length - 1 && <div className={`h-0.5 w-8 sm:w-12 ${i < step ? "bg-white" : "bg-panel"}`} />}
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      </section>
 
-      <Card className="surface-panel p-6 sm:p-8">
+      <div className="surface-panel p-5 md:p-7">
+        <div className="mb-6">
+          <div className="mb-2 flex justify-between text-xs uppercase text-muted-foreground">
+            {FASI.map((s, i) => <span key={s} className={i <= step ? "text-accent" : ""}>{i + 1}. {s}</span>)}
+          </div>
+          <Progress value={((step + 1) / FASI.length) * 100} className="h-1.5" />
+        </div>
+
         {step === 0 && (
-          <div className="space-y-6 animate-in slide-in-from-right-4">
-            <h2 className="text-xl font-bold">1. Chi sta richiedendo il dossier?</h2>
-            <RadioGroup value={profilo} onValueChange={setProfilo} className="grid gap-4 sm:grid-cols-3">
-              {[
-                { id: "impresa", label: "🏢 Imprese & P.IVA", desc: "Commercio, artigianato, startup" },
-                { id: "terzo-settore", label: "🤝 Terzo Settore", desc: "Associazioni, comitati, onlus" },
-                { id: "cittadino", label: "👤 Privati Cittadini", desc: "Condomini, immobili, idee" },
-              ].map((p) => (
-                <div key={p.id} className={`relative flex cursor-pointer flex-col rounded-xl border p-4 transition-colors ${profilo === p.id ? "border-accent bg-accent/10" : "border-border bg-background hover:border-muted-foreground"}`} onClick={() => setProfilo(p.id)}>
-                  <RadioGroupItem value={p.id} id={p.id} className="sr-only" />
-                  <Label htmlFor={p.id} className="cursor-pointer font-bold">{p.label}</Label>
-                  <p className="mt-1 text-xs text-muted-foreground">{p.desc}</p>
-                </div>
-              ))}
-            </RadioGroup>
-            <Button disabled={!profilo} className="w-full font-bold" onClick={() => setStep(1)}>Continua</Button>
+          <div className="grid gap-3 sm:grid-cols-3">
+            {profiliLocali.map((p: any) => (
+              <button key={p.id} onClick={() => { setProfilo(p.id); setStep(1); }} className={card(profilo === p.id)}>
+                <p className="font-semibold">{p.nome}</p>
+                <p className="mt-1 text-xs text-muted-foreground">{p.desc}</p>
+              </button>
+            ))}
           </div>
         )}
 
         {step === 1 && (
-          <div className="space-y-6 animate-in slide-in-from-right-4">
-            <h2 className="text-xl font-bold">2. Localizzazione e Ambito</h2>
-            <div className="space-y-4">
-              <div>
-                <Label>In quale quartiere o area si sviluppa il progetto? (Opzionale)</Label>
-                <Select value={quartiere} onValueChange={setQuartiere}>
-                  <SelectTrigger className="mt-1 bg-background"><SelectValue placeholder="Seleziona un'area di riferimento" /></SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="centro">Centro Storico</SelectItem>
-                    <SelectItem value="periferia-nord">Periferia Nord (Cesi, Borgo Rivo...)</SelectItem>
-                    <SelectItem value="periferia-est">Periferia Est (Valnerina, Papigno...)</SelectItem>
-                    <SelectItem value="periferia-sud">Periferia Sud (Collescipoli, San Valentino...)</SelectItem>
-                    <SelectItem value="periferia-ovest">Periferia Ovest (Gabelletta, Cratere...)</SelectItem>
-                    <SelectItem value="tutta-citta">Riguarda tutta la città</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-              <div>
-                <Label>Qual è il tuo obiettivo primario?</Label>
-                <div className="mt-2 grid gap-3 sm:grid-cols-2">
-                  {[
-                    { id: "o1", label: "Riqualificazione Urbana", p: ["cittadino", "terzo-settore"] },
-                    { id: "o2", label: "Sostenibilità Energetica", p: ["impresa", "cittadino"] },
-                    { id: "o3", label: "Mobilità Dolce", p: ["cittadino", "terzo-settore"] },
-                    { id: "o4", label: "Nuovo Impianto/Azienda", p: ["impresa"] },
-                    { id: "o5", label: "Commercio e Locali Sfitti", p: ["impresa"] },
-                    { id: "o6", label: "Cultura e Turismo", p: ["terzo-settore", "impresa"] },
-                    { id: "o7", label: "Digitalizzazione", p: ["impresa"] },
-                  ]
-                    .filter((o) => !profilo || o.p.includes(profilo))
-                    .map((o) => (
-                      <Button key={o.id} variant={obiettivo === o.id ? "default" : "outline"} className={`justify-start ${obiettivo === o.id ? "border-accent bg-accent/20 text-accent hover:bg-accent/30" : "bg-background"}`} onClick={() => setObiettivo(o.id)}>
-                        {o.label}
-                      </Button>
-                    ))}
-                  <Button variant={obiettivo === "custom" ? "default" : "outline"} className={`justify-start ${obiettivo === "custom" ? "border-accent bg-accent/20 text-accent" : "bg-background"}`} onClick={() => setObiettivo("custom")}>
-                    Altro (Idea libera)
-                  </Button>
-                </div>
-              </div>
+          <div className="space-y-4">
+            <Input value={cercaQuartiere} onChange={(e) => setCercaQuartiere(e.target.value)} placeholder="Cerca quartiere..." className="bg-background" />
+            <div className="flex flex-wrap gap-2">
+              {quartieriFiltrati.map((q: string) => (
+                <button key={q} onClick={() => { setQuartiere(q); setStep(2); }} className={`rounded-full border px-3.5 py-1.5 text-xs ${quartiere === q ? "border-primary bg-primary" : "border-border"}`}>{q}</button>
+              ))}
             </div>
-            <div className="flex gap-3">
-              <Button variant="outline" onClick={() => setStep(0)}>Indietro</Button>
-              <Button disabled={!obiettivo} className="flex-1 font-bold" onClick={() => setStep(2)}>Cerca Bandi Attivi</Button>
-            </div>
+            <Button variant="outline" onClick={() => setStep(0)}>Indietro</Button>
           </div>
         )}
 
         {step === 2 && (
-          <div className="space-y-6 animate-in slide-in-from-right-4">
-            <h2 className="text-xl font-bold">3. Analisi e Parametri IA</h2>
-            {obiettivo === "custom" ? (
-              <div className="space-y-4">
-                <p className="text-sm text-muted-foreground">Descrivi brevemente il tuo progetto. Il nostro sistema analizzerà le parole chiave per scovare le migliori linee di finanziamento attive o in arrivo.</p>
-                <div><Label>Titolo del progetto</Label><Input className="mt-1 bg-background" value={custom.titolo} onChange={(e) => setCustom({ ...custom, titolo: e.target.value })} placeholder="Es. Recupero casale per agriturismo" /></div>
-                <div><Label>Descrizione dettagliata</Label><Textarea className="mt-1 bg-background" value={custom.descrizione} onChange={(e) => setCustom({ ...custom, descrizione: e.target.value })} placeholder="Cosa vuoi realizzare? Quali sono le spese previste? Chi sono i beneficiari?" rows={4} /></div>
-              </div>
-            ) : (
-              <div className="space-y-4">
-                <div className="rounded-xl border border-accent/30 bg-accent/10 p-5 text-center">
-                  <h3 className="text-lg font-bold text-accent">Motore di Ricerca Bandi Attivato</h3>
-                  <p className="mt-2 text-sm text-muted-foreground">Stiamo interrogando i database di Regione Umbria, Comune di Terni, fondi ministeriali e PNRR focalizzati su <b>{obCustom?.titolo || obiettivo}</b> per il profilo <b>{profilo}</b>.</p>
-                </div>
-                <div className="space-y-2">
-                  <Label>Vuoi collegarlo a un'idea già proposta dalla community? (Opzionale)</Label>
-                  <Input placeholder="Filtra idee per zona o titolo..." className="bg-background" value={cercaQuartiere} onChange={(e) => setCercaQuartiere(e.target.value)} />
-                  {communityOb.length > 0 ? (
-                    <div className="grid max-h-48 gap-2 overflow-y-auto pr-2">
-                      {communityOb.filter((o) => o.titolo.toLowerCase().includes(cercaQuartiere.toLowerCase()) || o.area.toLowerCase().includes(cercaQuartiere.toLowerCase())).map((o) => (
-                        <div key={o.id} className={`cursor-pointer rounded-lg border p-3 text-sm transition-colors ${obiettivo === o.id ? "border-accent bg-accent/20" : "border-border bg-background hover:border-muted-foreground"}`} onClick={() => setObiettivo(o.id)}>
-                          <b className="block">{o.titolo}</b>
-                          <span className="text-xs text-muted-foreground">📍 {o.area}</span>
-                        </div>
-                      ))}
-                    </div>
-                  ) : (
-                    <p className="text-sm text-muted-foreground">Nessuna proposta attiva in quest'area.</p>
-                  )}
-                </div>
-              </div>
-            )}
-            <div className="flex gap-3">
-              <Button variant="outline" onClick={() => setStep(1)}>Indietro</Button>
-              <Button className="flex-1 font-bold" onClick={() => setStep(3)}>Analizza Match (IA)</Button>
+          <div className="space-y-5">
+            <div className="grid gap-3 sm:grid-cols-2">
+              {obiettiviLocali.map((o: any) => (
+                <button key={o.id} onClick={() => setObiettivo(o.id)} className={card(obiettivo === o.id)}>
+                  <p className="font-semibold">{o.nome}</p>
+                </button>
+              ))}
             </div>
+            <div className="rounded-lg border border-dashed border-accent/60 p-4">
+              <p className="mb-3 font-semibold"><Plus className="size-4 inline" /> Obiettivo Personalizzato</p>
+              <Input className="bg-background mb-2" value={custom.titolo} onChange={(e) => setCustom({ ...custom, titolo: e.target.value })} placeholder="Titolo" />
+              <Button size="sm" onClick={aggiungiCustom}>Aggiungi</Button>
+            </div>
+            <div className="flex gap-3"><Button variant="outline" onClick={() => setStep(1)}>Indietro</Button><Button disabled={!obiettivo} className="flex-1" onClick={() => setStep(3)}>Analizza</Button></div>
           </div>
         )}
 
         {step === 3 && (
-          <div className="space-y-8 animate-in slide-in-from-right-4">
-            <div className="text-center">
-              <h2 className="text-2xl font-bold text-white">Il tuo Dossier è pronto per essere generato</h2>
-              <p className="mt-2 text-muted-foreground">Ecco cosa conterrà il documento di ~15/20 pagine generato su misura per te:</p>
-            </div>
-            <div className="grid gap-4 sm:grid-cols-2">
-              {MODELLI_DOSSIER.map((m, i) => (
-                <div key={i} className="flex items-center gap-3 rounded-lg border border-border bg-background p-3 text-sm font-medium">
-                  <CheckCircle2 className="size-4 text-emerald-500" /> {m}
-                </div>
-              ))}
-            </div>
-
-            <div className="rounded-xl border border-border bg-background p-6">
-              <div className="flex flex-col items-center justify-between gap-4 sm:flex-row">
-                <div>
-                  <h3 className="text-lg font-bold">Generazione Dossier IA</h3>
-                  <p className="text-sm text-muted-foreground">Tempo di elaborazione stimato: 24/48 ore. Riceverai il PDF sulla tua email.</p>
-                </div>
+          <div className="space-y-6">
+            <div className="text-center"><h2 className="text-2xl font-bold">Dossier Pronto</h2></div>
+            {bandi.length === 0 ? (
+              <div className="p-6 text-center border rounded-lg border-amber-500/40 bg-amber-500/10">
+                <AlertCircle className="mx-auto mb-2 size-8 text-amber-400" />
+                <p className="text-amber-400 font-semibold">Nessun bando diretto rilevato. Richiedi contatto gratuito.</p>
+              </div>
+            ) : (
+              <div className="p-6 border rounded-xl bg-background flex justify-between items-center">
+                <div><h3 className="font-bold">Dossier IA</h3><p className="text-xs text-muted-foreground">In 24/48h via email</p></div>
                 <div className="text-right">
-                  <div className="text-2xl font-black text-white">€ {usaPunti && puoScontare ? prezzoScontato.toFixed(2) : prezzoPieno.toFixed(2)}</div>
-                  {puoScontare && (
-                    <div className="mt-2 flex items-center gap-2 text-sm">
-                      <Checkbox id="usaPunti" checked={usaPunti} onCheckedChange={(c) => setUsaPunti(c as boolean)} />
-                      <Label htmlFor="usaPunti" className="cursor-pointer font-bold text-accent">Usa {costoPunti} pt esplorazione (Sconto € 5)</Label>
-                    </div>
-                  )}
+                  <div className="text-2xl font-black">€ {usaPunti && puoScontare ? prezzoScontato.toFixed(2) : prezzoPieno.toFixed(2)}</div>
+                  {puoScontare && <div className="flex items-center gap-2 text-sm"><Checkbox id="pts" checked={usaPunti} onCheckedChange={(c) => setUsaPunti(c as boolean)} /><Label htmlFor="pts">Usa {costoPunti} pt (Sconto €5)</Label></div>}
                 </div>
               </div>
+            )}
+            <div className="p-5 border rounded-xl bg-secondary/50">
+              <Label className="font-bold text-accent">📧 Indirizzo Email (Obbligatorio)</Label>
+              <Input type="email" value={emailDossier} onChange={(e) => setEmailDossier(e.target.value)} placeholder="tua@email.it" className="bg-background mt-2" />
             </div>
-
-            <div className="p-4 bg-panel border border-accent/30 rounded-xl my-4 space-y-2">
-              <label className="text-sm font-bold text-accent">📧 Indirizzo Email (Obbligatorio per ricevere il Dossier)</label>
-              <input type="email" id="dossierEmail" placeholder="tua@email.it" className="w-full p-2.5 rounded-lg bg-background border border-border text-white outline-none focus:border-accent transition-colors" required />
-            </div>
-
-            <div className="flex gap-3">
-              <Button variant="outline" size="lg" onClick={() => setStep(2)}>Modifica Parametri</Button>
-              <Button className="flex-1 font-bold" size="lg" onClick={generaDossier}>
-                Richiedi Dossier Ora
-              </Button>
-            </div>
+            <div className="flex gap-3"><Button variant="outline" onClick={() => setStep(2)}>Modifica</Button><Button className="flex-1" onClick={generaDossier}>Richiedi</Button></div>
           </div>
         )}
-      </Card>
-
-      <section className="mt-16">
-        <div className="mb-6 text-center">
-          <h2 className="text-2xl font-bold">Cosa dicono i nostri utenti</h2>
-          <p className="mt-2 text-muted-foreground">Le esperienze di chi ha già richiesto un Dossier IA</p>
-        </div>
-        <div className="grid gap-3 md:grid-cols-2">
-          {state.recensioni.map((r) => (
-            <div key={r.id} className="surface-panel p-4">
-              <div className="flex items-center justify-between gap-2">
-                <Stelle n={r.stelle} />
-                <span className="text-xs text-muted-foreground">{r.data}</span>
-              </div>
-              <p className="mt-2 text-sm">{r.testo}</p>
-              <p className="mt-2 flex items-center gap-1 text-xs text-muted-foreground">
-                <b className="text-foreground">{r.autore}</b> · {r.ruolo}
-                {r.verificata && <span className="ml-1 inline-flex items-center gap-0.5 text-accent"><BadgeCheck className="size-3" /> verificata</span>}
-              </p>
-            </div>
-          ))}
-        </div>
-        <div className="surface-panel mt-5 p-5">
-          <h3 className="mb-3 font-semibold">Lascia la tua recensione</h3>
-          <div className="grid gap-3 sm:grid-cols-2">
-            <div><Label>Nome</Label><Input value={rec.autore} onChange={(e) => setRec({ ...rec, autore: e.target.value })} /></div>
-            <div><Label>Ruolo (ente pubblico, impresa, cittadino…)</Label><Input value={rec.ruolo} onChange={(e) => setRec({ ...rec, ruolo: e.target.value })} /></div>
-          </div>
-          <div className="mt-3 flex items-center gap-2 text-sm">Valutazione: <Stelle n={rec.stelle} onSet={(v) => setRec({ ...rec, stelle: v })} /></div>
-          <Textarea className="mt-3" value={rec.testo} onChange={(e) => setRec({ ...rec, testo: e.target.value })} placeholder="Com'è andata con il Dossier?" />
-          <Button className="mt-3" onClick={inviaRecensione}>Pubblica recensione</Button>
-        </div>
-      </section>
+      </div>
     </div>
   );
 }
