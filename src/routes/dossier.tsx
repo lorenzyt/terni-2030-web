@@ -73,7 +73,7 @@ function Stelle({ n, onSet }: { n: number; onSet?: (v: number) => void }) {
     <span className="inline-flex">
       {[1, 2, 3, 4, 5].map((i) => (
         <>
-            <div className="p-4 bg-panel border border-accent/30 rounded-xl my-4 space-y-2"><label className="text-sm font-bold text-accent">📧 Indirizzo Email (Obbligatorio per ricevere il Dossier)</label><input type="email" id="dossierEmail" placeholder="tua@email.it" className="w-full p-2.5 rounded-lg bg-background border border-border text-white outline-none focus:border-accent transition-colors" required /></div>
+            
             <button key={i} type="button" disabled={!onSet} onClick={() => onSet?.(i)}>
           <Star className={`size-4 ${i <= n ? "fill-accent text-accent" : "text-muted-foreground"}`} />
         </button>
