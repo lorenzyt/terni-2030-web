@@ -407,6 +407,85 @@ export async function inviaPropostaModerazione(payload: {
   });
 }
 
+export async function eliminaPoiAdmin(id: string) {
+  if (!supabase) throw new Error("Database offline");
+  const { error } = await supabase.from("segnalazioni").delete().eq("id", id);
+  if (error) throw new Error(error.message);
+}
+
+export async function modificaPoiAdmin(id: string, payload: any) {
+  if (!supabase) throw new Error("Database offline");
+  const { error } = await supabase.from("segnalazioni").update({
+    titolo: payload.titolo.slice(0, 120),
+    lat: payload.lat || 42.5636,
+    lng: payload.lng || 12.6427,
+    descrizione: JSON.stringify({
+      tipo: "poi",
+      titolo: payload.titolo,
+      autore: payload.autoreStorico || payload.autore || "Non specificato",
+      autoreScheda: payload.autoreScheda || "Lorenzo Covicchio",
+      contatto: "Admin Diretto",
+      data: oggi(),
+      stato: "Approvata",
+      dati: {
+        nome: payload.titolo,
+        autore: payload.autoreStorico || payload.autore || "Non specificato",
+        autoreScheda: payload.autoreScheda || "Lorenzo Covicchio",
+        anno: payload.anno,
+        categoria: payload.categoria,
+        rarita: payload.rarita,
+        punti: payload.punti,
+        lat: payload.lat,
+        lng: payload.lng,
+        descrizione: payload.descrizione,
+        immagine: payload.immagine,
+        articolo: payload.articolo
+      }
+    })
+  }).eq("id", id);
+  if (error) throw new Error(error.message);
+}
+
+export async function inserisciPoiDirettoAdmin(payload: any) {
+  if (!supabase) throw new Error("Database offline");
+  const idRow = `prop_poi_${Date.now().toString(36)}`;
+  const { error } = await supabase.from("segnalazioni").insert({
+    id: idRow,
+    titolo: payload.titolo.slice(0, 120),
+    quartiere: "Regia",
+    categoria: "Proposta_Moderazione",
+    stato: "Approvata",
+    voti: 0,
+    lat: payload.lat || 42.5636,
+    lng: payload.lng || 12.6427,
+    descrizione: JSON.stringify({
+      tipo: "poi",
+      titolo: payload.titolo,
+      autore: payload.autoreStorico || payload.autore || "Non specificato",
+      autoreScheda: payload.autoreScheda || "Lorenzo Covicchio",
+      contatto: "Admin Diretto",
+      data: oggi(),
+      stato: "Approvata",
+      dati: {
+        nome: payload.titolo,
+        autore: payload.autoreStorico || payload.autore || "Non specificato",
+        autoreScheda: payload.autoreScheda || "Lorenzo Covicchio",
+        anno: payload.anno,
+        categoria: payload.categoria,
+        rarita: payload.rarita,
+        punti: payload.punti,
+        lat: payload.lat,
+        lng: payload.lng,
+        descrizione: payload.descrizione,
+        immagine: payload.immagine,
+        articolo: payload.articolo
+      }
+    }),
+    created_at: oggi(),
+  });
+  if (error) throw new Error(error.message);
+}
+
 export { oggi };
 export const COSTI_PREMI = { sconto: 500, badge: 1000, partner: 150 } as const;
 
