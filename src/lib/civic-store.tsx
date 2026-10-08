@@ -532,3 +532,21 @@ export async function salvaAuditBandoCloud(key: string, titolo: string, nuovoSta
     created_at: new Date().toISOString().split("T")[0]
   });
 }
+
+
+export async function aggiungiCommento(autore: string, testo: string, poiId: string) {
+  if (!supabase) return;
+  const idRow = `commento_${Date.now().toString(36)}`;
+  await supabase.from("segnalazioni").insert({
+    id: idRow,
+    titolo: `Commento di ${autore}`,
+    quartiere: poiId, // Usiamo il campo quartiere per collegare il commento al POI
+    categoria: "Commento",
+    stato: "Pubblicato",
+    voti: 0,
+    lat: 42.5636,
+    lng: 12.6427,
+    descrizione: JSON.stringify({ autore, testo, data: oggi() }),
+    created_at: new Date().toISOString().split("T")[0]
+  });
+}
