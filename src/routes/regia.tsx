@@ -11,7 +11,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { ORDINE_RARITA, RARITA_STANDARD, type RaritaPOI, type POI } from "@/lib/terni-data";
-import { gestisciPropostaAdmin, inserisciPoiDirettoAdmin, eliminaPoiAdmin, modificaPoiAdmin, salvaAuditBandoCloud, useCivic, type AuditBando, type PropostaModerazione } from "@/lib/civic-store";
+import { gestisciPropostaAdmin, inserisciPoiDirettoAdmin, eliminaPoiAdmin, modificaPoiAdmin, salvaAuditBandoCloud, getDossiersAdmin, eliminaDossierAdmin, modificaStatoDossierAdmin, useCivic, type AuditBando, type PropostaModerazione } from "@/lib/civic-store";
 
 export const Route = createFileRoute("/regia")({
   head: () => ({
@@ -202,7 +202,7 @@ function RegiaPage() {
       aggiornato: new Date().toLocaleString("it-IT"),
     };
     update((s) => ({ ...s, auditBandi: { ...s.auditBandi, [k]: record } }));
-    await salvaAuditBandoCloud(k, b.titolo, record);
+    await salvaAuditBandoCloud, getDossiersAdmin, eliminaDossierAdmin, modificaStatoDossierAdmin(k, b.titolo, record);
     toast.success(`Bando aggiornato (${nuovoStato}) da ${operatore}`);
   };
 
@@ -366,7 +366,8 @@ function RegiaPage() {
         </div>
       )}
 
-      {tab === "dossier" && (
+      {tab === "dossier" && <PannelloDossier />}
+      {tab === "dossier_vecchio" && (
         <div className="space-y-4">
           {state.dossierGenerati.length === 0 ? (
             <div className="surface-panel p-8 text-center text-sm text-muted-foreground">
@@ -614,3 +615,74 @@ function RegiaPage() {
   );
 }
 
+
+
+function PannelloDossier() {
+  const [lista, setLista] = React.useState<any[]>([]);
+  const [loading, setLoading] = React.useState(true);
+
+  React.useEffect(() => {
+    getDossiersAdmin().then(d => { setLista(d); setLoading(false); });
+  }, []);
+
+  const handleElimina = async (id: string) => {
+    if (!confirm("Sei sicuro di voler eliminare definitivamente questo dossier dal database?")) return;
+    await eliminaDossierAdmin(id);
+    setLista(lista.filter(x => x.id !== id));
+  };
+
+  const handleStato = async (id: string, stato: string) => {
+    await modificaStatoDossierAdmin(id, stato);
+    setLista(lista.map(x => x.id === id ? { ...x, stato } : x));
+  };
+
+  if (loading) return <div className="p-8 text-center text-muted-foreground text-sm font-bold">Caricamento dossier in corso...</div>;
+  if (lista.length === 0) return <div className="p-8 text-center text-muted-foreground text-sm">Nessun dossier è stato ancora richiesto.</div>;
+
+  return (
+    <div className="space-y-4">
+      {lista.map(d => {
+        const dati = JSON.parse(d.descrizione || "{}");
+        const email = dati.email || "Nessuna email";
+        const isVenduto = d.stato === "Venduto";
+        
+        return (
+          <div key={d.id} className="surface-panel p-5 border border-border rounded-xl">
+            <div className="flex flex-wrap justify-between items-start gap-4">
+              <div>
+                <h3 className="font-bold text-accent text-base">{d.titolo}</h3>
+                <p className="text-sm text-muted-foreground mt-1">📧 Email Contatto: <b className="text-white">{email}</b></p>
+                <p className="text-xs mt-1 text-muted-foreground">Profilo: {dati.profilo || "ND"} | Quartiere: {dati.quartiere || "ND"} | Obiettivo: {dati.obiettivo || "ND"}</p>
+                <div className="mt-3">
+                  <span className={`px-2 py-1 text-[10px] uppercase font-bold rounded-full ${isVenduto ? 'bg-emerald-500/20 text-emerald-400' : 'bg-amber-500/20 text-amber-400'}`}>
+                    {d.stato}
+                  </span>
+                </div>
+              </div>
+              <div className="flex gap-2 flex-wrap items-center">
+                <button 
+                  className="px-3 py-1.5 text-xs font-bold rounded bg-blue-600 text-white hover:bg-blue-500 transition-colors" 
+                  onClick={() => window.location.href = `mailto:${email}?subject=Il tuo Dossier Terni 2030`}
+                >
+                  📧 Contatta
+                </button>
+                <button 
+                  className="px-3 py-1.5 text-xs font-bold rounded bg-secondary text-white hover:bg-secondary/80 transition-colors" 
+                  onClick={() => handleStato(d.id, isVenduto ? "Da Contattare" : "Venduto")}
+                >
+                  {isVenduto ? "Segna come Da Contattare" : "✅ Segna come Venduto"}
+                </button>
+                <button 
+                  className="px-3 py-1.5 text-xs font-bold rounded bg-red-600 text-white hover:bg-red-500 transition-colors" 
+                  onClick={() => handleElimina(d.id)}
+                >
+                  🗑️ Elimina
+                </button>
+              </div>
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  );
+}

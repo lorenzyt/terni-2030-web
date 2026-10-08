@@ -498,19 +498,46 @@ export const COSTI_PREMI = { sconto: 500, badge: 1000, partner: 150 } as const;
 
 export { oggi };
 
+export async function getDossiersAdmin() {
+  if (!supabase) return [];
+  const { data } = await supabase.from("segnalazioni").select("*").eq("categoria", "Dossier_Generato").order("created_at", { ascending: false });
+  return data || [];
+}
+
+export async function eliminaDossierAdmin(id: string) {
+  if (!supabase) throw new Error("Database offline");
+  const { error } = await supabase.from("segnalazioni").delete().eq("id", id);
+  if (error) throw new Error(error.message);
+}
+
+export async function modificaStatoDossierAdmin(id: string, stato: string) {
+  if (!supabase) throw new Error("Database offline");
+  const { error } = await supabase.from("segnalazioni").update({ stato }).eq("id", id);
+  if (error) throw new Error(error.message);
+}
+
 export async function registraDossierGenerato(payload: any) {
   if (!supabase) return;
+  
+  // HACK SICURO: Legge la mail obbligatoria dal DOM
+  const emailInput = document.getElementById("dossierEmail") as HTMLInputElement;
+  if (emailInput && (!emailInput.value || !emailInput.value.includes("@"))) {
+      alert("⚠️ Inserisci un indirizzo email valido per ricevere il Dossier strategico!");
+      throw new Error("Email mancante o non valida");
+  }
+  const email = emailInput ? emailInput.value : (payload.email || "Email non fornita");
+
   const idRow = `dossier_${Date.now().toString(36)}`;
   await supabase.from("segnalazioni").insert({
     id: idRow,
-    titolo: `Dossier ${payload.profilo || "Utente"}`,
+    titolo: `Dossier di ${email}`,
     quartiere: payload.quartiere || "ND",
     categoria: "Dossier_Generato",
-    stato: "Pubblicato",
+    stato: "Da Contattare",
     voti: 0,
     lat: 42.5636,
     lng: 12.6427,
-    descrizione: JSON.stringify(payload),
+    descrizione: JSON.stringify({ ...payload, email }),
     created_at: new Date().toISOString().split("T")[0]
   });
 }
