@@ -629,7 +629,7 @@ export async function eliminaPoiAdmin(id: string) {
 
 export async function modificaPoiAdmin(id: string, payload: any) {
   if (!supabase) return;
-  const { error } = await supabase.from("segnalazioni").update({
+  const { error  = await supabase.from("segnalazioni").update({
     titolo: payload.titolo.slice(0, 120),
     quartiere: "Regia",
     categoria: "Proposta_Moderazione",
@@ -658,8 +658,7 @@ export async function modificaPoiAdmin(id: string, payload: any) {
         descrizione: payload.descrizione,
         immagine: payload.immagine,
         articolo: payload.articolo,
-      },
-    }),
-  }).eq("id", id);
+      ,
+    ),
+  ).eq("id", id);
   if (error) console.error("Errore modifica POI:", error);
-}
