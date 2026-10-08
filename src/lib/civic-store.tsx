@@ -492,3 +492,43 @@ export async function gestisciPropostaAdmin(id: string, stato: string) {
   const { error } = await supabase.from("segnalazioni").update({ stato }).eq("id", id);
   if (error) throw new Error(error.message);
 }
+
+// --- FUNZIONI DI SUPPORTO E DOSSIER RIPRISTINATE ---
+export const COSTI_PREMI = { sconto: 500, badge: 1000, partner: 150 } as const;
+
+export { oggi };
+
+export async function registraDossierGenerato(payload: any) {
+  if (!supabase) return;
+  const idRow = `dossier_${Date.now().toString(36)}`;
+  await supabase.from("segnalazioni").insert({
+    id: idRow,
+    titolo: `Dossier ${payload.profilo || "Utente"}`,
+    quartiere: payload.quartiere || "ND",
+    categoria: "Dossier_Generato",
+    stato: "Pubblicato",
+    voti: 0,
+    lat: 42.5636,
+    lng: 12.6427,
+    descrizione: JSON.stringify(payload),
+    created_at: new Date().toISOString().split("T")[0]
+  });
+}
+
+export async function salvaAuditBandoCloud(key: string, titolo: string, nuovoStato: string, nota: string, linkUfficiale: string) {
+  if (!supabase) return;
+  const idRow = `audit_${key}`;
+  await supabase.from("segnalazioni").delete().eq("id", idRow);
+  await supabase.from("segnalazioni").insert({
+    id: idRow,
+    titolo: titolo.slice(0, 120),
+    quartiere: "Regia",
+    categoria: "Audit_Bando",
+    stato: nuovoStato,
+    voti: 0,
+    lat: 42.5636,
+    lng: 12.6427,
+    descrizione: JSON.stringify({ stato: nuovoStato, linkUfficiale, nota, operatore: "Controllo Regione", aggiornato: new Date().toLocaleString("it-IT") }),
+    created_at: new Date().toISOString().split("T")[0]
+  });
+}
