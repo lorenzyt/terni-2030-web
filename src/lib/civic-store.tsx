@@ -369,7 +369,6 @@ export function CivicProvider({ children }: { children: ReactNode }) {
       } catch {}
       if (supabase) {
         const diff = next.segnalazioni.find((n, i) => n.voti !== prev.segnalazioni[i]?.voti);
-        const diff = next.segnalazioni.find((n, i) => n.voti !== prev.segnalazioni[i]?.voti);
         if (diff) supabase.from("segnalazioni").update({ voti: diff.voti }).eq("id", diff.id).then();
         
         // Sincronizza profilo utente su DB se loggato
