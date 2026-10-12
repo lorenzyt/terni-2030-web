@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as DossierRouteImport } from './routes/dossier'
 import { Route as MappaRouteImport } from './routes/mappa'
 import { Route as PartnerRouteImport } from './routes/partner'
+import { Route as ProfiloRouteImport } from './routes/profilo'
 import { Route as RegiaRouteImport } from './routes/regia'
 import { Route as UrbanGoRouteImport } from './routes/urban-go'
 import { Route as ArticoliIdRouteImport } from './routes/articoli.$id'
@@ -37,6 +38,11 @@ const PartnerRoute = PartnerRouteImport.update({
   path: '/partner',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ProfiloRoute = ProfiloRouteImport.update({
+  id: '/profilo',
+  path: '/profilo',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const RegiaRoute = RegiaRouteImport.update({
   id: '/regia',
   path: '/regia',
@@ -58,6 +64,7 @@ export interface FileRoutesByFullPath {
   '/dossier': typeof DossierRoute
   '/mappa': typeof MappaRoute
   '/partner': typeof PartnerRoute
+  '/profilo': typeof ProfiloRoute
   '/regia': typeof RegiaRoute
   '/urban-go': typeof UrbanGoRoute
   '/articoli/$id': typeof ArticoliIdRoute
@@ -67,6 +74,7 @@ export interface FileRoutesByTo {
   '/dossier': typeof DossierRoute
   '/mappa': typeof MappaRoute
   '/partner': typeof PartnerRoute
+  '/profilo': typeof ProfiloRoute
   '/regia': typeof RegiaRoute
   '/urban-go': typeof UrbanGoRoute
   '/articoli/$id': typeof ArticoliIdRoute
@@ -77,6 +85,7 @@ export interface FileRoutesById {
   '/dossier': typeof DossierRoute
   '/mappa': typeof MappaRoute
   '/partner': typeof PartnerRoute
+  '/profilo': typeof ProfiloRoute
   '/regia': typeof RegiaRoute
   '/urban-go': typeof UrbanGoRoute
   '/articoli/$id': typeof ArticoliIdRoute
@@ -88,6 +97,7 @@ export interface FileRouteTypes {
     | '/dossier'
     | '/mappa'
     | '/partner'
+    | '/profilo'
     | '/regia'
     | '/urban-go'
     | '/articoli/$id'
@@ -97,6 +107,7 @@ export interface FileRouteTypes {
     | '/dossier'
     | '/mappa'
     | '/partner'
+    | '/profilo'
     | '/regia'
     | '/urban-go'
     | '/articoli/$id'
@@ -106,6 +117,7 @@ export interface FileRouteTypes {
     | '/dossier'
     | '/mappa'
     | '/partner'
+    | '/profilo'
     | '/regia'
     | '/urban-go'
     | '/articoli/$id'
@@ -116,6 +128,7 @@ export interface RootRouteChildren {
   DossierRoute: typeof DossierRoute
   MappaRoute: typeof MappaRoute
   PartnerRoute: typeof PartnerRoute
+  ProfiloRoute: typeof ProfiloRoute
   RegiaRoute: typeof RegiaRoute
   UrbanGoRoute: typeof UrbanGoRoute
   ArticoliIdRoute: typeof ArticoliIdRoute
@@ -151,6 +164,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PartnerRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/profilo': {
+      id: '/profilo'
+      path: '/profilo'
+      fullPath: '/profilo'
+      preLoaderRoute: typeof ProfiloRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/regia': {
       id: '/regia'
       path: '/regia'
@@ -180,6 +200,7 @@ const rootRouteChildren: RootRouteChildren = {
   DossierRoute: DossierRoute,
   MappaRoute: MappaRoute,
   PartnerRoute: PartnerRoute,
+  ProfiloRoute: ProfiloRoute,
   RegiaRoute: RegiaRoute,
   UrbanGoRoute: UrbanGoRoute,
   ArticoliIdRoute: ArticoliIdRoute,

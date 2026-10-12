@@ -147,23 +147,35 @@ type Ctx = {
   ricaricaCloud: () => Promise<void>;
   puntiGuadagnati: number;
   puntiDisponibili: number;
+  user: any;
 };
 
 const CivicContext = createContext<Ctx | null>(null);
 
 export function CivicProvider({ children }: { children: ReactNode }) {
   const [state, setState] = useState<CivicState>(INIZIALE);
+  const [user, setUser] = useState<any>(null);
   const hydrated = useRef(false);
 
-  const ricaricaCloud = useCallback(async () => {
+  const ricaricaCloud = useCallback(async (sessionUser?: any) => {
+      let dbCheckin: string[] | undefined = undefined;
+      let dbPuntiSpesi: number | undefined = undefined;
+
+      if (supabase && sessionUser) {
+        const { data } = await supabase.from("profili").select("luoghi_scoperti, punti_spesi").eq("id", sessionUser.id).single();
+        if (data) {
+          dbCheckin = data.luoghi_scoperti || [];
+          dbPuntiSpesi = data.punti_spesi || 0;
+        }
+      }
     try {
       const raw = localStorage.getItem(KEY);
       if (raw) {
         const salvato = JSON.parse(raw) as Partial<CivicState>;
         setState((prev) => ({
           ...prev,
-          checkin: salvato.checkin ?? prev.checkin,
-          puntiSpesi: salvato.puntiSpesi ?? prev.puntiSpesi,
+          checkin: dbCheckin ?? salvato.checkin ?? prev.checkin,
+          puntiSpesi: dbPuntiSpesi ?? salvato.puntiSpesi ?? prev.puntiSpesi,
           scontoDossier: salvato.scontoDossier ?? prev.scontoDossier,
           badgeEsploratore: salvato.badgeEsploratore ?? prev.badgeEsploratore,
           votiSegnalazioni: salvato.votiSegnalazioni ?? prev.votiSegnalazioni,
@@ -324,7 +336,21 @@ export function CivicProvider({ children }: { children: ReactNode }) {
   }, []);
 
   useEffect(() => {
-    void ricaricaCloud();
+    if (supabase) {
+      supabase.auth.getSession().then(({ data: { session } }) => {
+        const u = session?.user ?? null;
+        setUser(u);
+        void ricaricaCloud(u);
+      });
+      const { data: { subscription } } = supabase.auth.onAuthStateChange((_e, session) => {
+        const u = session?.user ?? null;
+        setUser(u);
+        void ricaricaCloud(u);
+      });
+      return () => subscription.unsubscribe();
+    } else {
+      void ricaricaCloud();
+    }
     hydrated.current = true;
   }, [ricaricaCloud]);
 
@@ -343,7 +369,16 @@ export function CivicProvider({ children }: { children: ReactNode }) {
       } catch {}
       if (supabase) {
         const diff = next.segnalazioni.find((n, i) => n.voti !== prev.segnalazioni[i]?.voti);
+        const diff = next.segnalazioni.find((n, i) => n.voti !== prev.segnalazioni[i]?.voti);
         if (diff) supabase.from("segnalazioni").update({ voti: diff.voti }).eq("id", diff.id).then();
+        
+        // Sincronizza profilo utente su DB se loggato
+        if (user) {
+          supabase.from("profili").update({ 
+            luoghi_scoperti: next.checkin,
+            punti_spesi: next.puntiSpesi
+          }).eq("id", user.id).then();
+        }
       }
       return next;
     });
@@ -354,7 +389,7 @@ export function CivicProvider({ children }: { children: ReactNode }) {
 
   return (
     <CivicContext.Provider
-      value={{ state, update, ricaricaCloud, puntiGuadagnati, puntiDisponibili: puntiGuadagnati - state.puntiSpesi }}
+      value={{ state, update, ricaricaCloud, puntiGuadagnati, puntiDisponibili: puntiGuadagnati - state.puntiSpesi, user }}
     >
       {children}
     </CivicContext.Provider>
