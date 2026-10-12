@@ -2682,5 +2682,24 @@
     "obiettivo_nome": "Sostenibilità Energetica",
     "obiettivo": "o2",
     "id": "b-a2b6e0ce"
+  },
+  {
+    "portale": "FSE",
+    "titolo": "In arrivo voucher per lo sport dei bambini e una nuova legge sullo sport",
+    "ente": "FSE",
+    "scadenza": "Thu, 23 Jul 2026",
+    "importo": "Consulta avviso ufficiale",
+    "descrizione": "Avviso pubblico rilevato sul canale FSE.",
+    "link": "https://news.google.com/rss/articles/CBMiygFBVV95cUxPVkZ4Y1pmNk9DMW9QUWFNdmNDMGU1N29kWmd6NDNoR3pqczVLdkFwel81a0VkYmVRN3RBZXJpamppWS14d3c4NHMwbWozNWxaSjlRTXpjdXpBc0hhNEZlaUgzNWVYVWtLM1dtelU1QlNWVllWdGZSYmV5dWVtVG1vTTloTWZ1TVRSczc4UkVyTGtzLWFMRzhWV1k0RUljeGhTR2RzZWcwYW5GVzNGNk9McnpFVlU0MG1CXzFIU0phTG5McTNuSkVna05B0gHPAUFVX3lxTE5UM2NrT09TTDdfSTZyU2lTUXlkeWVydjlMVG9URFpTUlk3OWMxVFBMUnN2d3dfdmlTeHJxZmJtT3VEd3U0bHRyd21yRm00MVd4WlJlTmpsZk5TNTBXcy1UaTdHS2xtZ1B6YjBtSDJ5US1aTk5vbVZiUHEzWjJEMU9zbVc3OHdBMEFicVIwOFlTVk5ibG9MbGZ6R3lGaDEybzc5YTcxZnN0YjFVcDh1dDg2SW0yN2VwbzhaeVZWWVk5NXZWeU5DMFpQRGRSRFdtVQ?oc=5",
+    "semaforo": "giallo",
+    "ambiti": [
+      "cittadino",
+      "impresa",
+      "pubblico"
+    ],
+    "obiettivo_id": "o6",
+    "obiettivo_nome": "Cultura, Turismo & Terzo Settore",
+    "obiettivo": "o6",
+    "id": "b-ea46f8cb"
   }
 ]
