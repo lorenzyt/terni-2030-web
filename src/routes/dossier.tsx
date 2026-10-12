@@ -122,7 +122,7 @@ function DossierPage() {
       if (usaPunti && typeof update === "function") {
         update((s: any) => ({ ...s, puntiSpesi: (s.puntiSpesi || 0) + costoPunti }));
       }
-      toast.success("Dossier richiesto! Ti contatteremo a breve all'indirizzo " + emailDossier);
+      toast.success("Richiesta ricevuta! Ti invieremo l'anteprima e i dati per il saldo all'indirizzo " + emailDossier);
     } catch (err: any) { toast.error(`Errore: ${err.message}`); }
   };
 
@@ -220,7 +220,7 @@ function DossierPage() {
               </div>
             ) : (
               <div className="p-6 border rounded-xl bg-background flex justify-between items-center">
-                <div><h3 className="font-bold">Dossier IA</h3><p className="text-xs text-muted-foreground">In 24/48h via email</p></div>
+                <div><h3 className="font-bold">Dossier IA</h3><p className="text-xs text-muted-foreground">Anteprima gratuita in 24/48h. Paghi solo se decidi di sbloccarlo.</p></div>
                 <div className="text-right">
                   <div className="text-2xl font-black">€ {usaPunti && puoScontare ? prezzoScontato.toFixed(2) : prezzoPieno.toFixed(2)}</div>
                   {puoScontare && (

@@ -298,7 +298,7 @@ function UrbanGo() {
       <div className="mb-6 flex flex-wrap items-end justify-between gap-4">
         <div>
           <Badge variant="secondary" className="mb-2">
-            5 Gradi di Rarità: Comune (25) · Raro (50) · Epico (100) · Leggendario (200) · Unico (500)
+5 Gradi di Rarità: Comune (25) · Raro (50) · Epico (100) · Leggendario (200) · Unico (500)
           </Badge>
           <h1 className="text-3xl font-bold md:text-4xl">
             Terni <span className="text-ember-gradient">Urban GO</span> & TerniDex
