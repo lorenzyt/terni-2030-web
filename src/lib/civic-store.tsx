@@ -76,7 +76,9 @@ export type DossierLog = {
   profilo: string;
   quartiere: string;
   obiettivo: string;
+  email?: string;
   azione: string;
+  stato?: string;
   numero_bandi: number;
   elenco_bandi: string[];
 };
@@ -155,33 +157,51 @@ const CivicContext = createContext<Ctx | null>(null);
 export function CivicProvider({ children }: { children: ReactNode }) {
   const [state, setState] = useState<CivicState>(INIZIALE);
   const [user, setUser] = useState<any>(null);
+  const userRef = useRef<any>(null);
   const hydrated = useRef(false);
 
   const ricaricaCloud = useCallback(async (sessionUser?: any) => {
-      let dbCheckin: string[] | undefined = undefined;
-      let dbPuntiSpesi: number | undefined = undefined;
+    const activeUser = sessionUser !== undefined ? sessionUser : userRef.current;
+    let dbCheckin: string[] | undefined = undefined;
+    let dbPuntiSpesi: number | undefined = undefined;
 
-      if (supabase && sessionUser) {
-        const { data } = await supabase.from("profili").select("luoghi_scoperti, punti_spesi").eq("id", sessionUser.id).single();
-        if (data) {
-          dbCheckin = data.luoghi_scoperti || [];
-          dbPuntiSpesi = data.punti_spesi || 0;
-        }
+    if (supabase && activeUser) {
+      // 1. Legge da user_metadata (sempre disponibile su Supabase Auth)
+      if (Array.isArray(activeUser.user_metadata?.luoghi_scoperti)) {
+        dbCheckin = activeUser.user_metadata.luoghi_scoperti;
       }
+      if (typeof activeUser.user_metadata?.punti_spesi === "number") {
+        dbPuntiSpesi = activeUser.user_metadata.punti_spesi;
+      }
+      // 2. Legge anche dalla tabella profili se presente
+      try {
+        const { data } = await supabase.from("profili").select("luoghi_scoperti, punti_spesi").eq("id", activeUser.id).maybeSingle();
+        if (data) {
+          if (Array.isArray(data.luoghi_scoperti) && data.luoghi_scoperti.length > (dbCheckin?.length || 0)) {
+            dbCheckin = data.luoghi_scoperti;
+          }
+          if (typeof data.punti_spesi === "number") {
+            dbPuntiSpesi = Math.max(dbPuntiSpesi || 0, data.punti_spesi);
+          }
+        }
+      } catch {}
+    }
+
     try {
       const raw = localStorage.getItem(KEY);
-      if (raw) {
-        const salvato = JSON.parse(raw) as Partial<CivicState>;
-        setState((prev) => ({
+      const salvato = raw ? (JSON.parse(raw) as Partial<CivicState>) : {};
+      setState((prev) => {
+        const mergedCheckin = Array.from(new Set([...(dbCheckin || []), ...(salvato.checkin || []), ...prev.checkin]));
+        return {
           ...prev,
-          checkin: dbCheckin ?? salvato.checkin ?? prev.checkin,
+          checkin: mergedCheckin,
           puntiSpesi: dbPuntiSpesi ?? salvato.puntiSpesi ?? prev.puntiSpesi,
           scontoDossier: salvato.scontoDossier ?? prev.scontoDossier,
           badgeEsploratore: salvato.badgeEsploratore ?? prev.badgeEsploratore,
           votiSegnalazioni: salvato.votiSegnalazioni ?? prev.votiSegnalazioni,
           votiSondaggi: salvato.votiSondaggi ?? prev.votiSondaggi,
-        }));
-      }
+        };
+      });
     } catch {}
 
     if (!supabase) return;
@@ -215,15 +235,22 @@ export function CivicProvider({ children }: { children: ReactNode }) {
         } else if (idStr.startsWith("dossier_")) {
           try {
             const parsed = JSON.parse(item.descrizione || "{}");
+            const elenco = Array.isArray(parsed.elenco_bandi)
+              ? parsed.elenco_bandi
+              : Array.isArray(parsed.bandi)
+              ? parsed.bandi.map((b: any) => (typeof b === "string" ? b : `${b.nome || b.titolo} (${b.ente || ""})`))
+              : [];
             listaDossier.push({
               id: idStr,
               orario: parsed.orario || item.created_at || "-",
               profilo: parsed.profilo || item.titolo || "-",
               quartiere: parsed.quartiere || item.quartiere || "-",
               obiettivo: parsed.obiettivo || "-",
-              azione: parsed.azione || item.stato || "Dossier",
-              numero_bandi: typeof parsed.numero_bandi === "number" ? parsed.numero_bandi : (item.voti || 0),
-              elenco_bandi: Array.isArray(parsed.elenco_bandi) ? parsed.elenco_bandi : [],
+              email: parsed.email || "-",
+              azione: parsed.azione || item.stato || "Richiesta Dossier",
+              stato: item.stato || "Da Contattare",
+              numero_bandi: typeof parsed.numero_bandi === "number" ? parsed.numero_bandi : elenco.length,
+              elenco_bandi: elenco,
             });
           } catch {}
         } else if (idStr.startsWith("prop_")) {
@@ -300,7 +327,6 @@ export function CivicProvider({ children }: { children: ReactNode }) {
             }
           } catch {}
         } else {
-          // Segnalazioni Mappa: se sono "In revisione" vanno anche nella coda di moderazione Admin
           if (item.stato === "In revisione") {
             listaProposte.push({
               id: idStr,
@@ -339,11 +365,13 @@ export function CivicProvider({ children }: { children: ReactNode }) {
     if (supabase) {
       supabase.auth.getSession().then(({ data: { session } }) => {
         const u = session?.user ?? null;
+        userRef.current = u;
         setUser(u);
         void ricaricaCloud(u);
       });
       const { data: { subscription } } = supabase.auth.onAuthStateChange((_e, session) => {
         const u = session?.user ?? null;
+        userRef.current = u;
         setUser(u);
         void ricaricaCloud(u);
       });
@@ -367,16 +395,28 @@ export function CivicProvider({ children }: { children: ReactNode }) {
           votiSondaggi: next.votiSondaggi,
         }));
       } catch {}
+
       if (supabase) {
         const diff = next.segnalazioni.find((n, i) => n.voti !== prev.segnalazioni[i]?.voti);
         if (diff) supabase.from("segnalazioni").update({ voti: diff.voti }).eq("id", diff.id).then();
-        
-        // Sincronizza profilo utente su DB se loggato
-        if (user) {
-          supabase.from("profili").update({ 
+
+        const currentUser = userRef.current;
+        if (currentUser) {
+          // 1. Salva sempre nei metadata dell'utente autenticato (affidabile al 100%)
+          supabase.auth.updateUser({
+            data: {
+              luoghi_scoperti: next.checkin,
+              punti_spesi: next.puntiSpesi,
+            }
+          }).catch(() => {});
+
+          // 2. Upsert anche nella tabella profili
+          supabase.from("profili").upsert({
+            id: currentUser.id,
+            email: currentUser.email,
             luoghi_scoperti: next.checkin,
-            punti_spesi: next.puntiSpesi
-          }).eq("id", user.id).then();
+            punti_spesi: next.puntiSpesi,
+          }).then();
         }
       }
       return next;
@@ -385,10 +425,11 @@ export function CivicProvider({ children }: { children: ReactNode }) {
 
   const tuttiPoi = [...POI_LIST, ...state.poiExtra];
   const puntiGuadagnati = tuttiPoi.filter((p) => state.checkin.includes(p.id)).reduce((a, p) => a + p.punti, 0);
+  const puntiDisponibili = Math.max(0, puntiGuadagnati - state.puntiSpesi);
 
   return (
     <CivicContext.Provider
-      value={{ state, update, ricaricaCloud, puntiGuadagnati, puntiDisponibili: puntiGuadagnati - state.puntiSpesi, user }}
+      value={{ state, update, ricaricaCloud, puntiGuadagnati, puntiDisponibili, user }}
     >
       {children}
     </CivicContext.Provider>
@@ -401,7 +442,6 @@ export function useCivic() {
   return c;
 }
 
-// Le segnalazioni mappa entrano con stato "In revisione" per passare dal permesso Admin
 export async function inviaSegnalazione(segnalazione: Omit<Segnalazione, 'id' | 'created_at' | 'data'>) {
   if (!supabase) return;
   const { error } = await supabase.from("segnalazioni").insert({
@@ -413,7 +453,6 @@ export async function inviaSegnalazione(segnalazione: Omit<Segnalazione, 'id' | 
   if (error) console.error("Errore invio:", error);
 }
 
-// Invia una candidatura/proposta (Luogo POI, Bacheca, Sondaggio) alla coda di moderazione Admin
 export async function inviaPropostaModerazione(payload: {
   tipo: "poi" | "bacheca" | "sondaggio";
   titolo: string;
@@ -520,14 +559,12 @@ export async function inserisciPoiDirettoAdmin(payload: any) {
   if (error) throw new Error(error.message);
 }
 
-// Permette all'Admin in Regia di Approvare o Rifiutare qualsiasi proposta
 export async function gestisciPropostaAdmin(id: string, stato: string) {
   if (!supabase) throw new Error("Database offline");
   const { error } = await supabase.from("segnalazioni").update({ stato }).eq("id", id);
   if (error) throw new Error(error.message);
 }
 
-// --- FUNZIONI DI SUPPORTO E DOSSIER RIPRISTINATE ---
 export const COSTI_PREMI = { sconto: 500, badge: 1000, partner: 150 } as const;
 
 export { oggi };
@@ -552,14 +589,25 @@ export async function modificaStatoDossierAdmin(id: string, stato: string) {
 
 export async function registraDossierGenerato(payload: any) {
   if (!supabase) return;
-  
-  // HACK SICURO: Legge la mail obbligatoria dal DOM
-  const emailInput = document.getElementById("dossierEmail") as HTMLInputElement;
-  if (emailInput && (!emailInput.value || !emailInput.value.includes("@"))) {
-      alert("⚠️ Inserisci un indirizzo email valido per ricevere il Dossier strategico!");
-      throw new Error("Email mancante o non valida");
+
+  const emailInput = document.getElementById("dossierEmail") as HTMLInputElement | null;
+  const email = (payload.email || emailInput?.value || "").trim();
+  if (!email || !email.includes("@")) {
+    throw new Error("Inserisci un indirizzo email valido per ricevere il Dossier strategico.");
   }
-  const email = emailInput ? emailInput.value : (payload.email || "Email non fornita");
+
+  const orario = new Date().toLocaleString("it-IT");
+  const elencoBandi = Array.isArray(payload.bandi)
+    ? payload.bandi.map((b: any) => (typeof b === "string" ? b : `${b.nome || b.titolo} (${b.ente || ""})`))
+    : [];
+
+  const fullPayload = {
+    ...payload,
+    email,
+    orario,
+    numero_bandi: elencoBandi.length,
+    elenco_bandi: elencoBandi,
+  };
 
   const idRow = `dossier_${Date.now().toString(36)}`;
   await supabase.from("segnalazioni").insert({
@@ -568,12 +616,24 @@ export async function registraDossierGenerato(payload: any) {
     quartiere: payload.quartiere || "ND",
     categoria: "Dossier_Generato",
     stato: "Da Contattare",
-    voti: 0,
+    voti: elencoBandi.length,
     lat: 42.5636,
     lng: 12.6427,
-    descrizione: JSON.stringify({ ...payload, email }),
+    descrizione: JSON.stringify(fullPayload),
     created_at: new Date().toISOString().split("T")[0]
   });
+
+  // Invia anche alla tabella dossier_generati per far scattare il Webhook Make.com -> PEC Aruba
+  try {
+    await supabase.from("dossier_generati").insert({
+      email,
+      profilo: payload.profilo || "Cittadino",
+      quartiere: payload.quartiere || "Terni",
+      obiettivo: payload.obiettivo || "Generale",
+      bandi_trovati: elencoBandi,
+      stato: "Da Contattare",
+    });
+  } catch {}
 }
 
 export async function salvaAuditBandoCloud(key: string, titolo: string, nuovoStato: string, nota: string, linkUfficiale: string) {
@@ -594,14 +654,13 @@ export async function salvaAuditBandoCloud(key: string, titolo: string, nuovoSta
   });
 }
 
-
 export async function aggiungiCommento(autore: string, testo: string, poiId: string) {
   if (!supabase) return;
   const idRow = `commento_${Date.now().toString(36)}`;
   await supabase.from("segnalazioni").insert({
     id: idRow,
     titolo: `Commento di ${autore}`,
-    quartiere: poiId, // Usiamo il campo quartiere per collegare il commento al POI
+    quartiere: poiId,
     categoria: "Commento",
     stato: "Pubblicato",
     voti: 0,
