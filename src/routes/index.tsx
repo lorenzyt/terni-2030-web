@@ -318,7 +318,7 @@ function IndexPage() {
 
           <div className="surface-panel border p-8 rounded-xl shadow-sm hover:shadow-md transition-shadow">
             <Radar className="size-10 text-amber-500 mb-6" />
-            <h3 className="text-2xl font-bold mb-3">Urban GO & TerniDex</h3>
+            <h3 className="text-2xl font-bold mb-3">Terni Urban-Go</h3>
             <p className="text-muted-foreground mb-6 leading-relaxed">
               Scopri i {totPoi} luoghi monumentali del TerniDex camminando per la città col radar GPS e accumula Punti Esploratore.
             </p>

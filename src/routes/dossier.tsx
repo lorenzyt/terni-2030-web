@@ -101,6 +101,10 @@ function DossierPage() {
   );
   const bandiCitta = bandiAttivi.filter((b: any) => b.categoria_macro !== "welfare");
   const bandiWelfare = bandiAttivi.filter((b: any) => b.categoria_macro === "welfare");
+  const valoreCitta = bandiCitta.reduce((acc: number, b: any) => acc + (Number(b.valore_stimato_euro) || 350000), 0);
+  const valoreWelfare = bandiWelfare.reduce((acc: number, b: any) => acc + (Number(b.valore_stimato_euro) || 350000), 0);
+  const fmtEuro = (val: number) =>
+    new Intl.NumberFormat("it-IT", { style: "currency", currency: "EUR", maximumFractionDigits: 0 }).format(val);
 
   const obiettiviLocali = Array.isArray(OBIETTIVI) ? OBIETTIVI : [];
   const profiliLocali = macroSettore === "welfare" ? PROFILI_WELFARE : (Array.isArray(PROFILI) ? PROFILI : []);
@@ -224,26 +228,29 @@ function DossierPage() {
         </p>
       </div>
 
-      {/* SCELTA MACRO-AMBITO: CITTA & IMPRESE VS WELFARE & SOCIALE */}
+      {/* SCELTA MACRO-AMBITO CON CIFRE IDENTICHE ALLA LANDING PAGE */}
       <div className="grid gap-4 sm:grid-cols-2 mb-8">
         <button
           onClick={() => {
             setMacroSettore("citta");
             setAsseWelfareScelto("");
           }}
-          className={`p-5 rounded-2xl border text-left transition-all hover-lift ${
+          className={`p-6 rounded-2xl border text-left transition-all hover-lift ${
             macroSettore === "citta" ? "border-sky-400 bg-sky-500/10 shadow-md" : "border-border bg-secondary/20 hover:bg-secondary/40"
           }`}
         >
           <div className="flex items-center justify-between">
             <span className="text-xs font-bold uppercase text-sky-400 flex items-center gap-1.5">
-              <Building2 className="size-4" /> Linea 1 · Finanziamenti Città, Imprese & Energia
+              <Building2 className="size-4" /> Finanziamenti Città, Imprese & Energia
             </span>
-            <span className="text-xs font-semibold text-muted-foreground">{bandiCitta.length} misure monitorate</span>
+            <span className="text-xs font-semibold text-sky-400">{bandiCitta.length} bandi attivi</span>
           </div>
-          <div className="text-lg font-bold mt-1.5">Imprese, Commercio, Fotovoltaico, CER & Rigenerazione</div>
+          <div className="text-3xl md:text-4xl font-black mt-2 text-foreground">{fmtEuro(valoreCitta)}</div>
+          <p className="text-xs font-semibold text-foreground/90 mt-1.5">
+            Imprese, Commercio, Fotovoltaico, CER & Rigenerazione
+          </p>
           <p className="text-xs text-muted-foreground mt-1">
-            Contributi tra <b>€ 5.000 e € 150.000+</b> per aperture attività, locali sfitti, efficientamento energetico, innovazione digitale e riqualificazione.
+            {bandiCitta.length} misure attive (PR FESR, PNRR, GSE, Invitalia, CCIAA)
           </p>
         </button>
 
@@ -252,19 +259,22 @@ function DossierPage() {
             setMacroSettore("welfare");
             setObiettivo("o6");
           }}
-          className={`p-5 rounded-2xl border text-left transition-all hover-lift ${
+          className={`p-6 rounded-2xl border text-left transition-all hover-lift ${
             macroSettore === "welfare" ? "border-rose-400 bg-rose-500/10 shadow-md" : "border-border bg-secondary/20 hover:bg-secondary/40"
           }`}
         >
           <div className="flex items-center justify-between">
             <span className="text-xs font-bold uppercase text-rose-400 flex items-center gap-1.5">
-              <HeartHandshake className="size-4" /> Linea 2 · Welfare, Famiglie & Terzo Settore
+              <HeartHandshake className="size-4" /> Fondi Welfare, Sociale & Terzo Settore
             </span>
-            <span className="text-xs font-semibold text-muted-foreground">{bandiWelfare.length} misure monitorate</span>
+            <span className="text-xs font-semibold text-rose-400">{bandiWelfare.length} misure attive</span>
           </div>
-          <div className="text-lg font-bold mt-1.5">Politiche Sociali, Disabilità, Caregiver, Minori & ETS</div>
+          <div className="text-3xl md:text-4xl font-black mt-2 text-foreground">{fmtEuro(valoreWelfare)}</div>
+          <p className="text-xs font-semibold text-foreground/90 mt-1.5">
+            Politiche Sociali, Disabilità, Caregiver, Minori & ETS
+          </p>
           <p className="text-xs text-muted-foreground mt-1">
-            Assegni di cura, assistenza domiciliare, Vita Indipendente, bandi per Associazioni/ETS (Art. 55 CTS) e progetti socio-educativi.
+            {bandiWelfare.length} misure attive (PR FSE+, PNRR M5C2/M6, FNA, MLPS, Carit)
           </p>
         </button>
       </div>

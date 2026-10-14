@@ -35,7 +35,7 @@ export function SiteNav() {
 
         <nav className="hidden md:flex items-center gap-6">
           <Link to="/mappa" className={linkClass("/mappa")}>Mappa GIS</Link>
-          <Link to="/urban-go" className={linkClass("/urban-go")}>Urban GO (95 POI)</Link>
+          <Link to="/urban-go" className={linkClass("/urban-go")}>Terni Urban-Go</Link>
           <Link to="/dossier" className={linkClass("/dossier")}>Bandi & Dossier IA</Link>
           <Link to="/partner" className={linkClass("/partner")}>Partner</Link>
 
@@ -72,7 +72,7 @@ export function SiteNav() {
         <div className="md:hidden border-b border-border bg-background px-4 py-4">
           <nav className="flex flex-col space-y-4">
             <Link to="/mappa" className={linkClass("/mappa")} onClick={() => setIsOpen(false)}>Mappa GIS</Link>
-            <Link to="/urban-go" className={linkClass("/urban-go")} onClick={() => setIsOpen(false)}>Urban GO (95 POI)</Link>
+            <Link to="/urban-go" className={linkClass("/urban-go")} onClick={() => setIsOpen(false)}>Terni Urban-Go</Link>
             <Link to="/dossier" className={linkClass("/dossier")} onClick={() => setIsOpen(false)}>Bandi & Dossier IA</Link>
             <Link to="/partner" className={linkClass("/partner")} onClick={() => setIsOpen(false)}>Partner</Link>
             {isAdmin && (

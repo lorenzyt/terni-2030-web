@@ -22,7 +22,7 @@ import { COSTI_PREMI, inviaPropostaModerazione, useCivic } from "@/lib/civic-sto
 export const Route = createFileRoute("/urban-go")({
   head: () => ({
     meta: [
-      { title: "Terni Urban GO & TerniDex GPS — Terni 2030" },
+      { title: "Terni Urban-Go & TerniDex GPS — Terni 2030" },
       { name: "description", content: "Esplora i luoghi di Terni approvati dalla community, sblocca il TerniDex col GPS e proponi nuove tappe." },
     ],
   }),
@@ -127,7 +127,7 @@ function UrbanGo() {
         toast.success("📡 Radar GPS attivo! Avvicinati a meno di 150m dai luoghi per sbloccarli.");
       },
       () => {
-        toast.error("Permesso GPS negato. Abilita la posizione nel browser per giocare a Terni Urban GO.");
+        toast.error("Permesso GPS negato. Abilita la posizione nel browser per giocare a Terni Urban-Go.");
       },
       { enableHighAccuracy: true, timeout: 10000 }
     );
@@ -301,7 +301,7 @@ function UrbanGo() {
 5 Gradi di Rarità: Comune (25) · Raro (50) · Epico (100) · Leggendario (200) · Unico (500)
           </Badge>
           <h1 className="text-3xl font-bold md:text-4xl">
-            Terni <span className="text-ember-gradient">Urban GO</span> & TerniDex
+            Terni <span className="text-ember-gradient">Terni Urban-Go</span> & TerniDex
           </h1>
           <p className="mt-1 max-w-2xl text-sm text-muted-foreground">
             Esplora i luoghi culturali e architettonici inseriti e approvati dalla community di Terni 2030, avvicinati col GPS per riscuotere i punti e proponi nuove tappe.
@@ -367,7 +367,7 @@ function UrbanGo() {
               <MapPin className="mx-auto mb-3 size-10 text-accent" />
               <h3 className="text-lg font-bold">Nessun luogo ancora pubblicato sulla mappa</h3>
               <p className="mx-auto mt-1 max-w-xl text-xs text-muted-foreground">
-                La mappa di Terni Urban GO è pronta e pulita: tutti i luoghi (Comuni, Rari, Epici, Leggendari e Unici) vengono inseriti da te o proposti dai cittadini e pubblicati solo dopo il tuo consenso nella Regia Operatori.
+                La mappa di Terni Urban-Go è pronta e pulita: tutti i luoghi (Comuni, Rari, Epici, Leggendari e Unici) vengono inseriti da te o proposti dai cittadini e pubblicati solo dopo il tuo consenso nella Regia Operatori.
               </p>
               <Button className="mt-4" onClick={() => { setTipoCandidatura("poi"); setCandidaturaOpen(true); }}>
                 <Plus className="mr-1.5 size-4" /> Inserisci o Proponi il Primo Luogo
@@ -449,7 +449,6 @@ function UrbanGo() {
                             tentaCheckinGps(p, true);
                           }}
                         >
-                          🔓 Sblocco Test Admin
                         </Button>
                       )}
                     </div>
