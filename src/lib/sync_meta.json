@@ -1,0 +1,12 @@
+{
+  "ultimo_aggiornamento": "14/10/2026 alle 15:30:29",
+  "stato_automazione": "Attivo (Ogni giorno alle ore 09:00 · Task: Terni2030_AutoBandi_0900)",
+  "grezzi_analizzati": 188,
+  "duplicati_rimossi": 125,
+  "bandi_unici_attivi": 63,
+  "bandi_citta_count": 48,
+  "bandi_welfare_count": 15,
+  "valore_citta_euro": 59900000,
+  "valore_welfare_euro": 25815000,
+  "valore_totale_euro": 85715000
+}
