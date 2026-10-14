@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="240" height="240">
+  <rect width="120" height="120" rx="14" fill="#A21942"/>
+  <text x="10" y="27" fill="#ffffff" font-family="system-ui, -apple-system, sans-serif" font-size="22" font-weight="900">8</text>
+  <text x="38" y="17" fill="#ffffff" font-family="system-ui, -apple-system, sans-serif" font-size="7.3" font-weight="800" letter-spacing="0.3">LAVORO DIGNITOSO</text>
+  <text x="38" y="27" fill="#ffffff" font-family="system-ui, -apple-system, sans-serif" font-size="7.3" font-weight="800" letter-spacing="0.3">E CRESCITA</text>
+  <line x1="10" y1="33" x2="110" y2="33" stroke="#ffffff" stroke-opacity="0.35" stroke-width="1"/>
+  <rect x="30" y="74" width="12" height="22" fill="#fff" rx="2"/><rect x="48" y="62" width="12" height="34" fill="#fff" rx="2"/><rect x="66" y="48" width="12" height="48" fill="#fff" rx="2"/><path d="M28 64 L48 48 L62 54 L84 36" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><polyline points="72,36 84,36 84,48" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="60" y="112" text-anchor="middle" fill="#ffffff" fill-opacity="0.85" font-family="system-ui, sans-serif" font-size="6.5" font-weight="700" letter-spacing="0.8">AGENDA ONU 2030</text>
+</svg>

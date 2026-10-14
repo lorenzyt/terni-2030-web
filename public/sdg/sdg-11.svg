@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="240" height="240">
+  <rect width="120" height="120" rx="14" fill="#FD9D24"/>
+  <text x="10" y="27" fill="#ffffff" font-family="system-ui, -apple-system, sans-serif" font-size="22" font-weight="900">11</text>
+  <text x="38" y="17" fill="#ffffff" font-family="system-ui, -apple-system, sans-serif" font-size="7.3" font-weight="800" letter-spacing="0.3">CITTÀ E COMUNITÀ</text>
+  <text x="38" y="27" fill="#ffffff" font-family="system-ui, -apple-system, sans-serif" font-size="7.3" font-weight="800" letter-spacing="0.3">SOSTENIBILI</text>
+  <line x1="10" y1="33" x2="110" y2="33" stroke="#ffffff" stroke-opacity="0.35" stroke-width="1"/>
+  <rect x="26" y="54" width="18" height="42" fill="#fff" rx="1"/><rect x="48" y="40" width="22" height="56" fill="#fff" rx="1"/><polygon points="74,64 86,52 98,64 98,96 74,96" fill="#fff"/><rect x="53" y="46" width="4" height="5" fill="#FD9D24"/><rect x="61" y="46" width="4" height="5" fill="#FD9D24"/><rect x="53" y="56" width="4" height="5" fill="#FD9D24"/><rect x="61" y="56" width="4" height="5" fill="#FD9D24"/><rect x="83" y="76" width="6" height="20" fill="#FD9D24"/>
+  <text x="60" y="112" text-anchor="middle" fill="#ffffff" fill-opacity="0.85" font-family="system-ui, sans-serif" font-size="6.5" font-weight="700" letter-spacing="0.8">AGENDA ONU 2030</text>
+</svg>

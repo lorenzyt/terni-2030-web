@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="240" height="240">
+  <rect width="120" height="120" rx="14" fill="#FD6925"/>
+  <text x="10" y="27" fill="#ffffff" font-family="system-ui, -apple-system, sans-serif" font-size="22" font-weight="900">9</text>
+  <text x="38" y="17" fill="#ffffff" font-family="system-ui, -apple-system, sans-serif" font-size="7.3" font-weight="800" letter-spacing="0.3">IMPRESE, INNOVAZIONE</text>
+  <text x="38" y="27" fill="#ffffff" font-family="system-ui, -apple-system, sans-serif" font-size="7.3" font-weight="800" letter-spacing="0.3">E INFRASTRUTTURE</text>
+  <line x1="10" y1="33" x2="110" y2="33" stroke="#ffffff" stroke-opacity="0.35" stroke-width="1"/>
+  <polygon points="60,38 82,50 60,62 38,50" fill="none" stroke="#fff" stroke-width="4.5" stroke-linejoin="round"/><polygon points="38,50 60,62 60,88 38,76" fill="none" stroke="#fff" stroke-width="4.5" stroke-linejoin="round"/><polygon points="82,50 60,62 60,88 82,76" fill="none" stroke="#fff" stroke-width="4.5" stroke-linejoin="round"/><circle cx="60" cy="50" r="3.5" fill="#fff"/>
+  <text x="60" y="112" text-anchor="middle" fill="#ffffff" fill-opacity="0.85" font-family="system-ui, sans-serif" font-size="6.5" font-weight="700" letter-spacing="0.8">AGENDA ONU 2030</text>
+</svg>

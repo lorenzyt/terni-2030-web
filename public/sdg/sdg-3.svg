@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="240" height="240">
+  <rect width="120" height="120" rx="14" fill="#4C9F38"/>
+  <text x="10" y="27" fill="#ffffff" font-family="system-ui, -apple-system, sans-serif" font-size="22" font-weight="900">3</text>
+  <text x="38" y="17" fill="#ffffff" font-family="system-ui, -apple-system, sans-serif" font-size="7.3" font-weight="800" letter-spacing="0.3">SALUTE E</text>
+  <text x="38" y="27" fill="#ffffff" font-family="system-ui, -apple-system, sans-serif" font-size="7.3" font-weight="800" letter-spacing="0.3">BENESSERE</text>
+  <line x1="10" y1="33" x2="110" y2="33" stroke="#ffffff" stroke-opacity="0.35" stroke-width="1"/>
+  <path d="M22 68 h16 l8 -18 l10 34 l10 -24 l6 8 h26" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><path d="M60 96 C60 96 34 78 34 58 C34 47 43 40 52 46 C56 49 60 54 60 54 C60 54 64 49 68 46 C77 40 86 47 86 58 C86 78 60 96 60 96 Z" fill="none" stroke="#fff" stroke-width="3.5" opacity="0.45"/>
+  <text x="60" y="112" text-anchor="middle" fill="#ffffff" fill-opacity="0.85" font-family="system-ui, sans-serif" font-size="6.5" font-weight="700" letter-spacing="0.8">AGENDA ONU 2030</text>
+</svg>

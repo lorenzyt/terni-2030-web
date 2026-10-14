@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Lock, Radar, AlertCircle, Plus, CheckCircle2, Globe, Sparkles } from "lucide-react";
+import { Lock, Radar, AlertCircle, Plus, CheckCircle2, Globe, Sparkles, Building2, HeartHandshake } from "lucide-react";
 import { useState, useEffect } from "react";
 import { toast } from "sonner";
 import { useCivic, registraDossierGenerato, COSTI_PREMI, nuovoId } from "@/lib/civic-store";
@@ -31,31 +31,24 @@ function normKey(titolo: string): string {
   return String(titolo || "").toLowerCase().replace(/[^a-z0-9]/g, "").slice(0, 40);
 }
 
-const SDG_MAP: Record<string, string> = {
-  o1: "SDG 11 · Città Sostenibili & Rigenerazione",
-  o2: "SDG 7 & 13 · Energia Pulita & Clima",
-  o3: "SDG 11 · Mobilità Dolce & Sostenibile",
-  o4: "SDG 8 & 9 · Sviluppo Industriale & Lavoro",
-  o5: "SDG 8 · Commercio & Impresa Locale",
-  o6: "SDG 3 & 10 · Welfare, Salute, Cultura & Inclusione",
-  o7: "SDG 9 · Innovazione & Transizione Digitale 5.0",
+function stimaValoreBando(b: any): number {
+  if (typeof b?.valore_stimato_euro === "number" && b.valore_stimato_euro > 0) {
+    return b.valore_stimato_euro;
+  }
+  return b?.semaforo === "verde" ? 350000 : 95000;
+}
+
+const SDG_META: Record<string, { label: string; img: string }> = {
+  o1: { label: "SDG 11 · Città Sostenibili & Rigenerazione", img: "/sdg/sdg-11.svg" },
+  o2: { label: "SDG 7 & 13 · Energia Pulita & Clima", img: "/sdg/sdg-7.svg" },
+  o3: { label: "SDG 11 & 13 · Mobilità Dolce & Sostenibile", img: "/sdg/sdg-13.svg" },
+  o4: { label: "SDG 8 & 9 · Sviluppo Industriale & Lavoro", img: "/sdg/sdg-8.svg" },
+  o5: { label: "SDG 8 · Commercio & Impresa Locale", img: "/sdg/sdg-8.svg" },
+  o6: { label: "SDG 3 & 10 · Welfare, Salute, Cultura & Inclusione", img: "/sdg/sdg-3.svg" },
+  o7: { label: "SDG 9 · Innovazione & Transizione Digitale 5.0", img: "/sdg/sdg-9.svg" },
 };
 
 const bandiArray = Array.isArray(bandiRealiJson) ? bandiRealiJson : [];
-const contaPerPortale = (chiavi: string[]) =>
-  bandiArray.filter((b: any) => {
-    const p = (b.portale || b.ente || "").toLowerCase();
-    return chiavi.some((k) => p.includes(k.toLowerCase()));
-  }).length;
-
-const PORTALI = [
-  { nome: "Regione Umbria & FESR/FSE+", n: contaPerPortale(["Regione Umbria", "FESR", "FSE", "FSC"]), ambito: "PR FESR, PR FSE+, Welfare e Coesione" },
-  { nome: "Comune di Terni & Carit", n: contaPerPortale(["Comune di Terni", "Carit"]), ambito: "Sfitti, commercio, cultura, sociale" },
-  { nome: "GSE & Clima", n: contaPerPortale(["GSE"]), ambito: "Conto Termico 3.0, CER, fotovoltaico" },
-  { nome: "PNRR & Welfare Nazionale", n: contaPerPortale(["PNRR", "MLPS", "INPS"]), ambito: "Transizione 5.0, M5C2 Inclusione, M6 Salute" },
-  { nome: "Invitalia & MIMIT", n: contaPerPortale(["Invitalia"]), ambito: "Nuove imprese ON, Smart&Start, Sviluppo" },
-  { nome: "Camera di Commercio", n: contaPerPortale(["Camera di Commercio"]), ambito: "Voucher digitali I4.0, doppia transizione" }
-];
 
 function DossierPage() {
   const search = Route.useSearch();
@@ -76,6 +69,34 @@ function DossierPage() {
   const [emailDossier, setEmailDossier] = useState("");
   const [inviato, setInviato] = useState(false);
 
+  const bandiAttivi = bandiArray.filter(
+    (b: any) => state?.auditBandi?.[normKey(b.nome || b.titolo)]?.stato !== "Scartato"
+  );
+
+  const contaPerPortale = (chiavi: string[]) =>
+    bandiAttivi.filter((b: any) => {
+      const p = `${b.portale || ""} ${b.ente || ""}`.toLowerCase();
+      return chiavi.some((k) => p.includes(k.toLowerCase()));
+    }).length;
+
+  const PORTALI = [
+    { nome: "PR FESR / FSC & Regione Umbria", n: contaPerPortale(["Regione Umbria", "FESR", "FSC"]), ambito: "Rigenerazione, imprese, energia" },
+    { nome: "Welfare FSE+ / MLPS / INPS", n: contaPerPortale(["FSE", "MLPS", "INPS", "Welfare", "Salute"]), ambito: "Non autosufficienza, disabilità, Art. 55 CTS" },
+    { nome: "Comune di Terni & Fondazione Carit", n: contaPerPortale(["Comune di Terni", "Carit"]), ambito: "Sfitti, commercio, cultura, sociale" },
+    { nome: "GSE & Comunit? Energetiche", n: contaPerPortale(["GSE"]), ambito: "Conto Termico 3.0, CER, fotovoltaico" },
+    { nome: "PNRR Italia Domani", n: contaPerPortale(["PNRR"]), ambito: "Transizione 5.0, M5C2 Inclusione, M6 Salute" },
+    { nome: "Invitalia & Camera di Commercio", n: contaPerPortale(["Invitalia", "Camera di Commercio"]), ambito: "Nuove imprese ON, Smart&Start, Voucher I4.0" }
+  ];
+
+  const valoreCitta = bandiAttivi
+    .filter((b: any) => b.categoria_macro !== "welfare")
+    .reduce((acc: number, b: any) => acc + stimaValoreBando(b), 0);
+  const valoreWelfare = bandiAttivi
+    .filter((b: any) => b.categoria_macro === "welfare")
+    .reduce((acc: number, b: any) => acc + stimaValoreBando(b), 0);
+  const fmtEuro = (val: number) =>
+    new Intl.NumberFormat("it-IT", { style: "currency", currency: "EUR", maximumFractionDigits: 0 }).format(val);
+
   const obiettiviLocali = Array.isArray(OBIETTIVI) ? OBIETTIVI : [];
   const profiliLocali = Array.isArray(PROFILI) ? PROFILI : [];
   const quartieriLocali = Array.isArray(QUARTIERI) ? QUARTIERI : [];
@@ -85,7 +106,6 @@ function DossierPage() {
     : undefined;
 
   const costoPunti = COSTI_PREMI?.sconto || 500;
-  // Supporta sia numero diretto che eventuale funzione
   const saldo = typeof rawPunti === "number" ? rawPunti : typeof rawPunti === "function" ? rawPunti() : 0;
   const puoScontare = saldo >= costoPunti;
   const prezzoPieno = 14.90;
@@ -93,7 +113,7 @@ function DossierPage() {
 
   const dossierTotali = Array.isArray(state?.dossierGenerati) ? state.dossierGenerati.length : 0;
 
-  const bandiGrezzi = bandiArray.filter((b: any) => {
+  const bandiGrezzi = bandiAttivi.filter((b: any) => {
     if (!obiettivo) return false;
     const obId = b.obiettivo_id || b.obiettivo;
     const matchObiettivo = obId === obiettivo;
@@ -101,13 +121,13 @@ function DossierPage() {
     return matchObiettivo && matchProfilo;
   });
 
-  const bandiFallback = bandiGrezzi.length > 0
-    ? bandiGrezzi
-    : bandiArray.filter((b: any) => (b.obiettivo_id || b.obiettivo) === obiettivo);
+  const bandi = (
+    bandiGrezzi.length > 0
+      ? bandiGrezzi
+      : bandiAttivi.filter((b: any) => (b.obiettivo_id || b.obiettivo) === obiettivo)
+  ).slice(0, 6);
 
-  const bandi = bandiFallback
-    .filter((b: any) => state?.auditBandi?.[normKey(b.nome || b.titolo)]?.stato !== "Scartato")
-    .slice(0, 6);
+  const valoreDossier = bandi.reduce((acc: number, b: any) => acc + stimaValoreBando(b), 0);
 
   const profiloNome = profiliLocali.find((p: any) => p.id === profilo)?.nome ?? (profilo || "Cittadino / Impresa");
   const obiettivoNome = obCustom?.titolo ?? obiettiviLocali.find((o: any) => o.id === obiettivo)?.nome ?? obiettivo;
@@ -198,7 +218,7 @@ function DossierPage() {
           Bandi & <span className="text-ember-gradient">Dossier IA</span>
         </h1>
         <p className="mt-2 text-sm text-muted-foreground max-w-2xl mx-auto">
-          Incrocia i {bandiArray.length} bandi regionali, nazionali ed europei con il tuo progetto a Terni e gli obiettivi dell'Agenda 2030.
+          Motore unificato Finanziamenti Città ({fmtEuro(valoreCitta)}) + Welfare & Politiche Sociali ({fmtEuro(valoreWelfare)}).
         </p>
         {dossierTotali > 0 && (
           <p className="mt-2 text-xs font-semibold text-accent">🔥 {dossierTotali} Dossier già elaborati per il territorio!</p>
@@ -206,10 +226,20 @@ function DossierPage() {
       </div>
 
       <section className="surface-panel mb-6 p-5">
-        <h2 className="flex items-center gap-2 text-lg font-bold">
-          <Radar className="size-5 text-accent" /> Radar Canali di Finanziamento Attivi ({bandiArray.length} Bandi nel Pool)
-        </h2>
-        <div className="mt-4 grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="flex flex-wrap items-center justify-between gap-2 mb-4">
+          <h2 className="flex items-center gap-2 text-lg font-bold">
+            <Radar className="size-5 text-accent" /> Radar Unificato Bandi & Welfare ({bandiAttivi.length} Misure Attive)
+          </h2>
+          <div className="flex gap-3 text-xs font-bold">
+            <span className="inline-flex items-center gap-1 text-sky-400">
+              <Building2 className="size-3.5" /> Città: {fmtEuro(valoreCitta)}
+            </span>
+            <span className="inline-flex items-center gap-1 text-rose-400">
+              <HeartHandshake className="size-3.5" /> Welfare: {fmtEuro(valoreWelfare)}
+            </span>
+          </div>
+        </div>
+        <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
           {PORTALI.map((p) => (
             <div key={p.nome} className="rounded-md border border-border p-3">
               <p className="flex justify-between text-sm font-semibold">
@@ -291,28 +321,33 @@ function DossierPage() {
         {step === 2 && (
           <div className="space-y-5">
             <div className="grid gap-3 sm:grid-cols-2">
-              {obiettiviLocali.map((o: any) => (
-                <button key={o.id} onClick={() => setObiettivo(o.id)} className={card(obiettivo === o.id)}>
-                  <div className="flex items-center justify-between gap-2">
-                    <p className="font-semibold">{o.nome}</p>
-                    {SDG_MAP[o.id] && (
-                      <span className="text-[10px] font-bold text-accent uppercase">{SDG_MAP[o.id].split("·")[0]}</span>
-                    )}
-                  </div>
-                  {SDG_MAP[o.id] && <p className="text-xs text-muted-foreground mt-1">{SDG_MAP[o.id]}</p>}
-                </button>
-              ))}
+              {obiettiviLocali.map((o: any) => {
+                const sdg = SDG_META[o.id];
+                return (
+                  <button key={o.id} onClick={() => setObiettivo(o.id)} className={card(obiettivo === o.id)}>
+                    <div className="flex items-center gap-3">
+                      {sdg && (
+                        <img src={sdg.img} alt={sdg.label} className="w-12 h-12 rounded-md shrink-0 shadow-sm" />
+                      )}
+                      <div>
+                        <p className="font-semibold">{o.nome}</p>
+                        {sdg && <p className="text-xs text-accent mt-0.5 font-medium">{sdg.label}</p>}
+                      </div>
+                    </div>
+                  </button>
+                );
+              })}
             </div>
             <div className="rounded-lg border border-dashed border-accent/60 p-4">
               <p className="mb-3 font-semibold">
-                <Plus className="size-4 inline" /> Obiettivo Personalizzato (Progetto Specifico)
+                <Plus className="size-4 inline" /> Obiettivo Personalizzato (Progetto Specifico Città o Welfare)
               </p>
               <input
                 type="text"
                 className="flex h-9 w-full rounded-md border border-input bg-background px-3 py-1 text-sm shadow-sm mb-2"
                 value={custom.titolo}
                 onChange={(e) => setCustom({ ...custom, titolo: e.target.value })}
-                placeholder="Descrivi il tuo obiettivo (es. Riapertura locale artigiano, Impianto fotovoltaico, Co-progettazione Welfare)"
+                placeholder="Descrivi il tuo obiettivo (es. Riapertura locale, Impianto fotovoltaico, Co-progettazione Welfare)"
               />
               <button
                 className="h-8 px-3 rounded-md bg-primary text-primary-foreground text-xs font-medium"
@@ -341,21 +376,35 @@ function DossierPage() {
 
         {step === 3 && (
           <div className="space-y-6">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-border pb-4">
-              <div>
-                <span className="inline-flex items-center gap-1 text-xs font-bold text-accent uppercase">
-                  <Globe className="size-3.5" /> {SDG_MAP[obiettivo] || "Allineamento Strategico Agenda 2030"}
-                </span>
-                <h2 className="text-2xl font-bold mt-0.5">
-                  Risultato Preliminare · {quartiere || "Terni"}
-                </h2>
-                <p className="text-xs text-muted-foreground">
-                  Profilo: <b>{profiloNome}</b> · Obiettivo: <b>{obiettivoNome}</b>
-                </p>
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-border pb-4">
+              <div className="flex items-center gap-3">
+                {SDG_META[obiettivo] && (
+                  <img
+                    src={SDG_META[obiettivo].img}
+                    alt={SDG_META[obiettivo].label}
+                    className="w-14 h-14 rounded-lg shadow-sm shrink-0"
+                  />
+                )}
+                <div>
+                  <span className="inline-flex items-center gap-1 text-xs font-bold text-accent uppercase">
+                    <Globe className="size-3.5" /> {SDG_META[obiettivo]?.label || "Allineamento Strategico Agenda 2030"}
+                  </span>
+                  <h2 className="text-2xl font-bold mt-0.5">
+                    Risultato Preliminare · {quartiere || "Terni"}
+                  </h2>
+                  <p className="text-xs text-muted-foreground">
+                    Profilo: <b>{profiloNome}</b> · Obiettivo: <b>{obiettivoNome}</b>
+                  </p>
+                </div>
               </div>
-              <span className="inline-flex items-center rounded-full bg-accent/15 px-3 py-1 text-xs font-bold text-accent">
-                {bandi.length} Misure Rilevate
-              </span>
+              <div className="text-left sm:text-right">
+                <span className="inline-flex items-center rounded-full bg-accent/15 px-3 py-1 text-xs font-bold text-accent">
+                  {bandi.length} Misure Rilevate
+                </span>
+                <div className="text-xs text-muted-foreground mt-1">
+                  Plafond stimato: <b className="text-foreground">{fmtEuro(valoreDossier)}</b>
+                </div>
+              </div>
             </div>
 
             {bandi.length > 0 && (
@@ -368,7 +417,7 @@ function DossierPage() {
                     <div key={b.id || b.titolo} className="rounded-lg border border-border bg-background/60 p-3.5 text-left">
                       <div className="flex items-center justify-between gap-2 text-[11px] text-accent font-semibold">
                         <span>{b.portale || b.ente}</span>
-                        <span>{b.scadenza || "Attivo"}</span>
+                        <span>{fmtEuro(stimaValoreBando(b))}</span>
                       </div>
                       <p className="font-bold text-sm mt-1 line-clamp-2">{b.titolo || b.nome}</p>
                       <p className="text-xs text-muted-foreground mt-1">{b.importo || "Contributo / Agevolazione"}</p>
