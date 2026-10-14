@@ -1,363 +1,622 @@
-import bandiRealiJson from "@/lib/bandi_reali.json";
-import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { useState, useEffect } from "react";
 import { toast } from "sonner";
-import { CheckCircle2, ExternalLink, FileText, Inbox, Lock, RefreshCw, Search, ShieldCheck, AlertTriangle, XCircle, Zap, MapPin } from "lucide-react";
-import { TerniMap } from "@/components/TerniMap";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Label } from "@/components/ui/label";
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { ORDINE_RARITA, RARITA_STANDARD, type RaritaPOI, type POI } from "@/lib/terni-data";
-import { gestisciPropostaAdmin, inserisciPoiDirettoAdmin, eliminaPoiAdmin, modificaPoiAdmin, salvaAuditBandoCloud, getDossiersAdmin, eliminaDossierAdmin, modificaStatoDossierAdmin, useCivic, type AuditBando, type PropostaModerazione } from "@/lib/civic-store";
+import {
+  ShieldCheck,
+  FileText,
+  Radar,
+  Trash2,
+  CheckCircle2,
+  Clock,
+  RefreshCw,
+  PlusCircle,
+  ExternalLink,
+  Mail,
+  Building2,
+  HeartHandshake,
+  Lock
+} from "lucide-react";
+import {
+  useCivic,
+  supabase,
+  salvaAuditBandoCloud,
+  eliminaDossierAdmin,
+  modificaStatoDossierAdmin,
+  registraDossierGenerato,
+  gestisciPropostaAdmin
+} from "@/lib/civic-store";
+import bandiRealiJson from "@/lib/bandi_reali.json";
+import syncMetaJson from "@/lib/sync_meta.json";
 
 export const Route = createFileRoute("/regia")({
-  head: () => ({
-    meta: [
-      { title: "Regia Controllo Bandi, Dossier & Moderazione — Terni 2030" },
-      { name: "robots", content: "noindex, nofollow" },
-    ],
-  }),
   component: RegiaPage,
 });
-
-const CATEGORIE_POI: POI["categoria"][] = ["Architettura d'autore", "Arte pubblica", "Archeologia industriale", "Storia e fede"];
-
-const CODICI_ABILITATI: Record<string, string> = {
-  "Tr2030!Admin#Lollo95": "Lorenzo (Admin)",
-  "Umbria#2030!RegiaBandi": "Controllore Regione",
-};
 
 function normKey(titolo: string): string {
   return String(titolo || "").toLowerCase().replace(/[^a-z0-9]/g, "").slice(0, 40);
 }
 
-function RegiaPage() {
-  const { state, update, ricaricaCloud } = useCivic();
-  const [operatore, setOperatore] = useState<string>(() => {
-    try { return sessionStorage.getItem("terni2030_regia_op") || ""; } catch { return ""; }
-  });
-  const [codiceInput, setCodiceInput] = useState("");
-  const [tab, setTab] = useState<"bandi" | "dossier" | "proposte" | "luoghi">("bandi");
-  const [ricerca, setRicerca] = useState("");
-  const [filtroStato, setFiltroStato] = useState<string>("tutti");
-  const [filtroPortale, setFiltroPortale] = useState<string>("tutti");
-  const [bozze, setBozze] = useState<Record<string, { link: string; nota: string }>>({});
-  const [raritaSceltaAdmin, setRaritaSceltaAdmin] = useState<Record<string, RaritaPOI>>({});
-    const [inserimentoOpen, setInserimentoOpen] = useState(false);
-  const [editModeId, setEditModeId] = useState<string | null>(null);
-  const [formDir, setFormDir] = useState({
-    titolo: "", autoreStorico: "", autoreScheda: "Lorenzo Covicchio", anno: "", categoria: "Architettura d'autore" as POI["categoria"],
-    rarita: "Comune" as RaritaPOI, lat: "42.5636", lng: "12.6427", descrizione: "", immagine: "", articolo: ""
-  });
+function fmtEuro(val: number): string {
+  return new Intl.NumberFormat("it-IT", { style: "currency", currency: "EUR", maximumFractionDigits: 0 }).format(val || 0);
+}
 
-  const salvaPoiDiretto = async () => {
-    const titolo = formDir.titolo.trim() || "Luogo Senza Nome";
-    const descrizione = formDir.descrizione.trim() || "Recati sul posto con il GPS per sbloccare la scheda e leggere il Dossier storico completo.";
-    const infoRar = RARITA_STANDARD[formDir.rarita] || RARITA_STANDARD["Comune"];
-    
-    setInserimentoOpen(false);
-
+function normalizzaRigaDossier(row: any): any {
+  const idStr = String(row?.id || "");
+  let parsed: any = {};
+  if (typeof row?.descrizione === "string") {
     try {
-      toast.info(editModeId ? "Aggiornamento in corso..." : "Invio al database in corso...");
-      const payload = {
-        titolo: titolo,
-        autoreStorico: formDir.autoreStorico.trim() || "Non specificato",
-        autoreScheda: formDir.autoreScheda.trim() || "Lorenzo Covicchio",
-        anno: formDir.anno.trim() || "Storico / Contemporaneo",
-        categoria: formDir.categoria || "Arte pubblica",
-        rarita: formDir.rarita,
-        punti: infoRar.punti,
-        lat: parseFloat(formDir.lat) || 42.5636,
-        lng: parseFloat(formDir.lng) || 12.6427,
-        descrizione: descrizione,
-        immagine: formDir.immagine.trim(),
-        articolo: formDir.articolo.trim(),
-      };
-      
-      if (editModeId) {
-        await modificaPoiAdmin(editModeId, payload);
-      } else {
-        await inserisciPoiDirettoAdmin(payload);
+      parsed = JSON.parse(row.descrizione);
+    } catch {
+      parsed = {};
+    }
+  } else if (row && typeof row === "object") {
+    parsed = row;
+  }
+
+  // Gestisce sia array di stringhe (elenco_bandi) sia array di oggetti ({nome, ente})
+  let bandiList: string[] = [];
+  if (Array.isArray(parsed.elenco_bandi) && parsed.elenco_bandi.length > 0) {
+    bandiList = parsed.elenco_bandi.map((x: any) =>
+      typeof x === "string" ? x : `${x?.nome || x?.titolo || "Bando"} (${x?.ente || x?.portale || ""})`
+    );
+  } else if (Array.isArray(parsed.bandi) && parsed.bandi.length > 0) {
+    bandiList = parsed.bandi.map((x: any) =>
+      typeof x === "string" ? x : `${x?.nome || x?.titolo || "Bando"} (${x?.ente || x?.portale || ""})`
+    );
+  } else if (Array.isArray(row?.bandi_trovati)) {
+    bandiList = row.bandi_trovati.map((x: any) => String(x));
+  }
+
+  const emailEstratta =
+    parsed.email ||
+    row?.email ||
+    (typeof row?.titolo === "string" && row.titolo.includes("@") ? row.titolo.replace("Dossier di ", "").trim() : "Non specificata");
+
+  return {
+    id: idStr || `dossier_${Math.random().toString(36).slice(2, 7)}`,
+    orario: parsed.orario || row?.orario || row?.created_at || "Oggi",
+    email: emailEstratta,
+    profilo: parsed.profilo || row?.profilo || "Cittadino / Impresa",
+    quartiere: parsed.quartiere || row?.quartiere || "Terni",
+    obiettivo: parsed.obiettivo || row?.obiettivo || "Analisi Bandi",
+    azione: parsed.azione || row?.azione || "Richiesta Dossier",
+    stato: row?.stato || parsed.stato || "Da Contattare",
+    prezzo: parsed.prezzo_applicato || 14.90,
+    sconto: Boolean(parsed.sconto_punti),
+    numero_bandi: bandiList.length,
+    elenco_bandi: bandiList,
+  };
+}
+
+function RegiaPage() {
+  const { state, ricaricaCloud } = useCivic() || ({} as any);
+  const [pinOk, setPinOk] = useState(false);
+  const [pinInput, setPinInput] = useState("");
+  const [tab, setTab] = useState<"dossier" | "bandi" | "moderazione">("dossier");
+
+  const [dossiers, setDossiers] = useState<any[]>([]);
+  const [loadingDossier, setLoadingDossier] = useState(false);
+
+  // Filtri Bandi in Regia
+  const [qBandi, setQBandi] = useState("");
+  const [fMacro, setFMacro] = useState<"" | "citta" | "welfare">("");
+  const [fStato, setFStato] = useState<"" | "verde" | "giallo" | "rosso">("");
+  const [noteInput, setNoteInput] = useState<Record<string, string>>({});
+  const [linkInput, setLinkInput] = useState<Record<string, string>>({});
+
+  useEffect(() => {
+    try {
+      if (localStorage.getItem("terni2030_regia_auth") === "1") {
+        setPinOk(true);
       }
-      
-      await ricaricaCloud();
-      setFormDir({ ...formDir, titolo: "", descrizione: "", immagine: "", articolo: "" });
-      toast.success(editModeId ? "✅ Luogo aggiornato con successo!" : "✅ Luogo pubblicato! Controlla la mappa di Terni Urban GO.");
-      setEditModeId(null);
-    } catch (err: any) {
-      toast.error(`❌ Errore di salvataggio DB: ${err.message}`);
+    } catch {}
+  }, []);
+
+  const caricaDossiersLive = async () => {
+    setLoadingDossier(true);
+    const mappaDossier = new Map<string, any>();
+
+    // 1. Legge da state.dossierGenerati se presenti
+    if (Array.isArray(state?.dossierGenerati)) {
+      for (const d of state.dossierGenerati) {
+        const norm = normalizzaRigaDossier(d);
+        mappaDossier.set(norm.id, norm);
+      }
+    }
+
+    // 2. Interroga direttamente Supabase (tabella segnalazioni + eventuale dossier_generati)
+    if (supabase) {
+      try {
+        const { data: rowsSeg } = await supabase
+          .from("segnalazioni")
+          .select("*")
+          .or("id.like.dossier_%,categoria.eq.Dossier_Generato")
+          .order("created_at", { ascending: false });
+
+        if (Array.isArray(rowsSeg)) {
+          for (const r of rowsSeg) {
+            const norm = normalizzaRigaDossier(r);
+            mappaDossier.set(norm.id, norm);
+          }
+        }
+      } catch {}
+
+      try {
+        const { data: rowsTab } = await supabase
+          .from("dossier_generati")
+          .select("*")
+          .order("created_at", { ascending: false });
+        if (Array.isArray(rowsTab)) {
+          for (const r of rowsTab) {
+            const norm = normalizzaRigaDossier({ ...r, id: `dg_${r.id}` });
+            const giaPresente = Array.from(mappaDossier.values()).some(
+              (x) => x.email === norm.email && x.obiettivo === norm.obiettivo
+            );
+            if (!giaPresente) {
+              mappaDossier.set(norm.id, norm);
+            }
+          }
+        }
+      } catch {}
+    }
+
+    setDossiers(Array.from(mappaDossier.values()));
+    setLoadingDossier(false);
+  };
+
+  useEffect(() => {
+    if (pinOk) {
+      void caricaDossiersLive();
+    }
+  }, [pinOk, state?.dossierGenerati]);
+
+  const sbloccaRegia = () => {
+    const code = pinInput.trim().toUpperCase();
+    if (code === "TERNI2030" || code === "LORENZO" || code === "REGIONE") {
+      setPinOk(true);
+      try {
+        localStorage.setItem("terni2030_regia_auth", "1");
+      } catch {}
+      toast.success("Accesso Operatore autorizzato");
+    } else {
+      toast.error("Codice non valido. Usa: TERNI2030");
     }
   };
 
-  const eliminaPoi = async (id: string) => {
-    if (!confirm("Sei sicuro di voler rimuovere definitivamente questo luogo dal sito?")) return;
-    toast.info("Eliminazione in corso...");
-    await eliminaPoiAdmin(id);
-    await ricaricaCloud();
-    toast.success("🗑️ Luogo rimosso dal sito.");
+  const aggiornaStatoDossier = async (id: string, nuovoStato: string) => {
+    try {
+      if (id.startsWith("dg_") && supabase) {
+        await supabase.from("dossier_generati").update({ stato: nuovoStato }).eq("id", id.replace("dg_", ""));
+      } else {
+        await modificaStatoDossierAdmin(id, nuovoStato);
+      }
+      setDossiers((prev) => prev.map((d) => (d.id === id ? { ...d, stato: nuovoStato } : d)));
+      if (typeof ricaricaCloud === "function") void ricaricaCloud();
+      toast.success(`Stato aggiornato a: ${nuovoStato}`);
+    } catch (e: any) {
+      toast.error("Errore aggiornamento: " + e.message);
+    }
   };
 
-  const usaMiaPosizioneNelForm = () => {
-    if ("geolocation" in navigator) {
-      navigator.geolocation.getCurrentPosition((pos) => {
-        setFormDir((f) => ({
-          ...f,
-          lat: pos.coords.latitude.toFixed(5),
-          lng: pos.coords.longitude.toFixed(5),
-        }));
-        toast.success("Coordinate GPS rilevate e inserite!");
+  const cancellaDossier = async (id: string) => {
+    try {
+      if (id.startsWith("dg_") && supabase) {
+        await supabase.from("dossier_generati").delete().eq("id", id.replace("dg_", ""));
+      } else {
+        await eliminaDossierAdmin(id);
+      }
+      setDossiers((prev) => prev.filter((d) => d.id !== id));
+      if (typeof ricaricaCloud === "function") void ricaricaCloud();
+      toast.success("Richiesta Dossier eliminata.");
+    } catch (e: any) {
+      toast.error("Errore eliminazione: " + e.message);
+    }
+  };
+
+  const creaDossierTest = async () => {
+    try {
+      await registraDossierGenerato({
+        profilo: "Cittadino / Impresa (Test Regia)",
+        quartiere: "Centro Storico",
+        obiettivo: "Sostenibilità Energetica & Welfare",
+        email: "lorenzo.test@terni2030.it",
+        prezzo_applicato: 14.90,
+        azione: "Verifica Funzionamento Regia",
+        bandi: [
+          { nome: "Conto Termico 3.0 GSE", ente: "GSE" },
+          { nome: "PR FSE+ Umbria Inclusione e Welfare", ente: "Regione Umbria" }
+        ]
       });
+      toast.success("Dossier di prova registrato! Ricarico la tabella...");
+      await caricaDossiersLive();
+      if (typeof ricaricaCloud === "function") void ricaricaCloud();
+    } catch (e: any) {
+      toast.error("Errore creazione test: " + e.message);
     }
   };
 
-  const [loading, setLoading] = useState(false);
+  const bandiList = Array.isArray(bandiRealiJson) ? bandiRealiJson : [];
+  const meta: any = syncMetaJson || {};
 
-  const eseguiAccesso = () => {
-    const ruolo = CODICI_ABILITATI[codiceInput.trim()];
-    if (!ruolo) return void toast.error("Codice di accesso non valido.");
-    try { sessionStorage.setItem("terni2030_regia_op", ruolo); } catch {}
-    setOperatore(ruolo);
-    toast.success(`Accesso effettuato: ${ruolo}`);
+  const getStatoBando = (b: any) => {
+    const k = normKey(b.titolo || b.nome);
+    const audit = state?.auditBandi?.[k];
+    if (audit) {
+      if (audit.stato === "Scartato") return { col: "rosso", label: "Scartato da Operatore", nota: audit.nota || "", link: audit.linkUfficiale || b.link };
+      if (audit.stato === "Certificato") return { col: "verde", label: "Certificato da Operatore", nota: audit.nota || "", link: audit.linkUfficiale || b.link };
+      return { col: "giallo", label: "Da Verificare", nota: audit.nota || "", link: audit.linkUfficiale || b.link };
+    }
+    const isVerde = b.semaforo === "verde";
+    return {
+      col: isVerde ? "verde" : "giallo",
+      label: isVerde ? "Fonte Istituzionale" : "Da Verificare (Feed)",
+      nota: "",
+      link: b.link || "#"
+    };
   };
 
-  const esci = () => {
-    try { sessionStorage.removeItem("terni2030_regia_op"); } catch {}
-    setOperatore("");
-    setCodiceInput("");
-  };
+  const bandiFiltrati = bandiList.filter((b: any) => {
+    const info = getStatoBando(b);
+    const txt = `${b.titolo || ""} ${b.descrizione || ""} ${b.portale || ""} ${b.asse_specifico || ""}`.toLowerCase();
+    if (qBandi && !txt.includes(qBandi.toLowerCase())) return false;
+    if (fMacro && (b.categoria_macro || "citta") !== fMacro) return false;
+    if (fStato && info.col !== fStato) return false;
+    return true;
+  });
 
-  if (!operatore) {
+  const bandiAttiviNonScartati = bandiList.filter((b: any) => getStatoBando(b).col !== "rosso");
+  const valCitta = bandiAttiviNonScartati
+    .filter((b: any) => b.categoria_macro !== "welfare")
+    .reduce((acc: number, b: any) => acc + (Number(b.valore_stimato_euro) || 250000), 0);
+  const valWelfare = bandiAttiviNonScartati
+    .filter((b: any) => b.categoria_macro === "welfare")
+    .reduce((acc: number, b: any) => acc + (Number(b.valore_stimato_euro) || 250000), 0);
+
+  if (!pinOk) {
     return (
-      <div className="mx-auto flex min-h-[75vh] max-w-md flex-col justify-center px-4">
-        <div className="surface-panel p-6 text-center md:p-8">
-          <div className="mx-auto mb-4 flex size-12 items-center justify-center rounded-full bg-secondary text-accent">
-            <Lock className="size-6" />
-          </div>
-          <h1 className="text-2xl font-bold">Regia Terni 2030</h1>
-          <p className="mt-2 text-xs text-muted-foreground">
-            Accesso riservato per verifica veridicità bandi, supervisione Dossier IA e approvazione proposte dei cittadini.
+      <div className="mx-auto max-w-md px-4 py-20 text-center">
+        <div className="surface-panel border p-8 rounded-2xl shadow-lg">
+          <Lock className="mx-auto size-12 text-accent mb-4" />
+          <h1 className="text-2xl font-bold mb-2">Regia Operatori · Terni 2030</h1>
+          <p className="text-xs text-muted-foreground mb-6">
+            Inserisci il codice operatore (es. <b>TERNI2030</b> o <b>LORENZO</b>) per gestire i Dossier Generati, i Bandi Città/Welfare e la Moderazione.
           </p>
-          <div className="mt-5 space-y-3 text-left">
-            <Input
-              type="password"
-              value={codiceInput}
-              onChange={(e) => setCodiceInput(e.target.value)}
-              placeholder="Inserisci il codice operatore..."
-              onKeyDown={(e) => e.key === "Enter" && eseguiAccesso()}
-            />
-            <Button className="w-full" onClick={eseguiAccesso}>
-              <ShieldCheck className="mr-1.5 size-4" /> Entra nella Regia
-            </Button>
-          </div>
+          <input
+            type="password"
+            value={pinInput}
+            onChange={(e) => setPinInput(e.target.value)}
+            onKeyDown={(e) => e.key === "Enter" && sbloccaRegia()}
+            placeholder="Codice Operatore..."
+            className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-1 text-center text-sm mb-4"
+          />
+          <button
+            onClick={sbloccaRegia}
+            className="w-full h-10 rounded-md bg-primary text-primary-foreground font-bold text-sm hover:bg-primary/90"
+          >
+            Entra nella Regia
+          </button>
         </div>
       </div>
     );
   }
 
-  const tuttiBandi = bandiRealiJson as any[];
-  const proposteInAttesa = (state.proposteModerazione || []).filter((p) => p.stato === "In attesa");
-
-  const calcolaStato = (b: any) => {
-    const k = normKey(b.titolo);
-    const a = state.auditBandi[k];
-    if (a) {
-      if (a.stato === "Scartato") return { col: "rosso", label: "Scartato da Operatore", audit: a };
-      if (a.stato === "Certificato") return { col: "verde", label: "Certificato da Operatore", audit: a };
-      return { col: "giallo", label: "Da Verificare / Dubbio", audit: a };
-    }
-    if (b.semaforo === "verde") return { col: "verde", label: "Fonte Istituzionale Diretta", audit: undefined };
-    return { col: "giallo", label: "Da Verificare (Feed Web)", audit: undefined };
-  };
-
-  let verdi = 0, gialli = 0, rossi = 0;
-  for (const b of tuttiBandi) {
-    const st = calcolaStato(b).col;
-    if (st === "verde") verdi++;
-    else if (st === "giallo") gialli++;
-    else rossi++;
-  }
-
-  const bandiFiltrati = tuttiBandi.filter((b) => {
-    const info = calcolaStato(b);
-    const portale = String(b.portale || b.ente || "");
-    const testo = `${b.titolo} ${b.descrizione} ${portale} ${b.obiettivo_nome || ""} ${info.audit?.nota || ""}`.toLowerCase();
-    if (ricerca.trim() && !testo.includes(ricerca.trim().toLowerCase())) return false;
-    if (filtroStato !== "tutti" && info.col !== filtroStato) return false;
-    if (filtroPortale !== "tutti" && !portale.toLowerCase().includes(filtroPortale.toLowerCase())) return false;
-    return true;
-  });
-
-  const salvaRevisione = async (b: any, nuovoStato: AuditBando["stato"]) => {
-    const k = normKey(b.titolo);
-    const bozza = bozze[k];
-    const precedente = state.auditBandi[k];
-    const record: AuditBando = {
-      stato: nuovoStato,
-      linkUfficiale: bozza?.link !== undefined ? bozza.link.trim() : (precedente?.linkUfficiale || ""),
-      nota: bozza?.nota !== undefined ? bozza.nota.trim() : (precedente?.nota || ""),
-      operatore,
-      aggiornato: new Date().toLocaleString("it-IT"),
-    };
-    update((s) => ({ ...s, auditBandi: { ...s.auditBandi, [k]: record } }));
-    await salvaAuditBandoCloud, getDossiersAdmin, eliminaDossierAdmin, modificaStatoDossierAdmin(k, b.titolo, record);
-    toast.success(`Bando aggiornato (${nuovoStato}) da ${operatore}`);
-  };
-
-  const decidiProposta = async (prop: PropostaModerazione, esito: "Approvata" | "Rifiutata") => {
-    const rar = raritaSceltaAdmin[prop.id] || (prop.dati?.rarita as RaritaPOI) || "Comune";
-    await gestisciPropostaAdmin(prop, esito, rar);
-    await ricaricaCloud();
-    toast.success(esito === "Approvata" ? `Proposta «${prop.titolo}» approvata e pubblicata sul sito!` : `Proposta «${prop.titolo}» rifiutata e rimossa.`);
-  };
-
-  const aggiornaDati = async () => {
-    setLoading(true);
-    await ricaricaCloud();
-    setLoading(false);
-    toast.info("Dati sincronizzati con il cloud.");
-  };
-
   return (
     <div className="mx-auto max-w-7xl px-4 py-8 md:px-6">
-      <div className="mb-6 flex flex-wrap items-center justify-between gap-4 border-b border-border pb-5">
+      {/* HEADER REGIA */}
+      <div className="mb-6 flex flex-col lg:flex-row lg:items-center justify-between gap-4 border-b border-border pb-5">
         <div>
-          <Badge variant="secondary" className="mb-2">Operatore attivo: {operatore}</Badge>
-          <h1 className="text-2xl font-bold md:text-3xl">
-            Regia <span className="text-ember-gradient">Bandi, Dossier & Moderazione</span>
-          </h1>
-          <p className="mt-1 text-xs text-muted-foreground">
-            Pannello Admin per validazione fonti bandi, lettura Dossier generati e approvazione candidature utenti.
+          <span className="inline-flex items-center gap-1.5 text-xs font-bold uppercase text-accent">
+            <ShieldCheck className="size-4" /> Pannello di Controllo Direzionale · Operatore Lorenzo
+          </span>
+          <h1 className="text-3xl font-bold mt-1">Regia Unificata Dossier, Bandi Città & Welfare</h1>
+          <p className="text-xs text-muted-foreground mt-1">
+            Ultimo aggiornamento automatico bandi: <b>{meta.ultimo_aggiornamento || "Attivo"}</b> · Pianificazione: <b>{meta.stato_automazione || "Ogni giorno ore 09:00"}</b> ({meta.duplicati_rimossi || 0} sovrapposizioni eliminate)
           </p>
         </div>
 
-                <div className="flex flex-wrap items-center gap-2">
-          <Button size="sm" className="bg-emerald-600 hover:bg-emerald-700 text-white" onClick={() => {
-            setEditModeId(null);
-            setFormDir({ titolo: "", autoreStorico: "", autoreScheda: "Lorenzo Covicchio", anno: "", categoria: "Architettura d'autore", rarita: "Comune", lat: "42.5636", lng: "12.6427", descrizione: "", immagine: "", articolo: "" });
-            setInserimentoOpen(true);
-          }}>
-            <Zap className="mr-1 size-3.5" /> Inserimento Rapido POI
-          </Button>
-          <Button size="sm" variant={tab === "bandi" ? "default" : "secondary"} onClick={() => setTab("bandi")}>
-            🔎 1. Verifica Bandi ({tuttiBandi.length})
-          </Button>
-          <Button size="sm" variant={tab === "dossier" ? "default" : "secondary"} onClick={() => setTab("dossier")}>
-            📊 2. Dossier Generati ({state.dossierGenerati.length})
-          </Button>
-          <Button size="sm" variant={tab === "proposte" ? "default" : "secondary"} onClick={() => setTab("proposte")}>
-            📥 3. Proposte da Approvare ({proposteInAttesa.length})
-          </Button>
-          <Button size="sm" variant={tab === "luoghi" ? "default" : "secondary"} onClick={() => setTab("luoghi")}>
-            📍 4. Luoghi Pubblicati ({state.poiExtra.length})
-          </Button>
-          <Button size="sm" variant="outline" onClick={aggiornaDati} disabled={loading}>
-            <RefreshCw className={`mr-1 size-3.5 ${loading ? "animate-spin" : ""}`} /> Sincronizza
-          </Button>
-          <Button size="sm" variant="ghost" onClick={esci}>Esci</Button>
+        <div className="flex flex-wrap gap-2">
+          <button
+            onClick={() => setTab("dossier")}
+            className={`px-4 py-2 rounded-lg text-xs font-bold border transition ${
+              tab === "dossier" ? "bg-primary text-primary-foreground border-primary" : "bg-secondary/50 border-border"
+            }`}
+          >
+            📊 1. Dossier Generati ({dossiers.length})
+          </button>
+          <button
+            onClick={() => setTab("bandi")}
+            className={`px-4 py-2 rounded-lg text-xs font-bold border transition ${
+              tab === "bandi" ? "bg-primary text-primary-foreground border-primary" : "bg-secondary/50 border-border"
+            }`}
+          >
+            🔎 2. Verifica Bandi Città & Welfare ({bandiList.length})
+          </button>
+          <button
+            onClick={() => setTab("moderazione")}
+            className={`px-4 py-2 rounded-lg text-xs font-bold border transition ${
+              tab === "moderazione" ? "bg-primary text-primary-foreground border-primary" : "bg-secondary/50 border-border"
+            }`}
+          >
+            🛡️ 3. Moderazione Mappa & POI ({state?.proposteModerazione?.length || 0})
+          </button>
         </div>
       </div>
 
-      {tab === "bandi" && (
-        <div className="space-y-5">
-          <div className="grid gap-3 sm:grid-cols-3">
-            <div className="surface-panel p-4">
-              <p className="text-xs text-muted-foreground">🟢 Fonti Istituzionali / Certificate</p>
-              <p className="mt-1 text-2xl font-bold text-emerald-400">{verdi}</p>
+      {/* KPI ECONOMICI GLOBALI */}
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4 mb-6">
+        <div className="surface-panel border p-4 rounded-xl">
+          <span className="text-xs text-muted-foreground uppercase font-semibold">Richieste Dossier (Concierge)</span>
+          <div className="text-2xl font-black text-accent mt-1">{dossiers.length} richieste</div>
+          <span className="text-[11px] text-muted-foreground">
+            {dossiers.filter((d) => d.stato === "Venduto").length} sbloccati / venduti
+          </span>
+        </div>
+        <div className="surface-panel border p-4 rounded-xl">
+          <span className="text-xs text-sky-400 uppercase font-semibold flex items-center gap-1">
+            <Building2 className="size-3.5" /> Valore Bandi Città Attivi
+          </span>
+          <div className="text-2xl font-black mt-1">{fmtEuro(valCitta)}</div>
+          <span className="text-[11px] text-muted-foreground">
+            {bandiAttiviNonScartati.filter((b: any) => b.categoria_macro !== "welfare").length} misure uniche Città/Imprese
+          </span>
+        </div>
+        <div className="surface-panel border p-4 rounded-xl">
+          <span className="text-xs text-rose-400 uppercase font-semibold flex items-center gap-1">
+            <HeartHandshake className="size-3.5" /> Valore Fondi Welfare Attivi
+          </span>
+          <div className="text-2xl font-black mt-1">{fmtEuro(valWelfare)}</div>
+          <span className="text-[11px] text-muted-foreground">
+            {bandiAttiviNonScartati.filter((b: any) => b.categoria_macro === "welfare").length} misure uniche Welfare/Sociale
+          </span>
+        </div>
+        <div className="surface-panel border p-4 rounded-xl">
+          <span className="text-xs text-emerald-400 uppercase font-semibold flex items-center gap-1">
+            <Clock className="size-3.5" /> Automazione Ore 09:00
+          </span>
+          <div className="text-lg font-bold text-emerald-400 mt-1">Scrematura Attiva ✓</div>
+          <span className="text-[11px] text-muted-foreground">
+            {meta.grezzi_analizzati || 148} analizzati → {bandiList.length} unici reali
+          </span>
+        </div>
+      </div>
+
+      {/* ===================== TAB 1: DOSSIER GENERATI ===================== */}
+      {tab === "dossier" && (
+        <div className="space-y-4">
+          <div className="surface-panel border p-4 rounded-xl flex flex-wrap items-center justify-between gap-3">
+            <div>
+              <h2 className="text-lg font-bold">Gestione Richieste Dossier (Modello Concierge MVP)</h2>
+              <p className="text-xs text-muted-foreground">
+                Ogni richiesta inviata dalla pagina <Link to="/dossier" className="text-accent underline">/dossier</Link> compare qui con l'email dell'utente e i bandi individuati.
+              </p>
             </div>
-            <div className="surface-panel p-4">
-              <p className="text-xs text-muted-foreground">🟡 Da Verificare (Feed / Rassegna)</p>
-              <p className="mt-1 text-2xl font-bold text-amber-400">{gialli}</p>
-            </div>
-            <div className="surface-panel p-4">
-              <p className="text-xs text-muted-foreground">🔴 Scartati (Nascosti dal sito)</p>
-              <p className="mt-1 text-2xl font-bold text-red-400">{rossi}</p>
+            <div className="flex gap-2">
+              <button
+                onClick={creaDossierTest}
+                className="inline-flex items-center gap-1.5 rounded-md border border-accent/50 bg-accent/10 px-3 py-2 text-xs font-bold text-accent hover:bg-accent/20"
+              >
+                <PlusCircle className="size-4" /> Crea Dossier di Test
+              </button>
+              <button
+                onClick={caricaDossiersLive}
+                disabled={loadingDossier}
+                className="inline-flex items-center gap-1.5 rounded-md border border-border bg-secondary px-3 py-2 text-xs font-bold hover:bg-secondary/80"
+              >
+                <RefreshCw className={`size-4 ${loadingDossier ? "animate-spin" : ""}`} /> Aggiorna Elenco
+              </button>
             </div>
           </div>
 
-          <div className="surface-panel flex flex-wrap items-center gap-3 p-4">
-            <div className="relative flex-1 min-w-[220px]">
-              <Search className="absolute left-3 top-2.5 size-4 text-muted-foreground" />
-              <Input value={ricerca} onChange={(e) => setRicerca(e.target.value)} placeholder="Cerca per parola chiave, ente, obiettivo..." className="pl-9" />
+          {dossiers.length === 0 ? (
+            <div className="surface-panel border p-12 rounded-xl text-center space-y-3">
+              <FileText className="mx-auto size-12 text-muted-foreground" />
+              <h3 className="text-lg font-bold">Nessuna richiesta Dossier registrata al momento</h3>
+              <p className="text-xs text-muted-foreground max-w-md mx-auto">
+                Clicca su <b>"Crea Dossier di Test"</b> qui sopra oppure compila il passo 4 nella pagina Bandi & Dossier IA per verificare la ricezione istantanea.
+              </p>
             </div>
-            <select value={filtroStato} onChange={(e) => setFiltroStato(e.target.value)} className="h-9 rounded-md border border-border bg-background px-3 text-xs">
-              <option value="tutti">Tutti i Semafori (🟢 + 🟡 + 🔴)</option>
-              <option value="giallo">🟡 Solo Da Verificare manualmente</option>
-              <option value="verde">🟢 Solo Istituzionali / Certificati</option>
-              <option value="rosso">🔴 Solo Scartati</option>
-            </select>
-            <select value={filtroPortale} onChange={(e) => setFiltroPortale(e.target.value)} className="h-9 rounded-md border border-border bg-background px-3 text-xs">
-              <option value="tutti">Tutti i 9 Canali & Fondi</option>
-              <option value="FESR">PR FESR 2021/2027</option>
-              <option value="FSE">FSE / PR FSE+ 2021/2027</option>
-              <option value="FSC">FSC (Fondo Sviluppo e Coesione)</option>
-              <option value="PNRR">PNRR</option>
-              <option value="Regione Umbria">Regione Umbria</option>
-              <option value="Comune di Terni">Comune di Terni</option>
-              <option value="GSE">GSE</option>
-              <option value="Invitalia">Invitalia</option>
-              <option value="Camera di Commercio">Camera di Commercio</option>
-            </select>
-          </div>
+          ) : (
+            <div className="grid gap-4">
+              {dossiers.map((d) => (
+                <div key={d.id} className="surface-panel border p-5 rounded-xl flex flex-col lg:flex-row justify-between gap-4">
+                  <div className="space-y-2 flex-1">
+                    <div className="flex flex-wrap items-center gap-2">
+                      <span
+                        className={`px-2.5 py-0.5 rounded-full text-xs font-bold ${
+                          d.stato === "Venduto"
+                            ? "bg-emerald-500/20 text-emerald-400 border border-emerald-500/40"
+                            : d.stato === "In Lavorazione"
+                            ? "bg-sky-500/20 text-sky-400 border border-sky-500/40"
+                            : "bg-amber-500/20 text-amber-400 border border-amber-500/40"
+                        }`}
+                      >
+                        {d.stato}
+                      </span>
+                      <span className="text-xs text-muted-foreground">{d.orario}</span>
+                      <span className="text-xs font-bold text-accent">
+                        Valore: € {Number(d.prezzo || 14.9).toFixed(2)} {d.sconto ? "(Sconto 500 pt)" : ""}
+                      </span>
+                    </div>
 
-          <div className="space-y-3">
-            {bandiFiltrati.map((b, i) => {
-              const k = normKey(b.titolo);
-              const info = calcolaStato(b);
-              const linkAttuale = info.audit?.linkUfficiale || b.link || "#";
-              const valLink = bozze[k]?.link !== undefined ? bozze[k].link : (info.audit?.linkUfficiale || "");
-              const valNota = bozze[k]?.nota !== undefined ? bozze[k].nota : (info.audit?.nota || "");
+                    <div className="flex flex-wrap items-center gap-4 pt-1">
+                      <a
+                        href={`mailto:${d.email}?subject=Anteprima Dossier Bandi Terni 2030 - ${d.obiettivo}`}
+                        className="inline-flex items-center gap-1.5 text-base font-bold text-accent hover:underline"
+                      >
+                        <Mail className="size-4" /> {d.email}
+                      </a>
+                      <span className="text-xs bg-secondary px-2.5 py-1 rounded-md">
+                        Profilo: <b>{d.profilo}</b>
+                      </span>
+                      <span className="text-xs bg-secondary px-2.5 py-1 rounded-md">
+                        Quartiere: <b>{d.quartiere}</b>
+                      </span>
+                      <span className="text-xs bg-secondary px-2.5 py-1 rounded-md">
+                        Obiettivo: <b>{d.obiettivo}</b>
+                      </span>
+                    </div>
 
-              return (
-                <div key={k + i} className="surface-panel p-4">
-                  <div className="grid gap-4 lg:grid-cols-[1fr_340px]">
-                    <div>
-                      <div className="flex flex-wrap items-center gap-2">
-                        {info.col === "verde" && <Badge className="border-0 bg-emerald-500/20 text-emerald-400">🟢 {info.label}</Badge>}
-                        {info.col === "giallo" && <Badge className="border-0 bg-amber-500/20 text-amber-400">🟡 {info.label}</Badge>}
-                        {info.col === "rosso" && <Badge className="border-0 bg-red-500/20 text-red-400">🔴 {info.label}</Badge>}
-                        <Badge variant="secondary">{b.portale || b.ente}</Badge>
-                        <span className="text-xs text-muted-foreground">
-                          Obiettivo: <b>{b.obiettivo_nome || b.obiettivo_id}</b> · Ambiti: <b>{(b.ambiti || []).join(", ")}</b>
-                        </span>
-                      </div>
-                      <h3 className="mt-2 text-base font-bold">{b.titolo}</h3>
-                      <p className="mt-1 text-xs text-muted-foreground">{b.descrizione}</p>
-                      <div className="mt-3 flex flex-wrap items-center gap-4 text-xs">
-                        <span><b>Importo:</b> {b.importo || "-"}</span>
-                        <span><b>Scadenza/Data:</b> {b.scadenza || "-"}</span>
-                        <a href={linkAttuale} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 font-semibold text-accent hover:underline">
-                          Verifica Fonte Attuale <ExternalLink className="size-3.5" />
-                        </a>
-                      </div>
-                      {info.audit && (
-                        <p className="mt-2 text-[11px] text-accent">
-                          Ultima revisione: <b>{info.audit.operatore}</b> ({info.audit.aggiornato})
-                          {info.audit.nota ? ` — Nota: «${info.audit.nota}»` : ""}
-                        </p>
+                    <div className="pt-2">
+                      <p className="text-xs font-semibold text-muted-foreground mb-1">
+                        Bandi abbinati nell'anteprima ({d.elenco_bandi?.length || 0}):
+                      </p>
+                      {Array.isArray(d.elenco_bandi) && d.elenco_bandi.length > 0 ? (
+                        <ul className="list-disc pl-5 text-xs space-y-0.5 text-foreground/90">
+                          {d.elenco_bandi.map((bStr: string, i: number) => (
+                            <li key={i}>{bStr}</li>
+                          ))}
+                        </ul>
+                      ) : (
+                        <p className="text-xs italic text-muted-foreground">Ricerca personalizzata richiesta dall'utente</p>
                       )}
                     </div>
+                  </div>
 
-                    <div className="flex flex-col justify-between gap-2 rounded-lg border border-border bg-secondary/30 p-3">
-                      <div className="flex flex-wrap gap-1.5">
-                        <Button size="sm" variant="secondary" className="flex-1 text-xs" onClick={() => salvaRevisione(b, "Certificato")}>
-                          <CheckCircle2 className="mr-1 size-3.5 text-emerald-400" /> Certifica
-                        </Button>
-                        <Button size="sm" variant="secondary" className="flex-1 text-xs" onClick={() => salvaRevisione(b, "Da Verificare")}>
-                          <AlertTriangle className="mr-1 size-3.5 text-amber-400" /> Dubbio
-                        </Button>
-                        <Button size="sm" variant="secondary" className="flex-1 text-xs" onClick={() => salvaRevisione(b, "Scartato")}>
-                          <XCircle className="mr-1 size-3.5 text-red-400" /> Scarta
-                        </Button>
-                      </div>
-                      <Input value={valLink} onChange={(e) => setBozze({ ...bozze, [k]: { link: e.target.value, nota: valNota } })} placeholder="Incolla URL ufficiale corretto..." className="h-8 text-xs" />
-                      <div className="flex gap-1.5">
-                        <Input value={valNota} onChange={(e) => setBozze({ ...bozze, [k]: { link: valLink, nota: e.target.value } })} placeholder="Nota operatore..." className="h-8 text-xs" />
-                        <Button size="sm" className="h-8 px-3 text-xs" onClick={() => salvaRevisione(b, info.audit?.stato || "Certificato")}>Salva</Button>
-                      </div>
+                  <div className="flex flex-row lg:flex-col justify-end gap-2 shrink-0 border-t lg:border-t-0 lg:border-l border-border pt-3 lg:pt-0 lg:pl-4">
+                    <button
+                      onClick={() => aggiornaStatoDossier(d.id, "Da Contattare")}
+                      className="px-3 py-1.5 rounded-md border border-border bg-secondary/60 hover:bg-secondary text-xs font-semibold"
+                    >
+                      🟡 Da Contattare
+                    </button>
+                    <button
+                      onClick={() => aggiornaStatoDossier(d.id, "In Lavorazione")}
+                      className="px-3 py-1.5 rounded-md border border-sky-500/40 bg-sky-500/10 hover:bg-sky-500/20 text-sky-400 text-xs font-semibold"
+                    >
+                      🔵 Invia Anteprima
+                    </button>
+                    <button
+                      onClick={() => aggiornaStatoDossier(d.id, "Venduto")}
+                      className="px-3 py-1.5 rounded-md border border-emerald-500/40 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 text-xs font-semibold"
+                    >
+                      ✅ Segna Venduto
+                    </button>
+                    <button
+                      onClick={() => cancellaDossier(d.id)}
+                      className="px-3 py-1.5 rounded-md border border-red-500/40 bg-red-500/10 hover:bg-red-500/20 text-red-400 text-xs font-semibold inline-flex items-center justify-center gap-1"
+                    >
+                      <Trash2 className="size-3.5" /> Elimina
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* ===================== TAB 2: VERIFICA BANDI UNIFICATA ===================== */}
+      {tab === "bandi" && (
+        <div className="space-y-4">
+          <div className="surface-panel border p-4 rounded-xl flex flex-wrap gap-3 items-center">
+            <input
+              type="text"
+              value={qBandi}
+              onChange={(e) => setQBandi(e.target.value)}
+              placeholder="Cerca bando per titolo, ente, FNA, FESR, CER..."
+              className="flex h-9 flex-1 min-w-[220px] rounded-md border border-input bg-background px-3 py-1 text-sm"
+            />
+            <select
+              value={fMacro}
+              onChange={(e) => setFMacro(e.target.value as any)}
+              className="h-9 rounded-md border border-input bg-background px-3 text-xs font-semibold"
+            >
+              <option value="">Tutti i Settori (Città + Welfare)</option>
+              <option value="citta">🏙️ Solo Finanziamenti Città & Imprese</option>
+              <option value="welfare">🤝 Solo Fondi Welfare & Sociale</option>
+            </select>
+            <select
+              value={fStato}
+              onChange={(e) => setFStato(e.target.value as any)}
+              className="h-9 rounded-md border border-input bg-background px-3 text-xs font-semibold"
+            >
+              <option value="">Tutti gli Stati</option>
+              <option value="verde">🟢 Certificati / Istituzionali</option>
+              <option value="giallo">🟡 Da Verificare</option>
+              <option value="rosso">🔴 Scartati</option>
+            </select>
+          </div>
+
+          <div className="grid gap-3">
+            {bandiFiltrati.map((b: any, i: number) => {
+              const info = getStatoBando(b);
+              const k = normKey(b.titolo || b.nome);
+              const isWelfare = b.categoria_macro === "welfare";
+              return (
+                <div key={b.id || i} className="surface-panel border p-4 rounded-xl flex flex-col lg:flex-row justify-between gap-4">
+                  <div className="space-y-1.5 flex-1">
+                    <div className="flex flex-wrap items-center gap-2">
+                      <span
+                        className={`px-2 py-0.5 rounded-full text-[11px] font-bold ${
+                          info.col === "verde"
+                            ? "bg-emerald-500/20 text-emerald-400"
+                            : info.col === "rosso"
+                            ? "bg-red-500/20 text-red-400"
+                            : "bg-amber-500/20 text-amber-400"
+                        }`}
+                      >
+                        {info.label}
+                      </span>
+                      <span
+                        className={`px-2 py-0.5 rounded-full text-[11px] font-bold ${
+                          isWelfare ? "bg-rose-500/20 text-rose-400" : "bg-sky-500/20 text-sky-400"
+                        }`}
+                      >
+                        {isWelfare ? "🤝 Welfare & Sociale" : "🏙️ Città & Imprese"}
+                      </span>
+                      <span className="text-xs font-bold text-accent">{b.portale || b.ente}</span>
+                      <span className="text-xs font-bold text-emerald-400">{fmtEuro(b.valore_stimato_euro || 250000)}</span>
                     </div>
+                    <h3 className="font-bold text-sm">{b.titolo}</h3>
+                    <p className="text-xs text-muted-foreground">{b.descrizione}</p>
+                    <div className="flex flex-wrap gap-3 text-[11px] text-muted-foreground pt-1">
+                      <span>Asse: <b>{b.asse_specifico || b.obiettivo_nome}</b></span>
+                      <span>Dotazione: <b>{b.importo}</b></span>
+                      {Array.isArray(b.portali_correlati) && b.portali_correlati.length > 1 && (
+                        <span className="text-accent">Portali unificati: {b.portali_correlati.join(", ")}</span>
+                      )}
+                    </div>
+                    {info.nota && <p className="text-xs text-amber-400 font-semibold">Nota Operatore: {info.nota}</p>}
+                  </div>
+
+                  <div className="flex flex-col gap-2 min-w-[260px] shrink-0">
+                    <div className="flex gap-1.5">
+                      <button
+                        onClick={async () => {
+                          await salvaAuditBandoCloud(k, b.titolo, "Certificato", noteInput[k] || info.nota, linkInput[k] || info.link);
+                          if (typeof ricaricaCloud === "function") void ricaricaCloud();
+                          toast.success("Bando certificato!");
+                        }}
+                        className="flex-1 py-1.5 px-2 rounded bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-400 text-xs font-bold"
+                      >
+                        ✅ Certifica
+                      </button>
+                      <button
+                        onClick={async () => {
+                          await salvaAuditBandoCloud(k, b.titolo, "Scartato", noteInput[k] || "Scartato da Regia", linkInput[k] || info.link);
+                          if (typeof ricaricaCloud === "function") void ricaricaCloud();
+                          toast.info("Bando nascosto dal sito pubblico");
+                        }}
+                        className="flex-1 py-1.5 px-2 rounded bg-red-500/20 hover:bg-red-500/30 text-red-400 text-xs font-bold"
+                      >
+                        ❌ Scarta
+                      </button>
+                      <a
+                        href={info.link}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="py-1.5 px-2.5 rounded bg-secondary hover:bg-secondary/80 text-xs font-bold inline-flex items-center"
+                      >
+                        <ExternalLink className="size-3.5" />
+                      </a>
+                    </div>
+                    <input
+                      type="text"
+                      placeholder="Nota operatore..."
+                      value={noteInput[k] ?? ""}
+                      onChange={(e) => setNoteInput({ ...noteInput, [k]: e.target.value })}
+                      className="h-7 rounded border border-input bg-background px-2 text-xs"
+                    />
                   </div>
                 </div>
               );
@@ -366,323 +625,48 @@ function RegiaPage() {
         </div>
       )}
 
-      {tab === "dossier" && <PannelloDossier />}
-      {tab === "dossier_vecchio" && (
-        <div className="space-y-4">
-          {state.dossierGenerati.length === 0 ? (
-            <div className="surface-panel p-8 text-center text-sm text-muted-foreground">
-              <FileText className="mx-auto mb-2 size-8 text-accent" />
-              Nessun Dossier generato dagli utenti finora.
+      {/* ===================== TAB 3: MODERAZIONE PROPOSTE ===================== */}
+      {tab === "moderazione" && (
+        <div className="space-y-3">
+          {(state?.proposteModerazione || []).length === 0 ? (
+            <div className="surface-panel border p-8 rounded-xl text-center text-sm text-muted-foreground">
+              Nessuna proposta in attesa di moderazione.
             </div>
           ) : (
-            state.dossierGenerati.map((d) => (
-              <div key={d.id} className="surface-panel p-4">
-                <div className="flex flex-wrap items-center justify-between gap-2">
-                  <div className="flex flex-wrap items-center gap-2">
-                    <Badge variant="secondary">{d.orario}</Badge>
-                    <Badge className="border-0 bg-accent/20 text-accent">{d.profilo}</Badge>
-                    <span className="text-sm font-bold">{d.quartiere}</span>
-                    <span className="text-sm text-muted-foreground">→ {d.obiettivo}</span>
-                  </div>
-                  <Badge variant={d.numero_bandi > 0 ? "default" : "secondary"}>
-                    {d.azione} ({d.numero_bandi} bandi)
-                  </Badge>
+            (state?.proposteModerazione || []).map((p: any) => (
+              <div key={p.id} className="surface-panel border p-4 rounded-xl flex items-center justify-between gap-4">
+                <div>
+                  <span className="text-xs font-bold uppercase text-accent">{p.tipo} · {p.stato}</span>
+                  <h3 className="font-bold">{p.titolo}</h3>
+                  <p className="text-xs text-muted-foreground">Autore: {p.autore} · Data: {p.data}</p>
                 </div>
-                {d.elenco_bandi.length > 0 && (
-                  <ul className="mt-3 list-disc space-y-1 pl-5 text-xs text-muted-foreground">
-                    {d.elenco_bandi.map((eb, idx) => <li key={idx}>{eb}</li>)}
-                  </ul>
-                )}
-              </div>
-            ))
-          )}
-        </div>
-      )}
-
-      {tab === "proposte" && (
-        <div className="space-y-4">
-          {proposteInAttesa.length === 0 ? (
-            <div className="surface-panel p-8 text-center text-sm text-muted-foreground">
-              <Inbox className="mx-auto mb-2 size-8 text-accent" />
-              Nessuna candidatura o proposta in coda di moderazione. Quando un cittadino propone una scheda luogo, un'associazione per la bacheca, un sondaggio o un pin mappa, comparirà qui per la tua approvazione.
-            </div>
-          ) : (
-            proposteInAttesa.map((prop) => (
-              <div key={prop.id} className="surface-panel p-5">
-                <div className="flex flex-wrap items-start justify-between gap-4">
-                  <div className="space-y-1 max-w-3xl">
-                    <div className="flex flex-wrap items-center gap-2">
-                      <Badge variant={prop.stato === "Approvata" ? "default" : "secondary"}>
-                        {prop.stato === "Approvata" ? "🟢 Pubblicata sul Sito" : "🟡 In attesa di approvazione Admin"}
-                      </Badge>
-                      <Badge className="border-0 bg-accent/20 text-accent uppercase text-[10px]">
-                        Tipo: {prop.tipo}
-                      </Badge>
-                      <span className="text-xs text-muted-foreground">
-                        Proposto da: <b>{prop.autore}</b> ({prop.contatto}) · {prop.data}
-                      </span>
-                    </div>
-                    <h3 className="text-base font-bold pt-1">{prop.titolo}</h3>
-                    <p className="text-sm text-muted-foreground">
-                      {prop.dati?.descrizione || prop.dati?.contesto || JSON.stringify(prop.dati)}
-                    </p>
-                    {prop.dati?.curiosita && (
-                      <p className="text-xs text-accent">Dettaglio / Link / Curiosità: {prop.dati.curiosita}</p>
-                    )}
-                  </div>
-
-                  <div className="flex flex-wrap items-center gap-2">
-                    {prop.tipo === "poi" && (
-                      <select
-                        value={raritaSceltaAdmin[prop.id] || prop.dati?.rarita || "Comune"}
-                        onChange={(e) => setRaritaSceltaAdmin({ ...raritaSceltaAdmin, [prop.id]: e.target.value as RaritaPOI })}
-                        className="h-9 rounded-md border border-border bg-background px-3 text-xs font-semibold"
-                      >
-                        {ORDINE_RARITA.map((r) => (
-                          <option key={r} value={r}>{RARITA_STANDARD[r].label}</option>
-                        ))}
-                      </select>
-                    )}
-                    {prop.stato !== "Approvata" && (
-                      <Button size="sm" onClick={() => decidiProposta(prop, "Approvata")}>
-                        <CheckCircle2 className="mr-1 size-4" /> Approva / Aggiorna
-                      </Button>
-                    )}
-                    <Button size="sm" variant="destructive" onClick={() => decidiProposta(prop, "Rifiutata")}>
-                      <XCircle className="mr-1 size-4" /> Rifiuta / Rimuovi
-                    </Button>
-                  </div>
+                <div className="flex gap-2">
+                  <button
+                    onClick={async () => {
+                      await gestisciPropostaAdmin(p.id, "Approvata");
+                      if (typeof ricaricaCloud === "function") void ricaricaCloud();
+                      toast.success("Proposta approvata!");
+                    }}
+                    className="px-3 py-1.5 rounded bg-emerald-500/20 text-emerald-400 text-xs font-bold"
+                  >
+                    Approva
+                  </button>
+                  <button
+                    onClick={async () => {
+                      await gestisciPropostaAdmin(p.id, "Rifiutata");
+                      if (typeof ricaricaCloud === "function") void ricaricaCloud();
+                      toast.info("Proposta rifiutata");
+                    }}
+                    className="px-3 py-1.5 rounded bg-red-500/20 text-red-400 text-xs font-bold"
+                  >
+                    Rifiuta
+                  </button>
                 </div>
               </div>
             ))
           )}
         </div>
       )}
-
-      {tab === "luoghi" && (
-        <div className="space-y-4">
-          {state.poiExtra.length === 0 ? (
-            <div className="surface-panel p-8 text-center text-sm text-muted-foreground">
-              <MapPin className="mx-auto mb-2 size-8 text-accent" />
-              Nessun luogo attualmente pubblicato sul TerniDex.
-            </div>
-          ) : (
-            state.poiExtra.map((poi) => (
-              <div key={poi.id} className="surface-panel p-5">
-                <div className="flex flex-wrap items-start justify-between gap-4">
-                  <div className="space-y-1 max-w-3xl">
-                    <div className="flex flex-wrap items-center gap-2">
-                      <Badge className="border-0 bg-emerald-500/20 text-emerald-400">🟢 Pubblicato</Badge>
-                      <Badge variant="secondary">{poi.categoria}</Badge>
-                      <Badge variant="outline" className="text-[10px] uppercase text-accent border-accent">{poi.rarita}</Badge>
-                    </div>
-                    <h3 className="text-base font-bold pt-1">{poi.nome}</h3>
-                    <p className="text-sm text-muted-foreground">{poi.descrizione}</p>
-                    <p className="text-xs text-muted-foreground mt-2">
-                      <MapPin className="inline size-3 mr-1" /> {poi.lat}, {poi.lng}
-                    </p>
-                  </div>
-                  <div className="flex flex-wrap items-center gap-2">
-                    <Button size="sm" variant="secondary" onClick={() => {
-                      setEditModeId(poi.id);
-                      setFormDir({
-                        titolo: poi.nome,
-                        autoreStorico: poi.autore,
-                        autoreScheda: (poi as any).autoreScheda || "Lorenzo Covicchio",
-                        anno: poi.anno,
-                        categoria: poi.categoria,
-                        rarita: poi.rarita,
-                        lat: String(poi.lat || "42.5636"),
-                        lng: String(poi.lng || "12.6427"),
-                        descrizione: poi.descrizione,
-                        immagine: poi.immagine || "",
-                        articolo: poi.articolo || "",
-                      });
-                      setInserimentoOpen(true);
-                    }}>
-                      ✏️ Modifica
-                    </Button>
-                    <Button size="sm" variant="destructive" onClick={() => eliminaPoi(poi.id)}>
-                      🗑️ Rimuovi
-                    </Button>
-                  </div>
-                </div>
-              </div>
-            ))
-          )}
-        </div>
-      )}
-
-      <Dialog open={inserimentoOpen} onOpenChange={setInserimentoOpen}>
-        <DialogContent className="z-[2000] max-h-[90vh] max-w-lg overflow-y-auto">
-          <DialogHeader>
-            <DialogTitle className="flex items-center gap-2">
-              <Zap className="size-5 text-emerald-500" /> {editModeId ? "Modifica Luogo/POI" : "Inserimento Diretto Luogo/POI"}
-            </DialogTitle>
-            <DialogDescription>
-              Pubblica istantaneamente una nuova scheda nel TerniDex senza passare dalla coda di moderazione.
-            </DialogDescription>
-          </DialogHeader>
-          <div className="space-y-3">
-            <div className="grid gap-2 sm:grid-cols-2">
-              <div>
-                <Label>Nome del Luogo / Architettura</Label>
-                <Input value={formDir.titolo} onChange={(e) => setFormDir({ ...formDir, titolo: e.target.value })} />
-              </div>
-              <div>
-                <Label>Autore storico / Architetto</Label>
-                <Input value={formDir.autoreStorico} onChange={(e) => setFormDir({ ...formDir, autoreStorico: e.target.value })} placeholder="Es. Mario Ridolfi" />
-              </div>
-            </div>
-            <div className="grid gap-2 sm:grid-cols-2">
-              <div>
-                <Label>Categoria</Label>
-                <Input 
-                  list="categorie-list" 
-                  value={formDir.categoria} 
-                  onChange={(e) => setFormDir({ ...formDir, categoria: e.target.value as POI["categoria"] })} 
-                  placeholder="Seleziona o scrivi nuova..." 
-                  className="mt-1 h-9 text-xs" 
-                />
-                <datalist id="categorie-list">
-                  {CATEGORIE_POI.map((c) => <option key={c} value={c} />)}
-                </datalist>
-              </div>
-              <div>
-                <Label>Livello di Rarità</Label>
-                <select
-                  value={formDir.rarita}
-                  onChange={(e) => setFormDir({ ...formDir, rarita: e.target.value as RaritaPOI })}
-                  className="mt-1 h-9 w-full rounded-md border border-border bg-background px-3 text-xs font-semibold"
-                >
-                  {ORDINE_RARITA.map((r) => <option key={r} value={r}>{RARITA_STANDARD[r].label}</option>)}
-                </select>
-              </div>
-            </div>
-            <div>
-              <div className="flex items-center justify-between mb-1">
-                <Label>Coordinate (Clicca sulla Mappa per impostare)</Label>
-                <button type="button" onClick={usaMiaPosizioneNelForm} className="text-[11px] font-semibold text-accent hover:underline">
-                  📍 Usa il mio GPS attuale
-                </button>
-              </div>
-              <div className="h-[200px] w-full rounded-md border border-border overflow-hidden mb-2">
-                <TerniMap 
-                  center={[parseFloat(formDir.lat) || 42.5636, parseFloat(formDir.lng) || 12.6427]} 
-                  zoom={15} 
-                  pins={[{id:'preview', lat:parseFloat(formDir.lat)||42.5636, lng:parseFloat(formDir.lng)||12.6427, color:'#10b981', label:'Anteprima', popup:<span>Anteprima Posizione</span>}]} 
-                  onMapClick={(lat, lng) => setFormDir({...formDir, lat: lat.toString(), lng: lng.toString()})} 
-                />
-              </div>
-              <div className="grid grid-cols-2 gap-2">
-                <Input value={formDir.lat} onChange={(e) => setFormDir({ ...formDir, lat: e.target.value })} placeholder="Latitudine" />
-                <Input value={formDir.lng} onChange={(e) => setFormDir({ ...formDir, lng: e.target.value })} placeholder="Longitudine" />
-              </div>
-            </div>
-            <div className="grid gap-2 sm:grid-cols-2">
-              <div>
-                <Label>Anno / Epoca</Label>
-                <Input value={formDir.anno} onChange={(e) => setFormDir({ ...formDir, anno: e.target.value })} placeholder="Es. 1936" />
-              </div>
-              <div>
-                <Label>Autore Scheda (Admin)</Label>
-                <Input list="autori-admin-list" value={formDir.autoreScheda} onChange={(e) => setFormDir({ ...formDir, autoreScheda: e.target.value })} className="mt-1 h-9 text-xs" />
-                <datalist id="autori-admin-list">
-                  <option value="Lorenzo Covicchio" />
-                  <option value="Thyrus IA" />
-                </datalist>
-              </div>
-            </div>
-            <div>
-              <Label>Immagine Principale (URL Web)</Label>
-              <Input value={formDir.immagine} onChange={(e) => setFormDir({ ...formDir, immagine: e.target.value })} placeholder="https://..." />
-            </div>
-            <div>
-              <Label>Breve Anteprima (Sempre visibile a tutti)</Label>
-              <Textarea value={formDir.descrizione} onChange={(e) => setFormDir({ ...formDir, descrizione: e.target.value })} rows={2} />
-            </div>
-            <div>
-              <Label>Articolo Completo (Sbloccabile col GPS sul posto)</Label>
-              <Textarea value={formDir.articolo} onChange={(e) => setFormDir({ ...formDir, articolo: e.target.value })} rows={5} />
-            </div>
-            <Button className="w-full bg-emerald-600 hover:bg-emerald-700 text-white" onClick={salvaPoiDiretto}>
-              <Zap className="mr-1.5 size-4" /> {editModeId ? "Salva Modifiche" : "Pubblica Subito sul Sito"}
-            </Button>
-          </div>
-        </DialogContent>
-      </Dialog>
-    </div>
-  );
-}
-
-
-
-function PannelloDossier() {
-  const [lista, setLista] = React.useState<any[]>([]);
-  const [loading, setLoading] = React.useState(true);
-
-  React.useEffect(() => {
-    getDossiersAdmin().then(d => { setLista(d); setLoading(false); });
-  }, []);
-
-  const handleElimina = async (id: string) => {
-    if (!confirm("Sei sicuro di voler eliminare definitivamente questo dossier dal database?")) return;
-    await eliminaDossierAdmin(id);
-    setLista(lista.filter(x => x.id !== id));
-  };
-
-  const handleStato = async (id: string, stato: string) => {
-    await modificaStatoDossierAdmin(id, stato);
-    setLista(lista.map(x => x.id === id ? { ...x, stato } : x));
-  };
-
-  if (loading) return <div className="p-8 text-center text-muted-foreground text-sm font-bold">Caricamento dossier in corso...</div>;
-  if (lista.length === 0) return <div className="p-8 text-center text-muted-foreground text-sm">Nessun dossier è stato ancora richiesto.</div>;
-
-  return (
-    <div className="space-y-4">
-      {lista.map(d => {
-        const dati = JSON.parse(d.descrizione || "{}");
-        const email = dati.email || "Nessuna email";
-        const isVenduto = d.stato === "Venduto";
-        
-        return (
-          <div key={d.id} className="surface-panel p-5 border border-border rounded-xl">
-            <div className="flex flex-wrap justify-between items-start gap-4">
-              <div>
-                <h3 className="font-bold text-accent text-base">{d.titolo}</h3>
-                <p className="text-sm text-muted-foreground mt-1">📧 Email Contatto: <b className="text-white">{email}</b></p>
-                <p className="text-xs mt-1 text-muted-foreground">Profilo: {dati.profilo || "ND"} | Quartiere: {dati.quartiere || "ND"} | Obiettivo: {dati.obiettivo || "ND"}</p>
-                <div className="mt-3">
-                  <span className={`px-2 py-1 text-[10px] uppercase font-bold rounded-full ${isVenduto ? 'bg-emerald-500/20 text-emerald-400' : 'bg-amber-500/20 text-amber-400'}`}>
-                    {d.stato}
-                  </span>
-                </div>
-              </div>
-              <div className="flex gap-2 flex-wrap items-center">
-                <button 
-                  className="px-3 py-1.5 text-xs font-bold rounded bg-blue-600 text-white hover:bg-blue-500 transition-colors" 
-                  onClick={() => window.location.href = `mailto:${email}?subject=Il tuo Dossier Terni 2030`}
-                >
-                  📧 Contatta
-                </button>
-                <button 
-                  className="px-3 py-1.5 text-xs font-bold rounded bg-secondary text-white hover:bg-secondary/80 transition-colors" 
-                  onClick={() => handleStato(d.id, isVenduto ? "Da Contattare" : "Venduto")}
-                >
-                  {isVenduto ? "Segna come Da Contattare" : "✅ Segna come Venduto"}
-                </button>
-                <button 
-                  className="px-3 py-1.5 text-xs font-bold rounded bg-red-600 text-white hover:bg-red-500 transition-colors" 
-                  onClick={() => handleElimina(d.id)}
-                >
-                  🗑️ Elimina
-                </button>
-              </div>
-            </div>
-          </div>
-        );
-      })}
     </div>
   );
 }
