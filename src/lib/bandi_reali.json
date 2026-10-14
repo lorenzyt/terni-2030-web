@@ -1,90 +1,6 @@
 [
   {
-    "concept_id": "fesr_agenda_urbana_terni",
-    "portale": "PR FESR 2021/2027",
-    "categoria_macro": "citta",
-    "asse_specifico": "Rigenerazione Urbana & Spazi",
-    "titolo": "PR FESR Umbria 2021-2027 — Agenda Urbana Sostenibile Comune di Terni",
-    "ente": "Regione Umbria / Comune di Terni (PR FESR)",
-    "scadenza": "Attuazione 2021-2027",
-    "importo": "Dotazione 6.200.000 € dedicata Agenda Urbana Terni",
-    "valore_stimato_euro": 6200000,
-    "ambiti": [
-      "cittadino",
-      "impresa",
-      "pubblico"
-    ],
-    "obiettivo_id": "o1",
-    "descrizione": "Risorse FESR destinate alla rigenerazione di spazi urbani, digitalizzazione servizi comunali, mobilità ciclabile e inclusione a Terni.",
-    "link": "https://www.regione.umbria.it/programmazione-fesr",
-    "semaforo": "verde",
-    "obiettivo_nome": "Riqualificazione Urbana",
-    "obiettivo": "o1",
-    "sdg_id": "11",
-    "sdg_label": "SDG 11 · Città e Comunità Sostenibili",
-    "sdg_img": "/sdg/sdg-11.svg",
-    "id": "b-3ed2b1ea",
-    "portali_correlati": [
-      "PR FESR 2021/2027"
-    ]
-  },
-  {
-    "concept_id": "fsc_rigenerazione_umbria",
-    "portale": "FSC",
-    "categoria_macro": "citta",
-    "asse_specifico": "Rigenerazione Urbana & Spazi",
-    "titolo": "Accordo per la Coesione FSC 2021-2027 Regione Umbria — Infrastrutture e Rigenerazione Urbana",
-    "ente": "Presidenza del Consiglio / Regione Umbria (FSC 2021-2027)",
-    "scadenza": "Programmazione pluriennale attiva",
-    "importo": "Cofinanziamento statale/regionale FSC 5.500.000 €",
-    "valore_stimato_euro": 5500000,
-    "ambiti": [
-      "cittadino",
-      "pubblico"
-    ],
-    "obiettivo_id": "o1",
-    "descrizione": "Risorse del Fondo per lo Sviluppo e la Coesione per opere pubbliche, recupero immobili degradati e riqualificazione a Terni.",
-    "link": "https://politichecoesione.governo.it/it/politica-di-coesione/fondo-per-lo-sviluppo-e-la-coesione-fsc/",
-    "semaforo": "verde",
-    "obiettivo_nome": "Riqualificazione Urbana",
-    "obiettivo": "o1",
-    "sdg_id": "11",
-    "sdg_label": "SDG 11 · Città e Comunità Sostenibili",
-    "sdg_img": "/sdg/sdg-11.svg",
-    "id": "b-8a50b9cc",
-    "portali_correlati": [
-      "FSC"
-    ]
-  },
-  {
-    "concept_id": "contratto_sviluppo_invitalia",
-    "portale": "Invitalia",
-    "categoria_macro": "citta",
-    "asse_specifico": "Sviluppo Industriale & Lavoro",
-    "titolo": "Contratto di Sviluppo Invitalia — Grandi investimenti industriali e tutela ambientale",
-    "ente": "Invitalia / MIMIT",
-    "scadenza": "Sportello attivo",
-    "importo": "Fondo perduto + finanziamento agevolato fino al 75% (5.000.000 €)",
-    "valore_stimato_euro": 5000000,
-    "ambiti": [
-      "impresa",
-      "pubblico"
-    ],
-    "obiettivo_id": "o4",
-    "descrizione": "Principale strumento nazionale per la realizzazione di nuovi impianti industriali, riconversione siderurgica/chimica e poli produttivi.",
-    "link": "https://www.invitalia.it/cosa-facciamo/rafforziamo-le-imprese/contratti-di-sviluppo",
-    "semaforo": "verde",
-    "obiettivo_nome": "Nuovo Impianto & Sviluppo Industriale",
-    "obiettivo": "o4",
-    "sdg_id": "8",
-    "sdg_label": "SDG 8 & 9 · Sviluppo Industriale e Lavoro",
-    "sdg_img": "/sdg/sdg-8.svg",
-    "id": "b-f9179610",
-    "portali_correlati": [
-      "Invitalia"
-    ]
-  },
-  {
+    "id": "b-fesr-211",
     "concept_id": "fesr_efficienza_imprese",
     "portale": "PR FESR 2021/2027",
     "categoria_macro": "citta",
@@ -92,228 +8,171 @@
     "titolo": "PR FESR Umbria 2021-2027 — Azione 2.1.1 Efficienza energetica e rinnovabili nelle imprese",
     "ente": "Regione Umbria / Sviluppo Umbria (PR FESR 2021-2027)",
     "scadenza": "Programmazione 2021-2027 attiva",
-    "importo": "Plafond 4.500.000 € · Contributo a fondo perduto fino al 60%",
-    "valore_stimato_euro": 4500000,
+    "importo": "Contributo a fondo perduto 40%-60% (fino a 150.000 € per impresa)",
+    "valore_stimato_euro": 850000,
     "ambiti": [
       "impresa",
       "pubblico"
     ],
     "obiettivo_id": "o2",
-    "descrizione": "Finanziamenti FESR per diagnosi energetiche, impianti fotovoltaici, solare termico e isolamento degli immobili produttivi in Umbria.",
+    "descrizione": "Finanziamenti FESR per diagnosi energetiche, impianti fotovoltaici, solare termico e isolamento degli immobili produttivi nel bacino ternano.",
     "link": "https://www.regione.umbria.it/programmazione-fesr",
     "semaforo": "verde",
-    "obiettivo_nome": "Sostenibilità Energetica",
     "obiettivo": "o2",
+    "obiettivo_nome": "Sostenibilità Energetica",
     "sdg_id": "7",
     "sdg_label": "SDG 7 & 13 · Energia Pulita e Clima",
-    "sdg_img": "/sdg/sdg-7.svg",
-    "id": "b-28a14507",
-    "portali_correlati": [
-      "Camera di Commercio",
-      "GSE",
-      "PR FESR 2021/2027"
-    ]
+    "sdg_img": "/sdg/sdg-7.svg"
   },
   {
+    "id": "b-fesr-111",
     "concept_id": "fesr_ricerca_innovazione",
     "portale": "PR FESR 2021/2027",
     "categoria_macro": "citta",
     "asse_specifico": "Digitale & Transizione 5.0",
-    "titolo": "PR FESR Umbria 2021-2027 — Azione 1.1.1 Sostegno a progetti di Ricerca, Sviluppo e Innovazione",
-    "ente": "Regione Umbria / Sviluppo Umbria (PR FESR 2021-2027)",
+    "titolo": "PR FESR Umbria 2021-2027 — Azione 1.1.1 Progetti di Ricerca, Sviluppo e Innovazione",
+    "ente": "Regione Umbria / Sviluppo Umbria",
     "scadenza": "Bandi periodici attivi",
-    "importo": "Dotazione 3.800.000 € · Fondo perduto fino al 60% per PMI",
-    "valore_stimato_euro": 3800000,
+    "importo": "Fondo perduto fino al 60% per PMI e partenariati (da 30.000 € a 200.000 €)",
+    "valore_stimato_euro": 650000,
     "ambiti": [
       "impresa",
       "pubblico"
     ],
     "obiettivo_id": "o7",
-    "descrizione": "Supporto a progetti di ricerca industriale, sviluppo sperimentale, prototipazione e trasferimento tecnologico nelle filiere umbre.",
+    "descrizione": "Supporto a progetti di ricerca industriale, sviluppo sperimentale, prototipazione e trasferimento tecnologico nelle filiere locali.",
     "link": "https://www.sviluppoumbria.it/bandi-e-avvisi",
     "semaforo": "verde",
-    "obiettivo_nome": "Digitalizzazione & Innovazione",
     "obiettivo": "o7",
+    "obiettivo_nome": "Digitalizzazione & Innovazione",
     "sdg_id": "9",
     "sdg_label": "SDG 9 · Innovazione e Transizione 5.0",
-    "sdg_img": "/sdg/sdg-9.svg",
-    "id": "b-5d7c6946",
-    "portali_correlati": [
-      "PR FESR 2021/2027"
-    ]
+    "sdg_img": "/sdg/sdg-9.svg"
   },
   {
-    "concept_id": "transizione_5_0_mimit",
-    "portale": "PNRR",
+    "id": "b-fesr-agenda-terni",
+    "concept_id": "fesr_agenda_urbana_terni",
+    "portale": "PR FESR 2021/2027",
     "categoria_macro": "citta",
-    "asse_specifico": "Digitale & Transizione 5.0",
-    "titolo": "PNRR Transizione 5.0 — Credito d'imposta per digitalizzazione e risparmio energetico",
-    "ente": "MIMIT / PNRR Italia Domani",
-    "scadenza": "Attivo",
-    "importo": "Credito d'imposta fino al 45% (Stima bacino Terni: 3.500.000 €)",
-    "valore_stimato_euro": 3500000,
+    "asse_specifico": "Rigenerazione Urbana & Spazi",
+    "titolo": "PR FESR Umbria 2021-2027 — Agenda Urbana Sostenibile Comune di Terni",
+    "ente": "Regione Umbria / Comune di Terni",
+    "scadenza": "Attuazione 2021-2027",
+    "importo": "Dotazione territoriale dedicata al Comune di Terni",
+    "valore_stimato_euro": 1200000,
     "ambiti": [
-      "impresa",
-      "pubblico"
+      "pubblico",
+      "cittadino"
     ],
-    "obiettivo_id": "o7",
-    "descrizione": "Incentivo per imprese che investono in beni strumentali digitali 4.0 abbinati alla riduzione dei consumi energetici dello stabilimento.",
-    "link": "https://www.mimit.gov.it/it/incentivi/piano-transizione-5-0",
+    "obiettivo_id": "o1",
+    "descrizione": "Risorse FESR destinate alla rigenerazione di spazi urbani, digitalizzazione servizi comunali, parchi e mobilità dolce a Terni.",
+    "link": "https://www.regione.umbria.it/programmazione-fesr",
     "semaforo": "verde",
-    "obiettivo_nome": "Digitalizzazione & Innovazione",
-    "obiettivo": "o7",
-    "sdg_id": "9",
-    "sdg_label": "SDG 9 · Innovazione e Transizione 5.0",
-    "sdg_img": "/sdg/sdg-9.svg",
-    "id": "b-f36b315b",
-    "portali_correlati": [
-      "PNRR"
-    ]
+    "obiettivo": "o1",
+    "obiettivo_nome": "Riqualificazione Urbana",
+    "sdg_id": "11",
+    "sdg_label": "SDG 11 · Città e Comunità Sostenibili",
+    "sdg_img": "/sdg/sdg-11.svg"
   },
   {
-    "concept_id": "wf_desteenazione_minori",
-    "portale": "Fondi Nazionali MLPS",
-    "categoria_macro": "welfare",
-    "asse_specifico": "Famiglia, Minori & Povertà Educativa",
-    "titolo": "PN Inclusione 2021-2027 «DesTEENazione», Contrasto Povertà Educativa & Contributi Famiglie Numerose",
-    "ente": "MLPS / Impresa Sociale Con i Bambini / Comune di Terni",
-    "scadenza": "Attivo",
-    "importo": "3.300.000 € per Ambito Territoriale + Bandi Minori",
-    "valore_stimato_euro": 3300000,
-    "ambiti": [
-      "cittadino",
-      "impresa",
-      "pubblico"
-    ],
-    "obiettivo_id": "o6",
-    "descrizione": "Spazi multifunzionali per adolescenti 11-18 anni, comunità educanti, educativa di strada, supporto psicologico, nidi e sostegno alle famiglie.",
-    "link": "https://www.lavoro.gov.it/priorita/pagine/desteenazione-desideri-in-azione",
-    "semaforo": "verde",
-    "obiettivo_nome": "Welfare, Cultura, Turismo & Terzo Settore",
-    "obiettivo": "o6",
-    "sdg_id": "3",
-    "sdg_label": "SDG 3 & 10 · Welfare, Salute e Inclusione",
-    "sdg_img": "/sdg/sdg-3.svg",
-    "id": "b-36bd00a2",
-    "portali_correlati": [
-      "Comune di Terni",
-      "Fondi Nazionali MLPS"
-    ]
-  },
-  {
+    "id": "b-fesr-131",
     "concept_id": "fesr_investimenti_produttivi",
     "portale": "PR FESR 2021/2027",
     "categoria_macro": "citta",
     "asse_specifico": "Sviluppo Industriale & Lavoro",
     "titolo": "PR FESR Umbria 2021-2027 — Azione 1.3.1 Investimenti produttivi, macchinari e competitività PMI",
-    "ente": "Sviluppo Umbria (PR FESR 2021-2027)",
+    "ente": "Sviluppo Umbria",
     "scadenza": "Sportello attivo",
-    "importo": "Dotazione 3.200.000 € · Fondo perduto + anticipazione agevolata",
-    "valore_stimato_euro": 3200000,
+    "importo": "Fondo perduto + anticipazione agevolata (da 25.000 € a 150.000 €)",
+    "valore_stimato_euro": 750000,
     "ambiti": [
-      "impresa",
-      "pubblico"
+      "impresa"
     ],
     "obiettivo_id": "o4",
-    "descrizione": "Agevolazioni per ampliamento di stabilimenti produttivi, acquisto impianti industriali 4.0 e riconversione ecologica nel territorio ternano.",
+    "descrizione": "Agevolazioni per ampliamento stabilimenti produttivi, acquisto impianti 4.0 e riconversione ecologica nella conca ternana.",
     "link": "https://www.sviluppoumbria.it/bandi-e-avvisi",
     "semaforo": "verde",
-    "obiettivo_nome": "Nuovo Impianto & Sviluppo Industriale",
     "obiettivo": "o4",
+    "obiettivo_nome": "Nuovo Impianto & Sviluppo Industriale",
     "sdg_id": "8",
     "sdg_label": "SDG 8 & 9 · Sviluppo Industriale e Lavoro",
-    "sdg_img": "/sdg/sdg-8.svg",
-    "id": "b-079aa509",
-    "portali_correlati": [
-      "PR FESR 2021/2027"
-    ]
+    "sdg_img": "/sdg/sdg-8.svg"
   },
   {
-    "concept_id": "wf_pnrr_m6_case_comunita_dm77",
-    "portale": "PNRR M6 Salute & Welfare",
-    "categoria_macro": "welfare",
-    "asse_specifico": "Integrazione Socio-Sanitaria (DM 77/2022)",
-    "titolo": "PNRR M6C1 & DM 77/2022 — Case della Comunità, PUA (Punto Unico di Accesso) e Cure Domiciliari ADI",
-    "ente": "Ministero della Salute / Regione Umbria / USL Umbria 2 / Comune di Terni",
-    "scadenza": "Attuazione territoriale continua",
-    "importo": "Dotazione PNRR M6 + Fondo Sanitario (Stima locale 3.200.000 €)",
-    "valore_stimato_euro": 3200000,
+    "id": "b-fse-arpal",
+    "concept_id": "fse_assunzioni_arpal",
+    "portale": "FSE",
+    "categoria_macro": "citta",
+    "asse_specifico": "Sviluppo Industriale & Lavoro",
+    "titolo": "PR FSE+ Umbria 2021-2027 — Incentivi ARPAL per nuove assunzioni e stabilizzazioni",
+    "ente": "Regione Umbria / ARPAL Umbria",
+    "scadenza": "Avvisi annuali attivi",
+    "importo": "Contributo a fondo perduto fino a 10.000-12.000 € per assunzione",
+    "valore_stimato_euro": 450000,
+    "ambiti": [
+      "impresa"
+    ],
+    "obiettivo_id": "o4",
+    "descrizione": "Sovvenzioni FSE+ per le imprese ternane che assumono giovani, donne, disoccupati o lavoratori in transizione occupazionale.",
+    "link": "https://www.arpalumbria.it/avvisi-e-bandi",
+    "semaforo": "verde",
+    "obiettivo": "o4",
+    "obiettivo_nome": "Nuovo Impianto & Sviluppo Industriale",
+    "sdg_id": "8",
+    "sdg_label": "SDG 8 & 9 · Sviluppo Industriale e Lavoro",
+    "sdg_img": "/sdg/sdg-8.svg"
+  },
+  {
+    "id": "b-fse-autoimpiego",
+    "concept_id": "fse_creazione_impresa",
+    "portale": "FSE",
+    "categoria_macro": "citta",
+    "asse_specifico": "Commercio & Nuove Imprese",
+    "titolo": "PR FSE+ Umbria 2021-2027 — Creazione d'impresa, lavoro autonomo e microimprenditorialità",
+    "ente": "Regione Umbria / ARPAL Umbria",
+    "scadenza": "Attivo",
+    "importo": "Contributo a fondo perduto fino a 15.000-25.000 € per avvio attività",
+    "valore_stimato_euro": 400000,
     "ambiti": [
       "cittadino",
-      "pubblico"
+      "impresa"
     ],
-    "obiettivo_id": "o6",
-    "descrizione": "Accordi di programma Comune-USL per equipe multiprofessionali nei PUA, valutazione multidimensionale unica (UVM) e dimissioni protette.",
-    "link": "https://www.salute.gov.it/portale/pnrr/homePNRR.jsp",
+    "obiettivo_id": "o5",
+    "descrizione": "Finanziamenti del Fondo Sociale Europeo Plus per cittadini, giovani e professionisti che avviano nuove imprese o studi a Terni.",
+    "link": "https://www.regione.umbria.it/fse",
     "semaforo": "verde",
-    "obiettivo_nome": "Welfare, Cultura, Turismo & Terzo Settore",
-    "obiettivo": "o6",
-    "sdg_id": "3",
-    "sdg_label": "SDG 3 & 10 · Welfare, Salute e Inclusione",
-    "sdg_img": "/sdg/sdg-3.svg",
-    "id": "b-19cbe12c",
-    "portali_correlati": [
-      "PNRR M6 Salute & Welfare"
-    ]
+    "obiettivo": "o5",
+    "obiettivo_nome": "Commercio & Riuso Locali Sfitti",
+    "sdg_id": "8",
+    "sdg_label": "SDG 8 · Commercio e Impresa Locale",
+    "sdg_img": "/sdg/sdg-8.svg"
   },
   {
-    "concept_id": "wf_fse_inclusione_vita_indipendente",
-    "portale": "PR FSE+ Welfare",
-    "categoria_macro": "welfare",
-    "asse_specifico": "Disabilità & Vita Indipendente",
-    "titolo": "PR FSE+ Umbria 2021-2027 — Priorità 3 Inclusione Sociale, Vita Indipendente e Misura «Umbria per Tutti»",
-    "ente": "Regione Umbria — Direzione Salute e Welfare / Zona Sociale Terni",
-    "scadenza": "Programmazione 2021-2027 attiva",
-    "importo": "Dotazione pluriennale Asse Inclusione FSE+ (2.800.000 €)",
-    "valore_stimato_euro": 2800000,
+    "id": "b-fsc-rigenerazione",
+    "concept_id": "fsc_rigenerazione_umbria",
+    "portale": "FSC",
+    "categoria_macro": "citta",
+    "asse_specifico": "Rigenerazione Urbana & Spazi",
+    "titolo": "Accordo per la Coesione FSC 2021-2027 — Infrastrutture e Rigenerazione Urbana",
+    "ente": "Presidenza del Consiglio / Regione Umbria",
+    "scadenza": "Programmazione pluriennale attiva",
+    "importo": "Cofinanziamento statale/regionale FSC per opere sul territorio",
+    "valore_stimato_euro": 950000,
     "ambiti": [
-      "cittadino",
       "pubblico"
     ],
-    "obiettivo_id": "o6",
-    "descrizione": "Finanziamento di progetti personalizzati per l'autonomia delle persone con disabilità (D.Lgs. 62/2024), assegni di cura e sostegno alle famiglie.",
-    "link": "https://www.regione.umbria.it/sociale",
+    "obiettivo_id": "o1",
+    "descrizione": "Risorse del Fondo per lo Sviluppo e la Coesione per opere pubbliche, recupero immobili degradati e riqualificazione urbana.",
+    "link": "https://politichecoesione.governo.it/it/politica-di-coesione/fondo-per-lo-sviluppo-e-la-coesione-fsc/",
     "semaforo": "verde",
-    "obiettivo_nome": "Welfare, Cultura, Turismo & Terzo Settore",
-    "obiettivo": "o6",
-    "sdg_id": "3",
-    "sdg_label": "SDG 3 & 10 · Welfare, Salute e Inclusione",
-    "sdg_img": "/sdg/sdg-3.svg",
-    "id": "b-97abfeda",
-    "portali_correlati": [
-      "FSE",
-      "PR FSE+ Welfare"
-    ]
+    "obiettivo": "o1",
+    "obiettivo_nome": "Riqualificazione Urbana",
+    "sdg_id": "11",
+    "sdg_label": "SDG 11 · Città e Comunità Sostenibili",
+    "sdg_img": "/sdg/sdg-11.svg"
   },
   {
-    "concept_id": "wf_pnrr_m5c2_anziani",
-    "portale": "PNRR M5C2 Welfare",
-    "categoria_macro": "welfare",
-    "asse_specifico": "Non Autosufficienza, Anziani & Caregiver",
-    "titolo": "PNRR M5C2 Inv. 1.1 — Sostegno alle Persone Vulnerabili e Autonomia Anziani Non Autosufficienti",
-    "ente": "Ministero del Lavoro e delle Politiche Sociali (MLPS) / ATS Terni",
-    "scadenza": "Attuazione PNRR attiva",
-    "importo": "Fino a 2.500.000 € per Ambito Territoriale Sociale",
-    "valore_stimato_euro": 2500000,
-    "ambiti": [
-      "cittadino",
-      "pubblico"
-    ],
-    "obiettivo_id": "o6",
-    "descrizione": "Prevenzione dell'istituzionalizzazione, riconversione in gruppi appartamento domotici, potenziamento assistenza domiciliare (SAD) e teleassistenza over 65.",
-    "link": "https://www.lavoro.gov.it/temi-e-priorita/pnrr",
-    "semaforo": "verde",
-    "obiettivo_nome": "Welfare, Cultura, Turismo & Terzo Settore",
-    "obiettivo": "o6",
-    "sdg_id": "3",
-    "sdg_label": "SDG 3 & 10 · Welfare, Salute e Inclusione",
-    "sdg_img": "/sdg/sdg-3.svg",
-    "id": "b-c4de50d2",
-    "portali_correlati": [
-      "PNRR M5C2 Welfare"
-    ]
-  },
-  {
+    "id": "b-pnrr-mobilitadolce",
     "concept_id": "pnrr_m2c2_ciclabile",
     "portale": "PNRR",
     "categoria_macro": "citta",
@@ -321,29 +180,99 @@
     "titolo": "PNRR M2C2 & FSC — Rafforzamento Mobilità Ciclabile, Intermodalità e Trasporto Sostenibile",
     "ente": "MIT / Regione Umbria / Comune di Terni",
     "scadenza": "Attuazione in corso",
-    "importo": "Finanziamento 100% enti territoriali (2.400.000 €)",
-    "valore_stimato_euro": 2400000,
+    "importo": "Finanziamento per reti ciclabili urbane, velostazioni e micromobilità",
+    "valore_stimato_euro": 550000,
     "ambiti": [
+      "pubblico",
       "cittadino",
-      "impresa",
-      "pubblico"
+      "impresa"
     ],
     "obiettivo_id": "o3",
-    "descrizione": "Fondi dedicati alla realizzazione di piste ciclabili urbane (Bicipolitana), ciclostazioni e servizi integrati di micromobilità.",
+    "descrizione": "Fondi dedicati alla realizzazione di piste ciclabili urbane (Bicipolitana), ciclostazioni e servizi integrati di mobilità dolce.",
     "link": "https://www.italiadomani.gov.it",
     "semaforo": "verde",
-    "obiettivo_nome": "Mobilità Dolce & Sostenibile",
     "obiettivo": "o3",
+    "obiettivo_nome": "Mobilità Dolce & Sostenibile",
     "sdg_id": "11",
     "sdg_label": "SDG 11 & 13 · Mobilità Sostenibile",
-    "sdg_img": "/sdg/sdg-13.svg",
-    "id": "b-3bb9cc0c",
-    "portali_correlati": [
-      "FSC",
-      "PNRR"
-    ]
+    "sdg_img": "/sdg/sdg-13.svg"
   },
   {
+    "id": "b-pnrr-transizione50",
+    "concept_id": "transizione_5_0_mimit",
+    "portale": "PNRR",
+    "categoria_macro": "citta",
+    "asse_specifico": "Digitale & Transizione 5.0",
+    "titolo": "PNRR Transizione 5.0 — Credito d'imposta per digitalizzazione e risparmio energetico",
+    "ente": "MIMIT / PNRR Italia Domani",
+    "scadenza": "Attivo",
+    "importo": "Credito d'imposta fino al 45% degli investimenti aziendali",
+    "valore_stimato_euro": 650000,
+    "ambiti": [
+      "impresa"
+    ],
+    "obiettivo_id": "o7",
+    "descrizione": "Incentivo per imprese che investono in beni strumentali digitali 4.0 abbinati alla riduzione dei consumi energetici.",
+    "link": "https://www.mimit.gov.it/it/incentivi/piano-transizione-5-0",
+    "semaforo": "verde",
+    "obiettivo": "o7",
+    "obiettivo_nome": "Digitalizzazione & Innovazione",
+    "sdg_id": "9",
+    "sdg_label": "SDG 9 · Innovazione e Transizione 5.0",
+    "sdg_img": "/sdg/sdg-9.svg"
+  },
+  {
+    "id": "b-terni-sfitti",
+    "concept_id": "commercio_sfitti_terni",
+    "portale": "Comune di Terni",
+    "categoria_macro": "citta",
+    "asse_specifico": "Commercio & Nuove Imprese",
+    "titolo": "Agevolazioni per il rilancio del commercio di vicinato, pubblici esercizi e riuso locali sfitti",
+    "ente": "Comune di Terni / Regione Umbria",
+    "scadenza": "Sportello SUAPE / Bandi attivi",
+    "importo": "Sgravi tributari locali e contributi apertura (da 5.000 € a 25.000 €)",
+    "valore_stimato_euro": 250000,
+    "ambiti": [
+      "impresa",
+      "cittadino"
+    ],
+    "obiettivo_id": "o5",
+    "descrizione": "Misure per favorire la riapertura di botteghe artigiane, negozi su strada e recupero di vetrine sfitte nel centro e nei quartieri di Terni.",
+    "link": "https://www.comune.terni.it",
+    "semaforo": "verde",
+    "obiettivo": "o5",
+    "obiettivo_nome": "Commercio & Riuso Locali Sfitti",
+    "sdg_id": "8",
+    "sdg_label": "SDG 8 · Commercio e Impresa Locale",
+    "sdg_img": "/sdg/sdg-8.svg"
+  },
+  {
+    "id": "b-terni-pattibeni",
+    "concept_id": "regione_rigenerazione_spazi",
+    "portale": "Comune di Terni",
+    "categoria_macro": "citta",
+    "asse_specifico": "Rigenerazione Urbana & Spazi",
+    "titolo": "Patti di Collaborazione Beni Comuni & Recupero Spazi Verdi di Quartiere",
+    "ente": "Comune di Terni / Regione Umbria",
+    "scadenza": "Sempre aperto",
+    "importo": "Cofinanziamento micro-interventi, materiali ed esenzioni",
+    "valore_stimato_euro": 150000,
+    "ambiti": [
+      "cittadino",
+      "pubblico"
+    ],
+    "obiettivo_id": "o1",
+    "descrizione": "Strumento per cittadini, comitati di quartiere e associazioni ternane per co-gestire aree verdi, parchi e arredo urbano.",
+    "link": "https://www.comune.terni.it",
+    "semaforo": "verde",
+    "obiettivo": "o1",
+    "obiettivo_nome": "Riqualificazione Urbana",
+    "sdg_id": "11",
+    "sdg_label": "SDG 11 · Città e Comunità Sostenibili",
+    "sdg_img": "/sdg/sdg-11.svg"
+  },
+  {
+    "id": "b-gse-contotermico",
     "concept_id": "conto_termico_gse",
     "portale": "GSE",
     "categoria_macro": "citta",
@@ -351,28 +280,25 @@
     "titolo": "Conto Termico 3.0 — Incentivi GSE per efficientamento energetico e pompe di calore",
     "ente": "GSE (Gestore dei Servizi Energetici)",
     "scadenza": "Sportello permanente aperto",
-    "importo": "Fino al 65% a fondo perduto (100% edifici pubblici · Stima 2.100.000 €)",
-    "valore_stimato_euro": 2100000,
+    "importo": "Fino al 65% a fondo perduto (fino al 100% per edifici pubblici)",
+    "valore_stimato_euro": 450000,
     "ambiti": [
-      "cittadino",
+      "pubblico",
       "impresa",
-      "pubblico"
+      "cittadino"
     ],
     "obiettivo_id": "o2",
     "descrizione": "Contributo diretto sul conto corrente per sostituzione impianti di climatizzazione, solare termico, pompe di calore e isolamento.",
     "link": "https://www.gse.it/servizi-per-te/efficienza-energetica/conto-termico",
     "semaforo": "verde",
-    "obiettivo_nome": "Sostenibilità Energetica",
     "obiettivo": "o2",
+    "obiettivo_nome": "Sostenibilità Energetica",
     "sdg_id": "7",
     "sdg_label": "SDG 7 & 13 · Energia Pulita e Clima",
-    "sdg_img": "/sdg/sdg-7.svg",
-    "id": "b-b046b699",
-    "portali_correlati": [
-      "GSE"
-    ]
+    "sdg_img": "/sdg/sdg-7.svg"
   },
   {
+    "id": "b-gse-cer",
     "concept_id": "cer_comunita_energetiche",
     "portale": "GSE",
     "categoria_macro": "citta",
@@ -380,373 +306,25 @@
     "titolo": "Incentivi CER (Comunità Energetiche Rinnovabili) e Autoconsumo Diffuso",
     "ente": "GSE / MASE",
     "scadenza": "Sportello aperto fino al 2027",
-    "importo": "Tariffa incentivante 20 anni + fino al 40% PNRR (1.900.000 €)",
-    "valore_stimato_euro": 1900000,
+    "importo": "Tariffa incentivante 20 anni + contributo PNRR fino al 40%",
+    "valore_stimato_euro": 400000,
     "ambiti": [
-      "cittadino",
+      "pubblico",
       "impresa",
-      "pubblico"
+      "cittadino"
     ],
     "obiettivo_id": "o2",
     "descrizione": "Agevolazioni per cittadini, condomìni, PMI ed enti locali che condividono energia prodotta da impianti fotovoltaici.",
     "link": "https://www.gse.it/servizi-per-te/autoconsumo/gruppi-di-autoconsumatori-e-comunita-di-energia-rinnovabile",
     "semaforo": "verde",
-    "obiettivo_nome": "Sostenibilità Energetica",
     "obiettivo": "o2",
+    "obiettivo_nome": "Sostenibilità Energetica",
     "sdg_id": "7",
     "sdg_label": "SDG 7 & 13 · Energia Pulita e Clima",
-    "sdg_img": "/sdg/sdg-7.svg",
-    "id": "b-04671a75",
-    "portali_correlati": [
-      "GSE"
-    ]
+    "sdg_img": "/sdg/sdg-7.svg"
   },
   {
-    "concept_id": "nuove_imprese_tasso_zero",
-    "portale": "Invitalia",
-    "categoria_macro": "citta",
-    "asse_specifico": "Commercio & Nuove Imprese",
-    "titolo": "ON (Oltre Nuove Imprese a Tasso Zero), Imprenditoria Femminile & Smart&Start Startup",
-    "ente": "Invitalia",
-    "scadenza": "Sportello aperto",
-    "importo": "Copertura fino al 90% tra tasso zero e fondo perduto (1.800.000 €)",
-    "valore_stimato_euro": 1800000,
-    "ambiti": [
-      "cittadino",
-      "impresa",
-      "pubblico"
-    ],
-    "obiettivo_id": "o5",
-    "descrizione": "Incentivi unificati Invitalia per giovani, donne e startup che aprono una nuova attività commerciale, turistica, di servizi o tecnologica a Terni.",
-    "link": "https://www.invitalia.it/cosa-facciamo/creiamo-nuove-aziende/nuove-imprese-a-tasso-zero",
-    "semaforo": "verde",
-    "obiettivo_nome": "Commercio & Riuso Locali Sfitti",
-    "obiettivo": "o5",
-    "sdg_id": "8",
-    "sdg_label": "SDG 8 · Commercio e Impresa Locale",
-    "sdg_img": "/sdg/sdg-8.svg",
-    "id": "b-034a4fd9",
-    "portali_correlati": [
-      "Invitalia"
-    ]
-  },
-  {
-    "concept_id": "wf_pnrr_m5c2_housing_poverta",
-    "portale": "PNRR M5C2 Welfare",
-    "categoria_macro": "welfare",
-    "asse_specifico": "Contrasto Povertà, Adulti Fragili & Housing",
-    "titolo": "PNRR M5C2 Inv. 1.3 & Emergenza Abitativa — Housing First e Stazioni di Posta",
-    "ente": "MLPS / Comune di Terni Capofila Zona Sociale",
-    "scadenza": "Attivo",
-    "importo": "1.800.000 € (1.090.000 € Stazioni di Posta + 710.000 € Housing First)",
-    "valore_stimato_euro": 1800000,
-    "ambiti": [
-      "cittadino",
-      "pubblico"
-    ],
-    "obiettivo_id": "o6",
-    "descrizione": "Presidi territoriali di presa in carico multiprofessionale, contrasto alla grave marginalità adulta e assegnazione alloggi temporanei.",
-    "link": "https://www.lavoro.gov.it/temi-e-priorita/poverta-ed-esclusione-sociale",
-    "semaforo": "verde",
-    "obiettivo_nome": "Welfare, Cultura, Turismo & Terzo Settore",
-    "obiettivo": "o6",
-    "sdg_id": "3",
-    "sdg_label": "SDG 3 & 10 · Welfare, Salute e Inclusione",
-    "sdg_img": "/sdg/sdg-3.svg",
-    "id": "b-a46ec8f5",
-    "portali_correlati": [
-      "Comune di Terni",
-      "PNRR M5C2 Welfare"
-    ]
-  },
-  {
-    "concept_id": "wf_fna_non_autosufficienza",
-    "portale": "Fondi Nazionali MLPS",
-    "categoria_macro": "welfare",
-    "asse_specifico": "Non Autosufficienza, Anziani & Caregiver",
-    "titolo": "FNA (Fondo Nazionale Non Autosufficienza 2025-2027) & Fondo Sostegno Caregiver Familiari",
-    "ente": "MLPS / Regione Umbria / Zona Sociale Terni",
-    "scadenza": "Programmazione triennale attiva",
-    "importo": "Riparto strutturale FNA (1.650.000 €)",
-    "valore_stimato_euro": 1650000,
-    "ambiti": [
-      "cittadino",
-      "impresa",
-      "pubblico"
-    ],
-    "obiettivo_id": "o6",
-    "descrizione": "Garanzia dei LEPS tramite assegni di cura per disabilità gravissima, voucher socio-assistenziali e contributi sollievo per caregiver familiari.",
-    "link": "https://www.lavoro.gov.it/temi-e-priorita/disabilita-e-non-autosufficienza/focus-on/fondo-non-autosufficienze",
-    "semaforo": "verde",
-    "obiettivo_nome": "Welfare, Cultura, Turismo & Terzo Settore",
-    "obiettivo": "o6",
-    "sdg_id": "3",
-    "sdg_label": "SDG 3 & 10 · Welfare, Salute e Inclusione",
-    "sdg_img": "/sdg/sdg-3.svg",
-    "id": "b-f2683caa",
-    "portali_correlati": [
-      "Fondi Nazionali MLPS"
-    ]
-  },
-  {
-    "concept_id": "fse_assunzioni_arpal",
-    "portale": "FSE",
-    "categoria_macro": "citta",
-    "asse_specifico": "Sviluppo Industriale & Lavoro",
-    "titolo": "PR FSE+ Umbria 2021-2027 — Incentivi ARPAL per nuove assunzioni e stabilizzazioni lavorative",
-    "ente": "Regione Umbria / ARPAL Umbria (PR FSE+)",
-    "scadenza": "Avvisi annuali attivi",
-    "importo": "Plafond 1.500.000 € (fino a 12.000 € per assunzione)",
-    "valore_stimato_euro": 1500000,
-    "ambiti": [
-      "cittadino",
-      "impresa",
-      "pubblico"
-    ],
-    "obiettivo_id": "o4",
-    "descrizione": "Sovvenzioni FSE+ per le imprese umbre e ternane che assumono giovani, donne, disoccupati o lavoratori in transizione occupazionale.",
-    "link": "https://www.arpalumbria.it/avvisi-e-bandi",
-    "semaforo": "verde",
-    "obiettivo_nome": "Nuovo Impianto & Sviluppo Industriale",
-    "obiettivo": "o4",
-    "sdg_id": "8",
-    "sdg_label": "SDG 8 & 9 · Sviluppo Industriale e Lavoro",
-    "sdg_img": "/sdg/sdg-8.svg",
-    "id": "b-1c823aac",
-    "portali_correlati": [
-      "FSE"
-    ]
-  },
-  {
-    "portale": "Invitalia",
-    "titolo": "Smart&Start Italia — Finanziamenti per Startup Innovative e Tecnologiche",
-    "ente": "Invitalia",
-    "scadenza": "Sportello aperto",
-    "importo": "Finanziamento a tasso zero fino all'80% (da 100k a 1,5M €)",
-    "ambiti": [
-      "cittadino",
-      "impresa",
-      "pubblico"
-    ],
-    "obiettivo_id": "o7",
-    "descrizione": "Supporto alla nascita e crescita di startup ad alto contenuto tecnologico, digitale e di ricerca applicata.",
-    "link": "https://www.invitalia.it/cosa-facciamo/creiamo-nuove-aziende/smartstart-italia",
-    "obiettivo_nome": "Digitalizzazione & Innovazione",
-    "obiettivo": "o7",
-    "id": "b-b3ced13d",
-    "semaforo": "verde",
-    "stato_verifica": "Fonte Istituzionale Diretta",
-    "categoria_macro": "citta",
-    "asse_specifico": "Digitale & Transizione 5.0",
-    "concept_id": "smart_start_invitalia",
-    "sdg_id": "9",
-    "sdg_label": "SDG 9 · Innovazione e Transizione 5.0",
-    "sdg_img": "/sdg/sdg-9.svg",
-    "valore_stimato_euro": 1500000,
-    "portali_correlati": [
-      "Invitalia"
-    ]
-  },
-  {
-    "concept_id": "wf_art55_72_terzo_settore",
-    "portale": "Terzo Settore & Fondazioni",
-    "categoria_macro": "welfare",
-    "asse_specifico": "Co-Progettazione Terzo Settore (Art. 55 CTS)",
-    "titolo": "Avvisi Regionali Artt. 55 e 72 D.Lgs. 117/2017 & Bandi Fondazione Carit Terni (Welfare, Cultura e Sociale)",
-    "ente": "Regione Umbria (RUNTS) / Fondazione Cassa di Risparmio di Terni e Narni",
-    "scadenza": "Sessioni annuali aperte",
-    "importo": "Contributi a fondo perduto per OdV, APS, ETS ed Enti (1.400.000 €)",
-    "valore_stimato_euro": 1400000,
-    "ambiti": [
-      "cittadino",
-      "pubblico"
-    ],
-    "obiettivo_id": "o6",
-    "descrizione": "Risorse per co-programmazione e co-progettazione Art. 55 CTS (DM 72/2021) con enti iscritti al RUNTS e bandi territoriali Fondazione Carit a Terni.",
-    "link": "https://www.fondazionecarit.it/bandi",
-    "semaforo": "verde",
-    "obiettivo_nome": "Welfare, Cultura, Turismo & Terzo Settore",
-    "obiettivo": "o6",
-    "sdg_id": "3",
-    "sdg_label": "SDG 3 & 10 · Welfare, Salute e Inclusione",
-    "sdg_img": "/sdg/sdg-3.svg",
-    "id": "b-7df60877",
-    "portali_correlati": [
-      "Comune di Terni",
-      "Terzo Settore & Fondazioni"
-    ]
-  },
-  {
-    "concept_id": "fse_creazione_impresa",
-    "portale": "FSE",
-    "categoria_macro": "citta",
-    "asse_specifico": "Commercio & Nuove Imprese",
-    "titolo": "PR FSE+ Umbria 2021-2027 — Creazione d'impresa, lavoro autonomo e microimprenditorialità",
-    "ente": "Regione Umbria / ARPAL Umbria (PR FSE+)",
-    "scadenza": "Attivo",
-    "importo": "Dotazione 1.200.000 € a fondo perduto per avvio nuova attività",
-    "valore_stimato_euro": 1200000,
-    "ambiti": [
-      "cittadino",
-      "impresa",
-      "pubblico"
-    ],
-    "obiettivo_id": "o5",
-    "descrizione": "Finanziamenti del Fondo Sociale Europeo Plus per cittadini, giovani e professionisti che avviano nuove imprese o studi in Umbria.",
-    "link": "https://www.regione.umbria.it/fse",
-    "semaforo": "verde",
-    "obiettivo_nome": "Commercio & Riuso Locali Sfitti",
-    "obiettivo": "o5",
-    "sdg_id": "8",
-    "sdg_label": "SDG 8 · Commercio e Impresa Locale",
-    "sdg_img": "/sdg/sdg-8.svg",
-    "id": "b-3ebd0908",
-    "portali_correlati": [
-      "FSE"
-    ]
-  },
-  {
-    "concept_id": "wf_qsfp_assistenti_sociali",
-    "portale": "Fondi Nazionali MLPS",
-    "categoria_macro": "welfare",
-    "asse_specifico": "Contrasto Povertà, Adulti Fragili & Housing",
-    "titolo": "Quota Servizi Fondo Povertà (QSFP) & Assegno di Inclusione (ADI) — Potenziamento Servizio Sociale ATS",
-    "ente": "MLPS / INPS / Zona Sociale Terni",
-    "scadenza": "Attivo",
-    "importo": "Dotazione strutturale LEPS Assistenti Sociali 1:5.000 (950.000 €)",
-    "valore_stimato_euro": 950000,
-    "ambiti": [
-      "cittadino",
-      "impresa",
-      "pubblico"
-    ],
-    "obiettivo_id": "o6",
-    "descrizione": "Finanziamento strutturale per assunzione Assistenti Sociali nei Comuni/ATS, supervisione professionale (LEPS) e Patti per l'Inclusione Sociale.",
-    "link": "https://www.lavoro.gov.it/temi-e-priorita/poverta-ed-esclusione-sociale",
-    "semaforo": "verde",
-    "obiettivo_nome": "Welfare, Cultura, Turismo & Terzo Settore",
-    "obiettivo": "o6",
-    "sdg_id": "3",
-    "sdg_label": "SDG 3 & 10 · Welfare, Salute e Inclusione",
-    "sdg_img": "/sdg/sdg-3.svg",
-    "id": "b-83a6e2aa",
-    "portali_correlati": [
-      "Fondi Nazionali MLPS"
-    ]
-  },
-  {
-    "concept_id": "wf_gol_inclusione_lavorativa",
-    "portale": "PR FSE+ Welfare",
-    "categoria_macro": "welfare",
-    "asse_specifico": "Inclusione Lavorativa & Politiche Attive Fragili",
-    "titolo": "Programma GOL (Percorso 4 Lavoro e Inclusione) & Tirocini di Inclusione Sociale Soggetti Fragili",
-    "ente": "Regione Umbria / ARPAL Umbria / Servizi Sociali Comunali",
-    "scadenza": "Sportello attivo",
-    "importo": "Fondi PNRR GOL + PR FSE+ Umbria (900.000 €)",
-    "valore_stimato_euro": 900000,
-    "ambiti": [
-      "cittadino",
-      "impresa",
-      "pubblico"
-    ],
-    "obiettivo_id": "o6",
-    "descrizione": "Equipe multidisciplinari Lavoro-Sociale (CPI + Comune) per tirocini extracurriculari inclusivi e inserimento lavorativo mirato (L. 68/1999).",
-    "link": "https://www.arpalumbria.it/avvisi-e-bandi",
-    "semaforo": "verde",
-    "obiettivo_nome": "Welfare, Cultura, Turismo & Terzo Settore",
-    "obiettivo": "o6",
-    "sdg_id": "3",
-    "sdg_label": "SDG 3 & 10 · Welfare, Salute e Inclusione",
-    "sdg_img": "/sdg/sdg-3.svg",
-    "id": "b-ac2ca546",
-    "portali_correlati": [
-      "PR FSE+ Welfare"
-    ]
-  },
-  {
-    "concept_id": "wf_inps_home_care_premium",
-    "portale": "INPS & Welfare",
-    "categoria_macro": "welfare",
-    "asse_specifico": "Non Autosufficienza, Anziani & Caregiver",
-    "titolo": "Bando INPS «Home Care Premium» (HCP) — Assistenza Domiciliare e Prestazioni Integrative",
-    "ente": "INPS / Convenzione Ambito Territoriale Sociale Terni",
-    "scadenza": "Programmazione pluriennale attiva",
-    "importo": "Contributi mensili + Prestazioni Integrative (850.000 €)",
-    "valore_stimato_euro": 850000,
-    "ambiti": [
-      "cittadino",
-      "pubblico"
-    ],
-    "obiettivo_id": "o6",
-    "descrizione": "Contributi economici mensili e servizi socio-assistenziali domiciliari (OSS, fisioterapia, sollievo, trasporto) gestiti in convenzione con l'Ambito.",
-    "link": "https://www.inps.it",
-    "semaforo": "verde",
-    "obiettivo_nome": "Welfare, Cultura, Turismo & Terzo Settore",
-    "obiettivo": "o6",
-    "sdg_id": "3",
-    "sdg_label": "SDG 3 & 10 · Welfare, Salute e Inclusione",
-    "sdg_img": "/sdg/sdg-3.svg",
-    "id": "b-64c3fda6",
-    "portali_correlati": [
-      "INPS & Welfare"
-    ]
-  },
-  {
-    "concept_id": "doppia_transizione_cciaa",
-    "portale": "Camera di Commercio",
-    "categoria_macro": "citta",
-    "asse_specifico": "Digitale & Transizione 5.0",
-    "titolo": "Bando Voucher Digitali I4.0 & Doppia Transizione Digitale ed Ecologica — CCIAA Umbria",
-    "ente": "Camera di Commercio dell'Umbria",
-    "scadenza": "Edizione annuale attiva",
-    "importo": "Voucher a fondo perduto fino al 70% (Plafond 750.000 €)",
-    "valore_stimato_euro": 750000,
-    "ambiti": [
-      "impresa"
-    ],
-    "obiettivo_id": "o7",
-    "descrizione": "Contributi a fondo perduto per le MPMI ternane e umbre per software, e-commerce, intelligenza artificiale, cybersecurity ed efficienza energetica.",
-    "link": "https://www.umbria.camcom.it/bandi-e-contributi",
-    "semaforo": "verde",
-    "obiettivo_nome": "Digitalizzazione & Innovazione",
-    "obiettivo": "o7",
-    "sdg_id": "9",
-    "sdg_label": "SDG 9 · Innovazione e Transizione 5.0",
-    "sdg_img": "/sdg/sdg-9.svg",
-    "id": "b-4e963721",
-    "portali_correlati": [
-      "Camera di Commercio"
-    ]
-  },
-  {
-    "concept_id": "wf_pnrr_m5c2_disabilita",
-    "portale": "PNRR M5C2 Welfare",
-    "categoria_macro": "welfare",
-    "asse_specifico": "Disabilità & Vita Indipendente",
-    "titolo": "PNRR M5C2 Inv. 1.2 — Percorsi di Autonomia per Persone con Disabilità (Progetto di Vita, Abitare e Lavoro)",
-    "ente": "MLPS / Zona Sociale Terni / Enti Terzo Settore (Art. 55 CTS)",
-    "scadenza": "Attivo",
-    "importo": "715.000 € per progetto d'Ambito Territoriale",
-    "valore_stimato_euro": 715000,
-    "ambiti": [
-      "cittadino",
-      "pubblico"
-    ],
-    "obiettivo_id": "o6",
-    "descrizione": "Co-progettazione Art. 55 D.Lgs. 117/2017 per co-housing domotico, Dopo di Noi (L. 112/2016), competenze digitali e tirocini inclusivi.",
-    "link": "https://www.lavoro.gov.it/temi-e-priorita/disabilita-e-non-autosufficienza",
-    "semaforo": "verde",
-    "obiettivo_nome": "Welfare, Cultura, Turismo & Terzo Settore",
-    "obiettivo": "o6",
-    "sdg_id": "3",
-    "sdg_label": "SDG 3 & 10 · Welfare, Salute e Inclusione",
-    "sdg_img": "/sdg/sdg-3.svg",
-    "id": "b-d8f6dc77",
-    "portali_correlati": [
-      "PNRR M5C2 Welfare"
-    ]
-  },
-  {
+    "id": "b-gse-colonnine",
     "concept_id": "colonnine_ricarica_ev",
     "portale": "GSE",
     "categoria_macro": "citta",
@@ -754,8 +332,8 @@
     "titolo": "Bonus Colonnine di Ricarica Veicoli Elettrici e Infrastrutture Green (Contributo fino all'80%)",
     "ente": "GSE / MIMIT / Invitalia",
     "scadenza": "Sportello annuale attivo",
-    "importo": "Contributo in conto capitale 40%-80% (650.000 €)",
-    "valore_stimato_euro": 650000,
+    "importo": "Contributo in conto capitale 40%-80% per privati, condomìni e PMI",
+    "valore_stimato_euro": 200000,
     "ambiti": [
       "cittadino",
       "impresa",
@@ -765,1027 +343,335 @@
     "descrizione": "Incentivi per l'installazione di infrastrutture di ricarica elettrica domestiche, condominiali, aziendali e urbane.",
     "link": "https://www.gse.it/servizi-per-te/mobilita-sostenibile",
     "semaforo": "verde",
-    "obiettivo_nome": "Mobilità Dolce & Sostenibile",
     "obiettivo": "o3",
+    "obiettivo_nome": "Mobilità Dolce & Sostenibile",
     "sdg_id": "11",
     "sdg_label": "SDG 11 & 13 · Mobilità Sostenibile",
-    "sdg_img": "/sdg/sdg-13.svg",
-    "id": "b-b2acf1fd",
-    "portali_correlati": [
-      "GSE"
-    ]
+    "sdg_img": "/sdg/sdg-13.svg"
   },
   {
-    "concept_id": "commercio_sfitti_terni",
-    "portale": "Comune di Terni",
+    "id": "b-invitalia-on",
+    "concept_id": "nuove_imprese_tasso_zero",
+    "portale": "Invitalia",
     "categoria_macro": "citta",
     "asse_specifico": "Commercio & Nuove Imprese",
-    "titolo": "Agevolazioni per il rilancio del commercio di vicinato, pubblici esercizi e riuso locali sfitti",
-    "ente": "Comune di Terni / Regione Umbria",
-    "scadenza": "Sportello SUAPE / Bandi attivi",
-    "importo": "Sgravi tributari locali e contributi a fondo perduto (450.000 €)",
-    "valore_stimato_euro": 450000,
+    "titolo": "ON (Oltre Nuove Imprese a Tasso Zero), Imprenditoria Femminile & Smart&Start Startup",
+    "ente": "Invitalia",
+    "scadenza": "Sportello aperto",
+    "importo": "Copertura fino al 90% tra tasso zero e fondo perduto (da 50k a 1,5M €)",
+    "valore_stimato_euro": 500000,
     "ambiti": [
       "cittadino",
-      "impresa",
-      "pubblico"
+      "impresa"
     ],
     "obiettivo_id": "o5",
-    "descrizione": "Misure per favorire la riapertura di botteghe artigiane, negozi su strada e recupero di vetrine sfitte nel centro e nei quartieri di Terni.",
-    "link": "https://www.comune.terni.it",
+    "descrizione": "Incentivi Invitalia per giovani, donne e startup che aprono una nuova attività commerciale, turistica, di servizi o tecnologica a Terni.",
+    "link": "https://www.invitalia.it/cosa-facciamo/creiamo-nuove-aziende/nuove-imprese-a-tasso-zero",
     "semaforo": "verde",
-    "obiettivo_nome": "Commercio & Riuso Locali Sfitti",
     "obiettivo": "o5",
+    "obiettivo_nome": "Commercio & Riuso Locali Sfitti",
     "sdg_id": "8",
     "sdg_label": "SDG 8 · Commercio e Impresa Locale",
-    "sdg_img": "/sdg/sdg-8.svg",
-    "id": "b-e2c9ef36",
-    "portali_correlati": [
-      "Comune di Terni"
-    ]
+    "sdg_img": "/sdg/sdg-8.svg"
   },
   {
-    "portale": "PNRR",
-    "titolo": "PNRR M5C2 — Piani Integrati di Rigenerazione Urbana e Housing Sociale",
-    "ente": "PNRR Italia Domani",
-    "scadenza": "Attivo",
-    "importo": "Fondi PNRR per Comuni e partenariati",
-    "ambiti": [
-      "cittadino",
-      "pubblico"
-    ],
-    "obiettivo_id": "o6",
-    "descrizione": "Interventi per il recupero di edilizia residenziale, rifunzionalizzazione di aree urbane degradate e creazione di spazi aggregativi.",
-    "link": "https://www.italiadomani.gov.it",
-    "semaforo": "verde",
-    "obiettivo_nome": "Welfare, Cultura, Turismo & Terzo Settore",
-    "obiettivo": "o6",
-    "id": "b-31f2e6ba",
-    "categoria_macro": "welfare",
-    "asse_specifico": "Contrasto Povertà, Adulti Fragili & Housing",
-    "concept_id": "pnrr_m5c2_rigenerazione",
-    "sdg_id": "3",
-    "sdg_label": "SDG 3 & 10 · Welfare, Salute e Inclusione",
-    "sdg_img": "/sdg/sdg-3.svg",
-    "valore_stimato_euro": 450000,
-    "portali_correlati": [
-      "PNRR"
-    ]
-  },
-  {
-    "portale": "Regione Umbria",
-    "titolo": "Programma Regionale Rigenerazione Urbana e recupero spazi pubblici nei Comuni umbri",
-    "ente": "Regione Umbria",
-    "scadenza": "Programmazione 2021-2027",
-    "importo": "Cofinanziamento regionale",
-    "ambiti": [
-      "pubblico"
-    ],
-    "obiettivo_id": "o1",
-    "descrizione": "Risorse per riqualificazione piazze, aree verdi, illuminazione pubblica e recupero immobili comunali dismessi.",
-    "link": "https://www.regione.umbria.it/la-regione/bandi",
-    "semaforo": "verde",
-    "obiettivo_nome": "Riqualificazione Urbana",
-    "obiettivo": "o1",
-    "id": "b-0483844c",
-    "categoria_macro": "citta",
-    "asse_specifico": "Rigenerazione Urbana & Spazi",
-    "concept_id": "regione_rigenerazione_spazi",
-    "sdg_id": "11",
-    "sdg_label": "SDG 11 · Città e Comunità Sostenibili",
-    "sdg_img": "/sdg/sdg-11.svg",
-    "valore_stimato_euro": 450000,
-    "portali_correlati": [
-      "Regione Umbria"
-    ]
-  },
-  {
-    "portale": "Regione Umbria",
-    "titolo": "Bando Sviluppo Umbria — Attrazione investimenti e nuovi insediamenti produttivi",
-    "ente": "Sviluppo Umbria",
-    "scadenza": "Sportello attivo",
-    "importo": "Fino al 50% tra fondo perduto e finanziamento agevolato",
-    "ambiti": [
-      "impresa",
-      "pubblico"
-    ],
-    "obiettivo_id": "o4",
-    "descrizione": "Sostegno all'apertura di nuovi impianti industriali, ampliamento stabilimenti e riconversione produttiva nella conca ternana.",
-    "link": "https://www.sviluppoumbria.it/bandi-e-avvisi",
-    "obiettivo_nome": "Nuovo Impianto & Sviluppo Industriale",
-    "obiettivo": "o4",
-    "id": "b-b8fe6a45",
-    "semaforo": "verde",
-    "stato_verifica": "Fonte Istituzionale Diretta",
-    "categoria_macro": "citta",
-    "asse_specifico": "Sviluppo Industriale & Lavoro",
-    "concept_id": "",
-    "sdg_id": "8",
-    "sdg_label": "SDG 8 & 9 · Sviluppo Industriale e Lavoro",
-    "sdg_img": "/sdg/sdg-8.svg",
-    "valore_stimato_euro": 450000,
-    "portali_correlati": [
-      "Regione Umbria"
-    ]
-  },
-  {
-    "portale": "Regione Umbria",
-    "titolo": "Incentivi regionali per la mobilità ciclabile, ciclopedonale e intermodalità dolce",
-    "ente": "Regione Umbria",
-    "scadenza": "Attivo",
-    "importo": "Cofinanziamento regionale fino all'80%",
-    "ambiti": [
-      "impresa",
-      "pubblico"
-    ],
-    "obiettivo_id": "o3",
-    "descrizione": "Interventi per reti ciclabili urbane, ciclostazioni, velostazioni e servizi di bike/micromobility sharing.",
-    "link": "https://www.regione.umbria.it/la-regione/bandi",
-    "obiettivo_nome": "Mobilità Dolce & Sostenibile",
-    "obiettivo": "o3",
-    "id": "b-8426fcfa",
-    "semaforo": "verde",
-    "stato_verifica": "Fonte Istituzionale Diretta",
-    "categoria_macro": "citta",
-    "asse_specifico": "Mobilità Dolce & Elettrica",
-    "concept_id": "",
-    "sdg_id": "11",
-    "sdg_label": "SDG 11 & 13 · Mobilità Sostenibile",
-    "sdg_img": "/sdg/sdg-13.svg",
-    "valore_stimato_euro": 450000,
-    "portali_correlati": [
-      "Regione Umbria"
-    ]
-  },
-  {
-    "portale": "Comune di Terni",
-    "titolo": "Patti di Collaborazione per la cura dei Beni Comuni e Spazi Verdi di quartiere",
-    "ente": "Comune di Terni",
-    "scadenza": "Sempre aperto",
-    "importo": "Supporto logistico, materiali ed esenzioni comunali",
-    "ambiti": [
-      "cittadino",
-      "pubblico"
-    ],
-    "obiettivo_id": "o1",
-    "descrizione": "Strumento per singoli cittadini, comitati di quartiere e associazioni ternane per co-gestire aree verdi, parchi e arredo urbano.",
-    "link": "https://www.comune.terni.it",
-    "obiettivo_nome": "Riqualificazione Urbana",
-    "obiettivo": "o1",
-    "id": "b-8c4903d2",
-    "semaforo": "verde",
-    "stato_verifica": "Fonte Istituzionale Diretta",
-    "categoria_macro": "citta",
-    "asse_specifico": "Rigenerazione Urbana & Spazi",
-    "concept_id": "",
-    "sdg_id": "11",
-    "sdg_label": "SDG 11 · Città e Comunità Sostenibili",
-    "sdg_img": "/sdg/sdg-11.svg",
-    "valore_stimato_euro": 450000,
-    "portali_correlati": [
-      "Comune di Terni"
-    ]
-  },
-  {
+    "id": "b-cciaa-voucher",
+    "concept_id": "doppia_transizione_cciaa",
     "portale": "Camera di Commercio",
-    "titolo": "Contributi per Turismo, Commercio, Fiere e Rivitalizzazione Centri Urbani",
+    "categoria_macro": "citta",
+    "asse_specifico": "Digitale & Transizione 5.0",
+    "titolo": "Bando Voucher Digitali I4.0 & Doppia Transizione Digitale ed Ecologica — CCIAA Umbria",
     "ente": "Camera di Commercio dell'Umbria",
-    "scadenza": "Attivo",
-    "importo": "Voucher a fondo perduto fino al 50%",
+    "scadenza": "Edizione annuale attiva",
+    "importo": "Voucher a fondo perduto fino al 70% (max 10.000 € per impresa)",
+    "valore_stimato_euro": 250000,
     "ambiti": [
-      "impresa",
-      "pubblico"
+      "impresa"
     ],
-    "obiettivo_id": "o5",
-    "descrizione": "Sostegno alle attività commerciali, ricettive e artigianali della provincia di Terni per ammodernamento locali, insegne e promozione.",
+    "obiettivo_id": "o7",
+    "descrizione": "Contributi a fondo perduto per le MPMI ternane per software, e-commerce, intelligenza artificiale, cybersecurity ed efficienza energetica.",
     "link": "https://www.umbria.camcom.it/bandi-e-contributi",
-    "obiettivo_nome": "Commercio & Riuso Locali Sfitti",
-    "obiettivo": "o5",
-    "id": "b-23232495",
     "semaforo": "verde",
-    "stato_verifica": "Fonte Istituzionale Diretta",
-    "categoria_macro": "citta",
-    "asse_specifico": "Commercio & Nuove Imprese",
-    "concept_id": "",
-    "sdg_id": "8",
-    "sdg_label": "SDG 8 · Commercio e Impresa Locale",
-    "sdg_img": "/sdg/sdg-8.svg",
-    "valore_stimato_euro": 450000,
-    "portali_correlati": [
-      "Camera di Commercio"
-    ]
-  },
-  {
-    "portale": "FSC",
-    "titolo": "FSC 2021-2027 — Sostegno alle Aree Industriali, Reindustrializzazione e Impianti Produttivi",
-    "ente": "MIMIT / Politiche di Coesione (FSC)",
-    "scadenza": "Attivo",
-    "importo": "Contributi in conto impianti e infrastrutturazione aree",
-    "ambiti": [
-      "impresa",
-      "pubblico"
-    ],
-    "obiettivo_id": "o4",
-    "descrizione": "Linee FSC per il rilancio delle aree industriali, attrazione di investimenti manifatturieri e ammodernamento ecologico degli stabilimenti.",
-    "link": "https://politichecoesione.governo.it/it/",
-    "semaforo": "verde",
-    "obiettivo_nome": "Nuovo Impianto & Sviluppo Industriale",
-    "obiettivo": "o4",
-    "id": "b-000d49ec",
-    "categoria_macro": "citta",
-    "asse_specifico": "Sviluppo Industriale & Lavoro",
-    "concept_id": "",
-    "sdg_id": "8",
-    "sdg_label": "SDG 8 & 9 · Sviluppo Industriale e Lavoro",
-    "sdg_img": "/sdg/sdg-8.svg",
-    "valore_stimato_euro": 450000,
-    "portali_correlati": [
-      "FSC"
-    ]
-  },
-  {
-    "portale": "PNRR",
-    "titolo": "Colpo grosso della Usl Umbria 2, si aggiudica due progetti Pnrr per 5 milioni di euro: più assistenza domiciliare per anziani e centri disabili",
-    "ente": "PNRR",
-    "scadenza": "Fri, 13 Mar 2026",
-    "importo": "Consulta avviso ufficiale",
-    "descrizione": "Avviso pubblico rilevato sul canale PNRR.",
-    "link": "https://news.google.com/rss/articles/CBMikwJBVV95cUxNM0NERXdDTUhMOTBlcUJydUpRQ0cwNnNSLUt6RnRsRWNhRlgySXBnb0Etd2xuOF9WQmU5bElSZ1dDaWFnMHJJT1FwRVRXWmlONVU0STFpdnl1WXV6d19JS2hkWWxTNldGM28zTTc0c3h5dG41VmlZcGJRakFDSGZpd0R0NXdldHBBdHpuUEtoQlVBMDhCVExoOTJGT1JVNkpickFSbm1tZmlzeEttLXd2QVlaNGdpV1FWOWllaUtOUlUydVFrNE9KeGdFSVFYMFJjbU1zR0FmbGJhZlVDU290R2lRM2xCQ2U2UndSXzVBaVVRVWdsdFZyVzY2REdnUWp6NTlUQ3lQUWZWVjM4WlJNVkNyTQ?oc=5",
-    "semaforo": "giallo",
-    "ambiti": [
-      "cittadino",
-      "pubblico"
-    ],
-    "obiettivo_id": "o6",
-    "obiettivo_nome": "Welfare, Cultura, Turismo & Terzo Settore",
-    "obiettivo": "o6",
-    "id": "b-76c7a271",
-    "categoria_macro": "welfare",
-    "asse_specifico": "Non Autosufficienza, Anziani & Caregiver",
-    "concept_id": "",
-    "sdg_id": "3",
-    "sdg_label": "SDG 3 & 10 · Welfare, Salute e Inclusione",
-    "sdg_img": "/sdg/sdg-3.svg",
-    "valore_stimato_euro": 5000000,
-    "portali_correlati": [
-      "PNRR"
-    ]
-  },
-  {
-    "portale": "PNRR",
-    "titolo": "PNRR Umbria, 4 milioni per modernizzare 33 frantoi",
-    "ente": "PNRR",
-    "scadenza": "Tue, 21 Jul 2026",
-    "importo": "Consulta avviso ufficiale",
-    "obiettivo": "o1",
-    "descrizione": "Avviso pubblico rilevato sul canale PNRR.",
-    "link": "https://news.google.com/rss/articles/CBMihgFBVV95cUxQbFk4enlPTDBkWW43ZndCRktLSjhIMHdMOUN4WHVweTBNT21NNHpjbUpfaGItSjJvTl9wTEtCMWtJcEh1NHZtVVdjTDVlUGRzX3lmV3lWcmFrbFdtbGJ2RXRJMW92dUZScnlTeXFFUUZVOHVUVGFTeWl4NHBBbFN2UC1McFlRQQ?oc=5",
-    "ambiti": [
-      "pubblico"
-    ],
-    "obiettivo_id": "o1",
-    "obiettivo_nome": "Riqualificazione Urbana",
-    "id": "b-accb9155",
-    "semaforo": "giallo",
-    "stato_verifica": "Da Verificare (Feed Web)",
-    "categoria_macro": "citta",
-    "asse_specifico": "Rigenerazione Urbana & Spazi",
-    "concept_id": "",
-    "sdg_id": "11",
-    "sdg_label": "SDG 11 · Città e Comunità Sostenibili",
-    "sdg_img": "/sdg/sdg-11.svg",
-    "valore_stimato_euro": 4000000,
-    "portali_correlati": [
-      "PNRR"
-    ]
-  },
-  {
-    "portale": "PR FESR 2021/2027",
-    "titolo": "La Regione investe sulla cultura: pubblicato il bando da 3,8 milioni di euro per le imprese creative",
-    "ente": "PR FESR 2021/2027",
-    "scadenza": "Wed, 05 Aug 2026",
-    "importo": "Consulta avviso ufficiale",
-    "descrizione": "Avviso pubblico rilevato sul canale PR FESR 2021/2027.",
-    "link": "https://news.google.com/rss/articles/CBMi2gFBVV95cUxNT2ItV1pxMnd3S25samJiVEU3eE8xcmJydHNjcXFQbHdIZmJyZFp0Y01jQjhQdlpnaVZLemZSUUNlVWxTWjV6ZHNKU1c5M2FwS2FTTlM5MmRyc2txUXZBUEdiUUpOV0k4aURxdWxvM3BMVFBLTDhrN3hxMmlXcDZYYk5DdTBkRk45QWpnbFhlUm9XUHEweFVZcmRybFRSWnBoVjA4YzJwLWdjb3hPX1FSekdxUkNDQWNJMDFuVXl3RmJ6RUFCSGpVTVNZMFZmRldBTG5mdnpBVzRUdw?oc=5",
-    "semaforo": "giallo",
-    "ambiti": [
-      "impresa",
-      "pubblico"
-    ],
-    "obiettivo_id": "o6",
-    "obiettivo_nome": "Welfare, Cultura, Turismo & Terzo Settore",
-    "obiettivo": "o6",
-    "id": "b-d13e84eb",
-    "categoria_macro": "citta",
-    "asse_specifico": "Cultura, Turismo & Eventi",
-    "concept_id": "",
-    "sdg_id": "3",
-    "sdg_label": "SDG 3 & 10 · Welfare, Salute e Inclusione",
-    "sdg_img": "/sdg/sdg-3.svg",
-    "valore_stimato_euro": 3800000,
-    "portali_correlati": [
-      "PR FESR 2021/2027",
-      "Regione Umbria"
-    ]
-  },
-  {
-    "portale": "PR FESR 2021/2027",
-    "categoria_macro": "citta",
-    "titolo": "Avviso STEP 2026 – LINEA A SOVVENZIONE",
-    "ente": "PR FESR 2021/2027",
-    "scadenza": "Thu, 01 Oct 2026",
-    "importo": "Consulta avviso ufficiale",
-    "descrizione": "Avviso pubblico rilevato sul canale PR FESR 2021/2027.",
-    "link": "https://news.google.com/rss/articles/CBMitwFBVV95cUxPTDhuZ0wweDlmbVl1bmxFb3EtOC1hY3hMam4yT3dqU0thY1ZTaFhtQmd3RWJxNzBSUUltb0hBSGtPQ0IzSEhuOUM4TmJBTV8yaVZVbXEwRGdjOU9fZU1GYVZyc3pBS1AxY0tqcXhUUTRsZ3ZvcENjNjVqaExDdlVzU0RwMkx2V3dtV1FzdkphR3EzRjc5T1FSY2FZQU4yNl84VFpGQ3lkeExfTURGcGZYM1VQMGxJeGc?oc=5",
-    "semaforo": "giallo",
-    "asse_specifico": "Rigenerazione Urbana & Spazi",
-    "ambiti": [
-      "impresa",
-      "pubblico"
-    ],
-    "obiettivo_id": "o1",
-    "obiettivo_nome": "Riqualificazione Urbana",
-    "obiettivo": "o1",
-    "concept_id": "",
-    "sdg_id": "11",
-    "sdg_label": "SDG 11 · Città e Comunità Sostenibili",
-    "sdg_img": "/sdg/sdg-11.svg",
-    "valore_stimato_euro": 150000,
-    "id": "b-2a60b6e8",
-    "portali_correlati": [
-      "PR FESR 2021/2027"
-    ]
-  },
-  {
-    "portale": "Invitalia",
-    "categoria_macro": "citta",
-    "titolo": "Finanziamenti Giovani Imprenditori 2026: Bandi a Fondo Perduto",
-    "ente": "Invitalia",
-    "scadenza": "Mon, 12 Oct 2026",
-    "importo": "Consulta avviso ufficiale",
-    "descrizione": "Avviso pubblico rilevato sul canale Invitalia.",
-    "link": "https://news.google.com/rss/articles/CBMie0FVX3lxTE10OWJsdDRwZFg5eVUyUG56UGtxS2p0RFhlSXhSTVM0dV9ydHI5Z1pENDZ5S19hSEoxWXJ2bm1kUld2UFVVOGFlcXl1RmJ6NkdmbmpLS2IxbkxjSkdKaE1oTkJCdDRBTVloeU5ueXdGU0hxZUkySXdqbmxpMA?oc=5",
-    "semaforo": "giallo",
-    "asse_specifico": "Digitale & Transizione 5.0",
-    "ambiti": [
-      "cittadino",
-      "impresa",
-      "pubblico"
-    ],
-    "obiettivo_id": "o7",
-    "obiettivo_nome": "Digitalizzazione & Innovazione",
     "obiettivo": "o7",
-    "concept_id": "",
+    "obiettivo_nome": "Digitalizzazione & Innovazione",
     "sdg_id": "9",
     "sdg_label": "SDG 9 · Innovazione e Transizione 5.0",
-    "sdg_img": "/sdg/sdg-9.svg",
-    "valore_stimato_euro": 150000,
-    "id": "b-ce7731fc",
-    "portali_correlati": [
-      "Invitalia"
-    ]
+    "sdg_img": "/sdg/sdg-9.svg"
   },
   {
-    "portale": "PNRR M5C2 Welfare",
-    "categoria_macro": "welfare",
-    "titolo": "Avviso per acquisizione di manifestazione d'interesse da parte di enti del terzo settore ad aderire alla co-progettazione (ex art 55, c.3 del dlgs 117/17) per definizione e realizzazione di interventi nella zona sociale n.7 finanziati dall’Unione Europea",
-    "ente": "PNRR M5C2 Welfare",
-    "scadenza": "Wed, 28 May 2025",
-    "importo": "Consulta avviso ufficiale",
-    "descrizione": "Avviso pubblico rilevato sul canale PNRR M5C2 Welfare.",
-    "link": "https://news.google.com/rss/articles/CBMimANBVV95cUxOZllPY1pzS0lSN1k0eVlLMmdvTi1pWGRYdGhGT3RhZ0RXSXFNdXE1NlE2Ty1yUEE5a295dXc1SWNTZ3JXc3VpMkd4WENpZVJUQlAxS2xOV3lRTXNGWDJ0R1p5dnJmTU5YXzRsMnZuRnRQTjdLczNocjZxMFRuRGQ1cTN6akZFMHQ4UkJYdDEyNTUxd0pLZjh4NExRZHJnWXBiQ3kzZGlRT1pFNWZMeG9yTE9aTk5LVW94cFB6cVNFNnVKaFhZRWNaUmVqdDVuOXJuZW4yaHAyQkRGTVZNM1F4a29IaThRT3QxbDlhN3g1cG8wUFlKdm9TSkRFNzdPVUZod3BGVEZkY0RUakppam1iTGVtcEhXSFNBaUFmX1RKeXlTS2xDcnZoUWc3RGdLUVBNbmVrZzJvZktPSlItV0htT3lqNjg3dTlrazljSWU1VXduWGZDSzRUQ1FCY2gxbXFZX19nUXlYb1RpcE9UbWxYZUFpdzcybEVlaTBQampNLUNuTldkQ196WXJvUFVwdV9xVldPLURaR0k?oc=5",
-    "semaforo": "giallo",
-    "asse_specifico": "Co-Progettazione Terzo Settore (Art. 55 CTS)",
-    "ambiti": [
-      "pubblico"
-    ],
-    "obiettivo_id": "o6",
-    "obiettivo_nome": "Welfare, Cultura, Turismo & Terzo Settore",
-    "obiettivo": "o6",
-    "concept_id": "",
-    "sdg_id": "3",
-    "sdg_label": "SDG 3 & 10 · Welfare, Salute e Inclusione",
-    "sdg_img": "/sdg/sdg-3.svg",
-    "valore_stimato_euro": 150000,
-    "id": "b-9446f14e",
-    "portali_correlati": [
-      "PNRR M5C2 Welfare"
-    ]
-  },
-  {
-    "portale": "PNRR",
-    "titolo": "Bandi e Incentivi PMI 2026: le 8 misure nazionali attive",
-    "ente": "PNRR",
-    "scadenza": "Sat, 22 Aug 2026",
-    "importo": "Consulta avviso ufficiale",
-    "obiettivo": "o1",
-    "descrizione": "Avviso pubblico rilevato sul canale PNRR.",
-    "link": "https://news.google.com/rss/articles/CBMibkFVX3lxTE1mYnc1bXpHMEs4TXhyUDhLQjBJaDBCbkE5SGRmUVNtREV2N01Ibmk5X1F0OVI4SjRQWm5tQVJoVlBSbXU1VmJIR190aGROQkFIUDZOODEwTkpQOVNKdXJFcHFaUFotckFHa2F0dElB?oc=5",
-    "ambiti": [
-      "impresa",
-      "pubblico"
-    ],
-    "obiettivo_id": "o1",
-    "obiettivo_nome": "Riqualificazione Urbana",
-    "id": "b-841840bf",
-    "semaforo": "giallo",
-    "stato_verifica": "Da Verificare (Feed Web)",
-    "categoria_macro": "citta",
-    "asse_specifico": "Rigenerazione Urbana & Spazi",
-    "concept_id": "",
-    "sdg_id": "11",
-    "sdg_label": "SDG 11 · Città e Comunità Sostenibili",
-    "sdg_img": "/sdg/sdg-11.svg",
-    "valore_stimato_euro": 150000,
-    "portali_correlati": [
-      "PNRR"
-    ]
-  },
-  {
-    "portale": "Camera di Commercio",
-    "titolo": "Bandi a Fondo Perduto Aperti Adesso: Scadenze e Click Day",
-    "ente": "Camera di Commercio",
-    "scadenza": "Thu, 23 Apr 2026",
-    "importo": "Consulta avviso ufficiale",
-    "descrizione": "Avviso pubblico rilevato sul canale Camera di Commercio.",
-    "link": "https://news.google.com/rss/articles/CBMiakFVX3lxTE9BTENkUDlzMFl1MzF6eVowYkw4M1RQZlhicU92MWJIbS10LWJQQlhsQTJ0SThPRlRUUjg1UWZfZThRNTRMcDA4OURLUjVkVEd6clQxRFJfOF9Ed1BjT2d1SGk2RkpJT3JwZmc?oc=5",
-    "semaforo": "giallo",
-    "ambiti": [
-      "impresa",
-      "pubblico"
-    ],
-    "obiettivo_id": "o5",
-    "obiettivo_nome": "Commercio & Riuso Locali Sfitti",
-    "obiettivo": "o5",
-    "id": "b-c5da29b5",
-    "categoria_macro": "citta",
-    "asse_specifico": "Commercio & Nuove Imprese",
-    "concept_id": "",
-    "sdg_id": "8",
-    "sdg_label": "SDG 8 · Commercio e Impresa Locale",
-    "sdg_img": "/sdg/sdg-8.svg",
-    "valore_stimato_euro": 150000,
-    "portali_correlati": [
-      "Camera di Commercio"
-    ]
-  },
-  {
-    "portale": "Comune di Terni",
-    "titolo": "Bando GAL Media Valle del Tevere 2026: contributi fino al 60% per PMI commercio e turismo",
-    "ente": "Comune di Terni",
-    "scadenza": "Mon, 20 Apr 2026",
-    "importo": "Consulta avviso ufficiale",
-    "descrizione": "Avviso pubblico rilevato sul canale Comune di Terni.",
-    "link": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxQMUF1b0IwWVhqYjJhWXh2Yks2VzAydGRMQ2FpanAzQzUzdllrd0gyQmtsR0ZoN1RmRC1peE5wSUtGVERPOWJWVzVvQXl2N2RXcnRjZjc2aWNkS1FkNU5qcERNU1RKMV9iUG0zc1pfNnlmcnp1SVU0YnhRYm8yZmtQSTJSMVBaa3J0TjNDLW4zT1pxc0RvREhOZFF1b05zcXVSQ04zVmhkdXgzY3p2d3N5NGVDU3hFTzJkRnRyMG9QUnIydw?oc=5",
-    "ambiti": [
-      "impresa",
-      "pubblico"
-    ],
-    "obiettivo_id": "o7",
-    "obiettivo_nome": "Digitalizzazione & Innovazione",
-    "obiettivo": "o7",
-    "id": "b-bfea0349",
-    "semaforo": "giallo",
-    "stato_verifica": "Da Verificare (Feed Web)",
-    "categoria_macro": "citta",
-    "asse_specifico": "Digitale & Transizione 5.0",
-    "concept_id": "",
-    "sdg_id": "9",
-    "sdg_label": "SDG 9 · Innovazione e Transizione 5.0",
-    "sdg_img": "/sdg/sdg-9.svg",
-    "valore_stimato_euro": 150000,
-    "portali_correlati": [
-      "Comune di Terni"
-    ]
-  },
-  {
-    "portale": "PNRR",
-    "titolo": "Il GSE lancia una nuova pagina sulle CER; con il Pnrr concessi contributi per oltre 700 milioni e 1,7 GW di potenza",
-    "ente": "GSE",
-    "scadenza": "Tue, 21 Jul 2026",
-    "importo": "Consulta avviso ufficiale",
-    "descrizione": "Avviso pubblico rilevato sul canale GSE.",
-    "link": "https://news.google.com/rss/articles/CBMihAFBVV95cUxQaUxsbUVKUlJRVzJQWUZNUWM0VG1PM2paUC0xeEdkRTlSSnZ3MXBXVEZZVGItZWxuVHNYZGN4MmFJcC1vQ05lTS16blJyaThnMktXYklDMXVTeHREbU1iSS1xUFJlTVdPRUNUUGd5ZG5sNFNkMUJkTFdnaUNhZFViaUprc3A?oc=5",
-    "ambiti": [
-      "pubblico"
-    ],
-    "obiettivo_id": "o2",
-    "obiettivo_nome": "Sostenibilità Energetica",
-    "obiettivo": "o2",
-    "id": "b-a05c3906",
-    "semaforo": "giallo",
-    "stato_verifica": "Da Verificare (Feed Web)",
-    "categoria_macro": "citta",
-    "asse_specifico": "Energia, CER & Clima",
-    "concept_id": "",
-    "sdg_id": "7",
-    "sdg_label": "SDG 7 & 13 · Energia Pulita e Clima",
-    "sdg_img": "/sdg/sdg-7.svg",
-    "valore_stimato_euro": 150000,
-    "portali_correlati": [
-      "PNRR"
-    ]
-  },
-  {
-    "portale": "Invitalia",
-    "titolo": "Contributo 100% fondo contrasto alla Deindustrializzazione Lazio e Marche",
-    "ente": "Invitalia",
-    "scadenza": "Mon, 28 Sep 2026",
-    "importo": "Consulta avviso ufficiale",
-    "descrizione": "Avviso pubblico rilevato sul canale Invitalia.",
-    "link": "https://news.google.com/rss/articles/CBMixAFBVV95cUxQT09jbE54TXBqZWloTXpwSXVRdDMzVDRRZ3p5X3JYdUx1UGthaHRsbWhINHFaTmstNUZtS3UzamFyaVdHLUxVX0NIWGZLdFBUQjB2TVF3WDgzdmluUmxiMnUxM3ZEbmFfUHBkdmlhODQ2VGpkLV8zUlE5b0lYdFcxU05Ob0dDbVhScGduOU54cjhRN242SzFDSm93dTdQbWhMdzJjV1JQb2tZckRkSEtTRk40eXRYbXVOY00yekdxeEUwbF94?oc=5",
-    "ambiti": [
-      "impresa",
-      "pubblico"
-    ],
-    "obiettivo_id": "o4",
-    "obiettivo_nome": "Nuovo Impianto & Sviluppo Industriale",
-    "obiettivo": "o4",
-    "id": "b-94692933",
-    "semaforo": "giallo",
-    "stato_verifica": "Da Verificare (Feed Web)",
-    "categoria_macro": "citta",
-    "asse_specifico": "Sviluppo Industriale & Lavoro",
-    "concept_id": "",
-    "sdg_id": "8",
-    "sdg_label": "SDG 8 & 9 · Sviluppo Industriale e Lavoro",
-    "sdg_img": "/sdg/sdg-8.svg",
-    "valore_stimato_euro": 150000,
-    "portali_correlati": [
-      "Invitalia"
-    ]
-  },
-  {
-    "portale": "Invitalia",
-    "titolo": "Contributi a Fondo perduto per il Turismo: tutti i Bandi Aperti di Invitalia per il 2026",
-    "ente": "Invitalia",
-    "scadenza": "Fri, 25 Sep 2026",
-    "importo": "Consulta avviso ufficiale",
-    "descrizione": "Avviso pubblico rilevato sul canale Invitalia.",
-    "link": "https://news.google.com/rss/articles/CBMizAFBVV95cUxPRlV4YzV1bDQ5bFhtcDI5M21CbDVheHgyN25IMUlxMXVDNEVZSUM2azdsdmxieDF1YVozMElrYnV5M2drNElVTzVlT3dWRU4wY0dzTTdaLWJYYTBPVkFBLWtYSFEwbUtaV2t6ck9zbnVFbmt1YTdBMC1fZVUwVlQyZlpyQzVlTzR6T2dfN0NEVE5sMEwxa25rYUtfSk9sM19iSF9McnhubXNrTlg2VVRKSlFBY1dweFNqYTdEMmtMX1JnMVJtWlZvZlk3cGc?oc=5",
-    "ambiti": [
-      "impresa",
-      "pubblico"
-    ],
-    "obiettivo_id": "o7",
-    "obiettivo_nome": "Digitalizzazione & Innovazione",
-    "obiettivo": "o7",
-    "id": "b-08fcbee1",
-    "semaforo": "giallo",
-    "stato_verifica": "Da Verificare (Feed Web)",
-    "categoria_macro": "citta",
-    "asse_specifico": "Digitale & Transizione 5.0",
-    "concept_id": "",
-    "sdg_id": "9",
-    "sdg_label": "SDG 9 · Innovazione e Transizione 5.0",
-    "sdg_img": "/sdg/sdg-9.svg",
-    "valore_stimato_euro": 150000,
-    "portali_correlati": [
-      "Invitalia"
-    ]
-  },
-  {
-    "portale": "PR FESR 2021/2027",
-    "titolo": "PR FESR 2021-2027 Azione 1.3.4 “Bando per il sostegno agli investimenti delle imprese che esercitano",
-    "ente": "PR FESR 2021/2027",
-    "scadenza": "Sat, 09 Aug 2025",
-    "importo": "Consulta avviso ufficiale",
-    "descrizione": "Avviso pubblico rilevato sul canale PR FESR 2021/2027.",
-    "link": "https://news.google.com/rss/articles/CBMi9wNBVV95cUxNaXQtYlVSUTdHVENGdm1tY0dVaEVzRTVua0x4bGlSLXFxMDhIVEVrMnJEOWFGVVBPVlh2NldUSTVIOUlVMHVOVVJ0RjVsenJLVGh1WjZwU0FZNV9RVk1ndE9MQzVGU1p3cXVXLUdUQXQwMDJTVDNnYm9MbkJGc09TaUQ2X3pLTWU2enpmSWxYNVdlOEFrU205aHZxRGI4UmU5ZmMzdlhDNGJpVXBIX1RBeDlSYldibEVJSVRCQ1hJZUFTMHZZclE0dWNiRGNNREZTcFJ1RUxzbHF2Q0VyZTh5Y0czbG5oSGNvN2xFblJGUzFVamFReXkzb3MwSEtTU2NoT2VjVzFqeXlnZjExZFlYUngxMXh4SlRDOWJvdjlWUGJTc3REUVFWeS1HTWdyTUhVdmJMY0JxcEpnVjl1eEdZMFB3Y0t1SlVzUVk4SUt5cTdQTWs1UlFyNUNmQUdZb1h1UkEybENGOENwNHpWYkxCTUFJNUVfdEFPNnNOLU9URTVxelNsd2pWLUR5Z1hZOXpxcGwyd1FxMEp2S3hja3cxcHZxUm9PTmZOdzBlb0lnOEhtc3VPWlMwNEM0cldjQ2xZZk5GSjVDaUI5UGZuRE8tbkRjUElQZ3o5azRPRnZfTVhXem9UQTE1YUs3RjRkT0Jvd1JMbXdNQQ?oc=5",
-    "semaforo": "giallo",
-    "ambiti": [
-      "impresa",
-      "pubblico"
-    ],
-    "obiettivo_id": "o1",
-    "obiettivo_nome": "Riqualificazione Urbana",
-    "obiettivo": "o1",
-    "id": "b-66684b54",
-    "categoria_macro": "citta",
-    "asse_specifico": "Rigenerazione Urbana & Spazi",
-    "concept_id": "",
-    "sdg_id": "11",
-    "sdg_label": "SDG 11 · Città e Comunità Sostenibili",
-    "sdg_img": "/sdg/sdg-11.svg",
-    "valore_stimato_euro": 150000,
-    "portali_correlati": [
-      "PR FESR 2021/2027"
-    ]
-  },
-  {
-    "portale": "FSE",
-    "titolo": "Avviso Pubblico P FSE+ 2021-2027",
-    "ente": "FSE",
-    "scadenza": "Fri, 02 Oct 2026",
-    "importo": "Consulta avviso ufficiale",
-    "descrizione": "Avviso pubblico rilevato sul canale FSE.",
-    "link": "https://news.google.com/rss/articles/CBMi3wFBVV95cUxQWVNxT0p1eHNVWlVZcFRSMklaYkFrMlJnWnNka2NHaWxYS2FRUDRTb3ZmVUR0STlkakZHMTRGZU9pVEdUU08tRXVpNTRPNGtHdVRWMUlrb0VMX2w5SGJUeEdZTXRyRDZONmRIb1VGa3hUd2xsQkVHSFpmSDh3bnlsQS1lQV9wc0hra2pYN0VnZWY2ODVFVzgzRDY3UkdVc3NxM1ByOHJ4NHlLZ0oyckxKSTBFdGZWVmJyWWVldEUycU84SnBNdC1UaElQaVdHdmJyaTJUSGprZTBOUy1uU2dF?oc=5",
-    "semaforo": "giallo",
-    "ambiti": [
-      "cittadino",
-      "pubblico"
-    ],
-    "obiettivo_id": "o1",
-    "obiettivo_nome": "Riqualificazione Urbana",
-    "obiettivo": "o1",
-    "id": "b-a7e8d1c7",
-    "categoria_macro": "citta",
-    "asse_specifico": "Rigenerazione Urbana & Spazi",
-    "concept_id": "",
-    "sdg_id": "11",
-    "sdg_label": "SDG 11 · Città e Comunità Sostenibili",
-    "sdg_img": "/sdg/sdg-11.svg",
-    "valore_stimato_euro": 150000,
-    "portali_correlati": [
-      "FSE"
-    ]
-  },
-  {
-    "portale": "FSE",
-    "titolo": "Bando Incentivi all'Occupazione 2025: al via il servizio di supporto per la rendicontazione sulla piattaforma Coe.Si 21-27",
-    "ente": "FSE",
-    "scadenza": "Wed, 22 Jul 2026",
-    "importo": "Consulta avviso ufficiale",
-    "descrizione": "Avviso pubblico rilevato sul canale FSE.",
-    "link": "https://news.google.com/rss/articles/CBMi5wFBVV95cUxOMW8yVk5LVXVkZ1JicVFFQzFhQktyZVdMUk9adEJqdHFTMko5aGo0eXQybGpMZmxLUFhoUnNpdmFQOXdVeTA0a2YzeElNejRFa0w5aG1VRGZSLUFnX1dkdnEySW9Rc0x4MUhFNlVDYUVtbVBVeXVnc2dsbGd6WnYxaTlHSTVqNjZObml2MWV1a1hLY0tqbWd1WEJ3Rms2T05fcGN5V3hzN2d0ekZFRUFLVFU0SmJxM0dyajAwVHdBNjRnc3R4WWJsaE9hTGdiSWFlNjhwc2N4NlY1ZTNIeGplemZiWmVQTDQ?oc=5",
-    "semaforo": "giallo",
-    "ambiti": [
-      "cittadino",
-      "pubblico"
-    ],
-    "obiettivo_id": "o4",
-    "obiettivo_nome": "Nuovo Impianto & Sviluppo Industriale",
-    "obiettivo": "o4",
-    "id": "b-8e2277fa",
-    "categoria_macro": "citta",
-    "asse_specifico": "Sviluppo Industriale & Lavoro",
-    "concept_id": "",
-    "sdg_id": "8",
-    "sdg_label": "SDG 8 & 9 · Sviluppo Industriale e Lavoro",
-    "sdg_img": "/sdg/sdg-8.svg",
-    "valore_stimato_euro": 150000,
-    "portali_correlati": [
-      "FSE"
-    ]
-  },
-  {
-    "portale": "FSE",
-    "titolo": "Bando Re Work Regione Umbria Contributi a fondo perduto per l'inserimento lavorativo",
-    "ente": "FSE",
-    "scadenza": "Sat, 14 Aug 2021",
-    "importo": "Consulta avviso ufficiale",
-    "descrizione": "Avviso pubblico rilevato sul canale FSE.",
-    "link": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxPUnFxTThaQlFsQV9sM2s5RDd6eEFPNUtHRC1jTjYwYTh0dy1fQTVNU0Y1a3FWTkwxMHFrQm5yQVJPaWNFU2R5aDgxSXB2NE5iaVBvaURCUms1ajBveWFfaDRCZTctUTdXYWE3dmdUdWJBS2FTOWd3MkZWWGpUcUZMVHFJTFM2VWNhQlNXU1lyREYzbVpCLXlsVmNnRmY1bi1iNGpVck1IYzZEVTRVSmJ1ZXdZOTBaSEFuTUJBaWlkZTBrMVU?oc=5",
-    "semaforo": "giallo",
-    "ambiti": [
-      "cittadino",
-      "pubblico"
-    ],
-    "obiettivo_id": "o7",
-    "obiettivo_nome": "Digitalizzazione & Innovazione",
-    "obiettivo": "o7",
-    "id": "b-b15558d9",
-    "categoria_macro": "citta",
-    "asse_specifico": "Digitale & Transizione 5.0",
-    "concept_id": "",
-    "sdg_id": "9",
-    "sdg_label": "SDG 9 · Innovazione e Transizione 5.0",
-    "sdg_img": "/sdg/sdg-9.svg",
-    "valore_stimato_euro": 150000,
-    "portali_correlati": [
-      "FSE"
-    ]
-  },
-  {
-    "portale": "FSC",
-    "titolo": "Avviso per il sostegno degli investimenti produttivi e per la tutela ambientale per l’area di Crisi Complessa Terni",
-    "ente": "FSC",
-    "scadenza": "Wed, 10 Sep 2025",
-    "importo": "Consulta avviso ufficiale",
-    "descrizione": "Avviso pubblico rilevato sul canale FSC.",
-    "link": "https://news.google.com/rss/articles/CBMiowJBVV95cUxOSE51c3dleURuaHVoZmVTTW9UZlFQQ2EtVF9DT2FrSF8zdXQxZmRHUUZ4dG56bjVlVmhMTExHM2pRMm1Va2R2STVrWnIyeFpqRzN3S1Vrc2hFa1FUZGNpNjB4SzZIakdLck1mVVpkVGI1OG01WjgwU3pIYmJ0UXJmQWF1ZU5RZ0lESTB1aFM3dUY4aFhJVHZpZWNJX1o4LWN1SERHQ3NCakJrNzVnWEhPa0ZKWG5ieTJFdUs1R2pFZTBiZ1BEREE2U3Q0aGJ2RFN2VzJxSjF2cXpLcVlJOWtVeGwteGhyNnF5SGpESWZFNTRRVEsxZERONkF1QTVBQWhFMUFadlBLVDh6bHdibkxVUlluT1VfV2xwSmFQa2FBSWJweWs?oc=5",
-    "semaforo": "giallo",
-    "ambiti": [
-      "impresa",
-      "pubblico"
-    ],
-    "obiettivo_id": "o4",
-    "obiettivo_nome": "Nuovo Impianto & Sviluppo Industriale",
-    "obiettivo": "o4",
-    "id": "b-bcca7d56",
-    "categoria_macro": "citta",
-    "asse_specifico": "Sviluppo Industriale & Lavoro",
-    "concept_id": "",
-    "sdg_id": "8",
-    "sdg_label": "SDG 8 & 9 · Sviluppo Industriale e Lavoro",
-    "sdg_img": "/sdg/sdg-8.svg",
-    "valore_stimato_euro": 150000,
-    "portali_correlati": [
-      "FSC"
-    ]
-  },
-  {
-    "portale": "PNRR",
-    "titolo": "Pnrr Terni, nuovo bando per Cesi: 600 mila euro per recupero patrimonio edilizio privato",
-    "ente": "PNRR",
-    "scadenza": "Thu, 25 Dec 2025",
-    "importo": "Consulta avviso ufficiale",
-    "descrizione": "Avviso pubblico rilevato sul canale PNRR.",
-    "link": "https://news.google.com/rss/articles/CBMisAFBVV95cUxNbTM2Wm8zalU5X05MMUF0SXlvLXotT2kxaV92VVQ2LVN6ZWM3ZVppdVNNNWxGeHQ2S0tBNTlhVXRqbkZKTjlnek5qZkhmS1dKcm9HaFZqdGNSSUExRDYzblVQSlJZZzNIalppcFRkYzliMjh4U1BwZlgwVTRhVG0xNlAxeGdrZjVkVS1Zb0p6TUJvTk9BQWtzTEpma2RjRF9KOFNDSkpVZXZ5aHpfYzlvaw?oc=5",
-    "semaforo": "giallo",
-    "ambiti": [
-      "pubblico"
-    ],
-    "obiettivo_id": "o1",
-    "obiettivo_nome": "Riqualificazione Urbana",
-    "obiettivo": "o1",
-    "id": "b-702657dd",
-    "categoria_macro": "citta",
-    "asse_specifico": "Rigenerazione Urbana & Spazi",
-    "concept_id": "",
-    "sdg_id": "11",
-    "sdg_label": "SDG 11 · Città e Comunità Sostenibili",
-    "sdg_img": "/sdg/sdg-11.svg",
-    "valore_stimato_euro": 150000,
-    "portali_correlati": [
-      "PNRR"
-    ]
-  },
-  {
-    "portale": "PNRR",
-    "titolo": "19 Comuni in 9 Regioni accedono ai contributi per scuolabus sostenibili",
-    "ente": "PNRR",
-    "scadenza": "Fri, 19 May 2023",
-    "importo": "Consulta avviso ufficiale",
-    "descrizione": "Avviso pubblico rilevato sul canale PNRR.",
-    "link": "https://news.google.com/rss/articles/CBMinAFBVV95cUxQblV4bnJMZGxtM2pkdHMzZW9kOS1abGI2czg3R1JCS3ViQ0NNTEw1a0poOE5IWmhyVUZxNzlCc0hkT19UUkUzaEkxSUhWYXFnR1VmOUMyN2dVcjRpanVXNkgtRlE4cF9MdGctdzJoZEZPalJxYjVYeVUyNF9RQ3l4a1JHQTlDN05pd0dHV1FHRXZGXzJQd29TZE5KWTM?oc=5",
-    "semaforo": "giallo",
-    "ambiti": [
-      "pubblico"
-    ],
-    "obiettivo_id": "o1",
-    "obiettivo_nome": "Riqualificazione Urbana",
-    "obiettivo": "o1",
-    "id": "b-e797322a",
-    "categoria_macro": "citta",
-    "asse_specifico": "Rigenerazione Urbana & Spazi",
-    "concept_id": "",
-    "sdg_id": "11",
-    "sdg_label": "SDG 11 · Città e Comunità Sostenibili",
-    "sdg_img": "/sdg/sdg-11.svg",
-    "valore_stimato_euro": 150000,
-    "portali_correlati": [
-      "PNRR"
-    ]
-  },
-  {
-    "portale": "PNRR",
-    "titolo": "Marsciano inaugura il cohousing per persone con disabilità: operativo il progetto Pnrr",
-    "ente": "PNRR",
-    "scadenza": "Thu, 23 Jul 2026",
-    "importo": "Consulta avviso ufficiale",
-    "descrizione": "Avviso pubblico rilevato sul canale PNRR.",
-    "link": "https://news.google.com/rss/articles/CBMivwFBVV95cUxQQmlvbGlrNnNDSnJhYnlWNHlDZU13WTNFTmFkaVEtTTVxN2NlR2J4OWhqM0hNRFdKSllpc2t4UWdWQ3I5NjJhd2w1OVd1Ykk0WWNGZ2NVVVh1bkV4b3A2M3IwRGhIMUZlUVB4RXR4UjRLc3ZJYU1YT0xiSnZPak83RmdPQXl6Tk1VMGhSa1NVN1ZUaklLdEVyLU1yb21uWUhQbWRlS2d6N1R6OUdiUzB1N0szdHkzeFdZaXF3X2dHRQ?oc=5",
-    "semaforo": "giallo",
-    "ambiti": [
-      "cittadino",
-      "pubblico"
-    ],
-    "obiettivo_id": "o6",
-    "obiettivo_nome": "Welfare, Cultura, Turismo & Terzo Settore",
-    "obiettivo": "o6",
-    "id": "b-b20276c3",
+    "id": "b-wf-fse-inclusione",
+    "concept_id": "wf_fse_inclusione_vita_indipendente",
+    "portale": "PR FSE+ Welfare",
     "categoria_macro": "welfare",
     "asse_specifico": "Disabilità & Vita Indipendente",
-    "concept_id": "",
+    "titolo": "PR FSE+ Umbria 2021-2027 — Priorità 3 Inclusione Sociale, Vita Indipendente e «Umbria per Tutti»",
+    "ente": "Regione Umbria — Direzione Salute e Welfare / Zona Sociale Terni",
+    "scadenza": "Programmazione 2021-2027 attiva",
+    "importo": "Progetti personalizzati e assegni di autonomia (Quota bacino Terni)",
+    "valore_stimato_euro": 750000,
+    "ambiti": [
+      "pubblico",
+      "cittadino"
+    ],
+    "obiettivo_id": "o6",
+    "descrizione": "Finanziamento di progetti personalizzati per l'autonomia delle persone con disabilità (D.Lgs. 62/2024), assegni di cura e sostegno alle famiglie.",
+    "link": "https://www.regione.umbria.it/sociale",
+    "semaforo": "verde",
+    "obiettivo": "o6",
+    "obiettivo_nome": "Welfare, Cultura, Turismo & Terzo Settore",
     "sdg_id": "3",
     "sdg_label": "SDG 3 & 10 · Welfare, Salute e Inclusione",
-    "sdg_img": "/sdg/sdg-3.svg",
-    "valore_stimato_euro": 150000,
-    "portali_correlati": [
-      "PNRR"
-    ]
+    "sdg_img": "/sdg/sdg-3.svg"
   },
   {
-    "portale": "GSE",
-    "titolo": "Facility CACER, regole più flessibili per i contributi alle CER",
-    "ente": "GSE",
-    "scadenza": "Tue, 31 Mar 2026",
-    "importo": "Consulta avviso ufficiale",
-    "descrizione": "Avviso pubblico rilevato sul canale GSE.",
-    "link": "https://news.google.com/rss/articles/CBMiT0FVX3lxTFBpdThhOFhuZUpYSjJadHJNaURYTFFrSGhXYjBNSkluV2F6bDZEaG9hdjhJalhsUVM2RjJEVWlhQkJrUDBCWXA5dFMyQ1NMTVk?oc=5",
-    "semaforo": "giallo",
+    "id": "b-wf-pnrr-11",
+    "concept_id": "wf_pnrr_m5c2_anziani",
+    "portale": "PNRR M5C2 Welfare",
+    "categoria_macro": "welfare",
+    "asse_specifico": "Non Autosufficienza, Anziani & Caregiver",
+    "titolo": "PNRR M5C2 Inv. 1.1 — Sostegno Persone Vulnerabili e Autonomia Anziani Non Autosufficienti",
+    "ente": "Ministero del Lavoro (MLPS) / Ambito Territoriale Sociale Terni",
+    "scadenza": "Attuazione attiva",
+    "importo": "Linea d'Ambito per domiciliarità, teleassistenza e domotica",
+    "valore_stimato_euro": 650000,
     "ambiti": [
-      "pubblico"
+      "pubblico",
+      "cittadino"
     ],
-    "obiettivo_id": "o2",
-    "obiettivo_nome": "Sostenibilità Energetica",
-    "obiettivo": "o2",
-    "id": "b-efee76fa",
-    "categoria_macro": "citta",
-    "asse_specifico": "Energia, CER & Clima",
-    "concept_id": "",
-    "sdg_id": "7",
-    "sdg_label": "SDG 7 & 13 · Energia Pulita e Clima",
-    "sdg_img": "/sdg/sdg-7.svg",
-    "valore_stimato_euro": 150000,
-    "portali_correlati": [
-      "GSE"
-    ]
+    "obiettivo_id": "o6",
+    "descrizione": "Prevenzione dell'istituzionalizzazione, riconversione in gruppi appartamento domotici e potenziamento assistenza domiciliare (SAD) over 65.",
+    "link": "https://www.lavoro.gov.it/temi-e-priorita/pnrr",
+    "semaforo": "verde",
+    "obiettivo": "o6",
+    "obiettivo_nome": "Welfare, Cultura, Turismo & Terzo Settore",
+    "sdg_id": "3",
+    "sdg_label": "SDG 3 & 10 · Welfare, Salute e Inclusione",
+    "sdg_img": "/sdg/sdg-3.svg"
   },
   {
-    "portale": "Invitalia",
-    "titolo": "Incentivi Startup 2026: Quali Misure Sono Aperte",
-    "ente": "Invitalia",
-    "scadenza": "Sun, 04 Oct 2026",
-    "importo": "Consulta avviso ufficiale",
-    "descrizione": "Avviso pubblico rilevato sul canale Invitalia.",
-    "link": "https://news.google.com/rss/articles/CBMiZEFVX3lxTE14WGlKbFNjOEF5TmpXYWYxMmtzY1JJWmlLbWRhTkhSc1gwQWRZM1VCOG9QdGg4dElydW9CWFJNVkE5QlBqSVJyV2JCRzhVOHoyRWhBWHhfa0ZsVElQa0NWbXMyRk0?oc=5",
-    "semaforo": "giallo",
+    "id": "b-wf-pnrr-12",
+    "concept_id": "wf_pnrr_m5c2_disabilita",
+    "portale": "PNRR M5C2 Welfare",
+    "categoria_macro": "welfare",
+    "asse_specifico": "Disabilità & Vita Indipendente",
+    "titolo": "PNRR M5C2 Inv. 1.2 — Percorsi di Autonomia per Persone con Disabilità (Abitare e Lavoro)",
+    "ente": "MLPS / Zona Sociale Terni / Enti Terzo Settore (Art. 55 CTS)",
+    "scadenza": "Attivo",
+    "importo": "715.000 € per progetto d'Ambito Territoriale",
+    "valore_stimato_euro": 715000,
     "ambiti": [
-      "impresa",
-      "pubblico"
+      "pubblico",
+      "cittadino"
     ],
-    "obiettivo_id": "o7",
-    "obiettivo_nome": "Digitalizzazione & Innovazione",
-    "obiettivo": "o7",
-    "id": "b-d4e80b20",
-    "categoria_macro": "citta",
-    "asse_specifico": "Digitale & Transizione 5.0",
-    "concept_id": "",
-    "sdg_id": "9",
-    "sdg_label": "SDG 9 · Innovazione e Transizione 5.0",
-    "sdg_img": "/sdg/sdg-9.svg",
-    "valore_stimato_euro": 150000,
-    "portali_correlati": [
-      "Invitalia"
-    ]
+    "obiettivo_id": "o6",
+    "descrizione": "Co-progettazione Art. 55 D.Lgs. 117/2017 per co-housing domotico, Dopo di Noi (L. 112/2016), competenze digitali e tirocini inclusivi.",
+    "link": "https://www.lavoro.gov.it/temi-e-priorita/disabilita-e-non-autosufficienza",
+    "semaforo": "verde",
+    "obiettivo": "o6",
+    "obiettivo_nome": "Welfare, Cultura, Turismo & Terzo Settore",
+    "sdg_id": "3",
+    "sdg_label": "SDG 3 & 10 · Welfare, Salute e Inclusione",
+    "sdg_img": "/sdg/sdg-3.svg"
   },
   {
-    "portale": "PR FESR 2021/2027",
-    "titolo": "PR FESR 2021-2027 Bando per il supporto ad interventi di produzione di energia da fonti rinnovabili e di prevenzione del rischio",
-    "ente": "PR FESR 2021/2027",
-    "scadenza": "Mon, 14 Sep 2026",
-    "importo": "Consulta avviso ufficiale",
-    "descrizione": "Avviso pubblico rilevato sul canale PR FESR 2021/2027.",
-    "link": "https://news.google.com/rss/articles/CBMiqARBVV95cUxNZk5JbTR6MHhWX2NyaERFTnpaY0UtSmZaOVJ5bGVBeWl0LWV2OTVZa3htZFVhT1FZbzRWaTh1MXJERWoxYi1XWVBUNWVxX09QM3lLLUcyQ1hGSkJzVXU5OXkwS1ZkZlhIYzBtSGJRel90dWV6b2ItSklyZjlwTWFDMzBsT2NSOVZpTFRxNXBYQnFXY2dKOXRWM1V2ZWp4Z3lUa25VQU5ITDBBakhoN3FkMXdPQk9vNVlsNWt4TnliWURqVklRRTdwMGEwcXJCSFhzMTY1cE5GZHJPazQzcGpoMVdKMXh0VDByUlF5NEVDN1ZlaXRlNVhFZndiUkZweEJOV1NLQTluU1ltNVNYX3pTdVZYSFlMNmF4dzJZWWhWM3Q2di1JT1pKb1MzazZWTHVzZml4ZlM2VUpEeGZHakQzd0FSZXFvYS1ZcnpWT0NGY3Q1eUg4c1ZERHpMVjBFX0VYeU1qTERqU05lRHpKSHZfaGJRSEFxT0daMEhJaWFMMkQzZE8yR1NjNDZlZlpadFYwMF9oakZSbXJCTkVVVGg0YVZrOHFGSzlPQWwtc1V5VzdTUHJDazZ6UGxUbU1LcVlNUmt2YWdmZXVhSWljelpZMVpIUVZGZ0V4ZEVQeEhoNnh4eVNJcjdSaVJOSWRSSTQ1Y01ITXpLZUJmdU4zanB3Q2NJak1BdnZIeW8teFo3V01pODlFSWxDdWd1eEp4Q2NRY3Q1MXVMSjI?oc=5",
-    "semaforo": "giallo",
+    "id": "b-wf-pnrr-13",
+    "concept_id": "wf_pnrr_m5c2_housing_poverta",
+    "portale": "PNRR M5C2 Welfare",
+    "categoria_macro": "welfare",
+    "asse_specifico": "Contrasto Povertà, Adulti Fragili & Housing",
+    "titolo": "PNRR M5C2 Inv. 1.3 & Emergenza Abitativa — Housing First e Stazioni di Posta",
+    "ente": "MLPS / Comune di Terni Capofila Zona Sociale",
+    "scadenza": "Attivo",
+    "importo": "Dotazione Housing temporaneo e Centro Servizi Povertà",
+    "valore_stimato_euro": 550000,
     "ambiti": [
-      "impresa",
-      "pubblico"
+      "pubblico",
+      "cittadino"
     ],
-    "obiettivo_id": "o2",
-    "obiettivo_nome": "Sostenibilità Energetica",
-    "obiettivo": "o2",
-    "id": "b-1bf2ca67",
-    "categoria_macro": "citta",
-    "asse_specifico": "Energia, CER & Clima",
-    "concept_id": "",
-    "sdg_id": "7",
-    "sdg_label": "SDG 7 & 13 · Energia Pulita e Clima",
-    "sdg_img": "/sdg/sdg-7.svg",
-    "valore_stimato_euro": 150000,
-    "portali_correlati": [
-      "PR FESR 2021/2027"
-    ]
+    "obiettivo_id": "o6",
+    "descrizione": "Presidi territoriali di presa in carico multiprofessionale, contrasto alla grave marginalità adulta e assegnazione alloggi temporanei.",
+    "link": "https://www.lavoro.gov.it/temi-e-priorita/poverta-ed-esclusione-sociale",
+    "semaforo": "verde",
+    "obiettivo": "o6",
+    "obiettivo_nome": "Welfare, Cultura, Turismo & Terzo Settore",
+    "sdg_id": "3",
+    "sdg_label": "SDG 3 & 10 · Welfare, Salute e Inclusione",
+    "sdg_img": "/sdg/sdg-3.svg"
   },
   {
-    "portale": "FSC",
-    "titolo": "Polo chimico di Terni, prorogati al 2026 i termini per le agevolazioni: la Regione accoglie la richiesta di Confindustria",
-    "ente": "FSC",
-    "scadenza": "Thu, 06 Nov 2025",
-    "importo": "Consulta avviso ufficiale",
-    "descrizione": "Avviso pubblico rilevato sul canale FSC.",
-    "link": "https://news.google.com/rss/articles/CBMid0FVX3lxTE1rQTdQRk5pMTFrRWVWRVV0anhEX3Y1VDhPbDNxc3c5eWREY0J0Vk93WktVYWRoLTczZDlCSXhHdko0SFhVelljNkdNOHRONndsNkJOTzFyUW1FLXJRbVNCMnk5SGpmQ2VoOVFXMlllTENQb0Y1Rlhz?oc=5",
-    "semaforo": "giallo",
+    "id": "b-wf-pnrr-m6",
+    "concept_id": "wf_pnrr_m6_case_comunita_dm77",
+    "portale": "PNRR M6 Salute & Welfare",
+    "categoria_macro": "welfare",
+    "asse_specifico": "Integrazione Socio-Sanitaria (DM 77/2022)",
+    "titolo": "PNRR M6C1 & DM 77/2022 — Case della Comunità, PUA (Punto Unico di Accesso) e Cure Domiciliari ADI",
+    "ente": "Ministero della Salute / Regione Umbria / USL Umbria 2 / Comune di Terni",
+    "scadenza": "Attuazione territoriale continua",
+    "importo": "Integrazione socio-sanitaria distrettuale e protocolli PUA/UVM",
+    "valore_stimato_euro": 685000,
     "ambiti": [
-      "impresa",
-      "pubblico"
+      "pubblico",
+      "cittadino"
     ],
-    "obiettivo_id": "o4",
-    "obiettivo_nome": "Nuovo Impianto & Sviluppo Industriale",
-    "obiettivo": "o4",
-    "id": "b-bb102f80",
-    "categoria_macro": "citta",
-    "asse_specifico": "Sviluppo Industriale & Lavoro",
-    "concept_id": "",
-    "sdg_id": "8",
-    "sdg_label": "SDG 8 & 9 · Sviluppo Industriale e Lavoro",
-    "sdg_img": "/sdg/sdg-8.svg",
-    "valore_stimato_euro": 150000,
-    "portali_correlati": [
-      "FSC"
-    ]
+    "obiettivo_id": "o6",
+    "descrizione": "Accordi di programma Comune-USL per equipe multiprofessionali nei PUA, valutazione multidimensionale unica (UVM) e dimissioni protette.",
+    "link": "https://www.salute.gov.it/portale/pnrr/homePNRR.jsp",
+    "semaforo": "verde",
+    "obiettivo": "o6",
+    "obiettivo_nome": "Welfare, Cultura, Turismo & Terzo Settore",
+    "sdg_id": "3",
+    "sdg_label": "SDG 3 & 10 · Welfare, Salute e Inclusione",
+    "sdg_img": "/sdg/sdg-3.svg"
   },
   {
-    "portale": "PNRR",
-    "titolo": "Cardeto, chiuso il bando per il ristorante panoramico: la svolta dopo i nuovi lavori e il controllo della Commissione del Comune di Terni",
-    "ente": "PNRR",
-    "scadenza": "Sun, 28 Dec 2025",
-    "importo": "Consulta avviso ufficiale",
-    "descrizione": "Avviso pubblico rilevato sul canale PNRR.",
-    "link": "https://news.google.com/rss/articles/CBMijwFBVV95cUxPN0xxLW9ta0V1a0lsYzgwQ2dyZW9VcWRLbFNDZFVIZVBlT3JyRUFIUGFNcXNhN3l2Zy1FaVU4VU9ER2ZGQjdFSEg4bS1TVHptS1hTQnF3ZEg2T0hJTmFVZjdyQmhGTVlaWi1DdXg3OTctSjhhN0xMS0g0ZDFyOGd0REdvazZBeUdYbFR1aGJFUQ?oc=5",
-    "semaforo": "giallo",
-    "ambiti": [
-      "pubblico"
-    ],
-    "obiettivo_id": "o1",
-    "obiettivo_nome": "Riqualificazione Urbana",
-    "obiettivo": "o1",
-    "id": "b-8811dbb9",
-    "categoria_macro": "citta",
-    "asse_specifico": "Rigenerazione Urbana & Spazi",
-    "concept_id": "",
-    "sdg_id": "11",
-    "sdg_label": "SDG 11 · Città e Comunità Sostenibili",
-    "sdg_img": "/sdg/sdg-11.svg",
-    "valore_stimato_euro": 150000,
-    "portali_correlati": [
-      "PNRR"
-    ]
-  },
-  {
-    "portale": "PNRR",
-    "titolo": "Nuovo Bando per studentati",
-    "ente": "PNRR",
-    "scadenza": "Sun, 11 Oct 2026",
-    "importo": "Consulta avviso ufficiale",
-    "descrizione": "Avviso pubblico rilevato sul canale PNRR.",
-    "link": "https://news.google.com/rss/articles/CBMivwFBVV95cUxNcG1keWNGZ0tnMWNsd1NIVmVUQnRXTHAxaVJydzJpOGhwTy16eFd0Yi1NbEN4YU81bVFBd2E3SVdrMTMyMnF4RzZwTkYzcDcwY2hMWldyQ2tYcURtb29COVpqWVp2bFdIOGIza1ZRYlJLQ0tDVzk0ajFtNV9hYUtTN25XdlZ0QTdRSEQxMmtvLTJnZnVjZVpRa3hEQ254Qlc0aHJHaGE2Y1RtTktVTGNNb3dBeDlhXzlTVXVaRnRjaw?oc=5",
-    "semaforo": "giallo",
-    "ambiti": [
-      "pubblico"
-    ],
-    "obiettivo_id": "o1",
-    "obiettivo_nome": "Riqualificazione Urbana",
-    "obiettivo": "o1",
-    "id": "b-72cbb339",
-    "categoria_macro": "citta",
-    "asse_specifico": "Rigenerazione Urbana & Spazi",
-    "concept_id": "",
-    "sdg_id": "11",
-    "sdg_label": "SDG 11 · Città e Comunità Sostenibili",
-    "sdg_img": "/sdg/sdg-11.svg",
-    "valore_stimato_euro": 150000,
-    "portali_correlati": [
-      "PNRR"
-    ]
-  },
-  {
-    "portale": "Invitalia",
-    "titolo": "Bando ON 2026: tasso zero fino al 90%, requisiti e punteggi",
-    "ente": "Invitalia",
-    "scadenza": "Sun, 04 Oct 2026",
-    "importo": "Consulta avviso ufficiale",
-    "descrizione": "Avviso pubblico rilevato sul canale Invitalia.",
-    "link": "https://news.google.com/rss/articles/CBMiakFVX3lxTFBLUThVdTljTi1SeGZPU2FGdFdNeUY1TUZVQURJWlBSR0xfRE5rc3NQZzJkR2p4UlE2eVJ5Q25tcjd1NVVGME5CaFgwLTdCeU5WM3RXd0diSVo3cWUxWTh3azNmSFl1NXRqaHc?oc=5",
-    "semaforo": "giallo",
-    "ambiti": [
-      "impresa",
-      "pubblico"
-    ],
-    "obiettivo_id": "o7",
-    "obiettivo_nome": "Digitalizzazione & Innovazione",
-    "obiettivo": "o7",
-    "id": "b-a88227ec",
-    "categoria_macro": "citta",
-    "asse_specifico": "Digitale & Transizione 5.0",
-    "concept_id": "",
-    "sdg_id": "9",
-    "sdg_label": "SDG 9 · Innovazione e Transizione 5.0",
-    "sdg_img": "/sdg/sdg-9.svg",
-    "valore_stimato_euro": 150000,
-    "portali_correlati": [
-      "Invitalia"
-    ]
-  },
-  {
-    "portale": "FSE",
-    "titolo": "In arrivo voucher per lo sport dei bambini e una nuova legge sullo sport",
-    "ente": "FSE",
-    "scadenza": "Thu, 23 Jul 2026",
-    "importo": "Consulta avviso ufficiale",
-    "descrizione": "Avviso pubblico rilevato sul canale FSE.",
-    "link": "https://news.google.com/rss/articles/CBMiygFBVV95cUxPVkZ4Y1pmNk9DMW9QUWFNdmNDMGU1N29kWmd6NDNoR3pqczVLdkFwel81a0VkYmVRN3RBZXJpamppWS14d3c4NHMwbWozNWxaSjlRTXpjdXpBc0hhNEZlaUgzNWVYVWtLM1dtelU1QlNWVllWdGZSYmV5dWVtVG1vTTloTWZ1TVRSczc4UkVyTGtzLWFMRzhWV1k0RUljeGhTR2RzZWcwYW5GVzNGNk9McnpFVlU0MG1CXzFIU0phTG5McTNuSkVna05B0gHPAUFVX3lxTE5UM2NrT09TTDdfSTZyU2lTUXlkeWVydjlMVG9URFpTUlk3OWMxVFBMUnN2d3dfdmlTeHJxZmJtT3VEd3U0bHRyd21yRm00MVd4WlJlTmpsZk5TNTBXcy1UaTdHS2xtZ1B6YjBtSDJ5US1aTk5vbVZiUHEzWjJEMU9zbVc3OHdBMEFicVIwOFlTVk5ibG9MbGZ6R3lGaDEybzc5YTcxZnN0YjFVcDh1dDg2SW0yN2VwbzhaeVZWWVk5NXZWeU5DMFpQRGRSRFdtVQ?oc=5",
-    "semaforo": "giallo",
+    "id": "b-wf-fna",
+    "concept_id": "wf_fna_non_autosufficienza",
+    "portale": "Fondi Nazionali MLPS",
+    "categoria_macro": "welfare",
+    "asse_specifico": "Non Autosufficienza, Anziani & Caregiver",
+    "titolo": "FNA (Fondo Nazionale Non Autosufficienza 2025-2027) & Fondo Sostegno Caregiver Familiari",
+    "ente": "MLPS / Regione Umbria / Zona Sociale Terni",
+    "scadenza": "Programmazione triennale attiva",
+    "importo": "Assegni di cura mensili e voucher sollievo caregiver",
+    "valore_stimato_euro": 650000,
     "ambiti": [
       "cittadino",
-      "impresa",
       "pubblico"
     ],
     "obiettivo_id": "o6",
-    "obiettivo_nome": "Welfare, Cultura, Turismo & Terzo Settore",
+    "descrizione": "Garanzia dei LEPS tramite assegni di cura per disabilità gravissima, voucher socio-assistenziali e contributi sollievo per caregiver familiari.",
+    "link": "https://www.lavoro.gov.it/temi-e-priorita/disabilita-e-non-autosufficienza/focus-on/fondo-non-autosufficienze",
+    "semaforo": "verde",
     "obiettivo": "o6",
-    "id": "b-ea46f8cb",
-    "categoria_macro": "citta",
-    "asse_specifico": "Cultura, Turismo & Eventi",
-    "concept_id": "",
+    "obiettivo_nome": "Welfare, Cultura, Turismo & Terzo Settore",
     "sdg_id": "3",
     "sdg_label": "SDG 3 & 10 · Welfare, Salute e Inclusione",
-    "sdg_img": "/sdg/sdg-3.svg",
-    "valore_stimato_euro": 150000,
-    "portali_correlati": [
-      "FSE"
-    ]
+    "sdg_img": "/sdg/sdg-3.svg"
+  },
+  {
+    "id": "b-wf-desteenazione",
+    "concept_id": "wf_desteenazione_minori",
+    "portale": "Fondi Nazionali MLPS",
+    "categoria_macro": "welfare",
+    "asse_specifico": "Famiglia, Minori & Povertà Educativa",
+    "titolo": "PN Inclusione 2021-2027 «DesTEENazione», Contrasto Povertà Educativa & Contributi Famiglie",
+    "ente": "MLPS / Impresa Sociale Con i Bambini / Comune di Terni",
+    "scadenza": "Attivo",
+    "importo": "Spazi multifunzionali adolescenti e bandi comunità educanti",
+    "valore_stimato_euro": 600000,
+    "ambiti": [
+      "pubblico",
+      "cittadino"
+    ],
+    "obiettivo_id": "o6",
+    "descrizione": "Spazi multifunzionali per adolescenti 11-18 anni, comunità educanti, educativa di strada, supporto psicologico, nidi e sostegno alle famiglie.",
+    "link": "https://www.lavoro.gov.it/priorita/pagine/desteenazione-desideri-in-azione",
+    "semaforo": "verde",
+    "obiettivo": "o6",
+    "obiettivo_nome": "Welfare, Cultura, Turismo & Terzo Settore",
+    "sdg_id": "3",
+    "sdg_label": "SDG 3 & 10 · Welfare, Salute e Inclusione",
+    "sdg_img": "/sdg/sdg-3.svg"
+  },
+  {
+    "id": "b-wf-qsfp",
+    "concept_id": "wf_qsfp_assistenti_sociali",
+    "portale": "Fondi Nazionali MLPS",
+    "categoria_macro": "welfare",
+    "asse_specifico": "Contrasto Povertà, Adulti Fragili & Housing",
+    "titolo": "Quota Servizi Fondo Povertà (QSFP) & Assegno di Inclusione (ADI) — Servizio Sociale ATS",
+    "ente": "MLPS / INPS / Zona Sociale Terni",
+    "scadenza": "Attivo",
+    "importo": "Dotazione strutturale LEPS Assistenti Sociali 1:5.000",
+    "valore_stimato_euro": 400000,
+    "ambiti": [
+      "pubblico",
+      "cittadino"
+    ],
+    "obiettivo_id": "o6",
+    "descrizione": "Finanziamento strutturale per assunzione Assistenti Sociali nei Comuni/ATS, supervisione professionale (LEPS) e Patti per l'Inclusione Sociale.",
+    "link": "https://www.lavoro.gov.it/temi-e-priorita/poverta-ed-esclusione-sociale",
+    "semaforo": "verde",
+    "obiettivo": "o6",
+    "obiettivo_nome": "Welfare, Cultura, Turismo & Terzo Settore",
+    "sdg_id": "3",
+    "sdg_label": "SDG 3 & 10 · Welfare, Salute e Inclusione",
+    "sdg_img": "/sdg/sdg-3.svg"
+  },
+  {
+    "id": "b-wf-hcp",
+    "concept_id": "wf_inps_home_care_premium",
+    "portale": "INPS & Welfare",
+    "categoria_macro": "welfare",
+    "asse_specifico": "Non Autosufficienza, Anziani & Caregiver",
+    "titolo": "Bando INPS «Home Care Premium» (HCP) — Assistenza Domiciliare e Prestazioni Integrative",
+    "ente": "INPS / Convenzione Ambito Territoriale Sociale Terni",
+    "scadenza": "Programmazione pluriennale attiva",
+    "importo": "Contributi mensili + Prestazioni Integrative domiciliari",
+    "valore_stimato_euro": 350000,
+    "ambiti": [
+      "cittadino",
+      "pubblico"
+    ],
+    "obiettivo_id": "o6",
+    "descrizione": "Contributi economici mensili e servizi socio-assistenziali domiciliari (OSS, fisioterapia, sollievo, trasporto) gestiti in convenzione con l'Ambito.",
+    "link": "https://www.inps.it",
+    "semaforo": "verde",
+    "obiettivo": "o6",
+    "obiettivo_nome": "Welfare, Cultura, Turismo & Terzo Settore",
+    "sdg_id": "3",
+    "sdg_label": "SDG 3 & 10 · Welfare, Salute e Inclusione",
+    "sdg_img": "/sdg/sdg-3.svg"
+  },
+  {
+    "id": "b-wf-art55-carit",
+    "concept_id": "wf_art55_72_terzo_settore",
+    "portale": "Terzo Settore & Fondazioni",
+    "categoria_macro": "welfare",
+    "asse_specifico": "Co-Progettazione Terzo Settore (Art. 55 CTS)",
+    "titolo": "Avvisi Regionali Artt. 55 e 72 D.Lgs. 117/2017 & Bandi Fondazione Carit Terni (Welfare e Sociale)",
+    "ente": "Regione Umbria (RUNTS) / Fondazione Cassa di Risparmio di Terni e Narni",
+    "scadenza": "Sessioni annuali aperte",
+    "importo": "Contributi a fondo perduto per OdV, APS, ETS ed Enti a Terni",
+    "valore_stimato_euro": 500000,
+    "ambiti": [
+      "pubblico",
+      "cittadino"
+    ],
+    "obiettivo_id": "o6",
+    "descrizione": "Risorse per co-programmazione e co-progettazione Art. 55 CTS (DM 72/2021) con enti iscritti al RUNTS e bandi territoriali Fondazione Carit a Terni.",
+    "link": "https://www.fondazionecarit.it/bandi",
+    "semaforo": "verde",
+    "obiettivo": "o6",
+    "obiettivo_nome": "Welfare, Cultura, Turismo & Terzo Settore",
+    "sdg_id": "3",
+    "sdg_label": "SDG 3 & 10 · Welfare, Salute e Inclusione",
+    "sdg_img": "/sdg/sdg-3.svg"
+  },
+  {
+    "id": "b-wf-gol-fragili",
+    "concept_id": "wf_gol_inclusione_lavorativa",
+    "portale": "PR FSE+ Welfare",
+    "categoria_macro": "welfare",
+    "asse_specifico": "Inclusione Lavorativa & Politiche Attive Fragili",
+    "titolo": "Programma GOL (Percorso 4 Lavoro e Inclusione) & Tirocini di Inclusione Sociale Soggetti Fragili",
+    "ente": "Regione Umbria / ARPAL Umbria / Servizi Sociali Comunali",
+    "scadenza": "Sportello attivo",
+    "importo": "Indennità tirocini extracurriculari e doti occupazionali L. 68/99",
+    "valore_stimato_euro": 350000,
+    "ambiti": [
+      "cittadino",
+      "pubblico",
+      "impresa"
+    ],
+    "obiettivo_id": "o6",
+    "descrizione": "Equipe multidisciplinari Lavoro-Sociale (CPI + Comune) per tirocini extracurriculari inclusivi e inserimento lavorativo mirato (L. 68/1999).",
+    "link": "https://www.arpalumbria.it/avvisi-e-bandi",
+    "semaforo": "verde",
+    "obiettivo": "o6",
+    "obiettivo_nome": "Welfare, Cultura, Turismo & Terzo Settore",
+    "sdg_id": "3",
+    "sdg_label": "SDG 3 & 10 · Welfare, Salute e Inclusione",
+    "sdg_img": "/sdg/sdg-3.svg"
   }
 ]

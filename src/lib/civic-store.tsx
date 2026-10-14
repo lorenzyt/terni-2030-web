@@ -81,6 +81,7 @@ export type DossierLog = {
   stato?: string;
   numero_bandi: number;
   elenco_bandi: string[];
+  bozza_testuale?: string;
 };
 
 export type PropostaModerazione = {
@@ -166,14 +167,12 @@ export function CivicProvider({ children }: { children: ReactNode }) {
     let dbPuntiSpesi: number | undefined = undefined;
 
     if (supabase && activeUser) {
-      // 1. Legge da user_metadata (sempre disponibile su Supabase Auth)
       if (Array.isArray(activeUser.user_metadata?.luoghi_scoperti)) {
         dbCheckin = activeUser.user_metadata.luoghi_scoperti;
       }
       if (typeof activeUser.user_metadata?.punti_spesi === "number") {
         dbPuntiSpesi = activeUser.user_metadata.punti_spesi;
       }
-      // 2. Legge anche dalla tabella profili se presente
       try {
         const { data } = await supabase.from("profili").select("luoghi_scoperti, punti_spesi").eq("id", activeUser.id).maybeSingle();
         if (data) {
@@ -248,9 +247,10 @@ export function CivicProvider({ children }: { children: ReactNode }) {
               obiettivo: parsed.obiettivo || "-",
               email: parsed.email || "-",
               azione: parsed.azione || item.stato || "Richiesta Dossier",
-              stato: item.stato || "Da Contattare",
+              stato: item.stato || "Da Supervisionare",
               numero_bandi: typeof parsed.numero_bandi === "number" ? parsed.numero_bandi : elenco.length,
               elenco_bandi: elenco,
+              bozza_testuale: parsed.bozza_testuale,
             });
           } catch {}
         } else if (idStr.startsWith("prop_")) {
@@ -326,7 +326,7 @@ export function CivicProvider({ children }: { children: ReactNode }) {
               }
             }
           } catch {}
-        } else {
+        } else if (idStr !== "config_admin_auth") {
           if (item.stato === "In revisione") {
             listaProposte.push({
               id: idStr,
@@ -402,7 +402,6 @@ export function CivicProvider({ children }: { children: ReactNode }) {
 
         const currentUser = userRef.current;
         if (currentUser) {
-          // 1. Salva sempre nei metadata dell'utente autenticato (affidabile al 100%)
           supabase.auth.updateUser({
             data: {
               luoghi_scoperti: next.checkin,
@@ -410,7 +409,6 @@ export function CivicProvider({ children }: { children: ReactNode }) {
             }
           }).catch(() => {});
 
-          // 2. Upsert anche nella tabella profili
           supabase.from("profili").upsert({
             id: currentUser.id,
             email: currentUser.email,
@@ -442,13 +440,13 @@ export function useCivic() {
   return c;
 }
 
-export async function inviaSegnalazione(segnalazione: Omit<Segnalazione, 'id' | 'created_at' | 'data'>) {
+export async function inviaSegnalazione(segnalazione: Omit<Segnalazione, "id" | "created_at" | "data">) {
   if (!supabase) return;
   const { error } = await supabase.from("segnalazioni").insert({
     ...segnalazione,
     stato: "In revisione",
     id: nuovoId("s"),
-    created_at: new Date().toISOString().split('T')[0]
+    created_at: new Date().toISOString().split("T")[0]
   });
   if (error) console.error("Errore invio:", error);
 }
@@ -593,13 +591,57 @@ export async function registraDossierGenerato(payload: any) {
   const emailInput = document.getElementById("dossierEmail") as HTMLInputElement | null;
   const email = (payload.email || emailInput?.value || "").trim();
   if (!email || !email.includes("@")) {
-    throw new Error("Inserisci un indirizzo email valido per ricevere il Dossier strategico.");
+    throw new Error("Inserisci un indirizzo email valido per richiedere il Dossier.");
   }
 
   const orario = new Date().toLocaleString("it-IT");
-  const elencoBandi = Array.isArray(payload.bandi)
-    ? payload.bandi.map((b: any) => (typeof b === "string" ? b : `${b.nome || b.titolo} (${b.ente || ""})`))
+  const bandiRaw = Array.isArray(payload.bandi_completi)
+    ? payload.bandi_completi
+    : Array.isArray(payload.bandi)
+    ? payload.bandi
     : [];
+  const elencoBandi = bandiRaw.map((b: any) =>
+    typeof b === "string" ? b : `${b.titolo || b.nome} — ${b.portale || b.ente || ""} (${b.importo || ""})`
+  );
+
+  const righeSchede = bandiRaw
+    .map((b: any, idx: number) => {
+      if (typeof b === "string") return `${idx + 1}.${b}`;
+      return [
+        `----------------------------------------------------------------------`,
+        `MISURA #${idx + 1}:${b.titolo || b.nome}`,
+        `----------------------------------------------------------------------`,
+        `• Ente / Canale Erogatore: ${b.ente || b.portale || "Istituzionale"}`,
+        `• Asse d'Intervento: ${b.asse_specifico || b.obiettivo_nome || payload.obiettivo}`,
+        `• Dotazione / Agevolazione: ${b.importo || "Contributo a fondo perduto / finanziamento agevolato"}`,
+        `• Stato / Scadenza: ${b.scadenza || "Sportello attivo"}`,
+        `• Sintesi Operativa: ${b.descrizione || "-"}`,
+        `• Link Ufficiale Bando: ${b.link || "https://www.regione.umbria.it"}`
+      ].join("\n");
+    })
+    .join("\n\n");
+
+  const bozzaTestuale = [
+    `======================================================================`,
+    ` DOSSIER STRATEGICO BANDI & FINANZIAMENTI — TERNI 2030`,
+    ` Curato e verificato da Lorenzo Covicchio`,
+    `======================================================================`,
+    `Data elaborazione: ${orario}`,
+    `Destinatario: ${email}`,
+    `Profilo Richiedente: ${payload.profilo || "Cittadino / Impresa"}`,
+    `Quartiere / Ambito di Terni: ${payload.quartiere || "Terni"}`,
+    `Obiettivo Progettuale: ${payload.obiettivo || "Generale"}`,
+    `Misure Compatibili Individuate: ${bandiRaw.length}`,
+    ``,
+    `1. QUADRO DELLE MISURE E DEI BANDI INDIVIDUATI`,
+    righeSchede || "Ricerca personalizzata su misura in fase di istruttoria.",
+    ``,
+    `2. CHECKLIST DOCUMENTALE E PASSI OPERATIVI CONSIGLIATI`,
+    `• Verifica dei requisiti soggettivi (SPID/CIE per privati, Visura Camerale e DURC regolare per imprese/ETS).`,
+    `• Raccolta preventivi di spesa analitici e cronoprogramma dell'intervento nel quartiere ${payload.quartiere || "indicato"}.`,
+    `• Verifica di cumulabilità tra incentivi regionali (PR FESR/FSE+), nazionali (GSE/Invitalia/MLPS) e comunali.`,
+    `======================================================================`
+  ].join("\n");
 
   const fullPayload = {
     ...payload,
@@ -607,6 +649,7 @@ export async function registraDossierGenerato(payload: any) {
     orario,
     numero_bandi: elencoBandi.length,
     elenco_bandi: elencoBandi,
+    bozza_testuale: bozzaTestuale,
   };
 
   const idRow = `dossier_${Date.now().toString(36)}`;
@@ -615,7 +658,7 @@ export async function registraDossierGenerato(payload: any) {
     titolo: `Dossier di ${email}`,
     quartiere: payload.quartiere || "ND",
     categoria: "Dossier_Generato",
-    stato: "Da Contattare",
+    stato: "Da Supervisionare",
     voti: elencoBandi.length,
     lat: 42.5636,
     lng: 12.6427,
@@ -623,7 +666,6 @@ export async function registraDossierGenerato(payload: any) {
     created_at: new Date().toISOString().split("T")[0]
   });
 
-  // Invia anche alla tabella dossier_generati per far scattare il Webhook Make.com -> PEC Aruba
   try {
     await supabase.from("dossier_generati").insert({
       email,
@@ -631,7 +673,7 @@ export async function registraDossierGenerato(payload: any) {
       quartiere: payload.quartiere || "Terni",
       obiettivo: payload.obiettivo || "Generale",
       bandi_trovati: elencoBandi,
-      stato: "Da Contattare",
+      stato: "Da Supervisionare",
     });
   } catch {}
 }

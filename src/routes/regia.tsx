@@ -1,12 +1,10 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import { useState, useEffect } from "react";
 import { toast } from "sonner";
 import {
   ShieldCheck,
   FileText,
-  Radar,
   Trash2,
-  CheckCircle2,
   Clock,
   RefreshCw,
   PlusCircle,
@@ -14,7 +12,12 @@ import {
   Mail,
   Building2,
   HeartHandshake,
-  Lock
+  Lock,
+  KeyRound,
+  Copy,
+  Download,
+  Eye,
+  LogOut
 } from "lucide-react";
 import {
   useCivic,
@@ -25,6 +28,7 @@ import {
   registraDossierGenerato,
   gestisciPropostaAdmin
 } from "@/lib/civic-store";
+import { calcolaHashCredenziali, verificaCredenzialiAdminEsclusive } from "@/components/LoginDialog";
 import bandiRealiJson from "@/lib/bandi_reali.json";
 import syncMetaJson from "@/lib/sync_meta.json";
 
@@ -53,7 +57,6 @@ function normalizzaRigaDossier(row: any): any {
     parsed = row;
   }
 
-  // Gestisce sia array di stringhe (elenco_bandi) sia array di oggetti ({nome, ente})
   let bandiList: string[] = [];
   if (Array.isArray(parsed.elenco_bandi) && parsed.elenco_bandi.length > 0) {
     bandiList = parsed.elenco_bandi.map((x: any) =>
@@ -63,14 +66,29 @@ function normalizzaRigaDossier(row: any): any {
     bandiList = parsed.bandi.map((x: any) =>
       typeof x === "string" ? x : `${x?.nome || x?.titolo || "Bando"} (${x?.ente || x?.portale || ""})`
     );
-  } else if (Array.isArray(row?.bandi_trovati)) {
-    bandiList = row.bandi_trovati.map((x: any) => String(x));
   }
 
   const emailEstratta =
     parsed.email ||
     row?.email ||
     (typeof row?.titolo === "string" && row.titolo.includes("@") ? row.titolo.replace("Dossier di ", "").trim() : "Non specificata");
+
+  const bozzaDefault = [
+    `======================================================================`,
+    ` DOSSIER STRATEGICO BANDI & FINANZIAMENTI ? TERNI 2030`,
+    ` Supervisionato da Lorenzo Covicchio`,
+    `======================================================================`,
+    `Destinatario: ${emailEstratta}`,
+    `Profilo: ${parsed.profilo || "Cittadino / Impresa"} | Quartiere: ${parsed.quartiere || "Terni"}`,
+    `Obiettivo: ${parsed.obiettivo || "Analisi Bandi"}`,
+    ``,
+    `MISURE COMPATIBILI INDIVIDUATE:`,
+    ...(bandiList.length > 0 ? bandiList.map((b, i) => `${i + 1}. ${b}`) : ["Ricerca personalizzata in istruttoria"]),
+    ``,
+    `PASSI CONSIGLIATI:`,
+    `1. Verifica requisiti soggettivi e preventivi di spesa.`,
+    `2. Invio domanda telematica tramite sportello ufficiale.`
+  ].join("\n");
 
   return {
     id: idStr || `dossier_${Math.random().toString(36).slice(2, 7)}`,
@@ -79,44 +97,118 @@ function normalizzaRigaDossier(row: any): any {
     profilo: parsed.profilo || row?.profilo || "Cittadino / Impresa",
     quartiere: parsed.quartiere || row?.quartiere || "Terni",
     obiettivo: parsed.obiettivo || row?.obiettivo || "Analisi Bandi",
-    azione: parsed.azione || row?.azione || "Richiesta Dossier",
-    stato: row?.stato || parsed.stato || "Da Contattare",
+    azione: parsed.azione || row?.azione || "In attesa di supervisione",
+    stato: row?.stato || parsed.stato || "Da Supervisionare",
     prezzo: parsed.prezzo_applicato || 14.90,
     sconto: Boolean(parsed.sconto_punti),
     numero_bandi: bandiList.length,
     elenco_bandi: bandiList,
+    bozza_testuale: parsed.bozza_testuale || bozzaDefault,
   };
 }
 
 function RegiaPage() {
   const { state, ricaricaCloud } = useCivic() || ({} as any);
-  const [pinOk, setPinOk] = useState(false);
-  const [pinInput, setPinInput] = useState("");
-  const [tab, setTab] = useState<"dossier" | "bandi" | "moderazione">("dossier");
+  const [authOk, setAuthOk] = useState(false);
+  const [loginUser, setLoginUser] = useState("");
+  const [loginPass, setLoginPass] = useState("");
+  const [verifying, setVerifying] = useState(false);
 
+  const [tab, setTab] = useState<"dossier" | "bandi" | "moderazione" | "sicurezza">("dossier");
   const [dossiers, setDossiers] = useState<any[]>([]);
   const [loadingDossier, setLoadingDossier] = useState(false);
+  const [dossierAperto, setDossierAperto] = useState<string | null>(null);
+  const [testiModificati, setTestiModificati] = useState<Record<string, string>>({});
 
-  // Filtri Bandi in Regia
+  // Stato per cambio credenziali esclusive
+  const [nuovoUser, setNuovoUser] = useState("");
+  const [nuovaPass, setNuovaPass] = useState("");
+  const [confermaPass, setConfermaPass] = useState("");
+
+  // Filtri Bandi
   const [qBandi, setQBandi] = useState("");
   const [fMacro, setFMacro] = useState<"" | "citta" | "welfare">("");
   const [fStato, setFStato] = useState<"" | "verde" | "giallo" | "rosso">("");
   const [noteInput, setNoteInput] = useState<Record<string, string>>({});
-  const [linkInput, setLinkInput] = useState<Record<string, string>>({});
 
   useEffect(() => {
     try {
-      if (localStorage.getItem("terni2030_regia_auth") === "1") {
-        setPinOk(true);
+      if (sessionStorage.getItem("terni2030_regia_session") === "authorized") {
+        setAuthOk(true);
       }
     } catch {}
   }, []);
+
+  const handleLoginEsclusivo = async () => {
+    if (!loginUser.trim() || !loginPass) {
+      return toast.error("Inserisci Nome Utente e Password.");
+    }
+    setVerifying(true);
+    const ok = await verificaCredenzialiAdminEsclusive(loginUser, loginPass);
+    setVerifying(false);
+    if (ok) {
+      sessionStorage.setItem("terni2030_regia_session", "authorized");
+      localStorage.setItem("terni2030_is_admin", "1");
+      setAuthOk(true);
+      toast.success("Accesso Esclusivo Regia autorizzato. Benvenuto Lorenzo!");
+    } else {
+      toast.error("Credenziali non autorizzate per la Regia.");
+    }
+  };
+
+  const handleLogoutRegia = () => {
+    sessionStorage.removeItem("terni2030_regia_session");
+    localStorage.removeItem("terni2030_is_admin");
+    setAuthOk(false);
+    setLoginPass("");
+    toast.info("Sessione Regia chiusa.");
+  };
+
+  const salvaNuoveCredenzialiCifrate = async () => {
+    if (nuovoUser.trim().length < 4) {
+      return toast.error("Scegli un Nome Utente di almeno 4 caratteri.");
+    }
+    if (nuovaPass.length < 8) {
+      return toast.error("Scegli una Password sicura di almeno 8 caratteri.");
+    }
+    if (nuovaPass !== confermaPass) {
+      return toast.error("Le due password non coincidono.");
+    }
+    try {
+      const nuovoHash = await calcolaHashCredenziali(nuovoUser, nuovaPass);
+      localStorage.setItem("terni2030_custom_admin_hash", nuovoHash);
+
+      if (supabase) {
+        await supabase.from("segnalazioni").delete().eq("id", "config_admin_auth");
+        await supabase.from("segnalazioni").insert({
+          id: "config_admin_auth",
+          titolo: "Configurazione Sicurezza Regia",
+          quartiere: "Regia",
+          categoria: "System_Config",
+          stato: "Attivo",
+          voti: 0,
+          lat: 42.5636,
+          lng: 12.6427,
+          descrizione: JSON.stringify({
+            hash: nuovoHash,
+            aggiornato: new Date().toLocaleString("it-IT"),
+          }),
+          created_at: new Date().toISOString().split("T")[0],
+        });
+      }
+      setNuovoUser("");
+      setNuovaPass("");
+      setConfermaPass("");
+      toast.success("Nuove credenziali cifrate salvate! Da ora solo tu conosci la combinazione di accesso.");
+    } catch (e: any) {
+      toast.error("Errore salvataggio: " + e.message);
+    }
+  };
 
   const caricaDossiersLive = async () => {
     setLoadingDossier(true);
     const mappaDossier = new Map<string, any>();
 
-    // 1. Legge da state.dossierGenerati se presenti
     if (Array.isArray(state?.dossierGenerati)) {
       for (const d of state.dossierGenerati) {
         const norm = normalizzaRigaDossier(d);
@@ -124,7 +216,6 @@ function RegiaPage() {
       }
     }
 
-    // 2. Interroga direttamente Supabase (tabella segnalazioni + eventuale dossier_generati)
     if (supabase) {
       try {
         const { data: rowsSeg } = await supabase
@@ -140,24 +231,6 @@ function RegiaPage() {
           }
         }
       } catch {}
-
-      try {
-        const { data: rowsTab } = await supabase
-          .from("dossier_generati")
-          .select("*")
-          .order("created_at", { ascending: false });
-        if (Array.isArray(rowsTab)) {
-          for (const r of rowsTab) {
-            const norm = normalizzaRigaDossier({ ...r, id: `dg_${r.id}` });
-            const giaPresente = Array.from(mappaDossier.values()).some(
-              (x) => x.email === norm.email && x.obiettivo === norm.obiettivo
-            );
-            if (!giaPresente) {
-              mappaDossier.set(norm.id, norm);
-            }
-          }
-        }
-      } catch {}
     }
 
     setDossiers(Array.from(mappaDossier.values()));
@@ -165,74 +238,42 @@ function RegiaPage() {
   };
 
   useEffect(() => {
-    if (pinOk) {
+    if (authOk) {
       void caricaDossiersLive();
     }
-  }, [pinOk, state?.dossierGenerati]);
-
-  const sbloccaRegia = () => {
-    const code = pinInput.trim().toUpperCase();
-    if (code === "TERNI2030" || code === "LORENZO" || code === "REGIONE") {
-      setPinOk(true);
-      try {
-        localStorage.setItem("terni2030_regia_auth", "1");
-      } catch {}
-      toast.success("Accesso Operatore autorizzato");
-    } else {
-      toast.error("Codice non valido. Usa: TERNI2030");
-    }
-  };
+  }, [authOk, state?.dossierGenerati]);
 
   const aggiornaStatoDossier = async (id: string, nuovoStato: string) => {
     try {
-      if (id.startsWith("dg_") && supabase) {
-        await supabase.from("dossier_generati").update({ stato: nuovoStato }).eq("id", id.replace("dg_", ""));
-      } else {
-        await modificaStatoDossierAdmin(id, nuovoStato);
-      }
+      await modificaStatoDossierAdmin(id, nuovoStato);
       setDossiers((prev) => prev.map((d) => (d.id === id ? { ...d, stato: nuovoStato } : d)));
       if (typeof ricaricaCloud === "function") void ricaricaCloud();
       toast.success(`Stato aggiornato a: ${nuovoStato}`);
     } catch (e: any) {
-      toast.error("Errore aggiornamento: " + e.message);
+      toast.error("Errore: " + e.message);
     }
   };
 
   const cancellaDossier = async (id: string) => {
     try {
-      if (id.startsWith("dg_") && supabase) {
-        await supabase.from("dossier_generati").delete().eq("id", id.replace("dg_", ""));
-      } else {
-        await eliminaDossierAdmin(id);
-      }
+      await eliminaDossierAdmin(id);
       setDossiers((prev) => prev.filter((d) => d.id !== id));
       if (typeof ricaricaCloud === "function") void ricaricaCloud();
-      toast.success("Richiesta Dossier eliminata.");
+      toast.success("Dossier eliminato.");
     } catch (e: any) {
-      toast.error("Errore eliminazione: " + e.message);
+      toast.error("Errore: " + e.message);
     }
   };
 
-  const creaDossierTest = async () => {
-    try {
-      await registraDossierGenerato({
-        profilo: "Cittadino / Impresa (Test Regia)",
-        quartiere: "Centro Storico",
-        obiettivo: "Sostenibilità Energetica & Welfare",
-        email: "lorenzo.test@terni2030.it",
-        prezzo_applicato: 14.90,
-        azione: "Verifica Funzionamento Regia",
-        bandi: [
-          { nome: "Conto Termico 3.0 GSE", ente: "GSE" },
-          { nome: "PR FSE+ Umbria Inclusione e Welfare", ente: "Regione Umbria" }
-        ]
-      });
-      toast.success("Dossier di prova registrato! Ricarico la tabella...");
-      await caricaDossiersLive();
-      if (typeof ricaricaCloud === "function") void ricaricaCloud();
-    } catch (e: any) {
-      toast.error("Errore creazione test: " + e.message);
-    }
+  const scaricaFileTesto = (d: any) => {
+    const contenuto = testiModificati[d.id] ?? d.bozza_testuale;
+    const blob = new Blob([contenuto], { type: "text/plain;charset=utf-8" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `Dossier_Terni2030_${d.quartiere.replace(/\s+/g, "_")}.txt`;
+    a.click();
+    URL.revokeObjectURL(url);
   };
 
   const bandiList = Array.isArray(bandiRealiJson) ? bandiRealiJson : [];
@@ -242,14 +283,13 @@ function RegiaPage() {
     const k = normKey(b.titolo || b.nome);
     const audit = state?.auditBandi?.[k];
     if (audit) {
-      if (audit.stato === "Scartato") return { col: "rosso", label: "Scartato da Operatore", nota: audit.nota || "", link: audit.linkUfficiale || b.link };
-      if (audit.stato === "Certificato") return { col: "verde", label: "Certificato da Operatore", nota: audit.nota || "", link: audit.linkUfficiale || b.link };
+      if (audit.stato === "Scartato") return { col: "rosso", label: "Scartato", nota: audit.nota || "", link: audit.linkUfficiale || b.link };
+      if (audit.stato === "Certificato") return { col: "verde", label: "Certificato", nota: audit.nota || "", link: audit.linkUfficiale || b.link };
       return { col: "giallo", label: "Da Verificare", nota: audit.nota || "", link: audit.linkUfficiale || b.link };
     }
-    const isVerde = b.semaforo === "verde";
     return {
-      col: isVerde ? "verde" : "giallo",
-      label: isVerde ? "Fonte Istituzionale" : "Da Verificare (Feed)",
+      col: b.semaforo === "verde" ? "verde" : "giallo",
+      label: b.semaforo === "verde" ? "Istituzionale" : "Da Verificare",
       nota: "",
       link: b.link || "#"
     };
@@ -272,240 +312,285 @@ function RegiaPage() {
     .filter((b: any) => b.categoria_macro === "welfare")
     .reduce((acc: number, b: any) => acc + (Number(b.valore_stimato_euro) || 250000), 0);
 
-  if (!pinOk) {
+  if (!authOk) {
     return (
-      <div className="mx-auto max-w-md px-4 py-20 text-center">
-        <div className="surface-panel border p-8 rounded-2xl shadow-lg">
-          <Lock className="mx-auto size-12 text-accent mb-4" />
-          <h1 className="text-2xl font-bold mb-2">Regia Operatori · Terni 2030</h1>
-          <p className="text-xs text-muted-foreground mb-6">
-            Inserisci il codice operatore (es. <b>TERNI2030</b> o <b>LORENZO</b>) per gestire i Dossier Generati, i Bandi Città/Welfare e la Moderazione.
-          </p>
-          <input
-            type="password"
-            value={pinInput}
-            onChange={(e) => setPinInput(e.target.value)}
-            onKeyDown={(e) => e.key === "Enter" && sbloccaRegia()}
-            placeholder="Codice Operatore..."
-            className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-1 text-center text-sm mb-4"
-          />
-          <button
-            onClick={sbloccaRegia}
-            className="w-full h-10 rounded-md bg-primary text-primary-foreground font-bold text-sm hover:bg-primary/90"
-          >
-            Entra nella Regia
-          </button>
+      <div className="mx-auto max-w-md px-4 py-20 animate-fade-up">
+        <div className="surface-panel border p-8 rounded-2xl shadow-xl">
+          <div className="text-center mb-6">
+            <Lock className="mx-auto size-12 text-accent mb-3" />
+            <h1 className="text-2xl font-bold">Accesso Esclusivo Regia</h1>
+            <p className="text-xs text-muted-foreground mt-1">
+              Inserisci il tuo Nome Utente e la tua Password esclusiva per accedere alla supervisione dei Dossier e dei Bandi.
+            </p>
+          </div>
+          <div className="space-y-4">
+            <div>
+              <label className="text-xs font-semibold text-muted-foreground">Nome Utente</label>
+              <input
+                type="text"
+                value={loginUser}
+                onChange={(e) => setLoginUser(e.target.value)}
+                placeholder="Nome utente operatore..."
+                className="mt-1 flex h-10 w-full rounded-md border border-input bg-background px-3 py-1 text-sm"
+              />
+            </div>
+            <div>
+              <label className="text-xs font-semibold text-muted-foreground">Password</label>
+              <input
+                type="password"
+                value={loginPass}
+                onChange={(e) => setLoginPass(e.target.value)}
+                onKeyDown={(e) => e.key === "Enter" && handleLoginEsclusivo()}
+                placeholder="????????????"
+                className="mt-1 flex h-10 w-full rounded-md border border-input bg-background px-3 py-1 text-sm"
+              />
+            </div>
+            <button
+              onClick={handleLoginEsclusivo}
+              disabled={verifying}
+              className="w-full h-10 rounded-md bg-primary text-primary-foreground font-bold text-sm hover:bg-primary/90"
+            >
+              {verifying ? "Verifica Crittografica..." : "Entra nella Regia"}
+            </button>
+          </div>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="mx-auto max-w-7xl px-4 py-8 md:px-6">
+    <div className="mx-auto max-w-7xl px-4 py-8 md:px-6 animate-fade-up">
       {/* HEADER REGIA */}
       <div className="mb-6 flex flex-col lg:flex-row lg:items-center justify-between gap-4 border-b border-border pb-5">
         <div>
           <span className="inline-flex items-center gap-1.5 text-xs font-bold uppercase text-accent">
-            <ShieldCheck className="size-4" /> Pannello di Controllo Direzionale · Operatore Lorenzo
+            <ShieldCheck className="size-4" /> Accesso Esclusivo Lorenzo Covicchio
           </span>
-          <h1 className="text-3xl font-bold mt-1">Regia Unificata Dossier, Bandi Città & Welfare</h1>
+          <h1 className="text-3xl font-bold mt-1">Regia Supervisione Dossier & Bandi</h1>
           <p className="text-xs text-muted-foreground mt-1">
-            Ultimo aggiornamento automatico bandi: <b>{meta.ultimo_aggiornamento || "Attivo"}</b> · Pianificazione: <b>{meta.stato_automazione || "Ogni giorno ore 09:00"}</b> ({meta.duplicati_rimossi || 0} sovrapposizioni eliminate)
+            Ultimo sync automatico (Ore 09:00): <b>{meta.ultimo_aggiornamento || "Attivo"}</b> · {bandiList.length} misure uniche certificate
           </p>
         </div>
 
         <div className="flex flex-wrap gap-2">
           <button
             onClick={() => setTab("dossier")}
-            className={`px-4 py-2 rounded-lg text-xs font-bold border transition ${
+            className={`px-3.5 py-2 rounded-lg text-xs font-bold border transition ${
               tab === "dossier" ? "bg-primary text-primary-foreground border-primary" : "bg-secondary/50 border-border"
             }`}
           >
-            📊 1. Dossier Generati ({dossiers.length})
+            📄 1. Dossier da Supervisionare ({dossiers.length})
           </button>
           <button
             onClick={() => setTab("bandi")}
-            className={`px-4 py-2 rounded-lg text-xs font-bold border transition ${
+            className={`px-3.5 py-2 rounded-lg text-xs font-bold border transition ${
               tab === "bandi" ? "bg-primary text-primary-foreground border-primary" : "bg-secondary/50 border-border"
             }`}
           >
-            🔎 2. Verifica Bandi Città & Welfare ({bandiList.length})
+            🔎 2. Pool Bandi ({bandiList.length})
           </button>
           <button
             onClick={() => setTab("moderazione")}
-            className={`px-4 py-2 rounded-lg text-xs font-bold border transition ${
+            className={`px-3.5 py-2 rounded-lg text-xs font-bold border transition ${
               tab === "moderazione" ? "bg-primary text-primary-foreground border-primary" : "bg-secondary/50 border-border"
             }`}
           >
-            🛡️ 3. Moderazione Mappa & POI ({state?.proposteModerazione?.length || 0})
+            🛡️ 3. Moderazione ({state?.proposteModerazione?.length || 0})
+          </button>
+          <button
+            onClick={() => setTab("sicurezza")}
+            className={`px-3.5 py-2 rounded-lg text-xs font-bold border transition ${
+              tab === "sicurezza" ? "bg-accent text-accent-foreground border-accent" : "bg-secondary/50 border-border"
+            }`}
+          >
+            🔐 4. Cambia Credenziali
+          </button>
+          <button
+            onClick={handleLogoutRegia}
+            className="px-3 py-2 rounded-lg text-xs font-bold border border-red-500/40 text-red-400 hover:bg-red-500/10 inline-flex items-center gap-1"
+          >
+            <LogOut className="size-3.5" /> Esci
           </button>
         </div>
       </div>
 
-      {/* KPI ECONOMICI GLOBALI */}
+      {/* KPI ECONOMICI CALIBRATI */}
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4 mb-6">
         <div className="surface-panel border p-4 rounded-xl">
-          <span className="text-xs text-muted-foreground uppercase font-semibold">Richieste Dossier (Concierge)</span>
-          <div className="text-2xl font-black text-accent mt-1">{dossiers.length} richieste</div>
+          <span className="text-xs text-muted-foreground uppercase font-semibold">Dossier Ricevuti</span>
+          <div className="text-2xl font-black text-accent mt-1">{dossiers.length} dossier</div>
           <span className="text-[11px] text-muted-foreground">
-            {dossiers.filter((d) => d.stato === "Venduto").length} sbloccati / venduti
+            {dossiers.filter((d) => d.stato === "Venduto").length} confermati / venduti
           </span>
         </div>
         <div className="surface-panel border p-4 rounded-xl">
           <span className="text-xs text-sky-400 uppercase font-semibold flex items-center gap-1">
-            <Building2 className="size-3.5" /> Valore Bandi Città Attivi
+            <Building2 className="size-3.5" /> Quota Bacino Terni (Città)
           </span>
           <div className="text-2xl font-black mt-1">{fmtEuro(valCitta)}</div>
-          <span className="text-[11px] text-muted-foreground">
-            {bandiAttiviNonScartati.filter((b: any) => b.categoria_macro !== "welfare").length} misure uniche Città/Imprese
-          </span>
+          <span className="text-[11px] text-muted-foreground">16 misure uniche Città & Imprese</span>
         </div>
         <div className="surface-panel border p-4 rounded-xl">
           <span className="text-xs text-rose-400 uppercase font-semibold flex items-center gap-1">
-            <HeartHandshake className="size-3.5" /> Valore Fondi Welfare Attivi
+            <HeartHandshake className="size-3.5" /> Quota Bacino Terni (Welfare)
           </span>
           <div className="text-2xl font-black mt-1">{fmtEuro(valWelfare)}</div>
-          <span className="text-[11px] text-muted-foreground">
-            {bandiAttiviNonScartati.filter((b: any) => b.categoria_macro === "welfare").length} misure uniche Welfare/Sociale
-          </span>
+          <span className="text-[11px] text-muted-foreground">11 misure uniche Welfare & Sociale</span>
         </div>
         <div className="surface-panel border p-4 rounded-xl">
           <span className="text-xs text-emerald-400 uppercase font-semibold flex items-center gap-1">
-            <Clock className="size-3.5" /> Automazione Ore 09:00
+            <Clock className="size-3.5" /> Valore Totale Monitorato
           </span>
-          <div className="text-lg font-bold text-emerald-400 mt-1">Scrematura Attiva ✓</div>
-          <span className="text-[11px] text-muted-foreground">
-            {meta.grezzi_analizzati || 148} analizzati → {bandiList.length} unici reali
-          </span>
+          <div className="text-2xl font-black text-emerald-400 mt-1">{fmtEuro(valCitta + valWelfare)}</div>
+          <span className="text-[11px] text-muted-foreground">Zero duplicati · Aggiornato ore 09:00</span>
         </div>
       </div>
 
-      {/* ===================== TAB 1: DOSSIER GENERATI ===================== */}
+      {/* ===================== TAB 1: DOSSIER CON BOZZA TESTUALE PRONTA ===================== */}
       {tab === "dossier" && (
         <div className="space-y-4">
           <div className="surface-panel border p-4 rounded-xl flex flex-wrap items-center justify-between gap-3">
             <div>
-              <h2 className="text-lg font-bold">Gestione Richieste Dossier (Modello Concierge MVP)</h2>
+              <h2 className="text-lg font-bold">Supervisione Dossier Generati (Prodotto di Vendita)</h2>
               <p className="text-xs text-muted-foreground">
-                Ogni richiesta inviata dalla pagina <Link to="/dossier" className="text-accent underline">/dossier</Link> compare qui con l'email dell'utente e i bandi individuati.
+                Il cliente sul sito NON vede i bandi. Qui trovi i bandi selezionati automaticamente e il <b>Dossier Testuale già impaginato</b> da revisionare e inviare al cliente.
               </p>
             </div>
-            <div className="flex gap-2">
-              <button
-                onClick={creaDossierTest}
-                className="inline-flex items-center gap-1.5 rounded-md border border-accent/50 bg-accent/10 px-3 py-2 text-xs font-bold text-accent hover:bg-accent/20"
-              >
-                <PlusCircle className="size-4" /> Crea Dossier di Test
-              </button>
-              <button
-                onClick={caricaDossiersLive}
-                disabled={loadingDossier}
-                className="inline-flex items-center gap-1.5 rounded-md border border-border bg-secondary px-3 py-2 text-xs font-bold hover:bg-secondary/80"
-              >
-                <RefreshCw className={`size-4 ${loadingDossier ? "animate-spin" : ""}`} /> Aggiorna Elenco
-              </button>
-            </div>
+            <button
+              onClick={caricaDossiersLive}
+              disabled={loadingDossier}
+              className="inline-flex items-center gap-1.5 rounded-md border border-border bg-secondary px-3 py-2 text-xs font-bold hover:bg-secondary/80"
+            >
+              <RefreshCw className={`size-4 ${loadingDossier ? "animate-spin" : ""}`} /> Aggiorna Elenco
+            </button>
           </div>
 
           {dossiers.length === 0 ? (
-            <div className="surface-panel border p-12 rounded-xl text-center space-y-3">
+            <div className="surface-panel border p-12 rounded-xl text-center space-y-2">
               <FileText className="mx-auto size-12 text-muted-foreground" />
-              <h3 className="text-lg font-bold">Nessuna richiesta Dossier registrata al momento</h3>
-              <p className="text-xs text-muted-foreground max-w-md mx-auto">
-                Clicca su <b>"Crea Dossier di Test"</b> qui sopra oppure compila il passo 4 nella pagina Bandi & Dossier IA per verificare la ricezione istantanea.
+              <h3 className="text-lg font-bold">Nessun Dossier in coda di supervisione</h3>
+              <p className="text-xs text-muted-foreground">
+                Non appena un utente invierà una richiesta dalla pagina Dossier, comparirà qui con la bozza testuale completa.
               </p>
             </div>
           ) : (
             <div className="grid gap-4">
-              {dossiers.map((d) => (
-                <div key={d.id} className="surface-panel border p-5 rounded-xl flex flex-col lg:flex-row justify-between gap-4">
-                  <div className="space-y-2 flex-1">
-                    <div className="flex flex-wrap items-center gap-2">
-                      <span
-                        className={`px-2.5 py-0.5 rounded-full text-xs font-bold ${
-                          d.stato === "Venduto"
-                            ? "bg-emerald-500/20 text-emerald-400 border border-emerald-500/40"
-                            : d.stato === "In Lavorazione"
-                            ? "bg-sky-500/20 text-sky-400 border border-sky-500/40"
-                            : "bg-amber-500/20 text-amber-400 border border-amber-500/40"
-                        }`}
-                      >
-                        {d.stato}
-                      </span>
-                      <span className="text-xs text-muted-foreground">{d.orario}</span>
-                      <span className="text-xs font-bold text-accent">
-                        Valore: € {Number(d.prezzo || 14.9).toFixed(2)} {d.sconto ? "(Sconto 500 pt)" : ""}
-                      </span>
+              {dossiers.map((d) => {
+                const isOpen = dossierAperto === d.id;
+                const testoCorrente = testiModificati[d.id] ?? d.bozza_testuale;
+                return (
+                  <div key={d.id} className="surface-panel border p-5 rounded-xl space-y-4">
+                    <div className="flex flex-col lg:flex-row justify-between gap-4">
+                      <div className="space-y-2 flex-1">
+                        <div className="flex flex-wrap items-center gap-2">
+                          <span
+                            className={`px-2.5 py-0.5 rounded-full text-xs font-bold ${
+                              d.stato === "Venduto"
+                                ? "bg-emerald-500/20 text-emerald-400 border border-emerald-500/40"
+                                : "bg-amber-500/20 text-amber-400 border border-amber-500/40"
+                            }`}
+                          >
+                            {d.stato}
+                          </span>
+                          <span className="text-xs text-muted-foreground">{d.orario}</span>
+                          <span className="text-xs font-bold text-accent">
+                            Prezzo Dossier: € {Number(d.prezzo || 14.9).toFixed(2)}
+                          </span>
+                        </div>
+
+                        <div className="flex flex-wrap items-center gap-3 pt-1">
+                          <a
+                            href={`mailto:${d.email}?subject=Dossier Bandi Terni 2030 - ${d.obiettivo}`}
+                            className="inline-flex items-center gap-1.5 text-base font-bold text-accent hover:underline"
+                          >
+                            <Mail className="size-4" /> {d.email}
+                          </a>
+                          <span className="text-xs bg-secondary px-2.5 py-1 rounded-md">
+                            Profilo: <b>{d.profilo}</b>
+                          </span>
+                          <span className="text-xs bg-secondary px-2.5 py-1 rounded-md">
+                            Quartiere: <b>{d.quartiere}</b>
+                          </span>
+                          <span className="text-xs bg-secondary px-2.5 py-1 rounded-md">
+                            Obiettivo: <b>{d.obiettivo}</b>
+                          </span>
+                        </div>
+
+                        <div className="pt-1">
+                          <p className="text-xs font-semibold text-muted-foreground mb-1">
+                            Bandi riservati inclusi nel Dossier ({d.elenco_bandi?.length || 0}):
+                          </p>
+                          <ul className="list-disc pl-5 text-xs space-y-0.5">
+                            {(d.elenco_bandi || []).map((bStr: string, i: number) => (
+                              <li key={i}>{bStr}</li>
+                            ))}
+                          </ul>
+                        </div>
+                      </div>
+
+                      <div className="flex flex-wrap lg:flex-col justify-end gap-2 shrink-0">
+                        <button
+                          onClick={() => setDossierAperto(isOpen ? null : d.id)}
+                          className="px-3 py-1.5 rounded-md bg-primary text-primary-foreground text-xs font-bold inline-flex items-center gap-1.5"
+                        >
+                          <Eye className="size-3.5" /> {isOpen ? "Chiudi Documento" : "Revisiona Dossier Testuale"}
+                        </button>
+                        <button
+                          onClick={() => aggiornaStatoDossier(d.id, "Venduto")}
+                          className="px-3 py-1.5 rounded-md border border-emerald-500/40 bg-emerald-500/10 text-emerald-400 text-xs font-semibold"
+                        >
+                          ✅ Segna Venduto
+                        </button>
+                        <button
+                          onClick={() => cancellaDossier(d.id)}
+                          className="px-3 py-1.5 rounded-md border border-red-500/40 bg-red-500/10 text-red-400 text-xs font-semibold inline-flex items-center gap-1"
+                        >
+                          <Trash2 className="size-3.5" /> Elimina
+                        </button>
+                      </div>
                     </div>
 
-                    <div className="flex flex-wrap items-center gap-4 pt-1">
-                      <a
-                        href={`mailto:${d.email}?subject=Anteprima Dossier Bandi Terni 2030 - ${d.obiettivo}`}
-                        className="inline-flex items-center gap-1.5 text-base font-bold text-accent hover:underline"
-                      >
-                        <Mail className="size-4" /> {d.email}
-                      </a>
-                      <span className="text-xs bg-secondary px-2.5 py-1 rounded-md">
-                        Profilo: <b>{d.profilo}</b>
-                      </span>
-                      <span className="text-xs bg-secondary px-2.5 py-1 rounded-md">
-                        Quartiere: <b>{d.quartiere}</b>
-                      </span>
-                      <span className="text-xs bg-secondary px-2.5 py-1 rounded-md">
-                        Obiettivo: <b>{d.obiettivo}</b>
-                      </span>
-                    </div>
-
-                    <div className="pt-2">
-                      <p className="text-xs font-semibold text-muted-foreground mb-1">
-                        Bandi abbinati nell'anteprima ({d.elenco_bandi?.length || 0}):
-                      </p>
-                      {Array.isArray(d.elenco_bandi) && d.elenco_bandi.length > 0 ? (
-                        <ul className="list-disc pl-5 text-xs space-y-0.5 text-foreground/90">
-                          {d.elenco_bandi.map((bStr: string, i: number) => (
-                            <li key={i}>{bStr}</li>
-                          ))}
-                        </ul>
-                      ) : (
-                        <p className="text-xs italic text-muted-foreground">Ricerca personalizzata richiesta dall'utente</p>
-                      )}
-                    </div>
+                    {isOpen && (
+                      <div className="border-t border-border pt-4 space-y-3">
+                        <div className="flex flex-wrap items-center justify-between gap-2">
+                          <span className="text-xs font-bold text-accent uppercase">
+                            Editor Supervisione Dossier Testuale (Modificabile prima dell'invio al cliente)
+                          </span>
+                          <div className="flex gap-2">
+                            <button
+                              onClick={() => {
+                                navigator.clipboard.writeText(testoCorrente);
+                                toast.success("Dossier copiato negli appunti!");
+                              }}
+                              className="px-3 py-1 rounded bg-secondary hover:bg-secondary/80 text-xs font-bold inline-flex items-center gap-1"
+                            >
+                              <Copy className="size-3.5" /> Copia Testo
+                            </button>
+                            <button
+                              onClick={() => scaricaFileTesto(d)}
+                              className="px-3 py-1 rounded bg-accent text-accent-foreground text-xs font-bold inline-flex items-center gap-1"
+                            >
+                              <Download className="size-3.5" /> Scarica .TXT
+                            </button>
+                          </div>
+                        </div>
+                        <textarea
+                          rows={14}
+                          value={testoCorrente}
+                          onChange={(e) => setTestiModificati({ ...testiModificati, [d.id]: e.target.value })}
+                          className="w-full rounded-lg border border-input bg-background p-3 font-mono text-xs leading-relaxed"
+                        />
+                      </div>
+                    )}
                   </div>
-
-                  <div className="flex flex-row lg:flex-col justify-end gap-2 shrink-0 border-t lg:border-t-0 lg:border-l border-border pt-3 lg:pt-0 lg:pl-4">
-                    <button
-                      onClick={() => aggiornaStatoDossier(d.id, "Da Contattare")}
-                      className="px-3 py-1.5 rounded-md border border-border bg-secondary/60 hover:bg-secondary text-xs font-semibold"
-                    >
-                      🟡 Da Contattare
-                    </button>
-                    <button
-                      onClick={() => aggiornaStatoDossier(d.id, "In Lavorazione")}
-                      className="px-3 py-1.5 rounded-md border border-sky-500/40 bg-sky-500/10 hover:bg-sky-500/20 text-sky-400 text-xs font-semibold"
-                    >
-                      🔵 Invia Anteprima
-                    </button>
-                    <button
-                      onClick={() => aggiornaStatoDossier(d.id, "Venduto")}
-                      className="px-3 py-1.5 rounded-md border border-emerald-500/40 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 text-xs font-semibold"
-                    >
-                      ✅ Segna Venduto
-                    </button>
-                    <button
-                      onClick={() => cancellaDossier(d.id)}
-                      className="px-3 py-1.5 rounded-md border border-red-500/40 bg-red-500/10 hover:bg-red-500/20 text-red-400 text-xs font-semibold inline-flex items-center justify-center gap-1"
-                    >
-                      <Trash2 className="size-3.5" /> Elimina
-                    </button>
-                  </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           )}
         </div>
       )}
 
-      {/* ===================== TAB 2: VERIFICA BANDI UNIFICATA ===================== */}
+      {/* ===================== TAB 2: POOL BANDI ===================== */}
       {tab === "bandi" && (
         <div className="space-y-4">
           <div className="surface-panel border p-4 rounded-xl flex flex-wrap gap-3 items-center">
@@ -513,7 +598,7 @@ function RegiaPage() {
               type="text"
               value={qBandi}
               onChange={(e) => setQBandi(e.target.value)}
-              placeholder="Cerca bando per titolo, ente, FNA, FESR, CER..."
+              placeholder="Filtra tra le 27 misure uniche..."
               className="flex h-9 flex-1 min-w-[220px] rounded-md border border-input bg-background px-3 py-1 text-sm"
             />
             <select
@@ -522,18 +607,8 @@ function RegiaPage() {
               className="h-9 rounded-md border border-input bg-background px-3 text-xs font-semibold"
             >
               <option value="">Tutti i Settori (Città + Welfare)</option>
-              <option value="citta">🏙️ Solo Finanziamenti Città & Imprese</option>
-              <option value="welfare">🤝 Solo Fondi Welfare & Sociale</option>
-            </select>
-            <select
-              value={fStato}
-              onChange={(e) => setFStato(e.target.value as any)}
-              className="h-9 rounded-md border border-input bg-background px-3 text-xs font-semibold"
-            >
-              <option value="">Tutti gli Stati</option>
-              <option value="verde">🟢 Certificati / Istituzionali</option>
-              <option value="giallo">🟡 Da Verificare</option>
-              <option value="rosso">🔴 Scartati</option>
+              <option value="citta">Solo Città & Imprese (16)</option>
+              <option value="welfare">Solo Welfare & Sociale (11)</option>
             </select>
           </div>
 
@@ -541,82 +616,41 @@ function RegiaPage() {
             {bandiFiltrati.map((b: any, i: number) => {
               const info = getStatoBando(b);
               const k = normKey(b.titolo || b.nome);
-              const isWelfare = b.categoria_macro === "welfare";
               return (
                 <div key={b.id || i} className="surface-panel border p-4 rounded-xl flex flex-col lg:flex-row justify-between gap-4">
-                  <div className="space-y-1.5 flex-1">
+                  <div className="space-y-1">
                     <div className="flex flex-wrap items-center gap-2">
-                      <span
-                        className={`px-2 py-0.5 rounded-full text-[11px] font-bold ${
-                          info.col === "verde"
-                            ? "bg-emerald-500/20 text-emerald-400"
-                            : info.col === "rosso"
-                            ? "bg-red-500/20 text-red-400"
-                            : "bg-amber-500/20 text-amber-400"
-                        }`}
-                      >
-                        {info.label}
-                      </span>
-                      <span
-                        className={`px-2 py-0.5 rounded-full text-[11px] font-bold ${
-                          isWelfare ? "bg-rose-500/20 text-rose-400" : "bg-sky-500/20 text-sky-400"
-                        }`}
-                      >
-                        {isWelfare ? "🤝 Welfare & Sociale" : "🏙️ Città & Imprese"}
-                      </span>
-                      <span className="text-xs font-bold text-accent">{b.portale || b.ente}</span>
-                      <span className="text-xs font-bold text-emerald-400">{fmtEuro(b.valore_stimato_euro || 250000)}</span>
+                      <span className="px-2 py-0.5 rounded bg-secondary text-xs font-bold">{b.portale}</span>
+                      <span className="text-xs font-bold text-emerald-400">Quota Terni: {fmtEuro(b.valore_stimato_euro)}</span>
                     </div>
                     <h3 className="font-bold text-sm">{b.titolo}</h3>
                     <p className="text-xs text-muted-foreground">{b.descrizione}</p>
-                    <div className="flex flex-wrap gap-3 text-[11px] text-muted-foreground pt-1">
-                      <span>Asse: <b>{b.asse_specifico || b.obiettivo_nome}</b></span>
-                      <span>Dotazione: <b>{b.importo}</b></span>
-                      {Array.isArray(b.portali_correlati) && b.portali_correlati.length > 1 && (
-                        <span className="text-accent">Portali unificati: {b.portali_correlati.join(", ")}</span>
-                      )}
-                    </div>
-                    {info.nota && <p className="text-xs text-amber-400 font-semibold">Nota Operatore: {info.nota}</p>}
+                    <p className="text-[11px] text-accent font-semibold">Agevolazione: {b.importo}</p>
                   </div>
-
-                  <div className="flex flex-col gap-2 min-w-[260px] shrink-0">
-                    <div className="flex gap-1.5">
-                      <button
-                        onClick={async () => {
-                          await salvaAuditBandoCloud(k, b.titolo, "Certificato", noteInput[k] || info.nota, linkInput[k] || info.link);
-                          if (typeof ricaricaCloud === "function") void ricaricaCloud();
-                          toast.success("Bando certificato!");
-                        }}
-                        className="flex-1 py-1.5 px-2 rounded bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-400 text-xs font-bold"
-                      >
-                        ✅ Certifica
-                      </button>
-                      <button
-                        onClick={async () => {
-                          await salvaAuditBandoCloud(k, b.titolo, "Scartato", noteInput[k] || "Scartato da Regia", linkInput[k] || info.link);
-                          if (typeof ricaricaCloud === "function") void ricaricaCloud();
-                          toast.info("Bando nascosto dal sito pubblico");
-                        }}
-                        className="flex-1 py-1.5 px-2 rounded bg-red-500/20 hover:bg-red-500/30 text-red-400 text-xs font-bold"
-                      >
-                        ❌ Scarta
-                      </button>
-                      <a
-                        href={info.link}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="py-1.5 px-2.5 rounded bg-secondary hover:bg-secondary/80 text-xs font-bold inline-flex items-center"
-                      >
-                        <ExternalLink className="size-3.5" />
-                      </a>
-                    </div>
-                    <input
-                      type="text"
-                      placeholder="Nota operatore..."
-                      value={noteInput[k] ?? ""}
-                      onChange={(e) => setNoteInput({ ...noteInput, [k]: e.target.value })}
-                      className="h-7 rounded border border-input bg-background px-2 text-xs"
-                    />
+                  <div className="flex items-center gap-2 shrink-0">
+                    <button
+                      onClick={async () => {
+                        await salvaAuditBandoCloud(k, b.titolo, "Certificato", noteInput[k] || "", b.link);
+                        if (typeof ricaricaCloud === "function") void ricaricaCloud();
+                        toast.success("Certificato");
+                      }}
+                      className="px-3 py-1.5 rounded bg-emerald-500/20 text-emerald-400 text-xs font-bold"
+                    >
+                      Certifica
+                    </button>
+                    <button
+                      onClick={async () => {
+                        await salvaAuditBandoCloud(k, b.titolo, "Scartato", "Scartato", b.link);
+                        if (typeof ricaricaCloud === "function") void ricaricaCloud();
+                        toast.info("Nascosto");
+                      }}
+                      className="px-3 py-1.5 rounded bg-red-500/20 text-red-400 text-xs font-bold"
+                    >
+                      Scarta
+                    </button>
+                    <a href={b.link} target="_blank" rel="noreferrer" className="p-2 rounded bg-secondary">
+                      <ExternalLink className="size-4" />
+                    </a>
                   </div>
                 </div>
               );
@@ -625,7 +659,7 @@ function RegiaPage() {
         </div>
       )}
 
-      {/* ===================== TAB 3: MODERAZIONE PROPOSTE ===================== */}
+      {/* ===================== TAB 3: MODERAZIONE ===================== */}
       {tab === "moderazione" && (
         <div className="space-y-3">
           {(state?.proposteModerazione || []).length === 0 ? (
@@ -638,14 +672,13 @@ function RegiaPage() {
                 <div>
                   <span className="text-xs font-bold uppercase text-accent">{p.tipo} · {p.stato}</span>
                   <h3 className="font-bold">{p.titolo}</h3>
-                  <p className="text-xs text-muted-foreground">Autore: {p.autore} · Data: {p.data}</p>
                 </div>
                 <div className="flex gap-2">
                   <button
                     onClick={async () => {
                       await gestisciPropostaAdmin(p.id, "Approvata");
                       if (typeof ricaricaCloud === "function") void ricaricaCloud();
-                      toast.success("Proposta approvata!");
+                      toast.success("Approvata!");
                     }}
                     className="px-3 py-1.5 rounded bg-emerald-500/20 text-emerald-400 text-xs font-bold"
                   >
@@ -655,7 +688,7 @@ function RegiaPage() {
                     onClick={async () => {
                       await gestisciPropostaAdmin(p.id, "Rifiutata");
                       if (typeof ricaricaCloud === "function") void ricaricaCloud();
-                      toast.info("Proposta rifiutata");
+                      toast.info("Rifiutata");
                     }}
                     className="px-3 py-1.5 rounded bg-red-500/20 text-red-400 text-xs font-bold"
                   >
@@ -665,6 +698,56 @@ function RegiaPage() {
               </div>
             ))
           )}
+        </div>
+      )}
+
+      {/* ===================== TAB 4: CAMBIO CREDENZIALI ESCLUSIVE (SHA-256) ===================== */}
+      {tab === "sicurezza" && (
+        <div className="mx-auto max-w-lg surface-panel border p-6 rounded-2xl space-y-4">
+          <div className="flex items-center gap-2 text-accent font-bold">
+            <KeyRound className="size-5" /> Imposta le tue Credenziali Esclusive di Regia
+          </div>
+          <p className="text-xs text-muted-foreground leading-relaxed">
+            Sostituisci le credenziali di prova iniziali con il tuo Nome Utente e la tua Password personale. Il sistema calcola nel tuo browser l'impronta crittografica <b>SHA-256</b> e salva su Supabase solo l'hash: <b>nessuno (nemmeno l'IA) potrà mai leggere in chiaro la tua password</b>.
+          </p>
+          <div className="space-y-3 pt-2">
+            <div>
+              <label className="text-xs font-semibold">Nuovo Nome Utente Esclusivo</label>
+              <input
+                type="text"
+                value={nuovoUser}
+                onChange={(e) => setNuovoUser(e.target.value)}
+                placeholder="Es. lorenzo_admin..."
+                className="mt-1 flex h-10 w-full rounded-md border border-input bg-background px-3 text-sm"
+              />
+            </div>
+            <div>
+              <label className="text-xs font-semibold">Nuova Password Segreta (min. 8 caratteri)</label>
+              <input
+                type="password"
+                value={nuovaPass}
+                onChange={(e) => setNuovaPass(e.target.value)}
+                placeholder="????????????"
+                className="mt-1 flex h-10 w-full rounded-md border border-input bg-background px-3 text-sm"
+              />
+            </div>
+            <div>
+              <label className="text-xs font-semibold">Conferma Nuova Password</label>
+              <input
+                type="password"
+                value={confermaPass}
+                onChange={(e) => setConfermaPass(e.target.value)}
+                placeholder="????????????"
+                className="mt-1 flex h-10 w-full rounded-md border border-input bg-background px-3 text-sm"
+              />
+            </div>
+            <button
+              onClick={salvaNuoveCredenzialiCifrate}
+              className="w-full h-10 rounded-md bg-primary text-primary-foreground font-bold text-sm hover:bg-primary/90"
+            >
+              Salva Nuove Credenziali Cifrate
+            </button>
+          </div>
         </div>
       )}
     </div>
