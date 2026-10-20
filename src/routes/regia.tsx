@@ -110,7 +110,7 @@ function normalizzaRigaDossier(row: any): any {
     "",
     "PASSI CONSIGLIATI:",
     "1. Verifica requisiti soggettivi e preventivi di spesa.",
-    "2. Invio domanda telematica tramite sportello ufficiale."
+    "2. Invio domanda telematica tramite sportello ufficiale.",
   ].join("\n");
 
   return {
@@ -129,10 +129,11 @@ function normalizzaRigaDossier(row: any): any {
     bozza_testuale: parsed.bozza_testuale || bozzaDefault,
   };
 }
+
 function RegiaPage() {
   const { state, ricaricaCloud } = useCivic() || ({} as any);
   const [authOk, setAuthOk] = useState(false);
-  const [operatoreNome, setOperatoreNome] = useState("Lorenzo Covicchio (Admin)");
+  const [operatoreNome, setOperatoreNome] = useState("Lorenzo Covicchio");
   const [loginUser, setLoginUser] = useState("");
   const [loginPass, setLoginPass] = useState("");
   const [verifying, setVerifying] = useState(false);
@@ -175,15 +176,17 @@ function RegiaPage() {
       return toast.error("Inserisci Nome Utente e Password.");
     }
     setVerifying(true);
-    const esito = await verificaCredenzialiAdminEsclusive(loginUser, loginPass);
+    const rawEsito: any = await verificaCredenzialiAdminEsclusive(loginUser, loginPass);
     setVerifying(false);
-    if (esito.ok) {
+    const isOk = typeof rawEsito === "boolean" ? rawEsito : Boolean(rawEsito?.ok);
+    const opName = typeof rawEsito === "object" && rawEsito?.operatore ? rawEsito.operatore : "Lorenzo Covicchio";
+    if (isOk) {
       sessionStorage.setItem("terni2030_regia_session", "authorized");
-      sessionStorage.setItem("terni2030_regia_operatore", esito.operatore);
+      sessionStorage.setItem("terni2030_regia_operatore", opName);
       localStorage.setItem("terni2030_is_admin", "1");
-      setOperatoreNome(esito.operatore);
+      setOperatoreNome(opName);
       setAuthOk(true);
-      toast.success(`Accesso Regia autorizzato. Benvenuto ${esito.operatore}!`);
+      toast.success("Accesso Regia autorizzato. Benvenuto " + opName + "!");
     } else {
       toast.error("Credenziali non autorizzate per la Regia.");
     }
@@ -250,7 +253,7 @@ function RegiaPage() {
       setNuovoUser("");
       setNuovaPass("");
       setConfermaPass("");
-      toast.success(`Nuove credenziali cifrate salvate per ${ruoloTarget === "lorenzo" ? "Lorenzo" : "Gianluca"}!`);
+      toast.success("Nuove credenziali cifrate salvate!");
     } catch (e: any) {
       toast.error("Errore salvataggio: " + e.message);
     }
@@ -299,7 +302,7 @@ function RegiaPage() {
       await modificaStatoDossierAdmin(id, nuovoStato);
       setDossiers((prev) => prev.map((d) => (d.id === id ? { ...d, stato: nuovoStato } : d)));
       if (typeof ricaricaCloud === "function") void ricaricaCloud();
-      toast.success(`Stato aggiornato a: ${nuovoStato}`);
+      toast.success("Stato aggiornato a: " + nuovoStato);
     } catch (e: any) {
       toast.error("Errore: " + e.message);
     }
@@ -322,12 +325,11 @@ function RegiaPage() {
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = `Dossier_Terni2030_${d.quartiere.replace(/\s+/g, "_")}.txt`;
+    a.download = "Dossier_Terni2030_" + String(d.quartiere || "Terni").replace(/\s+/g, "_") + ".txt";
     a.click();
     URL.revokeObjectURL(url);
   };
 
-  // Gestione completa POI Urban GO
   const tuttiPoi: POI[] = state?.poiExtra || [];
   const proposteInAttesa = (state?.proposteModerazione || []).filter((p: any) => p.stato === "In attesa");
 
@@ -398,7 +400,7 @@ function RegiaPage() {
       await eliminaPoiAdmin(id);
       if (editingPoiId === id) resetPoiForm();
       if (typeof ricaricaCloud === "function") await ricaricaCloud();
-      toast.success(`«${nome}» rimosso definitivamente da Terni Urban-Go.`);
+      toast.success("«" + nome + "» rimosso definitivamente da Terni Urban-Go.");
     } catch (e: any) {
       toast.error("Errore rimozione: " + e.message);
     }
@@ -425,7 +427,7 @@ function RegiaPage() {
 
   const bandiFiltrati = bandiList.filter((b: any) => {
     const info = getStatoBando(b);
-    const txt = `${b.titolo || ""} ${b.descrizione || ""} ${b.portale || ""} ${b.asse_specifico || ""}`.toLowerCase();
+    const txt = ((b.titolo || "") + " " + (b.descrizione || "") + " " + (b.portale || "") + " " + (b.asse_specifico || "")).toLowerCase();
     if (qBandi && !txt.includes(qBandi.toLowerCase())) return false;
     if (fMacro && (b.categoria_macro || "citta") !== fMacro) return false;
     if (fStato && info.col !== fStato) return false;
@@ -440,7 +442,6 @@ function RegiaPage() {
     .filter((b: any) => b.categoria_macro === "welfare")
     .reduce((acc: number, b: any) => acc + (Number(b.valore_stimato_euro) || 250000), 0);
 
-  // Pin per la mappa interattiva di gestione POI in Regia
   const pinsRegia = [
     {
       id: "pin_editor_corrente",
@@ -448,7 +449,7 @@ function RegiaPage() {
       lng: Number(poiForm.lng) || 12.6427,
       color: "#ef4444",
       glow: true,
-      label: editingPoiId ? `In modifica: ${poiForm.titolo || "POI"}` : "Nuovo Pin (Clicca sulla mappa per spostarlo)",
+      label: editingPoiId ? "In modifica: " + (poiForm.titolo || "POI") : "Nuovo Pin (Clicca sulla mappa per posizionarlo)",
       popup: (
         <div className="text-xs">
           <b>{poiForm.titolo || "Posizione Selezionata"}</b>
@@ -493,7 +494,7 @@ function RegiaPage() {
             <Lock className="mx-auto size-12 text-accent mb-3" />
             <h1 className="text-2xl font-bold">Accesso Esclusivo Regia</h1>
             <p className="text-xs text-muted-foreground mt-1">
-              Inserisci le tue credenziali operatore (Lorenzo o Gianluca) per accedere alla Regia.
+              Inserisci le tue credenziali operatore per accedere alla Regia.
             </p>
           </div>
           <div className="space-y-4">
@@ -548,41 +549,46 @@ function RegiaPage() {
         <div className="flex flex-wrap gap-2">
           <button
             onClick={() => setTab("dossier")}
-            className={`px-3.5 py-2 rounded-lg text-xs font-bold border transition ${
-              tab === "dossier" ? "bg-primary text-primary-foreground border-primary" : "bg-secondary/50 border-border"
-            }`}
+            className={
+              "px-3.5 py-2 rounded-lg text-xs font-bold border transition " +
+              (tab === "dossier" ? "bg-primary text-primary-foreground border-primary" : "bg-secondary/50 border-border")
+            }
           >
             📄 1. Dossier ({dossiers.length})
           </button>
           <button
             onClick={() => setTab("bandi")}
-            className={`px-3.5 py-2 rounded-lg text-xs font-bold border transition ${
-              tab === "bandi" ? "bg-primary text-primary-foreground border-primary" : "bg-secondary/50 border-border"
-            }`}
+            className={
+              "px-3.5 py-2 rounded-lg text-xs font-bold border transition " +
+              (tab === "bandi" ? "bg-primary text-primary-foreground border-primary" : "bg-secondary/50 border-border")
+            }
           >
             🔎 2. Pool Bandi ({bandiList.length})
           </button>
           <button
             onClick={() => setTab("moderazione")}
-            className={`px-3.5 py-2 rounded-lg text-xs font-bold border transition ${
-              tab === "moderazione" ? "bg-primary text-primary-foreground border-primary" : "bg-secondary/50 border-border"
-            }`}
+            className={
+              "px-3.5 py-2 rounded-lg text-xs font-bold border transition " +
+              (tab === "moderazione" ? "bg-primary text-primary-foreground border-primary" : "bg-secondary/50 border-border")
+            }
           >
             🛡️ 3. Moderazione ({proposteInAttesa.length})
           </button>
           <button
             onClick={() => setTab("urbango")}
-            className={`px-3.5 py-2 rounded-lg text-xs font-bold border transition ${
-              tab === "urbango" ? "bg-primary text-primary-foreground border-primary" : "bg-secondary/50 border-border"
-            }`}
+            className={
+              "px-3.5 py-2 rounded-lg text-xs font-bold border transition " +
+              (tab === "urbango" ? "bg-primary text-primary-foreground border-primary" : "bg-secondary/50 border-border")
+            }
           >
             📍 4. Gestione Urban GO ({tuttiPoi.length})
           </button>
           <button
             onClick={() => setTab("sicurezza")}
-            className={`px-3.5 py-2 rounded-lg text-xs font-bold border transition ${
-              tab === "sicurezza" ? "bg-accent text-accent-foreground border-accent" : "bg-secondary/50 border-border"
-            }`}
+            className={
+              "px-3.5 py-2 rounded-lg text-xs font-bold border transition " +
+              (tab === "sicurezza" ? "bg-accent text-accent-foreground border-accent" : "bg-secondary/50 border-border")
+            }
           >
             🔐 5. Credenziali
           </button>
@@ -627,7 +633,7 @@ function RegiaPage() {
         </div>
       </div>
 
-      {/* ===================== TAB 1: DOSSIER ===================== */}
+      {/* TAB 1: DOSSIER */}
       {tab === "dossier" && (
         <div className="space-y-4">
           <div className="surface-panel border p-4 rounded-xl flex flex-wrap items-center justify-between gap-3">
@@ -642,7 +648,7 @@ function RegiaPage() {
               disabled={loadingDossier}
               className="inline-flex items-center gap-1.5 rounded-md border border-border bg-secondary px-3 py-2 text-xs font-bold hover:bg-secondary/80"
             >
-              <RefreshCw className={`size-4 ${loadingDossier ? "animate-spin" : ""}`} /> Aggiorna Elenco
+              <RefreshCw className={"size-4 " + (loadingDossier ? "animate-spin" : "")} /> Aggiorna Elenco
             </button>
           </div>
 
@@ -665,11 +671,12 @@ function RegiaPage() {
                       <div className="space-y-2 flex-1">
                         <div className="flex flex-wrap items-center gap-2">
                           <span
-                            className={`px-2.5 py-0.5 rounded-full text-xs font-bold ${
-                              d.stato === "Venduto"
+                            className={
+                              "px-2.5 py-0.5 rounded-full text-xs font-bold " +
+                              (d.stato === "Venduto"
                                 ? "bg-emerald-500/20 text-emerald-400 border border-emerald-500/40"
-                                : "bg-amber-500/20 text-amber-400 border border-amber-500/40"
-                            }`}
+                                : "bg-amber-500/20 text-amber-400 border border-amber-500/40")
+                            }
                           >
                             {d.stato}
                           </span>
@@ -681,7 +688,7 @@ function RegiaPage() {
 
                         <div className="flex flex-wrap items-center gap-3 pt-1">
                           <a
-                            href={`mailto:${d.email}?subject=Dossier Bandi Terni 2030 - ${d.obiettivo}`}
+                            href={"mailto:" + d.email + "?subject=Dossier Bandi Terni 2030 - " + d.obiettivo}
                             className="inline-flex items-center gap-1.5 text-base font-bold text-accent hover:underline"
                           >
                             <Mail className="size-4" /> {d.email}
@@ -771,7 +778,7 @@ function RegiaPage() {
         </div>
       )}
 
-      {/* ===================== TAB 2: POOL BANDI ===================== */}
+      {/* TAB 2: POOL BANDI */}
       {tab === "bandi" && (
         <div className="space-y-4">
           <div className="surface-panel border p-4 rounded-xl flex flex-wrap gap-3 items-center">
@@ -848,12 +855,12 @@ function RegiaPage() {
         </div>
       )}
 
-      {/* ===================== TAB 3: MODERAZIONE (SOLO IN ATTESA, RIFIUTO = ELIMINA) ===================== */}
+      {/* TAB 3: MODERAZIONE (RIFIUTO = SPARSICE IMMEDIATAMENTE) */}
       {tab === "moderazione" && (
         <div className="space-y-3">
           {proposteInAttesa.length === 0 ? (
             <div className="surface-panel border p-8 rounded-xl text-center text-sm text-muted-foreground">
-              Nessuna proposta in attesa di moderazione. Le proposte rifiutate vengono eliminate automaticamente; quelle approvate passano nelle rispettive sezioni pubbliche.
+              Nessuna proposta in attesa di moderazione. Le proposte rifiutate vengono eliminate automaticamente e non restano in elenco.
             </div>
           ) : (
             proposteInAttesa.map((p: any) => (
@@ -893,11 +900,10 @@ function RegiaPage() {
         </div>
       )}
 
-      {/* ===================== TAB 4: GESTIONE DINAMICA TERNI URBAN GO (MAPPA + CRUD POI) ===================== */}
+      {/* TAB 4: GESTIONE DINAMICA TERNI URBAN GO (MAPPA + INSERISCI / MODIFICA / RIMUOVI POI) */}
       {tab === "urbango" && (
         <div className="space-y-6">
           <div className="grid gap-6 lg:grid-cols-[1fr_420px]">
-            {/* Mappa interattiva per cliccare le coordinate o selezionare un POI */}
             <div className="surface-panel border p-4 rounded-2xl space-y-3">
               <div className="flex flex-wrap items-center justify-between gap-2">
                 <div>
@@ -923,13 +929,12 @@ function RegiaPage() {
                       lat: Number(lat.toFixed(5)),
                       lng: Number(lng.toFixed(5)),
                     }));
-                    toast.info(`Coordinate impostate: ${lat.toFixed(5)}, ${lng.toFixed(5)}`);
+                    toast.info("Coordinate impostate: " + lat.toFixed(5) + ", " + lng.toFixed(5));
                   }}
                 />
               </div>
             </div>
 
-            {/* Editor Creazione / Modifica POI */}
             <div className="surface-panel border p-5 rounded-2xl space-y-3">
               <div className="flex items-center justify-between border-b border-border pb-2.5">
                 <h3 className="font-bold text-base flex items-center gap-1.5">
@@ -1099,7 +1104,6 @@ function RegiaPage() {
             </div>
           </div>
 
-          {/* Elenco completo dei POI attuali con pulsanti Modifica e Rimuovi */}
           <div className="surface-panel border p-5 rounded-2xl space-y-4">
             <div className="flex items-center justify-between">
               <div>
@@ -1124,7 +1128,7 @@ function RegiaPage() {
                         <div className="flex items-center justify-between gap-2">
                           <span
                             className="rounded-full px-2.5 py-0.5 text-[10px] font-bold"
-                            style={{ backgroundColor: `${infoRar.colore}25`, color: infoRar.colore }}
+                            style={{ backgroundColor: infoRar.colore + "25", color: infoRar.colore }}
                           >
                             {p.rarita} · +{p.punti} pt
                           </span>
@@ -1162,30 +1166,32 @@ function RegiaPage() {
         </div>
       )}
 
-      {/* ===================== TAB 5: CAMBIO CREDENZIALI (LORENZO O GIANLUCA) ===================== */}
+      {/* TAB 5: CAMBIO CREDENZIALI */}
       {tab === "sicurezza" && (
         <div className="mx-auto max-w-lg surface-panel border p-6 rounded-2xl space-y-4">
           <div className="flex items-center gap-2 text-accent font-bold">
             <KeyRound className="size-5" /> Gestione Credenziali Cifrate Operatori Regia
           </div>
           <p className="text-xs text-muted-foreground leading-relaxed">
-            L'accesso alla Regia avviene dal normale pulsante <b>«Accedi»</b> in alto a destra sul sito. Qui puoi aggiornare la password personale tua (Lorenzo) oppure quella del tuo collaboratore <b>Gianluca</b>.
+            Aggiorna il Nome Utente e la Password cifrata SHA-256 per l'accesso alla Regia.
           </p>
 
           <div className="grid grid-cols-2 gap-2 p-1 bg-secondary rounded-lg text-xs font-bold">
             <button
               onClick={() => setRuoloTarget("lorenzo")}
-              className={`py-2 rounded-md transition ${
-                ruoloTarget === "lorenzo" ? "bg-primary text-primary-foreground" : "text-muted-foreground"
-              }`}
+              className={
+                "py-2 rounded-md transition " +
+                (ruoloTarget === "lorenzo" ? "bg-primary text-primary-foreground" : "text-muted-foreground")
+              }
             >
               Profilo Lorenzo (Admin)
             </button>
             <button
               onClick={() => setRuoloTarget("gianluca")}
-              className={`py-2 rounded-md transition ${
-                ruoloTarget === "gianluca" ? "bg-primary text-primary-foreground" : "text-muted-foreground"
-              }`}
+              className={
+                "py-2 rounded-md transition " +
+                (ruoloTarget === "gianluca" ? "bg-primary text-primary-foreground" : "text-muted-foreground")
+              }
             >
               Profilo Gianluca (Collaboratore)
             </button>

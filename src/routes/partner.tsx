@@ -78,7 +78,7 @@ function PartnerPage() {
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-10 md:px-6 space-y-14">
-      {/* ==================== PARTE 1 (INIZIO): VETRINA PARTNER & SPONSOR ==================== */}
+      {/* PARTE 1 (INIZIO): VETRINA PARTNER & SPONSOR */}
       <section>
         <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
           <div>
@@ -89,7 +89,7 @@ function PartnerPage() {
               Partner & <span className="text-ember-gradient">Sponsor</span> della Riqualificazione
             </h1>
             <p className="mt-2 max-w-2xl text-sm text-muted-foreground">
-              Le realtà produttive, gli studi tecnici, i professionisti e gli sponsor che sostengono la rigenerazione urbana, energetica e sociale di Terni.
+              Aziende locali, studi tecnici, cooperative e sponsor al servizio della rigenerazione di Terni.
             </p>
           </div>
           <Button variant="outline" onClick={() => setKitOpen(true)}>
@@ -125,7 +125,7 @@ function PartnerPage() {
                 <button
                   onClick={() =>
                     contatta({
-                      oggetto: `Prenotazione Spazio Sponsor (${p.nome})`,
+                      oggetto: "Prenotazione Spazio Sponsor (" + p.nome + ")",
                       contesto: "Richiesta attivazione vetrina dalla card Partner & Sponsor",
                     })
                   }
@@ -139,7 +139,7 @@ function PartnerPage() {
         </div>
       </section>
 
-      {/* ==================== PARTE 2 (CENTRO): CHI SIAMO & STORYTELLING ==================== */}
+      {/* PARTE 2 (CENTRO): CHI SIAMO & STORYTELLING */}
       <section className="surface-panel border border-accent/30 rounded-2xl p-6 md:p-10 space-y-8">
         <div className="max-w-3xl">
           <span className="inline-flex items-center gap-1.5 rounded-full bg-accent/15 px-3 py-1 text-xs font-bold uppercase tracking-wider text-accent">
@@ -170,7 +170,7 @@ function PartnerPage() {
             </div>
             <h3 className="text-lg font-bold">2. La Nostra Missione</h3>
             <p className="text-sm text-muted-foreground leading-relaxed">
-              Unire l'intelligenza umana e l'Intelligenza Artificiale operativa per democratizzare l'accesso ai bandi pubblici (Città, Imprese, Energia e Welfare) e restituire voce ai 36 quartieri di Terni. Non un semplice sito vetrina, ma una infrastruttura civica dove ogni segnalazione sulla mappa può trasformarsi in un progetto finanziabile.
+              Unire la curatela progettuale umana e l'Intelligenza Artificiale operativa per democratizzare l'accesso ai bandi pubblici (Città, Imprese, Energia e Welfare) e restituire voce ai 36 quartieri di Terni. Non un semplice sito vetrina, ma un'infrastruttura civica dove ogni segnalazione sulla mappa può trasformarsi in un progetto finanziabile.
             </p>
           </div>
 
@@ -186,17 +186,17 @@ function PartnerPage() {
         </div>
       </section>
 
-      {/* ==================== PARTE 3 (FINE): CALL TO ACTION SPONSOR & KIT PARTNER ==================== */}
+      {/* PARTE 3 (FINE): CALL TO ACTION SPONSOR & SIGILLO PEC UNICO */}
       <section className="surface-panel border rounded-2xl p-6 md:p-8 space-y-6">
         <div className="flex flex-wrap items-center justify-between gap-6">
           <div className="max-w-xl">
             <span className="text-xs font-bold uppercase tracking-wider text-accent">
               Collaborazioni B2B, Studi Tecnici & Imprese
             </span>
-            <h2 className="text-2xl font-bold mt-1">Diventa Sponsor o Partner Tecnico di Terni 2030</h2>
+            <h2 className="text-2xl font-bold mt-1">Diventa Sponsor di Terni 2030</h2>
             <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
-              Posiziona la tua attività o il tuo studio professionale all'interno dell'ecosistema civico di Terni: visibilità qualificata nei Dossier Bandi IA, badge Partner Certificato e presenza dedicata sulla piattaforma.
-              Per proposte commerciali scrivi a{" "}
+              Visibilità sulla mappa civica, badge Partner Certificato, inserimento nei Dossier Bandi IA di quartiere e partnership promozionali dedicate.
+              Scrivi a{" "}
               <a href="mailto:Terni.2030@outlook.it" className="text-accent underline">
                 Terni.2030@outlook.it
               </a>
@@ -220,13 +220,16 @@ function PartnerPage() {
           </div>
         </div>
 
-        {/* Riquadro finale unico di Riferimento Istituzionale e PEC */}
+        {/* Riferimento PEC Unico a fine sezione */}
         <div className="border-t border-border pt-5 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs text-muted-foreground">
           <div className="flex items-center gap-2">
             <ShieldCheck className="size-4 text-accent shrink-0" />
             <span>
-              <b>Direzione e Curatela Progettuale:</b> Lorenzo Covicchio · Comunicazioni Ufficiali, Enti e Protocollo PEC:{" "}
-              <a href="mailto:lorenzo.covicchio@pec.it" className="font-mono font-semibold text-foreground underline underline-offset-4 hover:text-accent">
+              <b>Direzione e Curatela Progettuale:</b> Lorenzo Covicchio · Domicilio Digitale e Comunicazioni Ufficiali PEC:{" "}
+              <a
+                href="mailto:lorenzo.covicchio@pec.it"
+                className="font-mono font-semibold text-foreground underline underline-offset-4 hover:text-accent"
+              >
                 lorenzo.covicchio@pec.it
               </a>
             </span>
@@ -235,7 +238,6 @@ function PartnerPage() {
         </div>
       </section>
 
-      {/* Modal interattivo Kit Partner */}
       <Dialog open={kitOpen} onOpenChange={setKitOpen}>
         <DialogContent className="z-[2000] max-h-[90vh] max-w-4xl overflow-y-auto">
           <DialogHeader>
@@ -251,9 +253,10 @@ function PartnerPage() {
             {PACCHETTI_KIT.map((pkg) => (
               <div
                 key={pkg.livello}
-                className={`flex flex-col justify-between rounded-xl border p-4 ${
-                  pkg.evidenza ? "border-accent bg-secondary/40" : "border-border bg-surface-2"
-                }`}
+                className={
+                  "flex flex-col justify-between rounded-xl border p-4 " +
+                  (pkg.evidenza ? "border-accent bg-secondary/40" : "border-border bg-surface-2")
+                }
               >
                 <div>
                   <div className="flex items-center justify-between gap-2">
@@ -282,8 +285,8 @@ function PartnerPage() {
                   onClick={() => {
                     setKitOpen(false);
                     contatta({
-                      oggetto: `Richiesta Attivazione Kit Partner — Livello ${pkg.livello} (${pkg.prezzo})`,
-                      contesto: `Pacchetto selezionato dal Kit Partner: ${pkg.livello} (${pkg.prezzo}) —${pkg.sottotitolo}`,
+                      oggetto: "Richiesta Attivazione Kit Partner — Livello " + pkg.livello + " (" + pkg.prezzo + ")",
+                      contesto: "Pacchetto selezionato dal Kit Partner: " + pkg.livello + " (" + pkg.prezzo + ") — " + pkg.sottotitolo,
                     });
                   }}
                 >

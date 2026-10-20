@@ -257,6 +257,7 @@ export function CivicProvider({ children }: { children: ReactNode }) {
           try {
             const parsed = JSON.parse(item.descrizione || "{}");
             const stProp = (item.stato || parsed.stato || "In attesa") as PropostaModerazione["stato"];
+            if (stProp === "Rifiutata") { supabase.from("segnalazioni").delete().eq("id", idStr).then(); continue; }
             if (stProp === "Rifiutata") continue;
             const propObj: PropostaModerazione = {
               id: idStr,
