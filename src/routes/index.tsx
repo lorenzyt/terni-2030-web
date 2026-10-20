@@ -97,7 +97,6 @@ function IndexPage() {
   const { state } = useCivic() || ({} as any);
   const rawBandi = Array.isArray(bandiReali) ? bandiReali : [];
 
-  // Filtra automaticamente eventuali bandi scartati in Regia
   const arrBandi = rawBandi.filter(
     (b: any) => state?.auditBandi?.[normKey(b.nome || b.titolo)]?.stato !== "Scartato"
   );
@@ -112,7 +111,7 @@ function IndexPage() {
   const fmtEuro = (val: number) =>
     new Intl.NumberFormat("it-IT", { style: "currency", currency: "EUR", maximumFractionDigits: 0 }).format(val);
 
-  const totPoi = POI_LIST?.length || 0;
+  const totPoi = (POI_LIST?.length || 0) + (state?.poiExtra?.length || 0);
   const totBandi = arrBandi.length;
 
   return (
@@ -205,7 +204,7 @@ function IndexPage() {
         </div>
       </section>
 
-      {/* CRUSCOTTO DINAMICO AGENDA 2030 ONU CON IMMAGINI UFFICIALI */}
+      {/* CRUSCOTTO AGENDA 2030 ONU (CONTENUTI INFORMATIVI STATICI NON INTERAGIBILI) */}
       <section className="py-14 px-4 container mx-auto">
         <div className="mb-8 flex flex-col md:flex-row md:items-end justify-between gap-4">
           <div>
@@ -214,7 +213,7 @@ function IndexPage() {
             </span>
             <h2 className="text-2xl md:text-3xl font-bold mt-1">Cruscotto Agenda 2030 · Obiettivi & Fondi Attivi</h2>
             <p className="text-sm text-muted-foreground mt-1">
-              Seleziona uno degli Obiettivi di Sviluppo Sostenibile dell'Agenda 2030 per visualizzare i bandi e i fondi reali disponibili a Terni.
+              Panoramica degli Obiettivi di Sviluppo Sostenibile dell'Agenda 2030 e relativa ripartizione dei fondi attivi a Terni.
             </p>
           </div>
           <Link to="/dossier" className="text-sm font-bold text-accent hover:underline shrink-0">
@@ -222,28 +221,26 @@ function IndexPage() {
           </Link>
         </div>
 
-        {/* STRISCIA VISIVA DELLE 7 MATTONELLE UFFICIALI AGENDA 2030 */}
+        {/* STRISCIA VISIVA DELLE 7 MATTONELLE UFFICIALI AGENDA 2030 (STATICHE NON INTERAGIBILI) */}
         <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-7 gap-3 mb-8">
           {ALL_SDG_ICONS.map((item) => (
-            <Link
+            <div
               key={item.num}
-              to="/dossier"
-              search={{ obiettivo: item.ob }}
-              className="group flex flex-col items-center rounded-xl border border-border bg-secondary/20 p-2.5 hover:border-accent hover:bg-secondary/50 transition-all"
+              className="flex flex-col items-center rounded-xl border border-border bg-secondary/20 p-2.5 select-none cursor-default"
             >
               <img
                 src={item.img}
-                alt={`Goal ${item.num} - ${item.title}`}
-                className="w-20 h-20 sm:w-24 sm:h-24 rounded-lg shadow-md group-hover:scale-105 transition-transform"
+                alt={"Goal " + item.num + " - " + item.title}
+                className="w-20 h-20 sm:w-24 sm:h-24 rounded-lg shadow-md pointer-events-none"
               />
-              <span className="mt-2 text-[11px] font-bold text-center leading-tight group-hover:text-accent">
+              <span className="mt-2 text-[11px] font-bold text-center leading-tight text-foreground">
                 Goal {item.num} · {item.title}
               </span>
-            </Link>
+            </div>
           ))}
         </div>
 
-        {/* CARDS DETTAGLIATE AGENDA 2030 CON IMMAGINI E VALORE CALCOLATO */}
+        {/* CARDS DETTAGLIATE AGENDA 2030 (STATICHE NON INTERAGIBILI) */}
         <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
           {AGENDA_2030_GOALS.map((g) => {
             const bandiGoal = arrBandi.filter((b: any) => {
@@ -258,11 +255,9 @@ function IndexPage() {
             const perc = Math.min(100, Math.max(25, Math.round((valoreGoal / Math.max(1, valoreTotale)) * 220)));
 
             return (
-              <Link
+              <div
                 key={g.sdg}
-                to="/dossier"
-                search={{ obiettivo: g.obiettivoDefault }}
-                className="surface-panel border p-5 rounded-xl hover:border-accent transition-all flex flex-col justify-between group"
+                className="surface-panel border border-border p-5 rounded-xl flex flex-col justify-between select-none cursor-default"
               >
                 <div>
                   <div className="flex items-start justify-between gap-3 mb-4">
@@ -272,18 +267,18 @@ function IndexPage() {
                           key={src}
                           src={src}
                           alt={g.sdg}
-                          className="w-14 h-14 rounded-lg shadow-sm shrink-0 group-hover:scale-105 transition-transform"
+                          className="w-14 h-14 rounded-lg shadow-sm shrink-0 pointer-events-none"
                         />
                       ))}
                     </div>
                     <div className="text-right">
-                      <span className={`inline-flex items-center rounded-md border px-2.5 py-0.5 text-xs font-bold ${g.colore}`}>
+                      <span className={"inline-flex items-center rounded-md border px-2.5 py-0.5 text-xs font-bold " + g.colore}>
                         {g.sdg}
                       </span>
                       <div className="text-xs font-bold text-accent mt-1">{count} bandi attivi</div>
                     </div>
                   </div>
-                  <h3 className="text-lg font-bold group-hover:text-accent transition-colors">{g.titolo}</h3>
+                  <h3 className="text-lg font-bold text-foreground">{g.titolo}</h3>
                   <p className="text-xs text-muted-foreground mt-1.5 leading-relaxed">{g.desc}</p>
                 </div>
 
@@ -293,10 +288,10 @@ function IndexPage() {
                     <span className="font-bold text-foreground">{fmtEuro(valoreGoal)}</span>
                   </div>
                   <div className="h-1.5 w-full rounded-full bg-secondary overflow-hidden">
-                    <div className={`h-full ${g.barClass}`} style={{ width: `${perc}%` }} />
+                    <div className={"h-full " + g.barClass} style={{ width: perc + "%" }} />
                   </div>
                 </div>
-              </Link>
+              </div>
             );
           })}
         </div>

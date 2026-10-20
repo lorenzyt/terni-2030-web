@@ -329,7 +329,7 @@ export const PARTNERS: Partner[] = [
   {
     id: "p1",
     nome: "Spazio Sponsor Disponibile",
-    settore: "Prenota la tua vetrina a 14,90€",
+    settore: "Licenza Annuale Vetrina da 14,90€ / anno",
     descrizione: "Contatta Terni.2030@outlook.it per apparire qui (pagamento concordato via PayPal, Revolut o Bonifico).",
     citta: "Terni",
     certificato: false,
