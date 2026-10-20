@@ -319,15 +319,123 @@ function RegiaPage() {
     }
   };
 
-  const scaricaFileTesto = (d: any) => {
+  const esportaDossierPdfBrandizzato = (d: any) => {
     const contenuto = testiModificati[d.id] ?? d.bozza_testuale;
-    const blob = new Blob([contenuto], { type: "text/plain;charset=utf-8" });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = "Dossier_Terni2030_" + String(d.quartiere || "Terni").replace(/\s+/g, "_") + ".txt";
-    a.click();
-    URL.revokeObjectURL(url);
+    const win = window.open("", "_blank", "width=960,height=1080");
+    if (!win) {
+      toast.error("Consenti l'apertura dei popup nel browser per generare il PDF.");
+      return;
+    }
+
+    const escapeHtml = (s: string) =>
+      String(s || "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;");
+
+    // Trasforma automaticamente ogni URL presente nel testo revisionato in un link cliccabile nel PDF
+    const formattaRigaConLink = (line: string) => {
+      const safe = escapeHtml(line);
+      return safe.replace(
+        /(https?:\/\/[^\s<]+)/g,
+        '<a href="$1" target="_blank" style="color:#d97706;font-weight:700;text-decoration:underline;word-break:break-all;">$1</a>'
+      );
+    };
+
+    const righe = String(contenuto || "").split("\n");
+    let corpoHtml = "";
+    for (const rawLine of righe) {
+      const l = rawLine.trim();
+      if (!l || l.startsWith("====")) continue;
+      if (l.startsWith("----")) {
+        corpoHtml += '<hr style="border:none;border-top:1px dashed #cbd5e1;margin:14px 0;" />';
+      } else if (l.startsWith("MISURA #")) {
+        corpoHtml +=
+          '<div style="background:#fffbeb;border-left:4px solid #f59e0b;padding:10px 14px;margin-top:14px;margin-bottom:8px;border-radius:0 8px 8px 0;">' +
+          '<h3 style="margin:0;font-size:14px;color:#92400e;text-transform:uppercase;letter-spacing:0.03em;">' +
+          escapeHtml(l) +
+          "</h3></div>";
+      } else if (/^\d+\.\s+[A-Z]/.test(l)) {
+        corpoHtml +=
+          '<h2 style="margin-top:22px;margin-bottom:10px;padding-bottom:6px;border-bottom:2px solid #0f172a;font-size:15px;color:#0f172a;text-transform:uppercase;letter-spacing:0.05em;">' +
+          escapeHtml(l) +
+          "</h2>";
+      } else if (l.startsWith("•") || l.startsWith("-")) {
+        const testoPunto = l.replace(/^[•\-]\s*/, "");
+        const parti = testoPunto.split(":");
+        if (parti.length >= 2 && parti[0].length < 42) {
+          const etichetta = escapeHtml(parti[0]);
+          const valore = formattaRigaConLink(parti.slice(1).join(":"));
+          corpoHtml +=
+            '<div style="margin:5px 0 5px 10px;font-size:12.5px;line-height:1.55;color:#1e293b;">' +
+            '<span style="color:#d97706;font-weight:700;">▪ ' +
+            etichetta +
+            ":</span> " +
+            valore +
+            "</div>";
+        } else {
+          corpoHtml +=
+            '<div style="margin:5px 0 5px 10px;font-size:12.5px;line-height:1.55;color:#1e293b;">▪ ' +
+            formattaRigaConLink(testoPunto) +
+            "</div>";
+        }
+      } else {
+        corpoHtml +=
+          '<p style="margin:4px 0;font-size:12.5px;line-height:1.55;color:#334155;">' +
+          formattaRigaConLink(l) +
+          "</p>";
+      }
+    }
+
+    const htmlDoc =
+      "<!DOCTYPE html><html lang='it'><head><meta charset='utf-8' />" +
+      "<title>Dossier_Terni2030_" + escapeHtml(d.quartiere || "Terni") + "</title>" +
+      "<link href='https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap' rel='stylesheet'>" +
+      "<style>" +
+      "@page { size: A4; margin: 14mm; }" +
+      "body { font-family: 'Inter', sans-serif; color: #0f172a; background: #f1f5f9; margin: 0; padding: 24px; }" +
+      ".toolbar { max-width: 820px; margin: 0 auto 16px auto; background: #0f172a; color: #fff; padding: 12px 20px; border-radius: 10px; display: flex; justify-content: space-between; align-items: center; }" +
+      ".btn-print { background: #f59e0b; color: #0f172a; border: none; padding: 9px 18px; border-radius: 6px; font-weight: 800; font-size: 13px; cursor: pointer; }" +
+      ".page { max-width: 820px; margin: 0 auto; background: #ffffff; padding: 36px 42px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); border-top: 8px solid #f59e0b; }" +
+      ".header { display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 2px solid #e2e8f0; padding-bottom: 18px; margin-bottom: 20px; }" +
+      ".brand { font-family: 'Archivo', sans-serif; font-size: 28px; font-weight: 800; color: #0f172a; letter-spacing: -0.02em; }" +
+      ".brand span { color: #d97706; }" +
+      ".sub-brand { font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em; color: #64748b; font-weight: 700; margin-top: 4px; }" +
+      ".badge-doc { background: #fef3c7; color: #92400e; border: 1px solid #f59e0b; font-size: 11px; font-weight: 700; padding: 5px 10px; border-radius: 6px; text-align: right; }" +
+      ".meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 14px 18px; margin-bottom: 22px; font-size: 12px; }" +
+      ".meta-item b { color: #0f172a; display: block; font-size: 10.5px; text-transform: uppercase; color: #64748b; }" +
+      ".meta-item span { font-weight: 700; color: #0f172a; font-size: 13px; }" +
+      ".footer { margin-top: 32px; padding-top: 14px; border-top: 2px solid #e2e8f0; display: flex; justify-content: space-between; font-size: 10.5px; color: #64748b; }" +
+      "@media print { body { background: #ffffff; padding: 0; } .toolbar { display: none !important; } .page { box-shadow: none; padding: 0; max-width: 100%; border-top: 6px solid #f59e0b; padding-top: 12px; } }" +
+      "</style></head><body>" +
+      "<div class='toolbar'>" +
+      "<div><b>Anteprima Ufficiale Dossier PDF — Terni 2030</b><br/><span style='font-size:11px;color:#cbd5e1;'>Nel pannello di stampa seleziona Destinazione: «Salva come PDF»</span></div>" +
+      "<button class='btn-print' onclick='window.print()'>🖨️ Salva come PDF / Stampa Ora</button>" +
+      "</div>" +
+      "<div class='page'>" +
+      "<div class='header'>" +
+      "<div><div class='brand'>Terni <span>2030</span></div><div class='sub-brand'>Intelligence Bandi & Rigenerazione Urbana · Città e Welfare</div></div>" +
+      "<div class='badge-doc'>DOSSIER STRATEGICO VERIFICATO<br/><span style='font-weight:500;font-size:10px;'>Protocollo: " + escapeHtml(d.id) + "</span></div>" +
+      "</div>" +
+      "<div class='meta-grid'>" +
+      "<div class='meta-item'><b>Destinatario Dossier</b><span>" + escapeHtml(d.email) + "</span></div>" +
+      "<div class='meta-item'><b>Data di Elaborazione</b><span>" + escapeHtml(d.orario) + "</span></div>" +
+      "<div class='meta-item'><b>Profilo Richiedente</b><span>" + escapeHtml(d.profilo) + "</span></div>" +
+      "<div class='meta-item'><b>Quartiere / Ambito di Terni</b><span>" + escapeHtml(d.quartiere) + "</span></div>" +
+      "<div class='meta-item' style='grid-column: span 2;'><b>Obiettivo Progettuale Dichiarato</b><span>" + escapeHtml(d.obiettivo) + "</span></div>" +
+      "</div>" +
+      "<div>" + corpoHtml + "</div>" +
+      "<div class='footer'>" +
+      "<div><b>Terni 2030</b> · Dossier revisionato e validato da <b>Lorenzo Covicchio</b> (Autore e Curatore)</div>" +
+      "<div>Contatti: Terni.2030@outlook.it · PEC: <b>lorenzo.covicchio@pec.it</b></div>" +
+      "</div>" +
+      "</div>" +
+      "<script>setTimeout(() => { window.print(); }, 450);</script>" +
+      "</body></html>";
+
+    win.document.open();
+    win.document.write(htmlDoc);
+    win.document.close();
   };
 
   const tuttiPoi: POI[] = state?.poiExtra || [];
@@ -755,10 +863,10 @@ function RegiaPage() {
                               <Copy className="size-3.5" /> Copia Testo
                             </button>
                             <button
-                              onClick={() => scaricaFileTesto(d)}
-                              className="px-3 py-1 rounded bg-accent text-accent-foreground text-xs font-bold inline-flex items-center gap-1"
+                              onClick={() => esportaDossierPdfBrandizzato(d)}
+                              className="px-3.5 py-1.5 rounded bg-accent text-accent-foreground text-xs font-bold inline-flex items-center gap-1.5 shadow-sm hover:opacity-90"
                             >
-                              <Download className="size-3.5" /> Scarica .TXT
+                              <Download className="size-3.5" /> 📄 Esporta / Salva PDF Brandizzato
                             </button>
                           </div>
                         </div>

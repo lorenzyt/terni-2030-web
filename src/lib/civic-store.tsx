@@ -632,7 +632,7 @@ export async function registraDossierGenerato(payload: any) {
         `• Dotazione / Agevolazione: ${b.importo || "Contributo a fondo perduto / finanziamento agevolato"}`,
         `• Stato / Scadenza: ${b.scadenza || "Sportello attivo"}`,
         `• Sintesi Operativa: ${b.descrizione || "-"}`,
-        `• Link Ufficiale Bando: ${b.link || "https://www.regione.umbria.it"}`
+        `• Pagina Specifica del Bando / Sportello: ${b.link || "https://www.regione.umbria.it/bandi"}`
       ].join("\n");
     })
     .join("\n\n");

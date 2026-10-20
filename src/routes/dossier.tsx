@@ -116,17 +116,24 @@ function DossierPage() {
   const prezzoPieno = 14.90;
   const prezzoScontato = 9.90;
 
-  // Matching silenzioso dei bandi (NON mostrati al cliente, ma inviati in Regia a Lorenzo)
+  // Matching silenzioso rigoroso per Profilo + Obiettivo (con Link specifici per ogni singolo bando)
   const bandiIndividuatiSegreti = (() => {
     if (macroSettore === "welfare" || obiettivo === "o6") {
-      const perAsse = bandiWelfare.filter((b: any) => !asseWelfareScelto || b.asse_specifico === asseWelfareScelto);
+      const perAsse = bandiWelfare.filter((b: any) => {
+        const okProf = !profilo || !Array.isArray(b.ambiti) || b.ambiti.includes(profilo);
+        const okAsse = !asseWelfareScelto || b.asse_specifico === asseWelfareScelto;
+        return okProf && okAsse;
+      });
       return (perAsse.length > 0 ? perAsse : bandiWelfare).slice(0, 6);
     }
-    const perOb = bandiCitta.filter((b: any) => {
-      if (!obiettivo) return true;
-      return (b.obiettivo_id || b.obiettivo) === obiettivo;
+    const perObProf = bandiCitta.filter((b: any) => {
+      const okProf = !profilo || !Array.isArray(b.ambiti) || b.ambiti.includes(profilo);
+      const okOb = !obiettivo || (b.obiettivo_id || b.obiettivo) === obiettivo;
+      return okProf && okOb;
     });
-    return (perOb.length > 0 ? perOb : bandiCitta).slice(0, 6);
+    if (perObProf.length > 0) return perObProf.slice(0, 6);
+    const perSoloOb = bandiCitta.filter((b: any) => !obiettivo || (b.obiettivo_id || b.obiettivo) === obiettivo);
+    return (perSoloOb.length > 0 ? perSoloOb : bandiCitta).slice(0, 6);
   })();
 
   const profiloNome = profiliLocali.find((p: any) => p.id === profilo)?.nome ?? (profilo || "Cittadino / Impresa");
