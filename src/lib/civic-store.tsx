@@ -257,6 +257,7 @@ export function CivicProvider({ children }: { children: ReactNode }) {
           try {
             const parsed = JSON.parse(item.descrizione || "{}");
             const stProp = (item.stato || parsed.stato || "In attesa") as PropostaModerazione["stato"];
+            if (stProp === "Rifiutata") continue;
             const propObj: PropostaModerazione = {
               id: idStr,
               tipo: parsed.tipo || "bacheca",
@@ -519,7 +520,7 @@ export async function modificaPoiAdmin(id: string, payload: any) {
 
 export async function inserisciPoiDirettoAdmin(payload: any) {
   if (!supabase) throw new Error("Database offline");
-  const idRow = `prop_poi_${Date.now().toString(36)}`;
+  const idRow = "prop_poi_" + Date.now().toString(36);
   const { error } = await supabase.from("segnalazioni").insert({
     id: idRow,
     titolo: payload.titolo.slice(0, 120),
@@ -559,7 +560,21 @@ export async function inserisciPoiDirettoAdmin(payload: any) {
 
 export async function gestisciPropostaAdmin(id: string, stato: string) {
   if (!supabase) throw new Error("Database offline");
-  const { error } = await supabase.from("segnalazioni").update({ stato }).eq("id", id);
+  if (stato === "Rifiutata") {
+    const { error } = await supabase.from("segnalazioni").delete().eq("id", id);
+    if (error) throw new Error(error.message);
+    return;
+  }
+  const { data: row } = await supabase.from("segnalazioni").select("descrizione").eq("id", id).maybeSingle();
+  let nuovaDesc = row?.descrizione;
+  if (nuovaDesc) {
+    try {
+      const p = JSON.parse(nuovaDesc);
+      p.stato = stato;
+      nuovaDesc = JSON.stringify(p);
+    } catch {}
+  }
+  const { error } = await supabase.from("segnalazioni").update({ stato, ...(nuovaDesc ? { descrizione: nuovaDesc } : {}) }).eq("id", id);
   if (error) throw new Error(error.message);
 }
 

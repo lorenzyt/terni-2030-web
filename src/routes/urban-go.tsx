@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import {
-  Award, BadgeCheck, CheckCircle2, Compass, ExternalLink, Gift, Heart,
+  Award, BadgeCheck, CalendarDays, CheckCircle2, Compass, ExternalLink, Gift, Heart,
   Lock, MapPin, Megaphone, Navigation, Plus, ShieldCheck, Sparkles, Trophy, Users
 } from "lucide-react";
 import { TerniMap } from "@/components/TerniMap";
@@ -68,14 +68,15 @@ function calcolaGradoEsploratore(perc: number, nScoperti: number): string {
 function UrbanGo() {
   const { state, update, puntiGuadagnati, puntiDisponibili } = useCivic();
   const tuttiPoi: POI[] = [...POI_LIST, ...state.poiExtra];
-  const tuttaBacheca = [...BACHECA, ...state.bachecaExtra];
+  const tuttaBacheca = [...BACHECA, ...state.bachecaExtra].filter((b) => b.tipo !== "Evento");
+  const tuttiEventi = [...BACHECA, ...state.bachecaExtra].filter((b) => b.tipo === "Evento");
   const esplorati = state.checkin.filter((id) => tuttiPoi.some((p) => p.id === id));
 
   const [attivo, setAttivo] = useState<POI | undefined>(tuttiPoi[0]);
   const [premiOpen, setPremiOpen] = useState(false);
   const [ternidexOpen, setTernidexOpen] = useState(false);
   const [candidaturaOpen, setCandidaturaOpen] = useState(false);
-  const [tipoCandidatura, setTipoCandidatura] = useState<"poi" | "bacheca" | "sondaggio">("poi");
+  const [tipoCandidatura, setTipoCandidatura] = useState<"poi" | "bacheca" | "evento" | "sondaggio">("poi");
 
   const [gpsAttivo, setGpsAttivo] = useState(false);
   const [posUtente, setPosUtente] = useState<{ lat: number; lng: number; acc: number } | null>(null);
@@ -93,6 +94,8 @@ function UrbanGo() {
     lng: "12.6427",
     descrizione: "",
     curiosita: "",
+    immagine: "",
+    articolo: "",
     opzione1: "",
     opzione2: "",
     opzione3: "",
@@ -214,7 +217,7 @@ function UrbanGo() {
           articolo: formProp.articolo.trim() || "Luogo proposto dalla community e validato dalla Regia Terni 2030.",
         },
       });
-    } else if (tipoCandidatura === "bacheca") {
+    } else if (tipoCandidatura === "bacheca" || tipoCandidatura === "evento") {
       await inviaPropostaModerazione({
         tipo: "bacheca",
         titolo: formProp.titolo.trim(),
@@ -222,7 +225,7 @@ function UrbanGo() {
         contatto: formProp.contatto.trim(),
         dati: {
           nome: formProp.titolo.trim(),
-          tipo: "Associazione",
+          tipo: tipoCandidatura === "evento" ? "Evento" : "Associazione",
           ambito: formProp.sottotitolo.trim() || "Attivismo & Territorio",
           descrizione: formProp.descrizione.trim(),
           contatto: formProp.contatto.trim(),
@@ -553,26 +556,26 @@ function UrbanGo() {
           <div className="surface-panel p-5">
             <div className="flex items-center justify-between">
               <h2 className="flex items-center gap-2 text-sm font-semibold uppercase tracking-wider text-muted-foreground">
-                <Users className="size-4 text-accent" /> Bacheca del Territorio
+                <CalendarDays className="size-4 text-accent" /> Eventi in Città & Iniziative
               </h2>
-              <Button size="sm" variant="ghost" className="text-xs text-accent" onClick={() => { setTipoCandidatura("bacheca"); setCandidaturaOpen(true); }}>
-                + Proponi
+              <Button size="sm" variant="ghost" className="text-xs text-accent" onClick={() => { setTipoCandidatura("evento"); setCandidaturaOpen(true); }}>
+                + Proponi Evento
               </Button>
             </div>
             <div className="mt-3 space-y-3">
-              {tuttaBacheca.length === 0 ? (
+              {tuttiEventi.length === 0 ? (
                 <p className="text-xs text-muted-foreground">
-                  Le schede della Bacheca Territoriale compaiono qui non appena vengono approvate dall'Admin in Regia.
+                  Gli eventi culturali, gli incontri civici e le iniziative sul territorio di Terni compaiono qui non appena approvati dalla Regia.
                 </p>
               ) : (
-                tuttaBacheca.map((b) => (
-                  <div key={b.id} className="rounded-md border border-border p-3">
+                tuttiEventi.map((ev) => (
+                  <div key={ev.id} className="rounded-md border border-border p-3">
                     <div className="flex items-center justify-between gap-2">
-                      <h3 className="text-sm font-semibold">{b.nome}</h3>
-                      <Badge variant="secondary">{b.tipo}</Badge>
+                      <h3 className="text-sm font-semibold">{ev.nome}</h3>
+                      <Badge className="bg-accent/20 text-accent border-0">Evento</Badge>
                     </div>
-                    <p className="mt-1 text-xs text-muted-foreground">{b.descrizione}</p>
-                    <p className="mt-2 text-[11px] uppercase tracking-wide text-accent">{b.ambito} · {b.contatto}</p>
+                    <p className="mt-1 text-xs text-muted-foreground">{ev.descrizione}</p>
+                    <p className="mt-2 text-[11px] uppercase tracking-wide text-accent">{ev.ambito} · {ev.contatto}</p>
                   </div>
                 ))
               )}
@@ -678,7 +681,10 @@ function UrbanGo() {
                 📍 Nuovo Luogo / POI
               </Button>
               <Button size="sm" variant={tipoCandidatura === "bacheca" ? "default" : "secondary"} className="flex-1 text-xs" onClick={() => setTipoCandidatura("bacheca")}>
-                🏛️ Bacheca & Attivismo
+                🏛️ Bacheca
+              </Button>
+              <Button size="sm" variant={tipoCandidatura === "evento" ? "default" : "secondary"} className="flex-1 text-xs" onClick={() => setTipoCandidatura("evento")}>
+                📅 Evento
               </Button>
               <Button size="sm" variant={tipoCandidatura === "sondaggio" ? "default" : "secondary"} className="flex-1 text-xs" onClick={() => setTipoCandidatura("sondaggio")}>
                 📊 Nuovo Sondaggio
@@ -698,7 +704,7 @@ function UrbanGo() {
 
             <div>
               <Label>
-                {tipoCandidatura === "poi" ? "Nome del Luogo / Architettura" : tipoCandidatura === "bacheca" ? "Nome Associazione / Iniziativa" : "Domanda del Sondaggio Cittadino"}
+                {tipoCandidatura === "poi" ? "Nome del Luogo / Architettura" : tipoCandidatura === "evento" ? "Titolo dell'Evento Cittadino" : tipoCandidatura === "bacheca" ? "Nome Associazione / Iniziativa" : "Domanda del Sondaggio Cittadino"}
               </Label>
               <Input value={formProp.titolo} onChange={(e) => setFormProp({ ...formProp, titolo: e.target.value })} />
             </div>
@@ -765,7 +771,7 @@ function UrbanGo() {
               </>
             )}
 
-            {tipoCandidatura === "bacheca" && (
+            {(tipoCandidatura === "bacheca" || tipoCandidatura === "evento") && (
               <div className="grid gap-2 sm:grid-cols-2">
                 <div>
                   <Label>Ambito (Cultura, Ambiente, Giovani...)</Label>

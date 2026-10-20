@@ -222,7 +222,7 @@ export type POI = {
   autore: string;
   autoreScheda?: string;
   anno: string;
-  categoria: "Architettura d'autore" | "Arte pubblica" | "Archeologia industriale" | "Storia e fede";
+  categoria: string;
   lat: number;
   lng: number;
   punti: number;
@@ -234,21 +234,7 @@ export type POI = {
 };
 
 // Lista iniziale vuota: tutti i luoghi vengono inseriti da Lorenzo o dagli utenti previa approvazione Admin
-export const POI_LIST: POI[] = [
-  {
-    id: "poi_1",
-    nome: "Lancia di Luce (Obelisco di Arnaldo Pomodoro)",
-    autore: "Arnaldo Pomodoro",
-    anno: "1995",
-    categoria: "Arte contemporanea",
-    lat: 42.5646,
-    lng: 12.6495,
-    punti: 500,
-    rarita: "Leggendario",
-    descrizione: "Monumento simbolo della Terni contemporanea e dell'acciaio, alto 32 metri e composto da quattro sezioni triangolari sovrapposte.",
-    autoreScheda: "Lorenzo Covicchio"
-  }
-];
+export const POI_LIST: POI[] = [];
 
 export type Associazione = {
   id: string;

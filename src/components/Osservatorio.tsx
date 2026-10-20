@@ -1,5 +1,5 @@
 import { Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
-import { Bot, FileCheck2, TrendingUp } from "lucide-react";
+import { Bot, TrendingUp } from "lucide-react";
 import { useCivic } from "@/lib/civic-store";
 import { CATEGORIE } from "@/lib/terni-data";
 
@@ -17,23 +17,19 @@ export function Osservatorio() {
   const { state } = useCivic();
   const segn = state.segnalazioni;
 
-  // Dati Grafico 1: Quartieri
   const perQuartiere = QUARTIERI_OSS.map((q) => {
     const s = segn.filter((x) => x.quartiere === q || x.quartiere.includes(q));
     return { quartiere: q, segnalazioni: s.length, voti: s.reduce((a, x) => a + x.voti, 0) };
   });
 
-  // Dati Grafico 2: Tematiche (ex Istituzionali vs Cittadini)
   const perTematica = CATEGORIE.map((c) => {
     return {
       tema: c.replace("Proposta ", "").replace("Edifici ", ""),
-      segnalazioni: segn.filter((s) => s.categoria === c).length
+      segnalazioni: segn.filter((s) => s.categoria === c).length,
     };
   });
 
-  // Calcolo Match Bandi-Dossier (Sostituisce gli 0 €)
   const totaleBandiIntercettati = state.dossierGenerati.reduce((acc, d) => acc + d.numero_bandi, 0);
-
   const top = [...perQuartiere].sort((a, b) => b.voti - a.voti)[0];
   const topSegn = [...segn].sort((a, b) => b.voti - a.voti)[0];
   const commentiTot = Object.values(state.commenti).reduce((a, l) => a + l.length, 0);
@@ -53,7 +49,7 @@ export function Osservatorio() {
           <span className="size-2 animate-pulse rounded-full bg-accent" /> live
         </span>
       </div>
-      
+
       <div className="grid gap-4 lg:grid-cols-3">
         {/* Grafico 1: Quartieri */}
         <div className="rounded-lg border border-border p-3">
@@ -71,7 +67,7 @@ export function Osservatorio() {
           </div>
         </div>
 
-        {/* Grafico 2: Tematiche (Sostituisce il vecchio grafico) */}
+        {/* Grafico 2: Tematiche */}
         <div className="rounded-lg border border-border p-3">
           <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-muted-foreground">Distribuzione per Tematica</p>
           <div className="h-52">
@@ -87,29 +83,25 @@ export function Osservatorio() {
           </div>
         </div>
 
-        {/* Box Testuali e KPI */}
-        <div className="flex flex-col gap-3">
-          <div className="rounded-lg border border-border p-3">
-            <p className="flex items-center gap-1 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
-              <FileCheck2 className="size-4 text-accent" /> Match Progetti / Bandi
-            </p>
-            <p className="mt-1 font-display text-3xl font-bold text-ember-gradient">
-              {totaleBandiIntercettati}
-            </p>
-            <p className="text-xs text-muted-foreground">
-              Bandi attivi incrociati e inseriti nei Dossier generati dagli utenti.
-            </p>
-          </div>
-          
-          <div className="flex-1 rounded-lg border border-accent/40 bg-secondary/50 p-3 text-sm">
-            <p className="mb-1 flex items-center gap-1 text-xs font-semibold uppercase tracking-wide text-accent">
+        {/* Box Osservazione Automatica dell'IA a tutta altezza */}
+        <div className="flex flex-col justify-between rounded-lg border border-accent/40 bg-secondary/50 p-5 text-sm">
+          <div>
+            <p className="mb-3 flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-accent">
               <Bot className="size-4" /> Osservazione automatica dell'IA
             </p>
-            <p className="text-xs leading-relaxed">
-              Il quartiere più attivo è <b>{top?.quartiere}</b> con {top?.voti || 0} voti. 
-              {topSegn ? ` La proposta cittadina con più consenso è «${topSegn.titolo}» (${topSegn.voti} voti).` : " Nessuna proposta ancora registrata in mappa."} 
-              Sono stati generati <b>{state.dossierGenerati.length} Dossier</b> che hanno individuato <b>{totaleBandiIntercettati} opportunità di finanziamento</b>. La discussione civica conta {commentiTot} commenti totali.
+            <p className="text-sm leading-relaxed text-foreground/95">
+              Il quartiere attualmente più attivo è <b className="text-accent">{top?.quartiere}</b> con <b>{top?.voti || 0} voti</b> registrati.
+              {topSegn
+                ? ` La proposta cittadina con più consenso è «${topSegn.titolo}» (${topSegn.voti} voti).`
+                : " Nessuna proposta prioritaria ancora consolidata in mappa: inserisci il primo pin per avviare l'analisi territoriale."}
             </p>
+            <p className="mt-3 text-xs leading-relaxed text-muted-foreground">
+              L'incrocio continuo tra bisogni civici e finanza agevolativa ha generato finora <b>{state.dossierGenerati.length} Dossier Strategici</b>, individuando complessivamente <b>{totaleBandiIntercettati} opportunità di finanziamento</b> compatibili. La discussione civica conta {commentiTot} contributi totali.
+            </p>
+          </div>
+          <div className="mt-4 border-t border-border/60 pt-2.5 flex items-center justify-between text-[11px] text-muted-foreground">
+            <span>Sintesi generativa in tempo reale</span>
+            <span className="font-semibold text-accent">Motore Analitico Terni 2030</span>
           </div>
         </div>
       </div>

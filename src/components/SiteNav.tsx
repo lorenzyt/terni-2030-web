@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Link, useLocation } from "@tanstack/react-router";
-import { Menu, X, UserCircle, ShieldCheck } from "lucide-react";
+import { Menu, X, UserCircle } from "lucide-react";
 import { useCivic } from "@/lib/civic-store";
 import { LoginDialog } from "@/components/LoginDialog";
 import { Button } from "@/components/ui/button";
@@ -8,18 +8,8 @@ import { Button } from "@/components/ui/button";
 export function SiteNav() {
   const [isOpen, setIsOpen] = useState(false);
   const [loginOpen, setLoginOpen] = useState(false);
-  const [isAdmin, setIsAdmin] = useState(false);
   const { pathname } = useLocation();
   const { user } = useCivic() || {};
-
-  useEffect(() => {
-    try {
-      setIsAdmin(
-        sessionStorage.getItem("terni2030_regia_session") === "authorized" ||
-        localStorage.getItem("terni2030_is_admin") === "1"
-      );
-    } catch {}
-  }, [pathname, loginOpen]);
 
   const linkClass = (path: string) =>
     `text-sm font-medium transition-colors hover:text-accent ${pathname.startsWith(path) ? "text-accent font-semibold" : "text-muted-foreground"}`;
@@ -37,17 +27,9 @@ export function SiteNav() {
           <Link to="/mappa" className={linkClass("/mappa")}>Mappa GIS</Link>
           <Link to="/urban-go" className={linkClass("/urban-go")}>Terni Urban-Go</Link>
           <Link to="/dossier" className={linkClass("/dossier")}>Bandi & Dossier IA</Link>
-          <Link to="/partner" className={linkClass("/partner")}>Partner</Link>
+          <Link to="/partner" className={linkClass("/partner")}>Chi Siamo & Partner</Link>
 
           <div className="ml-4 border-l border-border pl-6 flex items-center gap-2">
-            {isAdmin && (
-              <Link
-                to="/regia"
-                className="inline-flex items-center justify-center rounded-md text-xs font-bold bg-accent/15 text-accent border border-accent/40 hover:bg-accent/25 h-9 px-3 gap-1.5"
-              >
-                <ShieldCheck className="size-4" /> Regia Lorenzo
-              </Link>
-            )}
             {user ? (
               <Link
                 to="/profilo"
@@ -74,12 +56,7 @@ export function SiteNav() {
             <Link to="/mappa" className={linkClass("/mappa")} onClick={() => setIsOpen(false)}>Mappa GIS</Link>
             <Link to="/urban-go" className={linkClass("/urban-go")} onClick={() => setIsOpen(false)}>Terni Urban-Go</Link>
             <Link to="/dossier" className={linkClass("/dossier")} onClick={() => setIsOpen(false)}>Bandi & Dossier IA</Link>
-            <Link to="/partner" className={linkClass("/partner")} onClick={() => setIsOpen(false)}>Partner</Link>
-            {isAdmin && (
-              <Link to="/regia" className="text-sm font-bold text-accent" onClick={() => setIsOpen(false)}>
-                Regia Esclusiva Lorenzo
-              </Link>
-            )}
+            <Link to="/partner" className={linkClass("/partner")} onClick={() => setIsOpen(false)}>Chi Siamo & Partner</Link>
             <div className="pt-4 border-t border-border flex flex-col gap-2">
               {user ? (
                 <Link

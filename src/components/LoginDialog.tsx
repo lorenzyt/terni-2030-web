@@ -7,8 +7,8 @@ import { supabase, useCivic } from "@/lib/civic-store";
 import { useNavigate } from "@tanstack/react-router";
 import { Lock, Mail, UserCheck } from "lucide-react";
 
-// Hash SHA-256 predefinito per le credenziali di prova iniziali:
-// Nome Utente: admin_lorenzo  |  Password: Terni2030!Prova
+// Credenziali Admin Lorenzo: admin_lorenzo / Terni2030!Prova
+// Credenziali Collaboratore Gianluca: gianluca_regia / Terni2030!Gianluca
 export const DEFAULT_ADMIN_HASH = "e6b3f0a341c4fe833804e05136a4a5fa8d8e6234e6f89b82a7c87dc16f8fd242";
 
 export async function calcolaHashCredenziali(username: string, password: string): Promise<string> {
@@ -20,10 +20,20 @@ export async function calcolaHashCredenziali(username: string, password: string)
   return hashArray.map((b) => b.toString(16).padStart(2, "0")).join("");
 }
 
-export async function verificaCredenzialiAdminEsclusive(username: string, password: string): Promise<boolean> {
+export async function verificaCredenzialiAdminEsclusive(
+  username: string,
+  password: string
+): Promise<{ ok: boolean; operatore: string }> {
+  const cleanUser = username.trim().toLowerCase();
   const hashInserito = await calcolaHashCredenziali(username, password);
 
-  // 1. Controlla se Lorenzo ha salvato nuove credenziali cifrate su Supabase Cloud
+  // 1. Verifica Collaboratore Gianluca (Credenziali Temporanee o Personalizzate)
+  const hashGianluca = await calcolaHashCredenziali("gianluca_regia", "Terni2030!Gianluca");
+  if (hashInserito === hashGianluca || (cleanUser === "gianluca_regia" && password === "Terni2030!Gianluca")) {
+    return { ok: true, operatore: "Gianluca (Collaboratore Regia)" };
+  }
+
+  // 2. Controlla se Lorenzo o Gianluca hanno salvato credenziali cifrate su Supabase Cloud
   if (supabase) {
     try {
       const { data } = await supabase
@@ -33,24 +43,31 @@ export async function verificaCredenzialiAdminEsclusive(username: string, passwo
         .maybeSingle();
       if (data?.descrizione) {
         const parsed = JSON.parse(data.descrizione);
-        if (parsed.hash) {
-          return hashInserito === parsed.hash;
+        if (parsed.hash && hashInserito === parsed.hash) {
+          return { ok: true, operatore: "Lorenzo Covicchio (Admin)" };
+        }
+        if (parsed.hash_gianluca && hashInserito === parsed.hash_gianluca) {
+          return { ok: true, operatore: "Gianluca (Collaboratore Regia)" };
         }
       }
     } catch {}
   }
 
-  // 2. Controlla eventuale hash salvato in locale
+  // 3. Controlla eventuale hash salvato in locale
   try {
     const localHash = localStorage.getItem("terni2030_custom_admin_hash");
-    if (localHash) {
-      return hashInserito === localHash;
+    if (localHash && hashInserito === localHash) {
+      return { ok: true, operatore: "Lorenzo Covicchio (Admin)" };
     }
   } catch {}
 
-  // 3. Verifica con le credenziali di prova iniziali (admin_lorenzo / Terni2030!Prova)
+  // 4. Verifica con le credenziali di Lorenzo (admin_lorenzo / Terni2030!Prova)
   const hashProva = await calcolaHashCredenziali("admin_lorenzo", "Terni2030!Prova");
-  return hashInserito === hashProva || hashInserito === DEFAULT_ADMIN_HASH;
+  if (hashInserito === hashProva || hashInserito === DEFAULT_ADMIN_HASH) {
+    return { ok: true, operatore: "Lorenzo Covicchio (Admin)" };
+  }
+
+  return { ok: false, operatore: "" };
 }
 
 export function LoginDialog({ open, onOpenChange }: { open: boolean; onOpenChange: (o: boolean) => void }) {
@@ -76,19 +93,18 @@ export function LoginDialog({ open, onOpenChange }: { open: boolean; onOpenChang
     }
     setLoading(true);
     try {
-      // 1. Verifica se sono le credenziali esclusive di Regia (Lorenzo)
-      const isRegiaAdmin = await verificaCredenzialiAdminEsclusive(usernameOrEmail, password);
-      if (isRegiaAdmin) {
+      const esitoRegia = await verificaCredenzialiAdminEsclusive(usernameOrEmail, password);
+      if (esitoRegia.ok) {
         sessionStorage.setItem("terni2030_regia_session", "authorized");
+        sessionStorage.setItem("terni2030_regia_operatore", esitoRegia.operatore);
         localStorage.setItem("terni2030_is_admin", "1");
         setLoading(false);
         onOpenChange(false);
-        toast.success("Accesso Esclusivo Regia riconosciuto! Benvenuto Lorenzo.");
+        toast.success(`Accesso Regia riconosciuto! Benvenuto ${esitoRegia.operatore}.`);
         navigate({ to: "/regia" });
         return;
       }
 
-      // 2. Altrimenti prova il normale login cittadino con Email + Password su Supabase
       if (supabase && usernameOrEmail.includes("@")) {
         const { error } = await supabase.auth.signInWithPassword({
           email: usernameOrEmail.trim(),
@@ -115,7 +131,7 @@ export function LoginDialog({ open, onOpenChange }: { open: boolean; onOpenChang
     if (!supabase) return toast.error("Supabase non connesso");
     const { error } = await supabase.auth.signInWithOAuth({
       provider: "google",
-      options: { redirectTo: window.location.origin + "/profilo" }
+      options: { redirectTo: window.location.origin + "/profilo" },
     });
     if (error) toast.error("Errore accesso Google: " + error.message);
   };
@@ -126,7 +142,7 @@ export function LoginDialog({ open, onOpenChange }: { open: boolean; onOpenChang
     setLoading(true);
     const { error } = await supabase.auth.signInWithOtp({
       email: emailMagic.trim(),
-      options: { emailRedirectTo: window.location.origin + "/profilo" }
+      options: { emailRedirectTo: window.location.origin + "/profilo" },
     });
     setLoading(false);
     if (error) {
@@ -160,7 +176,7 @@ export function LoginDialog({ open, onOpenChange }: { open: boolean; onOpenChang
         <DialogHeader>
           <DialogTitle>Accedi a Terni 2030</DialogTitle>
           <DialogDescription>
-            Accedi con Nome Utente e Password oppure entra nell'Area Cittadino con Email/Google.
+            Accedi con le tue credenziali personali oppure entra nell'Area Cittadino con Email/Google.
           </DialogDescription>
         </DialogHeader>
 
@@ -199,7 +215,7 @@ export function LoginDialog({ open, onOpenChange }: { open: boolean; onOpenChang
               <label className="text-xs font-semibold text-muted-foreground">Password</label>
               <Input
                 type="password"
-                placeholder="????????????"
+                placeholder="••••••••••••"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 onKeyDown={(e) => e.key === "Enter" && handleLoginCredenziali()}
