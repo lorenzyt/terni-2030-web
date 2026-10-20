@@ -16,84 +16,15 @@ const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || "https://qmkhbwlqbpswcr
 const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY || "sb_publishable_yqbhDlGA6_Q7oQz1flEa9w_4Jw1DkF3";
 export const supabase = supabaseUrl && supabaseAnonKey ? createClient(supabaseUrl, supabaseAnonKey) : null;
 
-export type Commento = {
-  id: string;
-  autore: string;
-  testo: string;
-  data: string;
-  esploratore?: boolean;
-};
-
+export type Commento = { id: string; autore: string; testo: string; data: string; esploratore?: boolean; };
 export type OpzioneSondaggio = { id: string; testo: string; voti: number; community?: boolean };
-export type SondaggioCivico = {
-  id: string;
-  domanda: string;
-  contesto: string;
-  community?: boolean;
-  opzioni: OpzioneSondaggio[];
-};
-
-export type ObiettivoCommunity = {
-  id: string;
-  titolo: string;
-  descrizione: string;
-  area: string;
-};
-
-export type Recensione = {
-  id: string;
-  autore: string;
-  ruolo: string;
-  stelle: number;
-  testo: string;
-  data: string;
-  verificata: boolean;
-};
-
-export type PostSocial = {
-  id: string;
-  pagina: string;
-  tipo: "Post" | "Video" | "Iniziativa";
-  testo: string;
-  temi: string[];
-  data: string;
-  reazioni: number;
-  link: string;
-  segnalatoDaUtente?: boolean;
-};
-
-export type AuditBando = {
-  stato: "Certificato" | "Da Verificare" | "Scartato";
-  linkUfficiale?: string;
-  nota?: string;
-  operatore?: string;
-  aggiornato?: string;
-};
-
-export type DossierLog = {
-  id: string;
-  orario: string;
-  profilo: string;
-  quartiere: string;
-  obiettivo: string;
-  email?: string;
-  azione: string;
-  stato?: string;
-  numero_bandi: number;
-  elenco_bandi: string[];
-  bozza_testuale?: string;
-};
-
-export type PropostaModerazione = {
-  id: string;
-  tipo: "poi" | "bacheca" | "sondaggio" | "mappa";
-  titolo: string;
-  autore: string;
-  contatto: string;
-  data: string;
-  stato: "In attesa" | "Approvata" | "Rifiutata";
-  dati: any;
-};
+export type SondaggioCivico = { id: string; domanda: string; contesto: string; community?: boolean; opzioni: OpzioneSondaggio[]; };
+export type ObiettivoCommunity = { id: string; titolo: string; descrizione: string; area: string; };
+export type Recensione = { id: string; autore: string; ruolo: string; stelle: number; testo: string; data: string; verificata: boolean; };
+export type PostSocial = { id: string; pagina: string; tipo: "Post" | "Video" | "Iniziativa"; testo: string; temi: string[]; data: string; reazioni: number; link: string; segnalatoDaUtente?: boolean; };
+export type AuditBando = { stato: "Certificato" | "Da Verificare" | "Scartato"; linkUfficiale?: string; nota?: string; operatore?: string; aggiornato?: string; };
+export type DossierLog = { id: string; orario: string; profilo: string; quartiere: string; obiettivo: string; email?: string; azione: string; stato?: string; numero_bandi: number; elenco_bandi: string[]; bozza_testuale?: string; };
+export type PropostaModerazione = { id: string; tipo: "poi" | "bacheca" | "sondaggio" | "mappa"; titolo: string; autore: string; contatto: string; data: string; stato: "In attesa" | "Approvata" | "Rifiutata"; dati: any; };
 
 export type CivicState = {
   segnalazioni: Segnalazione[];
@@ -117,7 +48,7 @@ export type CivicState = {
   proposteModerazione: PropostaModerazione[];
 };
 
-const oggi = () => new Date().toISOString().slice(0, 10);
+export const oggi = () => new Date().toISOString().split("T")[0];
 export const nuovoId = (p: string) => `${p}${Date.now().toString(36)}${Math.random().toString(36).slice(2, 6)}`;
 
 const INIZIALE: CivicState = {
@@ -258,7 +189,10 @@ export function CivicProvider({ children }: { children: ReactNode }) {
             const parsed = JSON.parse(item.descrizione || "{}");
             const stProp = (item.stato || parsed.stato || "In attesa") as PropostaModerazione["stato"];
             if (stProp === "Rifiutata") { supabase.from("segnalazioni").delete().eq("id", idStr).then(); continue; }
-            if (stProp === "Rifiutata") continue;
+            if (stProp === "Rifiutata") {
+              supabase.from("segnalazioni").delete().eq("id", idStr).then();
+              continue;
+            }
             const propObj: PropostaModerazione = {
               id: idStr,
               tipo: parsed.tipo || "bacheca",
@@ -273,10 +207,7 @@ export function CivicProvider({ children }: { children: ReactNode }) {
 
             if (stProp === "Approvata") {
               if (propObj.tipo === "poi" && propObj.dati) {
-                const raritaScelta: RaritaPOI =
-                  propObj.dati.rarita && RARITA_STANDARD[propObj.dati.rarita as RaritaPOI]
-                    ? (propObj.dati.rarita as RaritaPOI)
-                    : "Comune";
+                const raritaScelta: RaritaPOI = propObj.dati.rarita && RARITA_STANDARD[propObj.dati.rarita as RaritaPOI] ? (propObj.dati.rarita as RaritaPOI) : "Comune";
                 poiApprovati.push({
                   id: idStr,
                   nome: propObj.dati.nome || propObj.titolo,
@@ -318,33 +249,16 @@ export function CivicProvider({ children }: { children: ReactNode }) {
                   domanda: propObj.dati.domanda || propObj.titolo,
                   contesto: propObj.dati.contesto || `Proposto da ${propObj.autore}`,
                   community: true,
-                  opzioni: Array.isArray(propObj.dati.opzioni)
-                    ? propObj.dati.opzioni
-                    : [
-                        { id: "a", testo: "Favorevole / Prioritario", voti: 0 },
-                        { id: "b", testo: "Da valutare con modifiche", voti: 0 },
-                      ],
+                  opzioni: Array.isArray(propObj.dati.opzioni) ? propObj.dati.opzioni : [{ id: "a", testo: "Favorevole / Prioritario", voti: 0 }, { id: "b", testo: "Da valutare con modifiche", voti: 0 }],
                 });
               }
             }
           } catch {}
         } else if (idStr !== "config_admin_auth") {
           if (item.stato === "In revisione") {
-            listaProposte.push({
-              id: idStr,
-              tipo: "mappa",
-              titolo: item.titolo || "Segnalazione Mappa",
-              autore: "Cittadino su Mappa GIS",
-              contatto: item.quartiere || "Terni",
-              data: item.created_at || oggi(),
-              stato: "In attesa",
-              dati: item,
-            });
+            listaProposte.push({ id: idStr, tipo: "mappa", titolo: item.titolo || "Segnalazione Mappa", autore: "Cittadino su Mappa GIS", contatto: item.quartiere || "Terni", data: item.created_at || oggi(), stato: "In attesa", dati: item });
           } else if (item.stato !== "Rifiutata") {
-            soloSegnalazioniMappa.push({
-              ...item,
-              data: item.created_at,
-            });
+            soloSegnalazioniMappa.push({ ...item, data: item.created_at });
           }
         }
       }
@@ -423,14 +337,11 @@ export function CivicProvider({ children }: { children: ReactNode }) {
     });
   }, []);
 
-  const tuttiPoi = [...POI_LIST, ...state.poiExtra];
-  const puntiGuadagnati = tuttiPoi.filter((p) => state.checkin.includes(p.id)).reduce((a, p) => a + p.punti, 0);
+  const puntiGuadagnati = [...POI_LIST, ...state.poiExtra].filter((p) => state.checkin.includes(p.id)).reduce((a, p) => a + p.punti, 0);
   const puntiDisponibili = Math.max(0, puntiGuadagnati - state.puntiSpesi);
 
   return (
-    <CivicContext.Provider
-      value={{ state, update, ricaricaCloud, puntiGuadagnati, puntiDisponibili, user }}
-    >
+    <CivicContext.Provider value={{ state, update, ricaricaCloud, puntiGuadagnati, puntiDisponibili, user }}>
       {children}
     </CivicContext.Provider>
   );
@@ -442,28 +353,17 @@ export function useCivic() {
   return c;
 }
 
+export const COSTI_PREMI = { sconto: 500, badge: 1000, partner: 150 } as const;
+
 export async function inviaSegnalazione(segnalazione: Omit<Segnalazione, "id" | "created_at" | "data">) {
   if (!supabase) return;
-  const { error } = await supabase.from("segnalazioni").insert({
-    ...segnalazione,
-    stato: "In revisione",
-    id: nuovoId("s"),
-    created_at: new Date().toISOString().split("T")[0]
-  });
-  if (error) console.error("Errore invio:", error);
+  await supabase.from("segnalazioni").insert({ ...segnalazione, stato: "In revisione", id: nuovoId("s"), created_at: oggi() });
 }
 
-export async function inviaPropostaModerazione(payload: {
-  tipo: "poi" | "bacheca" | "sondaggio";
-  titolo: string;
-  autore: string;
-  contatto: string;
-  dati: any;
-}) {
+export async function inviaPropostaModerazione(payload: { tipo: "poi" | "bacheca" | "sondaggio"; titolo: string; autore: string; contatto: string; dati: any; }) {
   if (!supabase) return;
-  const idRow = `prop_${payload.tipo}_${Date.now().toString(36)}`;
   await supabase.from("segnalazioni").insert({
-    id: idRow,
+    id: `prop_${payload.tipo}_${Date.now().toString(36)}`,
     titolo: payload.titolo.slice(0, 120),
     quartiere: payload.dati?.quartiere || "Terni",
     categoria: "Proposta_Moderazione",
@@ -471,59 +371,33 @@ export async function inviaPropostaModerazione(payload: {
     voti: 0,
     lat: Number(payload.dati?.lat) || 42.5636,
     lng: Number(payload.dati?.lng) || 12.6427,
-    descrizione: JSON.stringify({
-      ...payload,
-      stato: "In attesa",
-      data: oggi(),
-    }),
+    descrizione: JSON.stringify({ ...payload, stato: "In attesa", data: oggi() }),
     created_at: oggi(),
   });
 }
 
-export async function eliminaPoiAdmin(id: string) {
-  if (!supabase) throw new Error("Database offline");
-  const { error } = await supabase.from("segnalazioni").delete().eq("id", id);
-  if (error) throw new Error(error.message);
-}
-
-export async function modificaPoiAdmin(id: string, payload: any) {
-  if (!supabase) throw new Error("Database offline");
-  const { error } = await supabase.from("segnalazioni").update({
-    titolo: payload.titolo.slice(0, 120),
-    lat: payload.lat || 42.5636,
-    lng: payload.lng || 12.6427,
-    descrizione: JSON.stringify({
-      tipo: "poi",
-      titolo: payload.titolo,
-      autore: payload.autoreStorico || payload.autore || "Non specificato",
-      autoreScheda: payload.autoreScheda || "Lorenzo Covicchio",
-      contatto: "Admin Diretto",
-      data: oggi(),
-      stato: "Approvata",
-      dati: {
-        nome: payload.titolo,
-        autore: payload.autoreStorico || payload.autore || "Non specificato",
-        autoreScheda: payload.autoreScheda || "Lorenzo Covicchio",
-        anno: payload.anno,
-        categoria: payload.categoria,
-        rarita: payload.rarita,
-        punti: payload.punti,
-        lat: payload.lat,
-        lng: payload.lng,
-        descrizione: payload.descrizione,
-        immagine: payload.immagine,
-        articolo: payload.articolo
-      }
-    })
-  }).eq("id", id);
-  if (error) throw new Error(error.message);
+export async function gestisciPropostaAdmin(id: string, stato: string) {
+  if (!supabase) return;
+  if (stato === "Rifiutata") {
+    await supabase.from("segnalazioni").delete().eq("id", id);
+    return;
+  }
+  const { data: row } = await supabase.from("segnalazioni").select("descrizione").eq("id", id).maybeSingle();
+  let nuovaDesc = row?.descrizione;
+  if (nuovaDesc) {
+    try {
+      const p = JSON.parse(nuovaDesc);
+      p.stato = stato;
+      nuovaDesc = JSON.stringify(p);
+    } catch {}
+  }
+  await supabase.from("segnalazioni").update({ stato, ...(nuovaDesc ? { descrizione: nuovaDesc } : {}) }).eq("id", id);
 }
 
 export async function inserisciPoiDirettoAdmin(payload: any) {
-  if (!supabase) throw new Error("Database offline");
-  const idRow = "prop_poi_" + Date.now().toString(36);
-  const { error } = await supabase.from("segnalazioni").insert({
-    id: idRow,
+  if (!supabase) return;
+  await supabase.from("segnalazioni").insert({
+    id: `prop_poi_${Date.now().toString(36)}`,
     titolo: payload.titolo.slice(0, 120),
     quartiere: "Regia",
     categoria: "Proposta_Moderazione",
@@ -551,37 +425,49 @@ export async function inserisciPoiDirettoAdmin(payload: any) {
         lng: payload.lng,
         descrizione: payload.descrizione,
         immagine: payload.immagine,
-        articolo: payload.articolo
-      }
+        articolo: payload.articolo,
+      },
     }),
     created_at: oggi(),
   });
-  if (error) throw new Error(error.message);
 }
 
-export async function gestisciPropostaAdmin(id: string, stato: string) {
-  if (!supabase) throw new Error("Database offline");
-  if (stato === "Rifiutata") {
-    const { error } = await supabase.from("segnalazioni").delete().eq("id", id);
-    if (error) throw new Error(error.message);
-    return;
-  }
-  const { data: row } = await supabase.from("segnalazioni").select("descrizione").eq("id", id).maybeSingle();
-  let nuovaDesc = row?.descrizione;
-  if (nuovaDesc) {
-    try {
-      const p = JSON.parse(nuovaDesc);
-      p.stato = stato;
-      nuovaDesc = JSON.stringify(p);
-    } catch {}
-  }
-  const { error } = await supabase.from("segnalazioni").update({ stato, ...(nuovaDesc ? { descrizione: nuovaDesc } : {}) }).eq("id", id);
-  if (error) throw new Error(error.message);
+export async function modificaPoiAdmin(id: string, payload: any) {
+  if (!supabase) return;
+  await supabase.from("segnalazioni").update({
+    titolo: payload.titolo.slice(0, 120),
+    lat: payload.lat || 42.5636,
+    lng: payload.lng || 12.6427,
+    descrizione: JSON.stringify({
+      tipo: "poi",
+      titolo: payload.titolo,
+      autore: payload.autoreStorico || payload.autore || "Non specificato",
+      autoreScheda: payload.autoreScheda || "Lorenzo Covicchio",
+      contatto: "Admin Diretto",
+      data: oggi(),
+      stato: "Approvata",
+      dati: {
+        nome: payload.titolo,
+        autore: payload.autoreStorico || payload.autore || "Non specificato",
+        autoreScheda: payload.autoreScheda || "Lorenzo Covicchio",
+        anno: payload.anno,
+        categoria: payload.categoria,
+        rarita: payload.rarita,
+        punti: payload.punti,
+        lat: payload.lat,
+        lng: payload.lng,
+        descrizione: payload.descrizione,
+        immagine: payload.immagine,
+        articolo: payload.articolo,
+      },
+    }),
+  }).eq("id", id);
 }
 
-export const COSTI_PREMI = { sconto: 500, badge: 1000, partner: 150 } as const;
-
-export { oggi };
+export async function eliminaPoiAdmin(id: string) {
+  if (!supabase) return;
+  await supabase.from("segnalazioni").delete().eq("id", id);
+}
 
 export async function getDossiersAdmin() {
   if (!supabase) return [];
@@ -590,57 +476,44 @@ export async function getDossiersAdmin() {
 }
 
 export async function eliminaDossierAdmin(id: string) {
-  if (!supabase) throw new Error("Database offline");
-  const { error } = await supabase.from("segnalazioni").delete().eq("id", id);
-  if (error) throw new Error(error.message);
+  if (!supabase) return;
+  await supabase.from("segnalazioni").delete().eq("id", id);
 }
 
 export async function modificaStatoDossierAdmin(id: string, stato: string) {
-  if (!supabase) throw new Error("Database offline");
-  const { error } = await supabase.from("segnalazioni").update({ stato }).eq("id", id);
-  if (error) throw new Error(error.message);
+  if (!supabase) return;
+  await supabase.from("segnalazioni").update({ stato }).eq("id", id);
 }
 
 export async function registraDossierGenerato(payload: any) {
   if (!supabase) return;
-
   const emailInput = document.getElementById("dossierEmail") as HTMLInputElement | null;
   const email = (payload.email || emailInput?.value || "").trim();
-  if (!email || !email.includes("@")) {
-    throw new Error("Inserisci un indirizzo email valido per richiedere il Dossier.");
-  }
+  if (!email || !email.includes("@")) throw new Error("Email non valida.");
 
   const orario = new Date().toLocaleString("it-IT");
-  const bandiRaw = Array.isArray(payload.bandi_completi)
-    ? payload.bandi_completi
-    : Array.isArray(payload.bandi)
-    ? payload.bandi
-    : [];
-  const elencoBandi = bandiRaw.map((b: any) =>
-    typeof b === "string" ? b : `${b.titolo || b.nome} — ${b.portale || b.ente || ""} (${b.importo || ""})`
-  );
+  const bandiRaw = Array.isArray(payload.bandi_completi) ? payload.bandi_completi : Array.isArray(payload.bandi) ? payload.bandi : [];
+  const elencoBandi = bandiRaw.map((b: any) => typeof b === "string" ? b : `${b.titolo || b.nome} — ${b.portale || b.ente || ""} (${b.importo || ""})`);
 
-  const righeSchede = bandiRaw
-    .map((b: any, idx: number) => {
-      if (typeof b === "string") return `${idx + 1}.${b}`;
-      return [
-        `----------------------------------------------------------------------`,
-        `MISURA #${idx + 1}:${b.titolo || b.nome}`,
-        `----------------------------------------------------------------------`,
-        `• Ente / Canale Erogatore: ${b.ente || b.portale || "Istituzionale"}`,
-        `• Asse d'Intervento: ${b.asse_specifico || b.obiettivo_nome || payload.obiettivo}`,
-        `• Dotazione / Agevolazione: ${b.importo || "Contributo a fondo perduto / finanziamento agevolato"}`,
-        `• Stato / Scadenza: ${b.scadenza || "Sportello attivo"}`,
-        `• Sintesi Operativa: ${b.descrizione || "-"}`,
-        `• Pagina Specifica del Bando / Sportello: ${b.link || "https://www.regione.umbria.it/bandi"}`
-      ].join("\n");
-    })
-    .join("\n\n");
+  const righeSchede = bandiRaw.map((b: any, idx: number) => {
+    if (typeof b === "string") return `${idx + 1}.${b}`;
+    return [
+      `----------------------------------------------------------------------`,
+      `MISURA #${idx + 1}:${b.titolo || b.nome}`,
+      `----------------------------------------------------------------------`,
+      `• Ente / Canale Erogatore: ${b.ente || b.portale || "Istituzionale"}`,
+      `• Asse d'Intervento: ${b.asse_specifico || b.obiettivo_nome || payload.obiettivo}`,
+      `• Dotazione / Agevolazione: ${b.importo || "Contributo a fondo perduto / finanziamento agevolato"}`,
+      `• Stato / Scadenza: ${b.scadenza || "Sportello attivo"}`,
+      `• Sintesi Operativa: ${b.descrizione || "-"}`,
+      `• Pagina Specifica del Bando / Sportello: ${b.link || "https://www.regione.umbria.it/bandi"}`
+    ].join("\n");
+  }).join("\n\n");
 
   const bozzaTestuale = [
     `======================================================================`,
     ` DOSSIER STRATEGICO BANDI & FINANZIAMENTI — TERNI 2030`,
-    ` Curato e verificato da Lorenzo Covicchio`,
+    ` Supervisionato da Lorenzo Covicchio`,
     `======================================================================`,
     `Data elaborazione: ${orario}`,
     `Destinatario: ${email}`,
@@ -659,16 +532,9 @@ export async function registraDossierGenerato(payload: any) {
     `======================================================================`
   ].join("\n");
 
-  const fullPayload = {
-    ...payload,
-    email,
-    orario,
-    numero_bandi: elencoBandi.length,
-    elenco_bandi: elencoBandi,
-    bozza_testuale: bozzaTestuale,
-  };
-
+  const fullPayload = { ...payload, email, orario, numero_bandi: elencoBandi.length, elenco_bandi: elencoBandi, bozza_testuale: bozzaTestuale };
   const idRow = `dossier_${Date.now().toString(36)}`;
+  
   await supabase.from("segnalazioni").insert({
     id: idRow,
     titolo: `Dossier di ${email}`,
@@ -679,22 +545,17 @@ export async function registraDossierGenerato(payload: any) {
     lat: 42.5636,
     lng: 12.6427,
     descrizione: JSON.stringify(fullPayload),
-    created_at: new Date().toISOString().split("T")[0]
+    created_at: oggi()
   });
 
   try {
     await supabase.from("dossier_generati").insert({
-      email,
-      profilo: payload.profilo || "Cittadino",
-      quartiere: payload.quartiere || "Terni",
-      obiettivo: payload.obiettivo || "Generale",
-      bandi_trovati: elencoBandi,
-      stato: "Da Supervisionare",
+      email, profilo: payload.profilo || "Cittadino", quartiere: payload.quartiere || "Terni", obiettivo: payload.obiettivo || "Generale", bandi_trovati: elencoBandi, stato: "Da Supervisionare"
     });
   } catch {}
 }
 
-export async function salvaAuditBandoCloud(key: string, titolo: string, nuovoStato: string, nota: string, linkUfficiale: string) {
+export async function salvaAuditBandoCloud(key: string, titolo: string, record: AuditBando) {
   if (!supabase) return;
   const idRow = `audit_${key}`;
   await supabase.from("segnalazioni").delete().eq("id", idRow);
@@ -703,20 +564,19 @@ export async function salvaAuditBandoCloud(key: string, titolo: string, nuovoSta
     titolo: titolo.slice(0, 120),
     quartiere: "Regia",
     categoria: "Audit_Bando",
-    stato: nuovoStato,
+    stato: record.stato,
     voti: 0,
     lat: 42.5636,
     lng: 12.6427,
-    descrizione: JSON.stringify({ stato: nuovoStato, linkUfficiale, nota, operatore: "Controllo Regione", aggiornato: new Date().toLocaleString("it-IT") }),
-    created_at: new Date().toISOString().split("T")[0]
+    descrizione: JSON.stringify(record),
+    created_at: oggi()
   });
 }
 
 export async function aggiungiCommento(autore: string, testo: string, poiId: string) {
   if (!supabase) return;
-  const idRow = `commento_${Date.now().toString(36)}`;
   await supabase.from("segnalazioni").insert({
-    id: idRow,
+    id: `commento_${Date.now().toString(36)}`,
     titolo: `Commento di ${autore}`,
     quartiere: poiId,
     categoria: "Commento",
@@ -725,6 +585,6 @@ export async function aggiungiCommento(autore: string, testo: string, poiId: str
     lat: 42.5636,
     lng: 12.6427,
     descrizione: JSON.stringify({ autore, testo, data: oggi() }),
-    created_at: new Date().toISOString().split("T")[0]
+    created_at: oggi()
   });
 }

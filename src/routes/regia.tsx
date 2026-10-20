@@ -22,6 +22,7 @@ import {
   Pencil,
   CheckCircle2,
   XCircle,
+  AlertTriangle,
 } from "lucide-react";
 import {
   useCivic,
@@ -50,6 +51,15 @@ function normKey(titolo: string): string {
 
 function fmtEuro(val: number): string {
   return new Intl.NumberFormat("it-IT", { style: "currency", currency: "EUR", maximumFractionDigits: 0 }).format(val || 0);
+}
+
+function estraiNomeCommittente(emailOrName: string, fallback: string): string {
+  const raw = String(emailOrName || "").trim();
+  if (!raw || raw === "Non specificata" || raw === "-") {
+    return String(fallback || "Committente").replace(/[^a-zA-Z0-9._-]/g, "_");
+  }
+  const base = raw.includes("@") ? raw.split("@")[0] : raw;
+  return base.replace(/[^a-zA-Z0-9._-]/g, "_") || "Committente";
 }
 
 const DEFAULT_POI_FORM = {
@@ -96,6 +106,7 @@ function normalizzaRigaDossier(row: any): any {
     row?.email ||
     (typeof row?.titolo === "string" && row.titolo.includes("@") ? row.titolo.replace("Dossier di ", "").trim() : "Non specificata");
 
+  const NL = String.fromCharCode(10);
   const bozzaDefault = [
     "======================================================================",
     " DOSSIER STRATEGICO BANDI & FINANZIAMENTI — TERNI 2030",
@@ -111,7 +122,7 @@ function normalizzaRigaDossier(row: any): any {
     "PASSI CONSIGLIATI:",
     "1. Verifica requisiti soggettivi e preventivi di spesa.",
     "2. Invio domanda telematica tramite sportello ufficiale.",
-  ].join("\n");
+  ].join(NL);
 
   return {
     id: idStr || "dossier_" + Math.random().toString(36).slice(2, 7),
@@ -144,24 +155,20 @@ function RegiaPage() {
   const [dossierAperto, setDossierAperto] = useState<string | null>(null);
   const [testiModificati, setTestiModificati] = useState<Record<string, string>>({});
 
-  // Stato per gestione POI Urban GO (Creazione / Modifica con Mappa)
   const [poiForm, setPoiForm] = useState(DEFAULT_POI_FORM);
   const [editingPoiId, setEditingPoiId] = useState<string | null>(null);
   const [savingPoi, setSavingPoi] = useState(false);
 
-  // Stato per cambio credenziali esclusive
   const [ruoloTarget, setRuoloTarget] = useState<"lorenzo" | "gianluca">("lorenzo");
   const [nuovoUser, setNuovoUser] = useState("");
   const [nuovaPass, setNuovaPass] = useState("");
   const [confermaPass, setConfermaPass] = useState("");
+  const [isDefaultPassword, setIsDefaultPassword] = useState(false);
+  const [feedbackCredenziali, setFeedbackCredenziali] = useState<string | null>(null);
 
-  // Filtri Bandi
   const [qBandi, setQBandi] = useState("");
   const [fMacro, setFMacro] = useState<"" | "citta" | "welfare">("");
   const [fStato, setFStato] = useState<"" | "verde" | "giallo" | "rosso">("");
-  const [noteInput] = useState<Record<string, string>>({});
-
-  const [isDefaultPassword, setIsDefaultPassword] = useState(false);
 
   useEffect(() => {
     try {
@@ -170,8 +177,9 @@ function RegiaPage() {
         const op = sessionStorage.getItem("terni2030_regia_operatore");
         if (op) {
           setOperatoreNome(op);
-          // Se Gianluca entra senza aver ancora salvato un hash personalizzato nel localStorage
           if (op.includes("Gianluca") && !localStorage.getItem("terni2030_custom_admin_hash_gianluca")) {
+            setIsDefaultPassword(true);
+          } else if (op.includes("Lorenzo") && !localStorage.getItem("terni2030_custom_admin_hash")) {
             setIsDefaultPassword(true);
           }
         }
@@ -193,6 +201,9 @@ function RegiaPage() {
       sessionStorage.setItem("terni2030_regia_operatore", opName);
       localStorage.setItem("terni2030_is_admin", "1");
       setOperatoreNome(opName);
+      if (loginPass === "Terni2030!Gianluca" || loginPass === "Terni2030!Prova") {
+        setIsDefaultPassword(true);
+      }
       setAuthOk(true);
       toast.success("Accesso Regia autorizzato. Benvenuto " + opName + "!");
     } else {
@@ -210,6 +221,7 @@ function RegiaPage() {
   };
 
   const salvaNuoveCredenzialiCifrate = async () => {
+    setFeedbackCredenziali(null);
     if (nuovoUser.trim().length < 4) {
       return toast.error("Scegli un Nome Utente di almeno 4 caratteri.");
     }
@@ -225,8 +237,8 @@ function RegiaPage() {
         localStorage.setItem("terni2030_custom_admin_hash", nuovoHash);
       } else {
         localStorage.setItem("terni2030_custom_admin_hash_gianluca", nuovoHash);
-        setIsDefaultPassword(false);
       }
+      setIsDefaultPassword(false);
 
       if (supabase) {
         let payloadPrecedente: any = {};
@@ -261,10 +273,22 @@ function RegiaPage() {
           created_at: new Date().toISOString().split("T")[0],
         });
       }
+
+      const nomeProfilo = ruoloTarget === "lorenzo" ? "Lorenzo Covicchio (Admin)" : "Gianluca (Collaboratore Regia)";
+      const msgConferma =
+        "Credenziali per " +
+        nomeProfilo +
+        " aggiornate con successo (Nuovo Utente: «" +
+        nuovoUser.trim() +
+        "» · Cifratura SHA-256 attiva il " +
+        new Date().toLocaleTimeString("it-IT") +
+        "). Le vecchie credenziali temporanee sono state disattivate.";
+
       setNuovoUser("");
       setNuovaPass("");
       setConfermaPass("");
-      toast.success("Nuove credenziali cifrate salvate!");
+      setFeedbackCredenziali(msgConferma);
+      toast.success("✅ " + msgConferma);
     } catch (e: any) {
       toast.error("Errore salvataggio: " + e.message);
     }
@@ -333,7 +357,6 @@ function RegiaPage() {
   const esportaDossierPdfBrandizzato = (d: any) => {
     let contenuto = testiModificati[d.id] ?? d.bozza_testuale;
 
-    // Aggiorna automaticamente eventuali link generici rimasti nei vecchi dossier salvati
     const mappaLinkSpecifici: Record<string, string> = {
       "https://www.regione.umbria.it/programmazione-fesr": "https://www.sviluppoumbria.it/imprese-e-enti-locali/bandi-per-le-imprese/pr-fesr-2021-2027-azione-2.1.1",
       "https://www.sviluppoumbria.it/bandi-e-avvisi": "https://www.sviluppoumbria.it/imprese-e-enti-locali/bandi-per-le-imprese/investimenti-produttivi-pmi-azione-1.3.1",
@@ -344,7 +367,7 @@ function RegiaPage() {
       "https://www.gse.it/servizi-per-te/mobilita-sostenibile": "https://www.mimit.gov.it/it/incentivi/bonus-colonnine-domestiche-e-condominiali",
       "https://www.umbria.camcom.it/bandi-e-contributi": "https://www.umbria.camcom.it/promozione-e-sviluppo-delle-imprese/pid-punto-impresa-digitale/bando-voucher-digitali-i4.0",
       "https://www.regione.umbria.it/sociale": "https://www.regione.umbria.it/sociale/disabilita-e-vita-indipendente-pr-fse-2021-2027",
-      "https://www.inps.it": "https://www.inps.it/it/it/dettaglio-scheda.schede-servizio-strumento.schede-servizi.bando-di-concorso-home-care-premium-assistenza-domiciliare.html"
+      "https://www.inps.it": "https://www.inps.it/it/it/dettaglio-scheda.schede-servizio-strumento.schede-servizi.bando-di-concorso-home-care-premium-assistenza-domiciliare.html",
     };
 
     Object.entries(mappaLinkSpecifici).forEach(([vecchioUrl, nuovoUrl]) => {
@@ -357,7 +380,7 @@ function RegiaPage() {
         .replace(/</g, "&lt;")
         .replace(/>/g, "&gt;");
 
-    // Converte ogni URL in un bottone pulito (nascondendo l'URL esteso)
+    // Nasconde l'URL lungo e lo incorpora direttamente nell'etichetta gialla cliccabile APRI BANDO
     const formattaRigaConLink = (line: string) => {
       const urlRegex = /(https?:\/\/[^\s<]+)/g;
       const parts = String(line || "").split(urlRegex);
@@ -368,7 +391,7 @@ function RegiaPage() {
             return (
               '<a href="' +
               cleanUrl +
-              '" target="_blank" rel="noopener noreferrer" style="display:inline-block;background:#f59e0b;color:#0f172a;border:1px solid #d97706;padding:4px 10px;border-radius:4px;font-size:11px;font-weight:800;text-decoration:none;margin-left:4px;">APRI BANDO UFFICIALE ↗</a>'
+              '" target="_blank" rel="noopener noreferrer" style="display:inline-block;background:#fef3c7;color:#92400e;border:1.5px solid #f59e0b;padding:3px 12px;border-radius:6px;font-size:11px;font-weight:800;text-decoration:none;letter-spacing:0.03em;margin-left:4px;">APRI BANDO ↗</a>'
             );
           }
           return escapeHtml(part);
@@ -376,7 +399,8 @@ function RegiaPage() {
         .join("");
     };
 
-    const righe = String(contenuto || "").split("\n");
+    const NL = String.fromCharCode(10);
+    const righe = String(contenuto || "").split(NL);
     let corpoHtml = "";
     for (const rawLine of righe) {
       const l = rawLine.trim();
@@ -397,11 +421,11 @@ function RegiaPage() {
       } else if (l.startsWith("•") || l.startsWith("-")) {
         const testoPunto = l.replace(/^[•\-]\s*/, "");
         const idxDuePunti = testoPunto.indexOf(":");
-        if (idxDuePunti > 0 && idxDuePunti < 45) {
+        if (idxDuePunti > 0 && idxDuePunti < 48) {
           const etichetta = escapeHtml(testoPunto.slice(0, idxDuePunti));
           const valore = formattaRigaConLink(testoPunto.slice(idxDuePunti + 1));
           corpoHtml +=
-            '<div style="margin:5px 0 5px 10px;font-size:12px;line-height:1.55;color:#1e293b;">' +
+            '<div style="margin:6px 0 6px 10px;font-size:12px;line-height:1.6;color:#1e293b;">' +
             '<span style="color:#d97706;font-weight:700;">▪ ' +
             etichetta +
             ":</span> " +
@@ -409,7 +433,7 @@ function RegiaPage() {
             "</div>";
         } else {
           corpoHtml +=
-            '<div style="margin:5px 0 5px 10px;font-size:12px;line-height:1.55;color:#1e293b;">▪ ' +
+            '<div style="margin:6px 0 6px 10px;font-size:12px;line-height:1.6;color:#1e293b;">▪ ' +
             formattaRigaConLink(testoPunto) +
             "</div>";
         }
@@ -421,15 +445,20 @@ function RegiaPage() {
       }
     }
 
-    // @page { margin: 0mm } rimuove completamente "about:blank", URL, data e numeri di pagina del browser!
+    // Nome del file PDF automatico basato sul committente del dossier
+    const nomeCommittente = estraiNomeCommittente(d.email, d.quartiere || "Terni");
+    const titoloFilePdf = "Dossier_Terni2030_" + nomeCommittente;
+
     const htmlDoc =
       "<!DOCTYPE html><html lang='it'><head><meta charset='utf-8' />" +
-      "<title>Dossier_Terni2030_" + escapeHtml(d.quartiere || "Terni") + "</title>" +
+      "<title>" + escapeHtml(titoloFilePdf) + "</title>" +
       "<link href='https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap' rel='stylesheet'>" +
       "<style>" +
       "@page { size: A4; margin: 0mm; }" +
-      "html, body { font-family: 'Inter', sans-serif; color: #0f172a; background: #ffffff; margin: 0; padding: 0; -webkit-print-color-adjust: exact; print-color-adjust: exact; }" +
-      ".page { padding: 16mm 18mm; box-sizing: border-box; width: 100%; border-top: 8px solid #f59e0b; }" +
+      "html, body { font-family: 'Inter', sans-serif; color: #0f172a; background: #f1f5f9; margin: 0; padding: 0; -webkit-print-color-adjust: exact; print-color-adjust: exact; }" +
+      ".toolbar { max-width: 820px; margin: 18px auto; background: #0f172a; color: #fff; padding: 12px 20px; border-radius: 10px; display: flex; justify-content: space-between; align-items: center; }" +
+      ".btn-print { background: #f59e0b; color: #0f172a; border: none; padding: 9px 18px; border-radius: 6px; font-weight: 800; font-size: 13px; cursor: pointer; }" +
+      ".page { max-width: 820px; margin: 0 auto 24px auto; background: #ffffff; padding: 16mm 18mm; box-sizing: border-box; width: 100%; border-top: 8px solid #f59e0b; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); }" +
       ".header { display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 2px solid #e2e8f0; padding-bottom: 14px; margin-bottom: 18px; }" +
       ".brand { font-family: 'Archivo', sans-serif; font-size: 28px; font-weight: 800; color: #0f172a; letter-spacing: -0.02em; }" +
       ".brand span { color: #d97706; }" +
@@ -439,14 +468,19 @@ function RegiaPage() {
       ".meta-item b { display: block; font-size: 10px; text-transform: uppercase; color: #64748b; }" +
       ".meta-item span { font-weight: 700; color: #0f172a; font-size: 12.5px; }" +
       ".footer { margin-top: 28px; padding-top: 12px; border-top: 2px solid #e2e8f0; display: flex; justify-content: space-between; font-size: 10px; color: #64748b; page-break-inside: avoid; }" +
+      "@media print { html, body { background: #ffffff; } .toolbar { display: none !important; } .page { margin: 0; max-width: 100%; box-shadow: none; border-radius: 0; } }" +
       "</style></head><body>" +
+      "<div class='toolbar'>" +
+      "<div><b>File pronto: " + escapeHtml(titoloFilePdf) + ".pdf</b><br/><span style='font-size:11px;color:#cbd5e1;'>Seleziona «Salva come PDF» — Tutti i pulsanti gialli APRI BANDO resteranno cliccabili nel PDF!</span></div>" +
+      "<button class='btn-print' onclick='window.print()'>🖨️ Salva PDF (" + escapeHtml(titoloFilePdf) + ")</button>" +
+      "</div>" +
       "<div class='page'>" +
       "<div class='header'>" +
       "<div><div class='brand'>Terni <span>2030</span></div><div class='sub-brand'>Intelligence Bandi & Rigenerazione Urbana · Città e Welfare</div></div>" +
       "<div class='badge-doc'>DOSSIER STRATEGICO VERIFICATO<br/><span style='font-weight:500;font-size:9.5px;'>Protocollo: " + escapeHtml(d.id) + "</span></div>" +
       "</div>" +
       "<div class='meta-grid'>" +
-      "<div class='meta-item'><b>Destinatario Dossier</b><span>" + escapeHtml(d.email) + "</span></div>" +
+      "<div class='meta-item'><b>Committente / Destinatario</b><span>" + escapeHtml(d.email) + "</span></div>" +
       "<div class='meta-item'><b>Data di Elaborazione</b><span>" + escapeHtml(d.orario) + "</span></div>" +
       "<div class='meta-item'><b>Profilo Richiedente</b><span>" + escapeHtml(d.profilo) + "</span></div>" +
       "<div class='meta-item'><b>Quartiere / Ambito di Terni</b><span>" + escapeHtml(d.quartiere) + "</span></div>" +
@@ -457,40 +491,19 @@ function RegiaPage() {
       "<div><b>Terni 2030</b> · Dossier revisionato e validato da <b>Lorenzo Covicchio</b> (Autore e Curatore)</div>" +
       "<div>Contatti: <a href='mailto:Terni.2030@outlook.it' style='color:#d97706;text-decoration:none;'>Terni.2030@outlook.it</a> · PEC: <a href='mailto:lorenzo.covicchio@pec.it' style='color:#0f172a;font-weight:700;text-decoration:none;'>lorenzo.covicchio@pec.it</a></div>" +
       "</div>" +
-      "</div></body></html>";
+      "</div>" +
+      "<script>window.onload = function(){ document.title = " + JSON.stringify(titoloFilePdf) + "; setTimeout(function(){ window.print(); }, 400); };</script>" +
+      "</body></html>";
 
-    // Usa un iframe invisibile in pagina invece di about:blank così il PDF ha link attivi e zero scritte "about:blank"
-    const oldFrame = document.getElementById("terni2030-pdf-frame");
-    if (oldFrame) oldFrame.remove();
-
-    const iframe = document.createElement("iframe");
-    iframe.id = "terni2030-pdf-frame";
-    iframe.style.position = "fixed";
-    iframe.style.right = "0";
-    iframe.style.bottom = "0";
-    iframe.style.width = "0";
-    iframe.style.height = "0";
-    iframe.style.border = "0";
-    document.body.appendChild(iframe);
-
-    const doc = iframe.contentWindow?.document;
-    if (!doc) {
-      toast.error("Impossibile inizializzare il generatore PDF.");
+    // Usa un Blob URL: elimina "about:blank", imposta il titolo col nome del committente e mantiene attivi i link nel PDF!
+    const blob = new Blob([htmlDoc], { type: "text/html;charset=utf-8" });
+    const blobUrl = URL.createObjectURL(blob);
+    const win = window.open(blobUrl, "_blank");
+    if (!win) {
+      toast.error("Consenti l'apertura dei popup nel browser per salvare il PDF.");
       return;
     }
-    const prevTitle = document.title;
-    document.title = "Dossier_Terni2030_" + String(d.quartiere || "Terni").replace(/\s+/g, "_");
-    doc.open();
-    doc.write(htmlDoc);
-    doc.close();
-
-    setTimeout(() => {
-      iframe.contentWindow?.focus();
-      iframe.contentWindow?.print();
-      setTimeout(() => {
-        document.title = prevTitle;
-      }, 1000);
-    }, 500);
+    toast.success("Generazione PDF pronta: " + titoloFilePdf + ".pdf");
   };
 
   const tuttiPoi: POI[] = state?.poiExtra || [];
@@ -697,19 +710,27 @@ function RegiaPage() {
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-8 md:px-6 animate-fade-up">
-      {/* HEADER REGIA */}
       {isDefaultPassword && (
-        <div className="mb-4 rounded-xl border border-amber-500/40 bg-amber-500/10 p-4 flex items-center justify-between gap-4">
+        <div className="mb-5 rounded-xl border border-amber-500/40 bg-amber-500/10 p-4 flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-3">
-            <AlertTriangle className="size-5 text-amber-500" />
+            <AlertTriangle className="size-6 text-amber-500 shrink-0" />
             <div>
-              <p className="font-bold text-amber-500 text-sm">Avviso di Sicurezza: Credenziali Provvisorie in uso</p>
-              <p className="text-xs text-amber-500/80">Stai utilizzando la password temporanea fornita dall'Admin. Vai subito nel Tab 5 (Credenziali) per impostare la tua password cifrata personale.</p>
+              <p className="font-bold text-amber-500 text-sm">Avviso di Sicurezza: Credenziali Temporanee Monouso in uso</p>
+              <p className="text-xs text-amber-500/90 mt-0.5">
+                Stai utilizzando una password iniziale temporanea. Apri subito il Tab 5 (Credenziali) per impostare la tua password cifrata personale.
+              </p>
             </div>
           </div>
-          <button onClick={() => setTab("sicurezza")} className="whitespace-nowrap px-4 py-2 rounded-lg bg-amber-500 text-amber-950 font-bold text-xs hover:bg-amber-400">Cambia Password Ora</button>
+          <button
+            onClick={() => setTab("sicurezza")}
+            className="whitespace-nowrap px-4 py-2 rounded-lg bg-amber-500 text-amber-950 font-bold text-xs hover:bg-amber-400"
+          >
+            Cambia Credenziali Ora
+          </button>
         </div>
       )}
+
+      {/* HEADER REGIA */}
       <div className="mb-6 flex flex-col lg:flex-row lg:items-center justify-between gap-4 border-b border-border pb-5">
         <div>
           <span className="inline-flex items-center gap-1.5 text-xs font-bold uppercase text-accent">
@@ -815,7 +836,7 @@ function RegiaPage() {
             <div>
               <h2 className="text-lg font-bold">Supervisione Dossier Generati</h2>
               <p className="text-xs text-muted-foreground">
-                Qui trovi i bandi selezionati automaticamente e il <b>Dossier Testuale già impaginato</b> da revisionare e inviare al cliente.
+                Revisiona il testo e clicca su <b>Esporta / Salva PDF Brandizzato</b>: il PDF avrà il nome del committente e i pulsanti gialli <b>APRI BANDO ↗</b> direttamente cliccabili.
               </p>
             </div>
             <button
@@ -840,6 +861,7 @@ function RegiaPage() {
               {dossiers.map((d) => {
                 const isOpen = dossierAperto === d.id;
                 const testoCorrente = testiModificati[d.id] ?? d.bozza_testuale;
+                const nomeFileCommittente = "Dossier_Terni2030_" + estraiNomeCommittente(d.email, d.quartiere || "Terni") + ".pdf";
                 return (
                   <div key={d.id} className="surface-panel border p-5 rounded-xl space-y-4">
                     <div className="flex flex-col lg:flex-row justify-between gap-4">
@@ -896,7 +918,13 @@ function RegiaPage() {
                           onClick={() => setDossierAperto(isOpen ? null : d.id)}
                           className="px-3 py-1.5 rounded-md bg-primary text-primary-foreground text-xs font-bold inline-flex items-center gap-1.5"
                         >
-                          <Eye className="size-3.5" /> {isOpen ? "Chiudi Documento" : "Revisiona Dossier Testuale"}
+                          <Eye className="size-3.5" /> {isOpen ? "Chiudi Documento" : "Revisiona Dossier & PDF"}
+                        </button>
+                        <button
+                          onClick={() => esportaDossierPdfBrandizzato(d)}
+                          className="px-3 py-1.5 rounded-md bg-accent text-accent-foreground text-xs font-bold inline-flex items-center gap-1.5"
+                        >
+                          <Download className="size-3.5" /> Scarica PDF ({estraiNomeCommittente(d.email, d.quartiere)})
                         </button>
                         <button
                           onClick={() => aggiornaStatoDossier(d.id, "Venduto")}
@@ -917,7 +945,7 @@ function RegiaPage() {
                       <div className="border-t border-border pt-4 space-y-3">
                         <div className="flex flex-wrap items-center justify-between gap-2">
                           <span className="text-xs font-bold text-accent uppercase">
-                            Editor Supervisione Dossier Testuale
+                            Editor Supervisione Dossier · Nome PDF automatico: {nomeFileCommittente}
                           </span>
                           <div className="flex gap-2">
                             <button
@@ -933,7 +961,7 @@ function RegiaPage() {
                               onClick={() => esportaDossierPdfBrandizzato(d)}
                               className="px-3.5 py-1.5 rounded bg-accent text-accent-foreground text-xs font-bold inline-flex items-center gap-1.5 shadow-sm hover:opacity-90"
                             >
-                              <Download className="size-3.5" /> 📄 Esporta / Salva PDF Brandizzato
+                              <Download className="size-3.5" /> 📄 Esporta PDF ({nomeFileCommittente})
                             </button>
                           </div>
                         </div>
@@ -1001,9 +1029,9 @@ function RegiaPage() {
                   <div className="flex items-center gap-2 shrink-0">
                     <button
                       onClick={async () => {
-                        await salvaAuditBandoCloud(k, b.titolo, "Certificato", noteInput[k] || "", b.link);
+                        await salvaAuditBandoCloud(k, b.titolo, { stato: "Certificato", linkUfficiale: b.link, operatore: operatoreNome });
                         if (typeof ricaricaCloud === "function") void ricaricaCloud();
-                        toast.success("Certificato");
+                        toast.success("Bando certificato!");
                       }}
                       className="px-3 py-1.5 rounded bg-emerald-500/20 text-emerald-400 text-xs font-bold"
                     >
@@ -1011,9 +1039,9 @@ function RegiaPage() {
                     </button>
                     <button
                       onClick={async () => {
-                        await salvaAuditBandoCloud(k, b.titolo, "Scartato", "Scartato", b.link);
+                        await salvaAuditBandoCloud(k, b.titolo, { stato: "Scartato", linkUfficiale: b.link, operatore: operatoreNome });
                         if (typeof ricaricaCloud === "function") void ricaricaCloud();
-                        toast.info("Nascosto");
+                        toast.info("Bando nascosto dal portale.");
                       }}
                       className="px-3 py-1.5 rounded bg-red-500/20 text-red-400 text-xs font-bold"
                     >
@@ -1030,7 +1058,7 @@ function RegiaPage() {
         </div>
       )}
 
-      {/* TAB 3: MODERAZIONE (RIFIUTO = SPARSICE IMMEDIATAMENTE) */}
+      {/* TAB 3: MODERAZIONE */}
       {tab === "moderazione" && (
         <div className="space-y-3">
           {proposteInAttesa.length === 0 ? (
@@ -1075,7 +1103,7 @@ function RegiaPage() {
         </div>
       )}
 
-      {/* TAB 4: GESTIONE DINAMICA TERNI URBAN GO (MAPPA + INSERISCI / MODIFICA / RIMUOVI POI) */}
+      {/* TAB 4: GESTIONE DINAMICA TERNI URBAN GO */}
       {tab === "urbango" && (
         <div className="space-y-6">
           <div className="grid gap-6 lg:grid-cols-[1fr_420px]">
@@ -1341,7 +1369,7 @@ function RegiaPage() {
         </div>
       )}
 
-      {/* TAB 5: CAMBIO CREDENZIALI */}
+      {/* TAB 5: CAMBIO CREDENZIALI CON FEEDBACK VISIVO DI CONFERMA */}
       {tab === "sicurezza" && (
         <div className="mx-auto max-w-lg surface-panel border p-6 rounded-2xl space-y-4">
           <div className="flex items-center gap-2 text-accent font-bold">
@@ -1351,9 +1379,22 @@ function RegiaPage() {
             Aggiorna il Nome Utente e la Password cifrata SHA-256 per l'accesso alla Regia.
           </p>
 
+          {feedbackCredenziali && (
+            <div className="rounded-xl border border-emerald-500/50 bg-emerald-500/15 p-4 text-xs text-emerald-300 flex items-start gap-2.5">
+              <CheckCircle2 className="size-5 text-emerald-400 shrink-0 mt-0.5" />
+              <div>
+                <p className="font-bold text-emerald-400 text-sm">Cambio Credenziali Completato!</p>
+                <p className="mt-1 leading-relaxed">{feedbackCredenziali}</p>
+              </div>
+            </div>
+          )}
+
           <div className="grid grid-cols-2 gap-2 p-1 bg-secondary rounded-lg text-xs font-bold">
             <button
-              onClick={() => setRuoloTarget("lorenzo")}
+              onClick={() => {
+                setRuoloTarget("lorenzo");
+                setFeedbackCredenziali(null);
+              }}
               className={
                 "py-2 rounded-md transition " +
                 (ruoloTarget === "lorenzo" ? "bg-primary text-primary-foreground" : "text-muted-foreground")
@@ -1362,7 +1403,10 @@ function RegiaPage() {
               Profilo Lorenzo (Admin)
             </button>
             <button
-              onClick={() => setRuoloTarget("gianluca")}
+              onClick={() => {
+                setRuoloTarget("gianluca");
+                setFeedbackCredenziali(null);
+              }}
               className={
                 "py-2 rounded-md transition " +
                 (ruoloTarget === "gianluca" ? "bg-primary text-primary-foreground" : "text-muted-foreground")
