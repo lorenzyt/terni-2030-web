@@ -320,12 +320,25 @@ function RegiaPage() {
   };
 
   const esportaDossierPdfBrandizzato = (d: any) => {
-    const contenuto = testiModificati[d.id] ?? d.bozza_testuale;
-    const win = window.open("", "_blank", "width=960,height=1080");
-    if (!win) {
-      toast.error("Consenti l'apertura dei popup nel browser per generare il PDF.");
-      return;
-    }
+    let contenuto = testiModificati[d.id] ?? d.bozza_testuale;
+
+    // Aggiorna automaticamente eventuali link generici rimasti nei vecchi dossier salvati
+    const mappaLinkSpecifici: Record<string, string> = {
+      "https://www.regione.umbria.it/programmazione-fesr": "https://www.sviluppoumbria.it/imprese-e-enti-locali/bandi-per-le-imprese/pr-fesr-2021-2027-azione-2.1.1",
+      "https://www.sviluppoumbria.it/bandi-e-avvisi": "https://www.sviluppoumbria.it/imprese-e-enti-locali/bandi-per-le-imprese/investimenti-produttivi-pmi-azione-1.3.1",
+      "https://www.arpalumbria.it/avvisi-e-bandi": "https://www.arpalumbria.it/incentivi-alle-assunzioni-pr-fse-2021-2027",
+      "https://www.regione.umbria.it/fse": "https://www.arpalumbria.it/creazione-dimpresa-e-lavoro-autonomo-pr-fse",
+      "https://www.italiadomani.gov.it": "https://www.italiadomani.gov.it/content/sogei-ng/it/it/Interventi/investimenti/rafforzamento-mobilita-ciclabile.html",
+      "https://www.comune.terni.it": "https://www.comune.terni.it/servizi/commercio-e-imprese/suape-sportello-unico-attivita-produttive-ed-edilizie",
+      "https://www.gse.it/servizi-per-te/mobilita-sostenibile": "https://www.mimit.gov.it/it/incentivi/bonus-colonnine-domestiche-e-condominiali",
+      "https://www.umbria.camcom.it/bandi-e-contributi": "https://www.umbria.camcom.it/promozione-e-sviluppo-delle-imprese/pid-punto-impresa-digitale/bando-voucher-digitali-i4.0",
+      "https://www.regione.umbria.it/sociale": "https://www.regione.umbria.it/sociale/disabilita-e-vita-indipendente-pr-fse-2021-2027",
+      "https://www.inps.it": "https://www.inps.it/it/it/dettaglio-scheda.schede-servizio-strumento.schede-servizi.bando-di-concorso-home-care-premium-assistenza-domiciliare.html"
+    };
+
+    Object.entries(mappaLinkSpecifici).forEach(([vecchioUrl, nuovoUrl]) => {
+      contenuto = String(contenuto || "").split(vecchioUrl).join(nuovoUrl);
+    });
 
     const escapeHtml = (s: string) =>
       String(s || "")
@@ -333,13 +346,27 @@ function RegiaPage() {
         .replace(/</g, "&lt;")
         .replace(/>/g, "&gt;");
 
-    // Trasforma automaticamente ogni URL presente nel testo revisionato in un link cliccabile nel PDF
+    // Converte ogni URL in un link ipertestuale attivo nel PDF (senza spezzare l'ancora)
     const formattaRigaConLink = (line: string) => {
-      const safe = escapeHtml(line);
-      return safe.replace(
-        /(https?:\/\/[^\s<]+)/g,
-        '<a href="$1" target="_blank" style="color:#d97706;font-weight:700;text-decoration:underline;word-break:break-all;">$1</a>'
-      );
+      const urlRegex = /(https?:\/\/[^\s<]+)/g;
+      const parts = String(line || "").split(urlRegex);
+      return parts
+        .map((part) => {
+          if (/^https?:\/\//.test(part)) {
+            const cleanUrl = part.trim();
+            return (
+              '<a href="' +
+              cleanUrl +
+              '" target="_blank" rel="noopener noreferrer" style="color:#d97706;font-weight:700;text-decoration:underline;">' +
+              escapeHtml(cleanUrl) +
+              '</a> <a href="' +
+              cleanUrl +
+              '" target="_blank" rel="noopener noreferrer" style="display:inline-block;margin-left:6px;background:#fef3c7;color:#92400e;border:1px solid #f59e0b;padding:1px 7px;border-radius:4px;font-size:10.5px;font-weight:800;text-decoration:none;">APRI BANDO ↗</a>'
+            );
+          }
+          return escapeHtml(part);
+        })
+        .join("");
     };
 
     const righe = String(contenuto || "").split("\n");
@@ -348,26 +375,26 @@ function RegiaPage() {
       const l = rawLine.trim();
       if (!l || l.startsWith("====")) continue;
       if (l.startsWith("----")) {
-        corpoHtml += '<hr style="border:none;border-top:1px dashed #cbd5e1;margin:14px 0;" />';
+        corpoHtml += '<hr style="border:none;border-top:1px dashed #cbd5e1;margin:12px 0;" />';
       } else if (l.startsWith("MISURA #")) {
         corpoHtml +=
-          '<div style="background:#fffbeb;border-left:4px solid #f59e0b;padding:10px 14px;margin-top:14px;margin-bottom:8px;border-radius:0 8px 8px 0;">' +
-          '<h3 style="margin:0;font-size:14px;color:#92400e;text-transform:uppercase;letter-spacing:0.03em;">' +
+          '<div style="background:#fffbeb;border-left:4px solid #f59e0b;padding:9px 14px;margin-top:14px;margin-bottom:8px;border-radius:0 8px 8px 0;page-break-inside:avoid;">' +
+          '<h3 style="margin:0;font-size:13.5px;color:#92400e;text-transform:uppercase;letter-spacing:0.03em;">' +
           escapeHtml(l) +
           "</h3></div>";
       } else if (/^\d+\.\s+[A-Z]/.test(l)) {
         corpoHtml +=
-          '<h2 style="margin-top:22px;margin-bottom:10px;padding-bottom:6px;border-bottom:2px solid #0f172a;font-size:15px;color:#0f172a;text-transform:uppercase;letter-spacing:0.05em;">' +
+          '<h2 style="margin-top:20px;margin-bottom:10px;padding-bottom:6px;border-bottom:2px solid #0f172a;font-size:14.5px;color:#0f172a;text-transform:uppercase;letter-spacing:0.05em;">' +
           escapeHtml(l) +
           "</h2>";
       } else if (l.startsWith("•") || l.startsWith("-")) {
         const testoPunto = l.replace(/^[•\-]\s*/, "");
-        const parti = testoPunto.split(":");
-        if (parti.length >= 2 && parti[0].length < 42) {
-          const etichetta = escapeHtml(parti[0]);
-          const valore = formattaRigaConLink(parti.slice(1).join(":"));
+        const idxDuePunti = testoPunto.indexOf(":");
+        if (idxDuePunti > 0 && idxDuePunti < 45) {
+          const etichetta = escapeHtml(testoPunto.slice(0, idxDuePunti));
+          const valore = formattaRigaConLink(testoPunto.slice(idxDuePunti + 1));
           corpoHtml +=
-            '<div style="margin:5px 0 5px 10px;font-size:12.5px;line-height:1.55;color:#1e293b;">' +
+            '<div style="margin:5px 0 5px 10px;font-size:12px;line-height:1.55;color:#1e293b;">' +
             '<span style="color:#d97706;font-weight:700;">▪ ' +
             etichetta +
             ":</span> " +
@@ -375,47 +402,41 @@ function RegiaPage() {
             "</div>";
         } else {
           corpoHtml +=
-            '<div style="margin:5px 0 5px 10px;font-size:12.5px;line-height:1.55;color:#1e293b;">▪ ' +
+            '<div style="margin:5px 0 5px 10px;font-size:12px;line-height:1.55;color:#1e293b;">▪ ' +
             formattaRigaConLink(testoPunto) +
             "</div>";
         }
       } else {
         corpoHtml +=
-          '<p style="margin:4px 0;font-size:12.5px;line-height:1.55;color:#334155;">' +
+          '<p style="margin:4px 0;font-size:12px;line-height:1.55;color:#334155;">' +
           formattaRigaConLink(l) +
           "</p>";
       }
     }
 
+    // @page { margin: 0mm } rimuove completamente "about:blank", URL, data e numeri di pagina del browser!
     const htmlDoc =
       "<!DOCTYPE html><html lang='it'><head><meta charset='utf-8' />" +
       "<title>Dossier_Terni2030_" + escapeHtml(d.quartiere || "Terni") + "</title>" +
       "<link href='https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap' rel='stylesheet'>" +
       "<style>" +
-      "@page { size: A4; margin: 14mm; }" +
-      "body { font-family: 'Inter', sans-serif; color: #0f172a; background: #f1f5f9; margin: 0; padding: 24px; }" +
-      ".toolbar { max-width: 820px; margin: 0 auto 16px auto; background: #0f172a; color: #fff; padding: 12px 20px; border-radius: 10px; display: flex; justify-content: space-between; align-items: center; }" +
-      ".btn-print { background: #f59e0b; color: #0f172a; border: none; padding: 9px 18px; border-radius: 6px; font-weight: 800; font-size: 13px; cursor: pointer; }" +
-      ".page { max-width: 820px; margin: 0 auto; background: #ffffff; padding: 36px 42px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); border-top: 8px solid #f59e0b; }" +
-      ".header { display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 2px solid #e2e8f0; padding-bottom: 18px; margin-bottom: 20px; }" +
+      "@page { size: A4; margin: 0mm; }" +
+      "html, body { font-family: 'Inter', sans-serif; color: #0f172a; background: #ffffff; margin: 0; padding: 0; -webkit-print-color-adjust: exact; print-color-adjust: exact; }" +
+      ".page { padding: 16mm 18mm; box-sizing: border-box; width: 100%; border-top: 8px solid #f59e0b; }" +
+      ".header { display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 2px solid #e2e8f0; padding-bottom: 14px; margin-bottom: 18px; }" +
       ".brand { font-family: 'Archivo', sans-serif; font-size: 28px; font-weight: 800; color: #0f172a; letter-spacing: -0.02em; }" +
       ".brand span { color: #d97706; }" +
-      ".sub-brand { font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em; color: #64748b; font-weight: 700; margin-top: 4px; }" +
-      ".badge-doc { background: #fef3c7; color: #92400e; border: 1px solid #f59e0b; font-size: 11px; font-weight: 700; padding: 5px 10px; border-radius: 6px; text-align: right; }" +
-      ".meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 14px 18px; margin-bottom: 22px; font-size: 12px; }" +
-      ".meta-item b { color: #0f172a; display: block; font-size: 10.5px; text-transform: uppercase; color: #64748b; }" +
-      ".meta-item span { font-weight: 700; color: #0f172a; font-size: 13px; }" +
-      ".footer { margin-top: 32px; padding-top: 14px; border-top: 2px solid #e2e8f0; display: flex; justify-content: space-between; font-size: 10.5px; color: #64748b; }" +
-      "@media print { body { background: #ffffff; padding: 0; } .toolbar { display: none !important; } .page { box-shadow: none; padding: 0; max-width: 100%; border-top: 6px solid #f59e0b; padding-top: 12px; } }" +
+      ".sub-brand { font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.12em; color: #64748b; font-weight: 700; margin-top: 4px; }" +
+      ".badge-doc { background: #fef3c7; color: #92400e; border: 1px solid #f59e0b; font-size: 10.5px; font-weight: 700; padding: 5px 10px; border-radius: 6px; text-align: right; }" +
+      ".meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px 16px; margin-bottom: 18px; font-size: 12px; }" +
+      ".meta-item b { display: block; font-size: 10px; text-transform: uppercase; color: #64748b; }" +
+      ".meta-item span { font-weight: 700; color: #0f172a; font-size: 12.5px; }" +
+      ".footer { margin-top: 28px; padding-top: 12px; border-top: 2px solid #e2e8f0; display: flex; justify-content: space-between; font-size: 10px; color: #64748b; page-break-inside: avoid; }" +
       "</style></head><body>" +
-      "<div class='toolbar'>" +
-      "<div><b>Anteprima Ufficiale Dossier PDF — Terni 2030</b><br/><span style='font-size:11px;color:#cbd5e1;'>Nel pannello di stampa seleziona Destinazione: «Salva come PDF»</span></div>" +
-      "<button class='btn-print' onclick='window.print()'>🖨️ Salva come PDF / Stampa Ora</button>" +
-      "</div>" +
       "<div class='page'>" +
       "<div class='header'>" +
       "<div><div class='brand'>Terni <span>2030</span></div><div class='sub-brand'>Intelligence Bandi & Rigenerazione Urbana · Città e Welfare</div></div>" +
-      "<div class='badge-doc'>DOSSIER STRATEGICO VERIFICATO<br/><span style='font-weight:500;font-size:10px;'>Protocollo: " + escapeHtml(d.id) + "</span></div>" +
+      "<div class='badge-doc'>DOSSIER STRATEGICO VERIFICATO<br/><span style='font-weight:500;font-size:9.5px;'>Protocollo: " + escapeHtml(d.id) + "</span></div>" +
       "</div>" +
       "<div class='meta-grid'>" +
       "<div class='meta-item'><b>Destinatario Dossier</b><span>" + escapeHtml(d.email) + "</span></div>" +
@@ -427,15 +448,42 @@ function RegiaPage() {
       "<div>" + corpoHtml + "</div>" +
       "<div class='footer'>" +
       "<div><b>Terni 2030</b> · Dossier revisionato e validato da <b>Lorenzo Covicchio</b> (Autore e Curatore)</div>" +
-      "<div>Contatti: Terni.2030@outlook.it · PEC: <b>lorenzo.covicchio@pec.it</b></div>" +
+      "<div>Contatti: <a href='mailto:Terni.2030@outlook.it' style='color:#d97706;text-decoration:none;'>Terni.2030@outlook.it</a> · PEC: <a href='mailto:lorenzo.covicchio@pec.it' style='color:#0f172a;font-weight:700;text-decoration:none;'>lorenzo.covicchio@pec.it</a></div>" +
       "</div>" +
-      "</div>" +
-      "<script>setTimeout(() => { window.print(); }, 450);</script>" +
-      "</body></html>";
+      "</div></body></html>";
 
-    win.document.open();
-    win.document.write(htmlDoc);
-    win.document.close();
+    // Usa un iframe invisibile in pagina invece di about:blank così il PDF ha link attivi e zero scritte "about:blank"
+    const oldFrame = document.getElementById("terni2030-pdf-frame");
+    if (oldFrame) oldFrame.remove();
+
+    const iframe = document.createElement("iframe");
+    iframe.id = "terni2030-pdf-frame";
+    iframe.style.position = "fixed";
+    iframe.style.right = "0";
+    iframe.style.bottom = "0";
+    iframe.style.width = "0";
+    iframe.style.height = "0";
+    iframe.style.border = "0";
+    document.body.appendChild(iframe);
+
+    const doc = iframe.contentWindow?.document;
+    if (!doc) {
+      toast.error("Impossibile inizializzare il generatore PDF.");
+      return;
+    }
+    const prevTitle = document.title;
+    document.title = "Dossier_Terni2030_" + String(d.quartiere || "Terni").replace(/\s+/g, "_");
+    doc.open();
+    doc.write(htmlDoc);
+    doc.close();
+
+    setTimeout(() => {
+      iframe.contentWindow?.focus();
+      iframe.contentWindow?.print();
+      setTimeout(() => {
+        document.title = prevTitle;
+      }, 1000);
+    }, 500);
   };
 
   const tuttiPoi: POI[] = state?.poiExtra || [];
