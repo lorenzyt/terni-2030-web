@@ -161,12 +161,20 @@ function RegiaPage() {
   const [fStato, setFStato] = useState<"" | "verde" | "giallo" | "rosso">("");
   const [noteInput] = useState<Record<string, string>>({});
 
+  const [isDefaultPassword, setIsDefaultPassword] = useState(false);
+
   useEffect(() => {
     try {
       if (sessionStorage.getItem("terni2030_regia_session") === "authorized") {
         setAuthOk(true);
         const op = sessionStorage.getItem("terni2030_regia_operatore");
-        if (op) setOperatoreNome(op);
+        if (op) {
+          setOperatoreNome(op);
+          // Se Gianluca entra senza aver ancora salvato un hash personalizzato nel localStorage
+          if (op.includes("Gianluca") && !localStorage.getItem("terni2030_custom_admin_hash_gianluca")) {
+            setIsDefaultPassword(true);
+          }
+        }
       }
     } catch {}
   }, []);
@@ -215,6 +223,9 @@ function RegiaPage() {
       const nuovoHash = await calcolaHashCredenziali(nuovoUser, nuovaPass);
       if (ruoloTarget === "lorenzo") {
         localStorage.setItem("terni2030_custom_admin_hash", nuovoHash);
+      } else {
+        localStorage.setItem("terni2030_custom_admin_hash_gianluca", nuovoHash);
+        setIsDefaultPassword(false);
       }
 
       if (supabase) {
@@ -346,7 +357,7 @@ function RegiaPage() {
         .replace(/</g, "&lt;")
         .replace(/>/g, "&gt;");
 
-    // Converte ogni URL in un link ipertestuale attivo nel PDF (senza spezzare l'ancora)
+    // Converte ogni URL in un bottone pulito (nascondendo l'URL esteso)
     const formattaRigaConLink = (line: string) => {
       const urlRegex = /(https?:\/\/[^\s<]+)/g;
       const parts = String(line || "").split(urlRegex);
@@ -357,11 +368,7 @@ function RegiaPage() {
             return (
               '<a href="' +
               cleanUrl +
-              '" target="_blank" rel="noopener noreferrer" style="color:#d97706;font-weight:700;text-decoration:underline;">' +
-              escapeHtml(cleanUrl) +
-              '</a> <a href="' +
-              cleanUrl +
-              '" target="_blank" rel="noopener noreferrer" style="display:inline-block;margin-left:6px;background:#fef3c7;color:#92400e;border:1px solid #f59e0b;padding:1px 7px;border-radius:4px;font-size:10.5px;font-weight:800;text-decoration:none;">APRI BANDO ↗</a>'
+              '" target="_blank" rel="noopener noreferrer" style="display:inline-block;background:#f59e0b;color:#0f172a;border:1px solid #d97706;padding:4px 10px;border-radius:4px;font-size:11px;font-weight:800;text-decoration:none;margin-left:4px;">APRI BANDO UFFICIALE ↗</a>'
             );
           }
           return escapeHtml(part);
@@ -691,6 +698,18 @@ function RegiaPage() {
   return (
     <div className="mx-auto max-w-7xl px-4 py-8 md:px-6 animate-fade-up">
       {/* HEADER REGIA */}
+      {isDefaultPassword && (
+        <div className="mb-4 rounded-xl border border-amber-500/40 bg-amber-500/10 p-4 flex items-center justify-between gap-4">
+          <div className="flex items-center gap-3">
+            <AlertTriangle className="size-5 text-amber-500" />
+            <div>
+              <p className="font-bold text-amber-500 text-sm">Avviso di Sicurezza: Credenziali Provvisorie in uso</p>
+              <p className="text-xs text-amber-500/80">Stai utilizzando la password temporanea fornita dall'Admin. Vai subito nel Tab 5 (Credenziali) per impostare la tua password cifrata personale.</p>
+            </div>
+          </div>
+          <button onClick={() => setTab("sicurezza")} className="whitespace-nowrap px-4 py-2 rounded-lg bg-amber-500 text-amber-950 font-bold text-xs hover:bg-amber-400">Cambia Password Ora</button>
+        </div>
+      )}
       <div className="mb-6 flex flex-col lg:flex-row lg:items-center justify-between gap-4 border-b border-border pb-5">
         <div>
           <span className="inline-flex items-center gap-1.5 text-xs font-bold uppercase text-accent">
