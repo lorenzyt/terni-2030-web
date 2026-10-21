@@ -18,6 +18,7 @@ import { reportLovableError } from "../lib/lovable-error-reporting";
 import { Mail } from "lucide-react";
 import { CivicProvider } from "@/lib/civic-store";
 import { ContactProvider, EMAIL_CONTATTO, useContact } from "@/components/ContactDialog";
+import { CookieBanner } from "@/components/CookieBanner";
 
 function NotFoundComponent() {
   return (
@@ -151,6 +152,7 @@ function RootComponent() {
             <SiteFooter />
           </div>
           <FloatingContact />
+          <CookieBanner />
           <Toaster position="top-right" richColors />
         </ContactProvider>
       </CivicProvider>
