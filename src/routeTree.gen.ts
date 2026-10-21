@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as DossierRouteImport } from './routes/dossier'
 import { Route as MappaRouteImport } from './routes/mappa'
 import { Route as PartnerRouteImport } from './routes/partner'
+import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as ProfiloRouteImport } from './routes/profilo'
 import { Route as RegiaRouteImport } from './routes/regia'
 import { Route as UrbanGoRouteImport } from './routes/urban-go'
@@ -36,6 +37,11 @@ const MappaRoute = MappaRouteImport.update({
 const PartnerRoute = PartnerRouteImport.update({
   id: '/partner',
   path: '/partner',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrivacyRoute = PrivacyRouteImport.update({
+  id: '/privacy',
+  path: '/privacy',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ProfiloRoute = ProfiloRouteImport.update({
@@ -64,6 +70,7 @@ export interface FileRoutesByFullPath {
   '/dossier': typeof DossierRoute
   '/mappa': typeof MappaRoute
   '/partner': typeof PartnerRoute
+  '/privacy': typeof PrivacyRoute
   '/profilo': typeof ProfiloRoute
   '/regia': typeof RegiaRoute
   '/urban-go': typeof UrbanGoRoute
@@ -74,6 +81,7 @@ export interface FileRoutesByTo {
   '/dossier': typeof DossierRoute
   '/mappa': typeof MappaRoute
   '/partner': typeof PartnerRoute
+  '/privacy': typeof PrivacyRoute
   '/profilo': typeof ProfiloRoute
   '/regia': typeof RegiaRoute
   '/urban-go': typeof UrbanGoRoute
@@ -85,6 +93,7 @@ export interface FileRoutesById {
   '/dossier': typeof DossierRoute
   '/mappa': typeof MappaRoute
   '/partner': typeof PartnerRoute
+  '/privacy': typeof PrivacyRoute
   '/profilo': typeof ProfiloRoute
   '/regia': typeof RegiaRoute
   '/urban-go': typeof UrbanGoRoute
@@ -97,6 +106,7 @@ export interface FileRouteTypes {
     | '/dossier'
     | '/mappa'
     | '/partner'
+    | '/privacy'
     | '/profilo'
     | '/regia'
     | '/urban-go'
@@ -107,6 +117,7 @@ export interface FileRouteTypes {
     | '/dossier'
     | '/mappa'
     | '/partner'
+    | '/privacy'
     | '/profilo'
     | '/regia'
     | '/urban-go'
@@ -117,6 +128,7 @@ export interface FileRouteTypes {
     | '/dossier'
     | '/mappa'
     | '/partner'
+    | '/privacy'
     | '/profilo'
     | '/regia'
     | '/urban-go'
@@ -128,6 +140,7 @@ export interface RootRouteChildren {
   DossierRoute: typeof DossierRoute
   MappaRoute: typeof MappaRoute
   PartnerRoute: typeof PartnerRoute
+  PrivacyRoute: typeof PrivacyRoute
   ProfiloRoute: typeof ProfiloRoute
   RegiaRoute: typeof RegiaRoute
   UrbanGoRoute: typeof UrbanGoRoute
@@ -162,6 +175,13 @@ declare module '@tanstack/react-router' {
       path: '/partner'
       fullPath: '/partner'
       preLoaderRoute: typeof PartnerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/privacy': {
+      id: '/privacy'
+      path: '/privacy'
+      fullPath: '/privacy'
+      preLoaderRoute: typeof PrivacyRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/profilo': {
@@ -200,6 +220,7 @@ const rootRouteChildren: RootRouteChildren = {
   DossierRoute: DossierRoute,
   MappaRoute: MappaRoute,
   PartnerRoute: PartnerRoute,
+  PrivacyRoute: PrivacyRoute,
   ProfiloRoute: ProfiloRoute,
   RegiaRoute: RegiaRoute,
   UrbanGoRoute: UrbanGoRoute,

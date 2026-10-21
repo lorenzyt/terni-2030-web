@@ -17,6 +17,7 @@ import { Toaster } from "@/components/ui/sonner";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { Mail } from "lucide-react";
 import { CivicProvider } from "@/lib/civic-store";
+import { SponsorBanner } from "@/components/SponsorBanner";
 import { ContactProvider, EMAIL_CONTATTO, useContact } from "@/components/ContactDialog";
 import { CookieBanner } from "@/components/CookieBanner";
 
@@ -149,6 +150,7 @@ function RootComponent() {
             <div className="flex-1">
               <Outlet />
             </div>
+            <SponsorBanner posizione="Spazio Sostenitori Territoriali" />
             <SiteFooter />
           </div>
           <FloatingContact />
@@ -172,7 +174,7 @@ function SiteFooter() {
         <button onClick={() => contatta({ oggetto: "Assistenza & Contatta l'Autore", contesto: "Footer del sito" })} className="text-accent underline-offset-4 hover:underline">
           Assistenza & Contatta l'Autore
         </button>{" "}
-        · <a href={`mailto:${EMAIL_CONTATTO}`} className="text-accent">{EMAIL_CONTATTO}</a>
+        · <a href={`mailto:${EMAIL_CONTATTO}`} className="text-accent">{EMAIL_CONTATTO}</a> · <Link to="/privacy" className="text-accent underline-offset-4 hover:underline">Privacy & Cookie Policy (GDPR)</Link>
       </p>
     </footer>
   );
