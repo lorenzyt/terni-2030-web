@@ -36,7 +36,7 @@ export const Route = createFileRoute("/urban-go")({
         content:
           "Cammina per Terni, avvicinati ai monumenti simbolo e leggi i saggi d'autore sulle preesistenze della città industriale.",
       },
-      { property: "og:image", content: "https://terni2030.integritastudio.it/og-urbango.jpg" },
+      { property: "og:image", content: "https://qmkhbwlqbpswcrvszjxd.supabase.co/storage/v1/object/public/Terni-images/og-image.jpg" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
   }),

@@ -22,7 +22,7 @@ export const Route = createFileRoute("/")({
         content:
           "Mappa interattiva dei 36 quartieri, radar bandi istituzionali e gamification urbana monumentale curata da Lorenzo Covicchio.",
       },
-      { property: "og:image", content: "https://terni2030.integritastudio.it/og-image.jpg" },
+      { property: "og:image", content: "https://qmkhbwlqbpswcrvszjxd.supabase.co/storage/v1/object/public/Terni-images/og-image.jpg" },
       // Twitter Card
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "Terni 2030 — Rigenerazione Urbana & Bandi IA" },
