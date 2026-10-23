@@ -40,7 +40,7 @@ export const Route = createFileRoute("/urban-go")({
       { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
-  component: UrbanGoPage,
+  component: UrbanGo,
 });
 
 const COLORI_POI: Record<POI["categoria"], string> = {
@@ -315,10 +315,10 @@ function UrbanGo() {
       <div className="mb-6 flex flex-wrap items-end justify-between gap-4">
         <div>
           <Badge variant="secondary" className="mb-2">
-5 Gradi di Rarità: Comune (25) · Raro (50) · Epico (100) · Leggendario (200) · Unico (500)
+            5 Gradi di Rarità: Comune (25) · Raro (50) · Epico (100) · Leggendario (200) · Unico (500)
           </Badge>
           <h1 className="text-3xl font-bold md:text-4xl">
-            Terni <span className="text-ember-gradient">Terni Urban-Go</span> & TerniDex
+            Terni <span className="text-ember-gradient">Urban-Go</span> & TerniDex
           </h1>
           <p className="mt-1 max-w-2xl text-sm text-muted-foreground">
             Esplora i luoghi culturali e architettonici inseriti e approvati dalla community di Terni 2030, avvicinati col GPS per riscuotere i punti e proponi nuove tappe.
@@ -466,6 +466,7 @@ function UrbanGo() {
                             tentaCheckinGps(p, true);
                           }}
                         >
+                          <Lock className="mr-1 size-3" /> Sblocco Test Admin
                         </Button>
                       )}
                     </div>
