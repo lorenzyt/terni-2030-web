@@ -5,6 +5,34 @@ import { POI_LIST } from "@/lib/terni-data";
 import { useCivic } from "@/lib/civic-store";
 
 export const Route = createFileRoute("/")({
+  head: () => ({
+    meta: [
+      { title: "Terni 2030 — Rigenerazione Urbana, Mappa GIS & Bandi IA" },
+      {
+        name: "description",
+        content:
+          "Piattaforma civica indipendente per la rigenerazione di Terni. Esplora la mappa GIS, scopri i finanziamenti attivi per cittadini e imprese e partecipa al cambiamento della città.",
+      },
+      // OpenGraph (Facebook, WhatsApp, LinkedIn)
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: "https://terni2030.integritastudio.it/" },
+      { property: "og:title", content: "Terni 2030 — La Città dell'Amore e dell'Acciaio" },
+      {
+        property: "og:description",
+        content:
+          "Mappa interattiva dei 36 quartieri, radar bandi istituzionali e gamification urbana monumentale curata da Lorenzo Covicchio.",
+      },
+      { property: "og:image", content: "https://terni2030.integritastudio.it/og-image.jpg" },
+      // Twitter Card
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "Terni 2030 — Rigenerazione Urbana & Bandi IA" },
+      {
+        name: "twitter:description",
+        content:
+          "Mappa GIS, intelligenza artificiale per i bandi e partecipazione attiva per il futuro di Terni.",
+      },
+    ],
+  }),
   component: IndexPage,
 });
 

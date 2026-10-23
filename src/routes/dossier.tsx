@@ -25,19 +25,26 @@ type DossierSearch = {
 };
 
 export const Route = createFileRoute("/dossier")({
-  validateSearch: (search: Record<string, unknown>): DossierSearch => ({
-    quartiere: search.quartiere as string | undefined,
-    obiettivo: search.obiettivo as string | undefined,
-    settore: search.settore as string | undefined,
+  head: () => ({
+    meta: [
+      { title: "Radar Bandi & Dossier Finanziamenti IA — Terni 2030" },
+      {
+        name: "description",
+        content:
+          "Trova tutti i bandi, contributi a fondo perduto e finanziamenti attivi su Terni e Umbria (PR FESR, FSE+, PNRR, FSC, GSE, Invitalia). Genera il tuo dossier personalizzato di fattibilità.",
+      },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: "https://terni2030.integritastudio.it/dossier" },
+      { property: "og:title", content: "Dossier Strategico Bandi & Finanziamenti — Terni 2030" },
+      {
+        property: "og:description",
+        content:
+          "Configura il tuo profilo tra Pubblico, Impresa o Cittadino e incrocia i 36 quartieri di Terni con oltre 95 misure agevolative attive.",
+      },
+      { name: "twitter:card", content: "summary" },
+    ],
   }),
   component: DossierPage,
-  errorComponent: ({ error }) => (
-    <div className="p-10 text-red-500 font-bold bg-background h-screen flex flex-col justify-center items-center text-center">
-      <AlertCircle className="size-12 mb-4" />
-      <h2 className="text-2xl mb-2">Errore di Rendering</h2>
-      <p className="font-mono text-sm">{error.message}</p>
-    </div>
-  )
 });
 
 const FASI = ["1. Profilo Richiedente", "2. Quartiere di Terni", "3. Obiettivo / Ambito", "4. Anteprima Contenuti & Richiesta"];

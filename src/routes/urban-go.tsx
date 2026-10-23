@@ -22,11 +22,25 @@ import { COSTI_PREMI, inviaPropostaModerazione, useCivic } from "@/lib/civic-sto
 export const Route = createFileRoute("/urban-go")({
   head: () => ({
     meta: [
-      { title: "Terni Urban-Go & TerniDex GPS — Terni 2030" },
-      { name: "description", content: "Esplora i luoghi di Terni approvati dalla community, sblocca il TerniDex col GPS e proponi nuove tappe." },
+      { title: "Terni Urban GO & TerniDex — Esplorazione Culturale GPS" },
+      {
+        name: "description",
+        content:
+          "Esplora le architetture d'autore, l'arte pubblica e l'archeologia industriale di Terni: da Palazzo Spada alla Lancia di Luce e al Villaggio Matteotti. Sblocca le tappe col GPS e colleziona i punti esploratore.",
+      },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: "https://terni2030.integritastudio.it/urban-go" },
+      { property: "og:title", content: "Terni Urban GO & TerniDex — Il Pokédex Architettonico di Terni" },
+      {
+        property: "og:description",
+        content:
+          "Cammina per Terni, avvicinati ai monumenti simbolo e leggi i saggi d'autore sulle preesistenze della città industriale.",
+      },
+      { property: "og:image", content: "https://terni2030.integritastudio.it/og-urbango.jpg" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
-  component: UrbanGo,
+  component: UrbanGoPage,
 });
 
 const COLORI_POI: Record<POI["categoria"], string> = {

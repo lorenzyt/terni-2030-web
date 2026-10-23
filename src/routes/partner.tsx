@@ -24,12 +24,21 @@ import { useContact } from "@/components/ContactDialog";
 export const Route = createFileRoute("/partner")({
   head: () => ({
     meta: [
-      { title: "Chi Siamo, Partner & Sponsor — Terni 2030" },
+      { title: "Partner & Sponsor — Offerte e Licenze Annuali Terni 2030" },
       {
         name: "description",
         content:
-          "La visione di Terni 2030, la nostra missione di rigenerazione urbana e le aziende partner del territorio.",
+          "Vetrina per aziende locali, studi tecnici e imprese della rigenerazione urbana a Terni. Scopri i livelli Sostenitore, Gold e Platinum per entrare nel circuito civico.",
       },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: "https://terni2030.integritastudio.it/partner" },
+      { property: "og:title", content: "Sostieni Terni 2030 — Partner e Sponsor Ufficiali" },
+      {
+        property: "og:description",
+        content:
+          "Accreditamento professionale nei dossier bandi e visibilità interattiva sulla mappa territoriale della città.",
+      },
+      { name: "twitter:card", content: "summary" },
     ],
   }),
   component: PartnerPage,
