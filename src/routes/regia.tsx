@@ -391,7 +391,9 @@ function RegiaPage() {
             return (
               '<a href="' +
               cleanUrl +
-              '" target="_blank" rel="noopener noreferrer" style="display:inline-block;background:#fef3c7;color:#92400e;border:1.5px solid #f59e0b;padding:3px 12px;border-radius:6px;font-size:11px;font-weight:800;text-decoration:none;letter-spacing:0.03em;margin-left:4px;">APRI BANDO ↗</a>'
+              '" style="color: #0284c7; text-decoration: underline; word-break: break-all; font-weight: normal; font-size: 11px;">' +
+              cleanUrl +
+              '</a>'
             );
           }
           return escapeHtml(part);
